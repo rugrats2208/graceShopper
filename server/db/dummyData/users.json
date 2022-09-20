@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "fName": "Jared",
+      "lName": "Leto",
+      "username": "jleto",
+      "password": "mars",
+      "email": "jared@leto.com",
+      "isAdmin": false
+    },
+    {
+      "fName": "Clint",
+      "lName": "Mansell",
+      "username": "cmansell",
+      "password": "music",
+      "email": "clint@mansell.com",
+      "isAdmin": true
+    },
+    {
+      "fName": "Marshall",
+      "lName": "Mathers",
+      "username": "eminem",
+      "password": "hailey",
+      "email": "marshall@mathers.com",
+      "isAdmin": false
+    },
+    {
+      "fName": "John",
+      "lName": "Lennon",
+      "username": "jlennon",
+      "password": "lennon",
+      "email": "john@lennon.com",
+      "isAdmin": true
+    },
+    {
+      "fName": "Elvis",
+      "lName": "Presley",
+      "username": "elvis",
+      "password": "cloneme",
+      "email": "elvis@presley.com",
+      "isAdmin": false
+    }
+  ]
+}
