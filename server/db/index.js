@@ -2,7 +2,7 @@ const conn = require('./conn');
 const { Sequelize } = conn;
 
 //DUMMY DATA
-const { users } = require('../db/users.json');
+const { users } = require('../db/dummyData/users.json');
 
 //MODELS
 const User = require('./models/User');
@@ -14,6 +14,7 @@ const LineItem = require('./models/LineItem'); //line item is the product and th
 const syncAndSeed = async () => {
   try {
     //WITH FORCE TRUE ENABLED, THE DATABASE WILL DROP THE TABLE BEFORE CREATING A NEW ONE
+    console.log('Started Seeding...')
     await conn.sync({ force: true });
     await Promise.all(users.map(user => User.create(user)));
     console.log('Seeding successful!');
