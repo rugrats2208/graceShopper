@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "start": "npm run build-watch & npm run start-server ",
+    "build": "webpack -w",
     "build:dev": "npm run build -- --watch --mode=development",
     "test": "mocha spec.js",
     "test:dev": "QUIET=true JWT=shh DATABASE_URL=postgres://localhost/acme_db_test npm test -- --watch",
     "start:dev": "JWT=shhh nodemon server --ignore src/ --ignore dist/ & npm run build:dev",
-    "testDev": "nodemon --watch server -e js,html server/index.js"
+    "testDev": "nodemon --watch server -e js,html server/index.js",
+    "build-watch": "webpack -w",
+    "start-server": "nodemon --watch server -e js,html server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +29,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@babel/plugin-transform-runtime": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
     "@babel/preset-react": "^7.18.6",
+    "@babel/runtime": "^7.19.0",
     "axios": "^0.27.2",
     "babel-loader": "^8.2.5",
     "chai": "^4.3.6",
