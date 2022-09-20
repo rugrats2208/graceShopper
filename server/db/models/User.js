@@ -69,7 +69,7 @@ User.findByToken = async function (token) {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id);
     if (!user) {
-      throw 'nooo';
+      throw 'no such user';
     }
     return user;
   } catch (ex) {
@@ -93,6 +93,7 @@ User.beforeCreate(async (user, options) => {
   const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS);
   user.password = hashedPassword;
 });
+
 User.beforeUpdate(async (user, options) => {
   const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS);
   user.password = hashedPassword;

@@ -3,6 +3,29 @@ const router = require('express').Router();
 const { User } = require('../db');
 const { requireToken } = require('./gatekeepingMiddleware');
 
+//dotenv holds our secret JWT key
+require('dotenv').config();
+
+// matches GET requests to /api/auth/
+router.get('/', requireToken, async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      attributes: [
+        'id',
+        'username',
+        'password',
+        'email',
+        'fName',
+        'lName',
+        'isAdmin',
+      ],
+    });
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // user login POST
 router.post('/login', async function (req, res, next) {
   try {
@@ -27,25 +50,6 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-// matches GET requests to /api/auth/
-router.get('/', requireToken, async (req, res, next) => {
-  try {
-    const users = await User.findAll({
-      attributes: [
-        'id',
-        'username',
-        'password',
-        'email',
-        'fName',
-        'lName',
-        'isAdmin',
-      ],
-    });
-    res.json(users);
-  } catch (err) {
-    next(err);
-  }
-});
 // matches GET requests to /api/auth/me
 router.get('/me', async (req, res, next) => {
   try {
