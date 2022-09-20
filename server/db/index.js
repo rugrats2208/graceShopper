@@ -1,13 +1,16 @@
 const conn = require('./conn');
 const { Sequelize } = conn;
 
+//GET DATA FROM SPOTIFY API
+const albums = require('./grabAlbums');
+console.log(albums);
+
 //MODELS
 const User = require('./User');
 const Order = require('./Order');
 const Product = require('./Product');
 const Tag = require('./Tag');
 const LineItem = require('./LineItem'); //line item is the product and the amount of that product to buy
-
 
 //ASSOCIATIONS
 User.hasMany(Order);
@@ -23,9 +26,9 @@ Order.hasMany(LineItem);
 //tag OR category OR brand
 
 module.exports = {
-  conn,
-  User,
-  Tag,
-  Order,
-  Product,
+    conn,
+    User,
+    Tag,
+    Order,
+    Product,
 };
