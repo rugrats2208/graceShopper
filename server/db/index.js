@@ -8,6 +8,7 @@ const Product = require('./Product');
 const Tag = require('./Tag');
 const LineItem = require('./LineItem'); //line item is the product and the amount of that product to buy
 
+
 //ASSOCIATIONS
 User.hasMany(Order);
 Tag.hasMany(Product);
