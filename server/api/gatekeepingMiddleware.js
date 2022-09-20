@@ -1,6 +1,4 @@
-const {
-  models: { User },
-} = require('../db/');
+const { User } = require('../db/');
 //store all of our functions that will act as middleware between our req and res
 
 const requireToken = async (req, res, next) => {
