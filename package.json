@@ -8,7 +8,8 @@
     "build:dev": "npm run build -- --watch --mode=development",
     "test": "mocha spec.js",
     "test:dev": "QUIET=true JWT=shh DATABASE_URL=postgres://localhost/acme_db_test npm test -- --watch",
-    "start:dev": "JWT=shhh nodemon server --ignore src/ --ignore dist/ & npm run build:dev"
+    "start:dev": "JWT=shhh nodemon server --ignore src/ --ignore dist/ & npm run build:dev",
+    "testDev": "nodemon --watch server -e js,html server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,8 +18,10 @@
     "bcrypt": "^5.0.1",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
     "pg": "^8.7.3",
     "redux-logger": "^3.0.6",
+    "request": "^2.88.2",
     "sequelize": "^6.21.3"
   },
   "devDependencies": {
