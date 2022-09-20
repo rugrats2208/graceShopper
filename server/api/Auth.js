@@ -2,7 +2,9 @@ const router = require('express').Router();
 const { User } = require('../db');
 
 router.get('/', async (req, res, next) => {
-    try { }
+    try {
+        res.send([]);
+    }
     catch (err) {
 
     }
