@@ -1,13 +1,13 @@
 // apiRoutes/users.js
 const router = require('express').Router();
 const { User } = require('../db');
-const { requireToken } = require('./gatekeepingMiddleware');
+const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 //dotenv holds our secret JWT key
 require('dotenv').config();
 
-// matches GET requests to /api/auth/
-router.get('/', requireToken, async (req, res, next) => {
+// matches GET requests to /api/auth/ - MUST BE VALID USER AND MUST BE ADMIN
+router.get('/', requireToken, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: [
