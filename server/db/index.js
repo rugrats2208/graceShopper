@@ -1,8 +1,14 @@
 const conn = require('./conn');
 const { Sequelize } = conn;
 
+
+//GET DATA FROM SPOTIFY API
+const albums = require('./grabAlbums');
+console.log(albums);
+
 //DUMMY DATA
 const { users } = require('../db/dummyData/users.json');
+
 
 //MODELS
 const User = require('./models/User');
@@ -25,7 +31,6 @@ const syncAndSeed = async () => {
 }
 
 
-
 //ASSOCIATIONS
 User.hasMany(Order);
 Tag.hasMany(Product);
@@ -40,6 +45,7 @@ Order.hasMany(LineItem);
 //tag OR category OR brand
 
 module.exports = {
+
   conn,
   User,
   Tag,
