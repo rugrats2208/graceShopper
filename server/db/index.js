@@ -3,9 +3,8 @@ const { Sequelize } = conn;
 
 //GET DATA FROM SPOTIFY API
 const getAlbumData = require('./grabAlbums');
-
-//DUMMY DATA
-const { users } = require('../db/dummyData/users.json');
+// GET USERS
+const getUsers = require('./getUsers');
 
 //MODELS
 const User = require('./models/User');
@@ -32,7 +31,11 @@ const syncAndSeed = async () => {
         //WITH FORCE TRUE ENABLED, THE DATABASE WILL DROP THE TABLE BEFORE CREATING A NEW ONE
         console.log('Started Seeding...');
         await conn.sync({ force: true });
+
+        //LOADING USERS
+        const users = await getUsers();
         await Promise.all(users.map(user => User.create(user)));
+
         const albums = await getAlbumData();
         await Promise.all(
             albums.map(async album => {
