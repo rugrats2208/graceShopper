@@ -1,5 +1,6 @@
 const axios = require('axios');
-require('dotenv').config({ path: '../../.env' });
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -79,19 +80,10 @@ const getAlbumData = async () => {
             //add the albums to an array
             albums = [...albums, ...response.data.albums];
         }
-        console.log('albums length inside function call', albums.length);
         return albums;
     } catch (error) {
         console.log(error);
     }
 };
 
-(async () => {
-    console.log(await getAlbumData());
-})();
-
-// const after = await getAlbumData();
-// console.log(after);
-
-// getAlbumData().then(albums => console.log(albums.length)); //use this to seed our database
 module.exports = getAlbumData;
