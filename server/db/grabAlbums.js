@@ -1,6 +1,6 @@
 const axios = require('axios');
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, './.env') });
+require('dotenv').config();
 
 
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
@@ -63,13 +63,16 @@ const getAlbumList = async () => {
 const getAlbumData = async () => {
     const access_token = await getAuth();
     const albumIds = await getAlbumList();
+    const uniqueAlbums = albumIds.filter(
+        (id, index, arr) => arr.indexOf(id) === index
+    );
 
     let albums = [];
     try {
         //get actual albums 20 at a time
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < Math.ceil(uniqueAlbums.length / 20); i++) {
             //get 20 ids at a time and put it on the url
-            let url = `https://api.spotify.com/v1/albums?ids=${albumIds
+            let url = `https://api.spotify.com/v1/albums?ids=${uniqueAlbums
                 .slice(i * 20, 20 + i * 20)
                 .join(',')}`;
             //request album data from server
