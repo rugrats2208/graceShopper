@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { authenticate, logout } from '../../reducers/authReducer';
+import { authenticate, logout } from '../../reducers/Auth/authReducer';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const Signup = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(authenticate(userName, password, email, fName, lName, 'signup'));
+    dispatch(authenticate(userName, password, 'signup', email, fName, lName));
   }
 
   const [auth, setAuth] = React.useState('');

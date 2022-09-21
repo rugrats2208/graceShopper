@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { authenticate, logout } from '../../reducers/authReducer';
+import { authenticate, logout } from '../../reducers/Auth/authReducer';
 
 const Login = () => {
   const dispatch = useDispatch();

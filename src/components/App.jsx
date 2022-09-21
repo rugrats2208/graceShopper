@@ -1,4 +1,6 @@
 import React from 'react';
+import Login from './Auth/Login';
+import Signup from './Auth/Signup';
 import {
   AllAlbums,
   SingleAlbum,
@@ -13,6 +15,8 @@ import { Route, Routes } from 'react-router-dom';
 function App() {
   return (
     <div>
+      <Login />
+      <Signup />
       <Routes>
         <Route index element={<GuestMain />} />
         <Route path={'/signedInMain'} element={<SignedInMain />} />
