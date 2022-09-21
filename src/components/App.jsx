@@ -7,12 +7,9 @@ import {
   SignedInMain,
   NewAlbumReleases,
 } from './index';
-<<<<<<< HEAD
-=======
 import Login from './Auth/Login';
 import Signup from './Auth/Signup';
 
->>>>>>> main
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
