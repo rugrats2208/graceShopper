@@ -4,10 +4,19 @@ body {
 
 .albums {
   display: flex;
-  justify-content: start;
   flex-wrap: wrap;
 }
 
 .album {
   margin: 10px;
+}
+
+.featured-albums-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.new-albums-list {
+  display: flex;
+  flex-wrap: wrap;
 }

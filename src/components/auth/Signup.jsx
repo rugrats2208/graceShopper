@@ -18,31 +18,31 @@ const Signup = () => {
   const [auth, setAuth] = React.useState('');
 
   return (
-    <div className='container'>
+    <div className="container">
       <form>
         <input
-          type='text'
-          placeholder='Enter username...'
+          type="text"
+          placeholder="Enter username..."
           onChange={(e) => setUserName(e.target.value)}
         />
         <input
-          type='password'
-          placeholder='Enter password...'
+          type="password"
+          placeholder="Enter password..."
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
-          type='email'
-          placeholder='Enter email...'
+          type="email"
+          placeholder="Enter email..."
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          type='fName'
-          placeholder='Enter first name...'
+          type="fName"
+          placeholder="Enter first name..."
           onChange={(e) => setFName(e.target.value)}
         />
         <input
-          type='lName'
-          placeholder='Enter last name...'
+          type="lName"
+          placeholder="Enter last name..."
           onChange={(e) => setLName(e.target.value)}
         />
         <button onClick={handleSubmit}>Sign Up</button>
