@@ -9,12 +9,12 @@ const setAlbums = (albums) => ({
 });
 
 // thunk for data
-// export const getAlbums = () => {
-//   return async (dispatch) => {
-//     const { data } = await axios.get();
-//     dispatch(setAlbums(data));
-//   };
-// };
+export const getAlbums = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get('/api/shop');
+    dispatch(setAlbums(data));
+  };
+};
 
 //const initialState = [];
 const initialState = [];
