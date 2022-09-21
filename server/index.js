@@ -11,10 +11,6 @@ const init = async () => {
     }
 };
 
-<<<<<<< HEAD
-init();
-=======
 // app.listen(port, () => console.log(`listening on port ${port}`));
 
 init();
->>>>>>> 224337571972d4d985e19e5a8af766b538270c92
