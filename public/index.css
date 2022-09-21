@@ -1,4 +1,8 @@
-.all-albums-list {
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.albums {
   display: flex;
   flex-wrap: wrap;
 }

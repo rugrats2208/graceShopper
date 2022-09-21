@@ -1,29 +1,30 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+//COMPONENTS
 import {
   AllAlbums,
   SingleAlbum,
   FeaturedAlbums,
   GuestMain,
   SignedInMain,
-  NewAlbumReleases,
+  Navbar,
+  Admin,
 } from './index';
-import Login from './Auth/Login';
-import Signup from './Auth/Signup';
-
-import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <div>
-      <Login />
-      <Signup />
+      <Navbar />
       <Routes>
         <Route index element={<GuestMain />} />
         <Route path={'/signedInMain'} element={<SignedInMain />} />
         <Route path={'/allAlbums'} element={<AllAlbums />} />
+        <Route path={'/featuredPlaylists'} element={<FeaturedPlaylists />} />
         <Route path={'/singleAlbum'} element={<SingleAlbum />} />
+        <Route path={'/singlePlaylist'} element={<SinglePlaylist />} />
         <Route path={'/featuredAlbums'} element={<FeaturedAlbums />} />
-        <Route path={'/newAlbumReleases'} element={<NewAlbumReleases />} />
+        <Route path={'/admin'} element={<Admin />} />
       </Routes>
     </div>
   );
