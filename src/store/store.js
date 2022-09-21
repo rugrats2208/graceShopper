@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '../reducers/authReducer';
+import authReducer from '../reducers/Auth/authReducer';
+import albumsReducer from '../reducers/albums/albumsReducer';
+import singleAlbumsReducer from '../reducers/albums/singleAlbumReducer';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    albums: albumsReducer,
+    singleAlbum: singleAlbumsReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
