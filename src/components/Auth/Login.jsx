@@ -12,6 +12,11 @@ const Login = () => {
     dispatch(authenticate(userName, password, 'login'));
   }
 
+  function handleLogout(e) {
+    e.preventDefault();
+    dispatch(logout());
+  }
+
   const [auth, setAuth] = React.useState('');
 
   return (
@@ -27,8 +32,9 @@ const Login = () => {
           placeholder='Enter password...'
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={handleSubmit}>Log In</button>
       </form>
+      <button onClick={handleLogout}>Log Out</button>
     </div>
   );
 };
