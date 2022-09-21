@@ -86,9 +86,11 @@ function AllAlbums() {
   return (
     <div className="all-albums">
       <h1>All Albums</h1>
-      {albumData.albums.map((album) => (
-        <Album key={album.id} data={album} />
-      ))}
+      <div className="albums">
+        {albumData.albums.map((album) => (
+          <Album key={album.id} data={album} />
+        ))}
+      </div>
     </div>
   );
 }
