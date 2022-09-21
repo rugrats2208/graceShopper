@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 
 //COMPONENTS
 import {
@@ -10,7 +10,7 @@ import {
   SignedInMain,
   Navbar,
   Admin,
-} from './index';
+} from "./index";
 
 function App() {
   return (
@@ -18,13 +18,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route index element={<GuestMain />} />
-        <Route path={'/signedInMain'} element={<SignedInMain />} />
-        <Route path={'/allAlbums'} element={<AllAlbums />} />
-        <Route path={'/featuredPlaylists'} element={<FeaturedPlaylists />} />
-        <Route path={'/singleAlbum'} element={<SingleAlbum />} />
-        <Route path={'/singlePlaylist'} element={<SinglePlaylist />} />
-        <Route path={'/featuredAlbums'} element={<FeaturedAlbums />} />
-        <Route path={'/admin'} element={<Admin />} />
+        <Route path={"/signedInMain"} element={<SignedInMain />} />
+        <Route path={"/allAlbums"} element={<AllAlbums />} />
+        <Route path={"/singleAlbum"} element={<SingleAlbum />} />
+        <Route path={"/featuredAlbums"} element={<FeaturedAlbums />} />
+        <Route path={"/admin"} element={<Admin />} />
       </Routes>
     </div>
   );
