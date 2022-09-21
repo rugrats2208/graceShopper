@@ -34,6 +34,7 @@
     "@babel/preset-env": "^7.19.1",
     "@babel/preset-react": "^7.18.6",
     "@babel/runtime": "^7.19.0",
+    "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "babel-loader": "^8.2.5",
     "chai": "^4.3.6",
