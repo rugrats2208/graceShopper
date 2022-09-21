@@ -1,6 +1,7 @@
 const axios = require('axios');
 require('dotenv').config({ path: '../../.env' });
 
+
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const client_code = Buffer.from(
@@ -86,9 +87,9 @@ const getAlbumData = async () => {
     }
 };
 
-(async () => {
-    console.log(await getAlbumData());
-})();
+// (async () => {
+//     console.log(await getAlbumData());
+// })();
 
 // const after = await getAlbumData();
 // console.log(after);
