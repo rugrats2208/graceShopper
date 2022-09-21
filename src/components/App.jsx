@@ -9,11 +9,15 @@ import {
   GuestMain,
   SignedInMain,
   NewAlbumReleases,
+  Admin,
 } from "./index";
+
+import Navbar from "./navbar/Navbar";
 
 function App() {
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route index element={<GuestMain />} />
         <Route path={"/signedInMain"} element={<SignedInMain />} />
@@ -21,6 +25,7 @@ function App() {
         <Route path={"/singleAlbum"} element={<SingleAlbum />} />
         <Route path={"/featuredAlbums"} element={<FeaturedAlbums />} />
         <Route path={"/newAlbumReleases"} element={<NewAlbumReleases />} />
+        <Route path={"/admin"} element={<Admin />} />
       </Routes>
     </div>
   );
