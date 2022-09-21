@@ -1,20 +1,26 @@
 import React from 'react';
-import { AllAlbums, AllPlaylists, SingleAlbum } from './index';
-// import AllAlbums from './albums/AllAlbums';
-// import SingleAlbum from './singleAlbum/SingleAlbum';
-// import AllPlaylists from './playlists/AllPlaylists';
-// import AllAlbums from './albums/AllAlbums';
-// import SingleAlbum from './singleAlbum/SingleAlbum';
+import {
+  AllAlbums,
+  FeaturedPlaylists,
+  SingleAlbum,
+  FeaturedAlbums,
+  SinglePlaylist,
+  GuestMain,
+  SignedInMain,
+} from './index';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <div>
-      {/* <AllAlbums /> */}
       <Routes>
-        <Route index element={<AllAlbums />} />
-        <Route path={'/allPlaylists'} element={<AllPlaylists />} />
+        <Route index element={<GuestMain />} />
+        <Route path={'/signedInMain'} element={<SignedInMain />} />
+        <Route path={'/allAlbums'} element={<AllAlbums />} />
+        <Route path={'/featuredPlaylists'} element={<FeaturedPlaylists />} />
         <Route path={'/singleAlbum'} element={<SingleAlbum />} />
+        <Route path={'/singlePlaylist'} element={<SinglePlaylist />} />
+        <Route path={'/featuredAlbums'} element={<FeaturedAlbums />} />
       </Routes>
     </div>
   );
