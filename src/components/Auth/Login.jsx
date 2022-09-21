@@ -1,27 +1,33 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { authenticate, logout } from '../../reducers/authReducer';
 
 const Login = () => {
-  const [form, setForm] = React.useState({
-    username: "",
-    password: "",
-  });
+  const dispatch = useDispatch();
+  const [userName, setUserName] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
-  const [auth, setAuth] = React.useState("");
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(authenticate(userName, password, 'login'));
+  }
 
-  const handleSubmit = async (form) => {
-    try {
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [auth, setAuth] = React.useState('');
 
   return (
-    <div className="container">
+    <div className='container'>
       <form>
-        <input type="text" placeholder="Enter username..." />
-        <input type="password" placeholder="Enter password..." />
-        <button>Submit</button>
+        <input
+          type='text'
+          placeholder='Enter username...'
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <input
+          type='password'
+          placeholder='Enter password...'
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   );

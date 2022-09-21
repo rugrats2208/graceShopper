@@ -38,8 +38,8 @@ router.post('/login', async function (req, res, next) {
 //User signup POST
 router.post('/signup', async (req, res, next) => {
   try {
-    const { username, password } = req.body; //to prevent malicious injection
-    const user = await User.create({ username, password });
+    const { username, password, email, fName, lName } = req.body; //to prevent malicious injection
+    const user = await User.create({ username, password, email, fName, lName });
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
@@ -51,12 +51,11 @@ router.post('/signup', async (req, res, next) => {
 });
 
 // matches GET requests to /api/auth/me
-router.get('/me', async (req, res, next) => {
+router.get('/me', requireToken, async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      attributes: ['id', 'username', 'password', 'email', 'fName', 'lName'],
-    });
-    res.json(users);
+    const { id, username } = req.user;
+    const userData = { id: id, username: username };
+    res.json(userData);
   } catch (err) {
     next(err);
   }

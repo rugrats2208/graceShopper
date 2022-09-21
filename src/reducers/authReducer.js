@@ -18,7 +18,7 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   if (token) {
-    const res = await axios.get('api/users/me', {
+    const res = await axios.get('api/auth/me', {
       headers: {
         authorization: token,
       },
@@ -30,7 +30,7 @@ export const me = () => async (dispatch) => {
 export const authenticate =
   (username, password, method) => async (dispatch) => {
     try {
-      const res = await axios.post(`/api/users/${method}`, {
+      const res = await axios.post(`/api/auth/${method}`, {
         username,
         password,
       });

@@ -1,6 +1,6 @@
-import React from "react";
-import { AllAlbums, AllPlaylists } from ".";
-import Login from "../components/Auth/Login";
+import React from 'react';
+import { AllAlbums, AllPlaylists } from '.';
+import Login from './Auth/Login';
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '../components/Auth/authReducer';
+import authReducer from '../reducers/authReducer';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 const store = configureStore({
