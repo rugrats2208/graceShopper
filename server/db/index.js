@@ -51,6 +51,7 @@ const syncAndSeed = async () => {
                 let prod = await Product.create({
                     name: album.name,
                     price: 1000 + album.popularity * 10,
+                    qty: Math.floor(Math.random() * 16),
                     img: album.images[0].url,
                     spotifyId: album.id,
                     totalTrack: album.total_tracks,
