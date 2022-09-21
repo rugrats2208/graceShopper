@@ -1,53 +1,112 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import {
+  MDBValidation,
+  MDBValidationItem,
+  MDBInput,
+  MDBBtn,
+  MDBCheckbox,
+  MDBInputGroup,
+} from 'mdb-react-ui-kit';
+import { useDispatch } from 'react-redux';
 import { authenticate, logout } from '../../reducers/Auth/authReducer';
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const [userName, setUserName] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [fName, setFName] = React.useState('');
-  const [lName, setLName] = React.useState('');
+  const [auth, setAuth] = React.useState('');
+
+  const [formValue, setFormValue] = useState({
+    fname: 'Mark',
+    lname: 'Otto',
+    email: '',
+    city: '',
+    state: '',
+    zip: '',
+  });
+
+  const onChange = (e) => {
+    setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(authenticate(userName, password, 'signup', email, fName, lName));
   }
 
-  const [auth, setAuth] = React.useState('');
-
   return (
-    <div className='container'>
-      <form>
-        <input
-          type='text'
-          placeholder='Enter username...'
-          onChange={(e) => setUserName(e.target.value)}
+    <MDBValidation className='row g-3'>
+      <MDBValidationItem className='col-md-4'>
+        <MDBInput
+          value={formValue.fName}
+          name='fName'
+          onChange={onChange}
+          id='validationCustom01'
+          required
+          label='First name'
         />
-        <input
-          type='password'
-          placeholder='Enter password...'
-          onChange={(e) => setPassword(e.target.value)}
+      </MDBValidationItem>
+      <MDBValidationItem className='col-md-4'>
+        <MDBInput
+          value={formValue.lName}
+          name='lName'
+          onChange={onChange}
+          id='validationCustom02'
+          required
+          label='Last name'
         />
-        <input
-          type='email'
-          placeholder='Enter email...'
-          onChange={(e) => setEmail(e.target.value)}
+      </MDBValidationItem>
+      <MDBValidationItem
+        feedback='Please choose a username.'
+        invalid
+        className='col-md-4'
+      >
+        <MDBInputGroup textBefore='@'>
+          <input
+            value={formValue.username}
+            name='username'
+            type='text'
+            className='form-control'
+            id='validationCustomUsername'
+            placeholder='Username'
+            required
+          />
+        </MDBInputGroup>
+      </MDBValidationItem>
+      <MDBValidationItem className='col-md-4'>
+        <MDBInput
+          value={formValue.email}
+          name='email'
+          onChange={onChange}
+          id='validationCustom03'
+          required
+          label='email'
         />
-        <input
-          type='fName'
-          placeholder='Enter first name...'
-          onChange={(e) => setFName(e.target.value)}
+      </MDBValidationItem>
+      <MDBValidationItem className='col-md-4'>
+        <MDBInput
+          value={formValue.password}
+          name='password'
+          onChange={onChange}
+          id='validationCustom04'
+          required
+          label='password'
         />
-        <input
-          type='lName'
-          placeholder='Enter last name...'
-          onChange={(e) => setLName(e.target.value)}
+      </MDBValidationItem>
+      <MDBValidationItem
+        className='col-12'
+        feedback='You must agree before submitting.'
+        invalid
+      >
+        <MDBCheckbox
+          label='Agree to terms and conditions'
+          id='invalidCheck'
+          required
         />
-        <button onClick={handleSubmit}>Sign Up</button>
-      </form>
-    </div>
+      </MDBValidationItem>
+      <div className='col-12'>
+        <MDBBtn type='submit'>Submit form</MDBBtn>
+        <MDBBtn type='reset'>Reset form</MDBBtn>
+      </div>
+    </MDBValidation>
   );
 };
 
