@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { getAlbums } from "../reducers/albums/albumsReducer";
 //COMPONENTS
 import {
   AllAlbums,
@@ -8,17 +9,18 @@ import {
   FeaturedAlbums,
   GuestMain,
   SignedInMain,
+  NewAlbumReleases,
   Navbar,
   Admin,
+  SingleArtist,
 } from "./index";
-
-import { fetchAlbums } from "../reducers/albums/albumsReducer";
 
 function App() {
   const dispatch = useDispatch();
-  React.useEffect(() => {
-    dispatch(fetchAlbums());
+  useEffect(() => {
+    dispatch(getAlbums());
   }, []);
+
   return (
     <div>
       <Navbar />
@@ -26,8 +28,10 @@ function App() {
         <Route index element={<GuestMain />} />
         <Route path={"/signedInMain"} element={<SignedInMain />} />
         <Route path={"/allAlbums"} element={<AllAlbums />} />
-        <Route path={"/singleAlbum"} element={<SingleAlbum />} />
+        <Route path={"/singleAlbum/:id"} element={<SingleAlbum />} />
+        <Route path={"/singleArtist/:id"} element={<SingleArtist />} />
         <Route path={"/featuredAlbums"} element={<FeaturedAlbums />} />
+        <Route path={"/newAlbumReleases"} element={<NewAlbumReleases />} />
         <Route path={"/admin"} element={<Admin />} />
       </Routes>
     </div>
