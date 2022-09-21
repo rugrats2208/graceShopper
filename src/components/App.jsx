@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 //COMPONENTS
 import {
   AllAlbums,
@@ -12,7 +12,13 @@ import {
   Admin,
 } from "./index";
 
+import { fetchAlbums } from "../reducers/albums/albumsReducer";
+
 function App() {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(fetchAlbums());
+  }, []);
   return (
     <div>
       <Navbar />
