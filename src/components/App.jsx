@@ -1,26 +1,31 @@
-import React from 'react';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+
+//COMPONENTS
 import {
   AllAlbums,
-  FeaturedPlaylists,
   SingleAlbum,
   FeaturedAlbums,
-  SinglePlaylist,
   GuestMain,
   SignedInMain,
-} from './index';
-import { Route, Routes } from 'react-router-dom';
+  NewAlbumReleases,
+  Admin,
+} from "./index";
+
+import Navbar from "./navbar/Navbar";
 
 function App() {
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route index element={<GuestMain />} />
-        <Route path={'/signedInMain'} element={<SignedInMain />} />
-        <Route path={'/allAlbums'} element={<AllAlbums />} />
-        <Route path={'/featuredPlaylists'} element={<FeaturedPlaylists />} />
-        <Route path={'/singleAlbum'} element={<SingleAlbum />} />
-        <Route path={'/singlePlaylist'} element={<SinglePlaylist />} />
-        <Route path={'/featuredAlbums'} element={<FeaturedAlbums />} />
+        <Route path={"/signedInMain"} element={<SignedInMain />} />
+        <Route path={"/allAlbums"} element={<AllAlbums />} />
+        <Route path={"/singleAlbum"} element={<SingleAlbum />} />
+        <Route path={"/featuredAlbums"} element={<FeaturedAlbums />} />
+        <Route path={"/newAlbumReleases"} element={<NewAlbumReleases />} />
+        <Route path={"/admin"} element={<Admin />} />
       </Routes>
     </div>
   );

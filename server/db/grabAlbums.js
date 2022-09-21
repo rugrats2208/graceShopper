@@ -2,6 +2,7 @@ const axios = require('axios');
 const path = require('path');
 require('dotenv').config();
 
+
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const client_code = Buffer.from(
