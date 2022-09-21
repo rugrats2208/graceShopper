@@ -29,7 +29,9 @@ router.get('/', requireToken, isAdmin, async (req, res, next) => {
 // user login POST
 router.post('/login', async function (req, res, next) {
   try {
-    res.send({ token: await User.authenticate(req.body) });
+    const { username, password } = req.body;
+    const userData = { username: username, password: password };
+    res.send({ token: await User.authenticate(userData) });
   } catch (err) {
     next(err);
   }

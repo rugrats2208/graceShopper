@@ -1,6 +1,7 @@
 import React from 'react';
 import { AllAlbums, AllPlaylists } from '.';
 import Login from './Auth/Login';
+import Signup from './Auth/Signup';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <AllAlbums />
       <AllPlaylists />
       <Login />
+      <Signup />
     </div>
   );
 }
