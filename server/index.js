@@ -4,7 +4,6 @@ const conn = require('./db');
 
 const init = async () => {
     try {
-
         await conn.syncAndSeed();
 
         app.listen(port, () => console.log(`listening on port ${port}`));
@@ -14,6 +13,5 @@ const init = async () => {
 };
 
 // app.listen(port, () => console.log(`listening on port ${port}`));
-
 
 init();
