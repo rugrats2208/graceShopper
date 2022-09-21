@@ -63,11 +63,13 @@ console.log(featuredAlbums);
 
 function FeaturedAlbums() {
   return (
-    <div id="featured-albums">
+    <div className="featured-albums">
       <h1>Featured Albums</h1>
-      {featuredAlbums.map((album) => (
-        <Album key={album.id} data={album} />
-      ))}
+      <div className="featured-albums-list">
+        {featuredAlbums.map((album) => (
+          <Album key={album.id} data={album} />
+        ))}
+      </div>
     </div>
   );
 }

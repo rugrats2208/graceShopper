@@ -89,9 +89,11 @@ function NewAlbumReleases() {
   return (
     <div>
       <h1>New Releases</h1>
-      {newReleases.albums.items.map((album) => (
-        <Album key={album.id} data={album} />
-      ))}
+      <div className="new-albums-list">
+        {newReleases.albums.items.map((album) => (
+          <Album key={album.id} data={album} />
+        ))}
+      </div>
     </div>
   );
 }
