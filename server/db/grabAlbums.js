@@ -2,6 +2,7 @@ const axios = require('axios');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 
+
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const client_code = Buffer.from(
@@ -86,4 +87,15 @@ const getAlbumData = async () => {
     }
 };
 
+<<<<<<< HEAD
+// (async () => {
+//     console.log(await getAlbumData());
+// })();
+
+// const after = await getAlbumData();
+// console.log(after);
+
+// getAlbumData().then(albums => console.log(albums.length)); //use this to seed our database
+=======
+>>>>>>> 224337571972d4d985e19e5a8af766b538270c92
 module.exports = getAlbumData;
