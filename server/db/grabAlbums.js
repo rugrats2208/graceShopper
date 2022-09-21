@@ -2,7 +2,6 @@ const axios = require('axios');
 const path = require('path');
 require('dotenv').config();
 
-
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const client_code = Buffer.from(
@@ -45,7 +44,7 @@ const getAlbumList = async () => {
         });
         response.data.albums.items.forEach(album => albumIds.push(album.id));
         //get next 50 albums
-        url += '&offset=1';
+        url += '&offset=50';
         const resOffset = await axios.get(url, {
             headers: {
                 Authorization: `Bearer ${access_token}`,

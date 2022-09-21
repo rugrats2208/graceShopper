@@ -36,6 +36,7 @@ const syncAndSeed = async () => {
         const users = await getUsers();
         await Promise.all(users.map(user => User.create(user)));
 
+        //LOAD ALBUMS
         const albums = await getAlbumData();
         await Promise.all(
             albums.map(async album => {
