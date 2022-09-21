@@ -1,0 +1,9 @@
+.albums {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.album {
+  margin: 10px;
+}
