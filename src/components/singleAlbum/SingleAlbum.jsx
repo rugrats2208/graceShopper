@@ -36,8 +36,10 @@ function SingleAlbum() {
     <div>
       <div className="single-album">
         <img src={singleAlbum.images[0].url}></img>
-        <h2>{singleAlbum.artists.map((artist) => artist.name)}</h2>
         <h2>{singleAlbum.name}</h2>
+        <h2>{singleAlbum.artists.map((artist) => artist.name)}</h2>
+        <p>Genre(s): {singleAlbum.artists[0].genres.join(', ')}</p>
+        <p>Date Released: {singleAlbum.release_date}</p>
         <ul>
           {singleAlbum.tracks.items.map((track) => (
             <li>{track.name}</li>

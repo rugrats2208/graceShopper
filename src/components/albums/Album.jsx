@@ -16,8 +16,6 @@ function Album(props) {
       <Link to={'/singleAlbum'}>
         <h2>{album.artists.map((artist) => artist.name)}</h2>
       </Link>
-
-      {/* <p>{album.tracks.items.map((track) => track.name)}</p> */}
     </div>
   );
 }

@@ -25,7 +25,7 @@ const albumData = {
       ],
       tracks: {
         total: 10,
-        items: [{ track1: 'track1' }],
+        items: [{ name: 'track1' }],
       },
     },
     {
@@ -50,7 +50,7 @@ const albumData = {
       ],
       tracks: {
         total: 9,
-        items: [{ track2: 'track2' }],
+        items: [{ name: 'track2' }],
       },
     },
     {
@@ -75,7 +75,7 @@ const albumData = {
       ],
       tracks: {
         total: 12,
-        items: [{ track3: 'track3' }],
+        items: [{ name: 'track3' }],
       },
     },
   ],
@@ -84,6 +84,7 @@ const albumData = {
 function AllAlbums() {
   return (
     <div className="all-albums">
+      <h1>All Albums</h1>
       {albumData.albums.map((album) => (
         <Album key={album.id} data={album} />
       ))}
