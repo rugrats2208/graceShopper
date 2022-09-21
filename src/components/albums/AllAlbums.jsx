@@ -4,7 +4,7 @@ import Album from './Album';
 
 function AllAlbums() {
   const allAlbums = useSelector((state) => state.albums);
-  // console.log(allAlbums);
+
   return (
     <div className="all-albums">
       <h1>All Albums</h1>
