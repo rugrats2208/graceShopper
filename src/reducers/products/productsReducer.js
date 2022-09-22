@@ -1,21 +1,21 @@
 import axios from 'axios';
 
 //ACTION TYPE
-const SET_ALBUMS = 'SET_ALBUMS';
+const SET_PRODUCTS = 'SET_PRODUCTS';
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const DEL_PRODUCT = 'DEL_PRODUCT';
 
 //ACTION CREATOR
-const setAlbums = (albums) => ({
-  type: SET_ALBUMS,
-  albums,
+const setProducts = (products) => ({
+  type: SET_PRODUCTS,
+  products,
 });
 
 //THUNKS
-export const getAlbums = () => {
+export const getProducts = () => {
   return async (dispatch) => {
     const { data } = await axios.get('/api/shop');
-    dispatch(setAlbums(data));
+    dispatch(setProducts(data));
   };
 };
 
@@ -24,40 +24,42 @@ export const addProduct = (form) => {
     try {
       const { data } = await axios.post(`/api/shop/albums`, form);
       dispatch({ type: ADD_PRODUCT, payload: data });
+    } catch (error) {
+      console.log(error);
     }
-    catch (error) {
-      console.log(error)
-    }
-  }
-}
+  };
+};
 
 export const delProduct = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(`/api/shop/albums/${id}`);
+      const token = window.localStorage.getItem('token');
+      const { data } = await axios.delete(`/api/shop/albums/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
       dispatch({ type: DEL_PRODUCT, payload: data.id });
+    } catch (error) {
+      console.log(error);
     }
-    catch (error) {
-      console.log(error)
-    }
-  }
-}
-
+  };
+};
 
 const initialState = [];
 
 //reducer
-const albumsReducer = (state = initialState, action) => {
+const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ALBUMS:
-      return action.albums;
+    case SET_PRODUCTS:
+      return action.products;
     case ADD_PRODUCT:
       return [...state, action.payload];
     case DEL_PRODUCT:
-      return state.filter(product => product.id !== action.payload);
+      return state.filter((product) => product.id !== action.payload);
     default:
       return state;
   }
 };
 
-export default albumsReducer;
+export default productReducer;

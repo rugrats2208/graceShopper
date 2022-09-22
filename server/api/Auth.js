@@ -52,7 +52,7 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-// matches GET requests to /api/auth/me
+// matches GET requests to /api/auth/me - returns logged in user data
 router.get('/me', requireToken, async (req, res, next) => {
   try {
     const { id, username } = req.user;

@@ -41,10 +41,12 @@ function Navigation() {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/allAlbums">Products</Nav.Link>
               <Nav.Link href="/admin">Admin</Nav.Link>
+
             </Nav>
 
             <Navbar.Text>
               Signed in as: <a href="#login">{username || "guest"} </a>
+
             </Navbar.Text>
             {username === null && (
               <Button
