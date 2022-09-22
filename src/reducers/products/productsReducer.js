@@ -22,7 +22,12 @@ export const getProducts = () => {
 export const addProduct = (form) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/shop/albums`, form);
+      const token = window.localStorage.getItem('token');
+      const { data } = await axios.post(`/api/shop/albums`, form, {
+        headers: {
+          authorization: token,
+        },
+      });
       dispatch({ type: ADD_PRODUCT, payload: data });
     } catch (error) {
       console.log(error);

@@ -51,7 +51,6 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
->>>>>>>>> Temporary merge branch 2
 router.delete('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
