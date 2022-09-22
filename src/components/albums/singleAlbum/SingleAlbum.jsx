@@ -34,7 +34,6 @@ function SingleAlbum() {
         <Link to={`/singleArtist/${artist.id}`}>
           <h3>{artist.name}</h3>
         </Link>
-        {/* <p>Genre(s): {singleAlbum.artists[0].genres.join(', ')}</p> */}
         <h3>Label: {album.label}</h3>
         <p>Date Released: {album.releaseDate}</p>
         <p>Price: {displayPrice(album.price)}</p>
