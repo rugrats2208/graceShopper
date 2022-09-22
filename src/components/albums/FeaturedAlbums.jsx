@@ -13,8 +13,9 @@ function FeaturedAlbums() {
       featuredAlbums.push(albumArray[i]);
     }
     featuredAlbums.sort((album1, album2) => {
-      return album2.price - album1.price;
+      return album2.artist.popularity - album1.artist.popularity;
     });
+
     return featuredAlbums.slice(0, 30);
   }
 

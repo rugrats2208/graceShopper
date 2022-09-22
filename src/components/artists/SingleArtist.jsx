@@ -15,6 +15,7 @@ function SingleArtist() {
 
   function displayPrice(price) {
     let priceDisplayed = `$${price / 100}`;
+
     JSON.stringify(priceDisplayed).length === 8
       ? (priceDisplayed = priceDisplayed)
       : (priceDisplayed = `${priceDisplayed}0`);
