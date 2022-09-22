@@ -79,6 +79,7 @@ const syncAndSeed = async () => {
             })
         );
         console.log('Seeding successful!');
+        conn.close();
     } catch (err) {
         console.log(err);
     }
