@@ -3,7 +3,7 @@ const { Sequelize } = conn;
 
 //GET DATA FROM SPOTIFY API
 const getAlbumData = require('./grabAlbums');
-// GET USERS
+// GET USERS FROM DUMMY API
 const getUsers = require('./getUsers');
 
 //MODELS
