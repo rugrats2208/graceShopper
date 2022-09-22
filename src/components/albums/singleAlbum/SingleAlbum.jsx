@@ -22,13 +22,18 @@ function SingleAlbum() {
   }
 
   function convertTrackLength(length) {
-    console.log(length);
+    //console.log(length);
     let trackLength = Math.round((100 * length) / 60000) / 100;
-    trackLength = (trackLength % 1) * 60;
-    let trackString = JSON.stringify(trackLength);
-    return trackString.replace('.', ':');
+    let seconds = Math.round((trackLength % 1) * 60);
+    let trackString = `${Math.floor(trackLength)}:${seconds}`;
+    return trackString;
   }
 
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
   return (
     <div>
       <div className="single-album">
@@ -38,7 +43,7 @@ function SingleAlbum() {
           <h3>{artist.name}</h3>
         </Link>
         <h3>Label: {album.label}</h3>
-        {artist.genre ? <p>Genre: {artist.genre.toUpperCase()}</p> : null}
+        {artist.genre ? <p>Genre: {toTitleCase(artist.genre)}</p> : null}
         <p>Date Released: {album.releaseDate}</p>
         <p>Price: {displayPrice(album.price)}</p>
         <p>Tracks: {album.totalTrack}</p>
@@ -52,6 +57,9 @@ function SingleAlbum() {
             ))}
         </ol>
         <button>Add to Cart</button> <button>Buy Now</button>
+        <Link to={'/'}>
+          <button>Back to Home</button>
+        </Link>
       </div>
     </div>
   );
