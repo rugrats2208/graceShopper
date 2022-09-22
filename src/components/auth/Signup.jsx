@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { authenticate, logout } from '../../reducers/Auth/authReducer';
 import {
   MDBRow,
@@ -45,6 +46,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function Signup() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //login vs register state
@@ -66,12 +68,14 @@ export default function Signup() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(authenticate('login', username, password));
+    navigate('/');
   }
 
   //logout handler
   function handleLogout(e) {
     e.preventDefault();
     dispatch(logout());
+    navigate('/');
   }
 
   return (
