@@ -8,11 +8,10 @@ const Artist = conn.define('artist', {
     },
     spotifyId: {
         type: Sequelize.STRING,
-        notNull: true,
     },
     img: {
         type: Sequelize.STRING,
-        defaultValue: '../../../public/music-note.jpg',
+        defaultValue: '../../../public/artist-default.jpg',
     },
     genre: {
         type: Sequelize.STRING,
