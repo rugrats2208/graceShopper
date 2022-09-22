@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <Routes>
         <Route index element={<GuestMain />} />
         <Route path={"/signedInMain"} element={<SignedInMain />} />

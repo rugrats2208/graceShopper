@@ -6,7 +6,6 @@ function NewAlbumReleases() {
   const albums = useSelector((state) => state.albums);
   const [filteredAlbums, setFilteredAlbums] = useState([]);
 
-  // console.log(albums);
   function getNewReleases(albumArray) {
     //using a new array that will be to not manipulate the array being passed in (which will be the albums array(the global album state))
     let featuredAlbums = [];
@@ -34,7 +33,7 @@ function NewAlbumReleases() {
   useEffect(() => {
     setFilteredAlbums(getNewReleases(albums));
   }, [albums]);
-  
+
   return (
     <div>
       <h1>New Releases</h1>

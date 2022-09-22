@@ -8,18 +8,17 @@ const Product = conn.define('product', {
     },
     price: {
         type: Sequelize.INTEGER,
-    }, //base on popularity
+    },
     qty: {
         type: Sequelize.INTEGER,
         defaultValue: 5,
     },
     img: {
         type: Sequelize.STRING,
-        defaultValue: '../../../public/music-note.jpg',
+        defaultValue: '/music-note.jpg',
     },
     spotifyId: {
         type: Sequelize.STRING,
-        // notNull: true,
     },
     totalTrack: {
         type: Sequelize.INTEGER,
