@@ -1,4 +1,4 @@
-export { default as Navbar } from './navbar/Navbar';
+export { default as Navigation } from './navbar/Navbar';
 export { default as AllAlbums } from './albums/AllAlbums';
 export { default as SingleAlbum } from './albums/singleAlbum/SingleAlbum';
 export { default as FeaturedAlbums } from './albums/FeaturedAlbums';
