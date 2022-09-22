@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSingleArtist } from '../../reducers/artists/singleArtistReducer';
 
 function SingleArtist() {
-  const [artistAlbums, setArtistAlbum] = useState([]);
   const artist = useSelector((state) => state.singleArtist);
   const params = useParams();
   const dispatch = useDispatch();
@@ -26,15 +25,15 @@ function SingleArtist() {
     <div className="single-artist">
       <h1>{artist.name}</h1>
       <img src={artist.img}></img>
-      <h3> Artist Albums:</h3>
+      <h3> Artist Products:</h3>
       <ul>
         {artist.products
           ? artist.products.map((product) => (
               <li key={product.id}>
-                <Link to={`/singleAlbum/${product.id}`}>
+                <Link to={`/singleProduct/${product.id}`}>
                   <h5>{product.name}</h5>
                 </Link>
-                <Link to={`/singleAlbum/${product.id}`}>
+                <Link to={`/singleProduct/${product.id}`}>
                   <img src={product.img} height="400" width="400"></img>
                 </Link>
                 <br></br>
