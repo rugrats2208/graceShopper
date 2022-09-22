@@ -1,11 +1,11 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../reducers/Auth/authReducer';
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../reducers/Auth/authReducer";
 
 function Navigation() {
   const navigate = useNavigate();
@@ -16,13 +16,13 @@ function Navigation() {
   //login  handler
   function handleLogin(e) {
     e.preventDefault();
-    navigate('/signup');
+    navigate("/signup");
   }
   //logout  handler
   function handleLogout(e) {
     e.preventDefault();
     dispatch(logout());
-    navigate('/');
+    navigate("/");
     window.location.reload();
   }
 
@@ -35,27 +35,16 @@ function Navigation() {
           <Navbar.Collapse id="navbarScroll">
             <Nav
               className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
+              style={{ maxHeight: "100px" }}
               navbarScroll
             >
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/allProducts">Products</Nav.Link>
+              <Nav.Link href="/allAlbums">Products</Nav.Link>
               <Nav.Link href="/admin">Admin</Nav.Link>
-              {/* <Nav.Link eventKey='signin' href='/signup'>
-                Sign In
-              </Nav.Link> */}
             </Nav>
-            {/* <Form className='d-flex'>
-              <Form.Control
-                type='search'
-                placeholder='Search'
-                className='me-2'
-                aria-label='Search'
-              />
-              <Button variant='outline-success'>Search</Button>
-            </Form> */}
+
             <Navbar.Text>
-              Signed in as: <a href="#login">{username || 'guest'} </a>
+              Signed in as: <a href="#login">{username || "guest"} </a>
             </Navbar.Text>
             {username === null && (
               <Button
