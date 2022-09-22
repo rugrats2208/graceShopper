@@ -22,7 +22,6 @@ function FeaturedAlbums() {
     setFilteredAlbums(filterFeaturedAlbums(albums));
   }, [albums]);
 
-  //console.log(filteredAlbums);
   return (
     <div className="featured-albums">
       <h1>Featured Albums</h1>
