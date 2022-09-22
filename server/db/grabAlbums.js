@@ -1,7 +1,5 @@
 const axios = require('axios');
-const path = require('path');
 require('dotenv').config();
-
 
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -25,18 +23,18 @@ const getAuth = async () => {
         );
         return response.data.access_token;
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 };
 
 //gets a list of 100 albums
 const getAlbumList = async () => {
-    //request token using getAuth() function
-    const access_token = await getAuth();
-
-    const albumIds = [];
-    let url = 'https://api.spotify.com/v1/browse/new-releases?limit=50';
     try {
+        //request token using getAuth() function
+        const access_token = await getAuth();
+
+        const albumIds = [];
+        let url = 'https://api.spotify.com/v1/browse/new-releases?limit=50';
         //get first 50 albums
         const response = await axios.get(url, {
             headers: {
@@ -45,7 +43,7 @@ const getAlbumList = async () => {
         });
         response.data.albums.items.forEach(album => albumIds.push(album.id));
         //get next 50 albums
-        url += '&offset=1';
+        url += '&offset=50';
         const resOffset = await axios.get(url, {
             headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -55,39 +53,77 @@ const getAlbumList = async () => {
 
         return albumIds;
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 };
 
 //get the list of albums information
 const getAlbumData = async () => {
-    const access_token = await getAuth();
-    const albumIds = await getAlbumList();
-    const uniqueAlbums = albumIds.filter(
-        (id, index, arr) => arr.indexOf(id) === index
-    );
-
-    let albums = [];
     try {
+        const access_token = await getAuth();
+        const albumIds = await getAlbumList();
+        const uniqueAlbumIds = albumIds.filter(
+            (id, index, arr) => arr.indexOf(id) === index
+        );
+
+        //TODO: add or remove this, might help prevent 429 response
+        // let artists = [];
+        let albums = [];
+
         //get actual albums 20 at a time
-        for (let i = 0; i < Math.ceil(uniqueAlbums.length / 20); i++) {
+        for (let i = 0; i < Math.ceil(uniqueAlbumIds.length / 20); i++) {
             //get 20 ids at a time and put it on the url
-            let url = `https://api.spotify.com/v1/albums?ids=${uniqueAlbums
+            let setOfAlbumIds = uniqueAlbumIds
                 .slice(i * 20, 20 + i * 20)
-                .join(',')}`;
+                .join(',');
             //request album data from server
-            let response = await axios.get(url, {
-                headers: {
-                    Authorization: `Bearer ${access_token}`,
-                },
-            });
+            let albumsResponse = await axios.get(
+                `https://api.spotify.com/v1/albums?ids=${setOfAlbumIds}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }
+            );
+            //get artists
+            //TODO: add or remove this, might help prevent 429 response
+            // let setOfArtistIds = albumsResponse.data.albums.map(
+            //     album => album.artists[0].id
+            // );
+
+            // let artistsResponse = await axios.get(
+            //     `https://api.spotify.com/v1/artists?ids=${setOfArtistIds}`,
+            //     {
+            //         headers: {
+            //             Authorization: `Bearer ${access_token}`,
+            //         },
+            //     }
+            // );
+
             //add the albums to an array
-            albums = [...albums, ...response.data.albums];
+            albums = [...albums, ...albumsResponse.data.albums];
+            //TODO: add or remove this, might help prevent 429 response, if keeping make sure to return it
+            // artists = [...artists, ...artistsResponse.data.artists];
         }
         return albums;
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 };
 
-module.exports = getAlbumData;
+const getArtist = async artistId => {
+    try {
+        const access_token = await getAuth();
+        let url = `https://api.spotify.com/v1/artists/${artistId}`;
+        const response = await axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${access_token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+module.exports = { getAlbumData, getArtist };

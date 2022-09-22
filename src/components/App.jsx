@@ -33,6 +33,7 @@ function App() {
         <Route path={"/featuredAlbums"} element={<FeaturedAlbums />} />
         <Route path={"/newAlbumReleases"} element={<NewAlbumReleases />} />
         <Route path={"/admin"} element={<Admin />} />
+
       </Routes>
     </div>
   );
