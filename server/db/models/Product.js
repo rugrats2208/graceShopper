@@ -19,11 +19,11 @@ const Product = conn.define('product', {
     },
     spotifyId: {
         type: Sequelize.STRING,
-        notNull: true,
+        // notNull: true,
     },
     totalTrack: {
         type: Sequelize.INTEGER,
-        notNull: true,
+        // notNull: true,
     },
     releaseDate: {
         type: Sequelize.STRING,
