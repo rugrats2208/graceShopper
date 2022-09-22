@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
 const EditForm = ({ data: { product, setItemEdit } }) => {
   const [form, setForm] = React.useState({
-    name: product.name || "",
-    price: product.price || "",
-    qty: product.qty || "",
-    img: product.img || "",
+    name: product.name || '',
+    price: product.price || '',
+    qty: product.qty || '',
+    img: product.img || '',
   });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     console.log(form);
-    setItemEdit("");
+    setItemEdit('');
   };
 
   return (
@@ -57,7 +57,7 @@ const EditForm = ({ data: { product, setItemEdit } }) => {
         }}
       />
       <button type="submit">Submit</button>
-      <button onClick={() => setItemEdit("")}>Cancel</button>
+      <button onClick={() => setItemEdit('')}>Cancel</button>
     </form>
   );
 };

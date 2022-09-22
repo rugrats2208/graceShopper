@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleAlbum } from '../../../reducers/albums/singleAlbumReducer';
+import { getSingleProduct } from '../../../reducers/products/singleProductReducer';
 
-function SingleAlbum() {
-  const album = useSelector((state) => state.singleAlbum);
-  const artist = album.artist || {};
+function SingleProduct() {
+  const product = useSelector((state) => state.singleProduct);
+  const artist = product.artist || {};
   const params = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getSingleAlbum(params.id));
+    dispatch(getSingleProduct(params.id));
   }, []);
 
   function displayPrice(price) {
@@ -34,22 +34,23 @@ function SingleAlbum() {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   }
+
   return (
     <div>
-      <div className="single-album">
-        <img src={album.img}></img>
-        <h1>{album.name}</h1>
+      <div className="single-product">
+        <img src={product.img}></img>
+        <h1>{product.name}</h1>
         <Link to={`/singleArtist/${artist.id}`}>
           <h3>{artist.name}</h3>
         </Link>
-        <h3>Label: {album.label}</h3>
+        <h3>Label: {product.label}</h3>
         {artist.genre ? <p>Genre: {toTitleCase(artist.genre)}</p> : null}
-        <p>Date Released: {album.releaseDate}</p>
-        <p>Price: {displayPrice(album.price)}</p>
-        <p>Tracks: {album.totalTrack}</p>
+        <p>Date Released: {product.releaseDate}</p>
+        <p>Price: {displayPrice(product.price)}</p>
+        <p>Tracks: {product.totalTrack}</p>
         <ol>
-          {album.tracks &&
-            album.tracks.map((track) => (
+          {product.tracks &&
+            product.tracks.map((track) => (
               <li key={track.id}>
                 Name: {track.name} <br></br>Length:{' '}
                 {convertTrackLength(track.length)} mins
@@ -65,4 +66,4 @@ function SingleAlbum() {
   );
 }
 
-export default SingleAlbum;
+export default SingleProduct;

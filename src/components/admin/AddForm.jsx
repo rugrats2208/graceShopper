@@ -1,23 +1,23 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../reducers/albums/albumsReducer";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../reducers/products/productsReducer';
 
 const AddForm = () => {
   const dispatch = useDispatch();
 
   const [form, setForm] = React.useState({
-    name: "",
-    price: "",
-    qty: "",
+    name: '',
+    price: '',
+    qty: '',
   });
 
   const handleClick = (evt) => {
     evt.preventDefault();
     dispatch(addProduct(form));
     setForm({
-      name: "",
-      price: "",
-      qty: "",
+      name: '',
+      price: '',
+      qty: '',
     });
   };
   return (

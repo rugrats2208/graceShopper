@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { FeaturedAlbums, NewAlbumReleases, AllAlbums } from '../';
+import { FeaturedProducts, NewProductReleases, AllProducts } from '../';
 
 function GuestMain() {
   return (
     <div id="guest-main">
       <div className="featured-albums-guest">
-        <FeaturedAlbums />
+        <FeaturedProducts />
       </div>
       <div className="new-releases-guest">
-        <NewAlbumReleases />
+        <NewProductReleases />
       </div>
       <div className="all-albums-guest">
-        <AllAlbums />
+        <AllProducts />
       </div>
     </div>
   );

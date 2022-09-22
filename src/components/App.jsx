@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getAlbums } from '../reducers/albums/albumsReducer';
+import { getProducts } from '../reducers/products/productsReducer';
 
 //COMPONENTS
 import {
-  AllAlbums,
-  SingleAlbum,
-  FeaturedAlbums,
+  AllProducts,
+  SingleProduct,
+  FeaturedProducts,
   GuestMain,
   SignedInMain,
-  NewAlbumReleases,
+  NewProductReleases,
   Navigation,
   Admin,
   SingleArtist,
@@ -20,7 +20,7 @@ import {
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAlbums());
+    dispatch(getProducts());
   }, []);
 
   return (
@@ -31,11 +31,11 @@ function App() {
         <Route path={'/signedInMain'} element={<SignedInMain />} />
         <Route path={'/signup'} element={<Signup />} />
         <Route path={'/signedInMain'} element={<SignedInMain />} />
-        <Route path={'/allAlbums'} element={<AllAlbums />} />
-        <Route path={'/singleAlbum/:id'} element={<SingleAlbum />} />
+        <Route path={'/allProducts'} element={<AllProducts />} />
+        <Route path={'/singleProduct/:id'} element={<SingleProduct />} />
         <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
-        <Route path={'/featuredAlbums'} element={<FeaturedAlbums />} />
-        <Route path={'/newAlbumReleases'} element={<NewAlbumReleases />} />
+        <Route path={'/featuredProducts'} element={<FeaturedProducts />} />
+        <Route path={'/newProductReleases'} element={<NewProductReleases />} />
         <Route path={'/admin'} element={<Admin />} />
       </Routes>
     </div>
