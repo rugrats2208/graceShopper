@@ -13,7 +13,7 @@ function FeaturedAlbums() {
       featuredAlbums.push(albumArray[i]);
     }
     featuredAlbums.sort((album1, album2) => {
-      return album2.price - album1.price;
+      return album2.artist.popularity - album1.artist.popularity;
     });
     return featuredAlbums.slice(0, 30);
   }
@@ -22,7 +22,6 @@ function FeaturedAlbums() {
     setFilteredAlbums(filterFeaturedAlbums(albums));
   }, [albums]);
 
-  //console.log(filteredAlbums);
   return (
     <div className="featured-albums">
       <h1>Featured Albums</h1>

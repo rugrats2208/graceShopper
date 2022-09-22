@@ -18,7 +18,7 @@ function SingleAlbum() {
   }, [artist]);
 
   console.log(artist);
-  console.log(artistAlbums);
+  // console.log(artistAlbums);
   return (
     <div className="single-artist">
       <h1>{artist.name}</h1>
