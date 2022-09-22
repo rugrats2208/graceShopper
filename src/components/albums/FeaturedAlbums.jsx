@@ -15,6 +15,7 @@ function FeaturedAlbums() {
     featuredAlbums.sort((album1, album2) => {
       return album2.artist.popularity - album1.artist.popularity;
     });
+
     return featuredAlbums.slice(0, 30);
   }
 

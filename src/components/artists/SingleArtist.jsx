@@ -1,38 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleArtist } from '../../reducers/artists/singleArtistReducer';
 
-function SingleAlbum() {
+function SingleArtist() {
   const [artistAlbums, setArtistAlbum] = useState([]);
   const artist = useSelector((state) => state.singleArtist);
   const params = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
-    console.log('get artist');
     dispatch(getSingleArtist(params.id));
   }, []);
-  useEffect(() => {
-    console.log('set artist album');
-    setArtistAlbum(artist.products);
-  }, [artist]);
 
-  console.log(artist);
-  // console.log(artistAlbums);
+  function displayPrice(price) {
+    let priceDisplayed = `$${price / 100}`;
+    console.log(JSON.stringify(priceDisplayed));
+    console.log(JSON.stringify(priceDisplayed).length);
+    JSON.stringify(priceDisplayed).length === 8
+      ? (priceDisplayed = priceDisplayed)
+      : (priceDisplayed = `${priceDisplayed}0`);
+    return priceDisplayed;
+  }
   return (
     <div className="single-artist">
       <h1>{artist.name}</h1>
+      <img src={artist.img}></img>
+      <h3> Artist Albums:</h3>
       <ul>
-        Artist Albums:
-        {artistAlbums &&
-          artistAlbums.map((product) => {
-            <li key={product.id}>
-              {product.name} {product.img}
-            </li>;
-          })}
+        {artist.products
+          ? artist.products.map((product) => (
+              <li key={product.id}>
+                <Link to={`/singleAlbum/${product.id}`}>
+                  <h5>{product.name}</h5>
+                </Link>
+                <Link to={`/singleAlbum/${product.id}`}>
+                  <img src={product.img} height="400" width="400"></img>
+                </Link>
+                <br></br>
+                <p>Price: {displayPrice(product.price)}</p>
+                <br></br>
+                <button>Add to Cart</button>
+              </li>
+            ))
+          : null}
       </ul>
     </div>
   );
 }
 
-export default SingleAlbum;
+export default SingleArtist;
