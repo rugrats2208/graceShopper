@@ -31,6 +31,7 @@ const syncAndSeed = async () => {
         //WITH FORCE TRUE ENABLED, THE DATABASE WILL DROP THE TABLE BEFORE CREATING A NEW ONE
         console.log('Started Seeding...');
         await conn.sync({ force: true });
+        // await conn.sync({ force: false });
 
         //LOADING USERS
         const users = await getUsers();

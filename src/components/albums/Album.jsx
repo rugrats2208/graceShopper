@@ -16,6 +16,8 @@ function Album(props) {
       <Link to={`/singleAlbum/${album.id}`}>
         <img src={album.img}></img>
       </Link>
+      <br></br>
+      <button>Add to Cart</button>
     </div>
   );
 }
