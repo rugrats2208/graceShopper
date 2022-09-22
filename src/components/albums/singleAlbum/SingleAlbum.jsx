@@ -21,9 +21,10 @@ function SingleAlbum() {
     return priceDisplayed;
   }
 
-  function trackLength(length) {
+  function convertTrackLength(length) {
     console.log(length);
     let trackLength = Math.round((100 * length) / 60000) / 100;
+    trackLength = (trackLength % 1) * 60;
     let trackString = JSON.stringify(trackLength);
     return trackString.replace('.', ':');
   }
@@ -45,8 +46,8 @@ function SingleAlbum() {
           {album.tracks &&
             album.tracks.map((track) => (
               <li key={track.id}>
-                Name: {track.name} <br></br>Length: {trackLength(track.length)}{' '}
-                mins
+                Name: {track.name} <br></br>Length:{' '}
+                {convertTrackLength(track.length)} mins
               </li>
             ))}
         </ol>
