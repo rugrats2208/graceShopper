@@ -11,7 +11,7 @@ import {
   GuestMain,
   SignedInMain,
   NewAlbumReleases,
-  Navbar,
+  Navigation,
   Admin,
   SingleArtist,
   Signup,
