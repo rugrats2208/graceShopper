@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleAlbum } from '../../../reducers/albums/singleAlbumReducer';
 import { getSingleArtist } from '../../../reducers/artists/singleArtistReducer';
@@ -7,14 +7,15 @@ import { getSingleArtist } from '../../../reducers/artists/singleArtistReducer';
 function SingleAlbum() {
   const [albumRetrieved, setAlbumRetirieved] = useState(false);
   const album = useSelector((state) => state.singleAlbum);
+  const artist = album.artist || {};
   const params = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getSingleAlbum(params.id));
-    // dispatch(getSingleArtist(album.artistId));
   }, []);
 
-  console.log(album);
+  console.log(artist);
 
   function displayPrice(price) {
     return `$${price / 100}0`;
@@ -30,7 +31,9 @@ function SingleAlbum() {
       <div className="single-album">
         <img src={album.img}></img>
         <h1>{album.name}</h1>
-        {/* <h3>{album.artist</h3> */}
+        <Link to={`/singleArtist/${artist.id}`}>
+          <h3>{artist.name}</h3>
+        </Link>
         {/* <p>Genre(s): {singleAlbum.artists[0].genres.join(', ')}</p> */}
         <h3>Label: {album.label}</h3>
         <p>Date Released: {album.releaseDate}</p>
