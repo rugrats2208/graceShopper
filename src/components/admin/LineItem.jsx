@@ -1,13 +1,10 @@
 import React from "react";
-
-// const [form, setForm] = React.useState({
-//   name: product.title || "",
-//   price: product.price || "",
-//   qty: product.stock || "",
-//   description: product.description || "",
-// });
+import { useDispatch } from "react-redux";
+import { delProduct } from "../../reducers/albums/albumsReducer";
 
 const LineItem = ({ data: { product, setItemEdit } }) => {
+  const dispatch = useDispatch();
+
   const handleClick = (evt) => {
     setItemEdit(evt.target.id);
   };
@@ -15,17 +12,17 @@ const LineItem = ({ data: { product, setItemEdit } }) => {
   return (
     <div style={{ display: "flex" }} className="lineItem">
       <div>{`ID: ${product.id}`}</div>
-      <div>{`Name: ${product.title}`}</div>
+      <div>{`Name: ${product.name}`}</div>
       <div>{`Price: ${product.price}`}</div>
-      <div>{`Stock Qty: ${product.stock}`}</div>
+      <div>{`Stock Qty: ${product.qty}`}</div>
       <div className="actions">
         <button id={product.id} onClick={handleClick}>
           Edit
         </button>
         <button
-          onClick={() =>
-            console.log(`Sike, you thought! Product ID: #${product.id}`)
-          }
+          onClick={() => {
+            dispatch(delProduct(product.id));
+          }}
         >
           Delete
         </button>

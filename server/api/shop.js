@@ -35,4 +35,17 @@ router.get('/artist/:id', async (req, res, next) => {
     }
 });
 
+//ADMIN PATHS
+router.delete('/albums/:id', async (req, res, next) => {
+    try {
+        const product = await Product.findByPk(req.params.id);
+        // console.log(product)
+        await product.destroy();
+        res.send(product);
+    }
+    catch (error) {
+        next(error)
+    }
+})
+
 module.exports = router;
