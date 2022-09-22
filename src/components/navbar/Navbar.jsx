@@ -39,11 +39,8 @@ function Navigation() {
               navbarScroll
             >
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/allProducts">Products</Nav.Link>
+              <Nav.Link href="/allAlbums">Products</Nav.Link>
               <Nav.Link href="/admin">Admin</Nav.Link>
-              {/* <Nav.Link eventKey='signin' href='/signup'>
-                Sign In
-              </Nav.Link> */}
             </Nav>
 
             <Navbar.Text>
