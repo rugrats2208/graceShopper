@@ -66,8 +66,7 @@ const getAlbumData = async () => {
             (id, index, arr) => arr.indexOf(id) === index
         );
 
-        //TODO: add or remove this, might help prevent 429 response
-        // let artists = [];
+        let artists = [];
         let albums = [];
 
         //get actual albums 20 at a time
@@ -86,44 +85,27 @@ const getAlbumData = async () => {
                 }
             );
             //get artists
-            //TODO: add or remove this, might help prevent 429 response
-            // let setOfArtistIds = albumsResponse.data.albums.map(
-            //     album => album.artists[0].id
-            // );
+            let setOfArtistIds = albumsResponse.data.albums.map(
+                album => album.artists[0].id
+            );
 
-            // let artistsResponse = await axios.get(
-            //     `https://api.spotify.com/v1/artists?ids=${setOfArtistIds}`,
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${access_token}`,
-            //         },
-            //     }
-            // );
+            let artistsResponse = await axios.get(
+                `https://api.spotify.com/v1/artists?ids=${setOfArtistIds}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }
+            );
 
             //add the albums to an array
             albums = [...albums, ...albumsResponse.data.albums];
-            //TODO: add or remove this, might help prevent 429 response, if keeping make sure to return it
-            // artists = [...artists, ...artistsResponse.data.artists];
+            artists = [...artists, ...artistsResponse.data.artists];
         }
-        return albums;
+        return [albums, artists];
     } catch (error) {
         console.error(error);
     }
 };
 
-const getArtist = async artistId => {
-    try {
-        const access_token = await getAuth();
-        let url = `https://api.spotify.com/v1/artists/${artistId}`;
-        const response = await axios.get(url, {
-            headers: {
-                Authorization: `Bearer ${access_token}`,
-            },
-        });
-        return response.data;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-module.exports = { getAlbumData, getArtist };
+module.exports = getAlbumData;

@@ -1,7 +1,7 @@
 const conn = require('./conn');
 
 //GET DATA FROM SPOTIFY API
-const { getAlbumData, getArtist } = require('./grabAlbums');
+const getAlbumData = require('./grabAlbums');
 // GET USERS
 const getUsers = require('./getUsers');
 
@@ -36,15 +36,18 @@ const syncAndSeed = async () => {
         await Promise.all(users.map(user => User.create(user)));
 
         //LOAD ALBUMS
-        const albums = await getAlbumData();
+        const [albums, artists] = await getAlbumData();
         await Promise.all(
             albums.map(async album => {
-                //find or create the artist
+                //find artist to assign to product
                 let art = await Artist.findOne({
                     where: { spotifyId: album.artists[0].id },
                 });
+                //if artist cant be found, create one
                 if (!art) {
-                    let spotifyArtist = await getArtist(album.artists[0].id);
+                    let spotifyArtist = artists.find(
+                        art => art.id === album.artists[0].id
+                    );
                     art = await Artist.create({
                         name: spotifyArtist.name,
                         spotifyId: spotifyArtist.id,
@@ -78,9 +81,8 @@ const syncAndSeed = async () => {
             })
         );
         console.log('Seeding successful!');
-        conn.close();
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 };
 
