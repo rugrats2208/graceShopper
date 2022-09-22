@@ -3,15 +3,22 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link, useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../reducers/Auth/authReducer';
+import Signup from '../auth/Signup';
 
 function Navigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //grab the username if logged in
   const username = useSelector((state) => state.auth.username);
+
+  //modal handlers
+  const [showLog, setShowLog] = React.useState(false);
+  const handleCloseLog = () => setShowLog(false);
+  const handleShowLog = () => setShowLog(true);
 
   //login  handler
   function handleLogin(e) {
@@ -28,6 +35,7 @@ function Navigation() {
 
   return (
     <>
+      {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
       <Navbar className='shadow' bg='dark' variant='dark' fixed='top'>
         <Container fluid>
           <Navbar.Brand href='#'>Grace Shopper</Navbar.Brand>
@@ -41,9 +49,6 @@ function Navigation() {
               <Nav.Link href='/'>Home</Nav.Link>
               <Nav.Link href='/allAlbums'>Products</Nav.Link>
               <Nav.Link href='/admin'>Admin</Nav.Link>
-              {/* <Nav.Link eventKey='signin' href='/signup'>
-                Sign In
-              </Nav.Link> */}
             </Nav>
             {/* <Form className='d-flex'>
               <Form.Control
@@ -57,11 +62,12 @@ function Navigation() {
             <Navbar.Text>
               Signed in as: <a href='#login'>{username || 'guest'} </a>
             </Navbar.Text>
+
             {username === null && (
               <Button
                 className='ms-3'
                 variant='outline-success'
-                onClick={handleLogin}
+                onClick={handleShowLog}
               >
                 Sign In
               </Button>
