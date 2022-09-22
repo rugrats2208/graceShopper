@@ -49,17 +49,17 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
   catch (error) {
     next(error)
   }
-})
+});
+
 router.delete('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
-    // console.log(product)
     await product.destroy();
     res.send(product);
   }
   catch (error) {
     next(error)
   }
-})
+});
 
 module.exports = router;

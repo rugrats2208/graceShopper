@@ -10,4 +10,4 @@ export { default as SignedInMain } from './mainPages/SignedInMain';
 export { default as SingleArtist } from './artists/SingleArtist';
 
 export { default as Admin } from './admin/Admin';
-export { default as Signup } from './auth/Signup'
+export { default as Signup } from './auth/Signup';
