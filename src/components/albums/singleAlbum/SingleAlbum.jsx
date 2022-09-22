@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleAlbum } from '../../../reducers/albums/singleAlbumReducer';
-import { getSingleArtist } from '../../../reducers/artists/singleArtistReducer';
 
 function SingleAlbum() {
-  const [albumRetrieved, setAlbumRetirieved] = useState(false);
   const album = useSelector((state) => state.singleAlbum);
   const artist = album.artist || {};
   const params = useParams();
@@ -24,12 +22,11 @@ function SingleAlbum() {
   }
 
   function trackLength(length) {
+    console.log(length);
     let trackLength = Math.round((100 * length) / 60000) / 100;
     let trackString = JSON.stringify(trackLength);
     return trackString.replace('.', ':');
   }
-
-  function capitalizeGenre() {}
 
   return (
     <div>
@@ -40,7 +37,7 @@ function SingleAlbum() {
           <h3>{artist.name}</h3>
         </Link>
         <h3>Label: {album.label}</h3>
-        {artist.genre ? <p>Genre: {artist.genre}</p> : null}
+        {artist.genre ? <p>Genre: {artist.genre.toUpperCase()}</p> : null}
         <p>Date Released: {album.releaseDate}</p>
         <p>Price: {displayPrice(album.price)}</p>
         <p>Tracks: {album.totalTrack}</p>
