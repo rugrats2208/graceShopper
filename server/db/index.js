@@ -2,7 +2,7 @@ const conn = require('./conn');
 const { Sequelize } = conn;
 
 //GET DATA FROM SPOTIFY API
-const getAlbumData = require('./grabAlbums');
+const { getAlbumData, getArtist } = require('./grabAlbums');
 // GET USERS
 const getUsers = require('./getUsers');
 
@@ -40,17 +40,24 @@ const syncAndSeed = async () => {
         const albums = await getAlbumData();
         await Promise.all(
             albums.map(async album => {
+                //find or create the artist
                 let art = await Artist.findOne({
                     where: { spotifyId: album.artists[0].id },
                 });
-                if (!art)
+                if (!art) {
+                    let spotifyArtist = await getArtist(album.artists[0].id);
                     art = await Artist.create({
-                        name: album.artists[0].name,
-                        spotifyId: album.artists[0].id,
+                        name: spotifyArtist.name,
+                        spotifyId: spotifyArtist.id,
+                        img: spotifyArtist.images[0].url,
+                        genre: spotifyArtist.genres[0],
+                        popularity: spotifyArtist.popularity,
                     });
+                }
+                //create the product and give it the artist ID
                 let prod = await Product.create({
                     name: album.name,
-                    price: 1000 + album.popularity * 10,
+                    price: 999 + Math.ceil(album.popularity / 10) * 100,
                     qty: Math.floor(Math.random() * 16),
                     img: album.images[0].url,
                     spotifyId: album.id,
@@ -59,6 +66,7 @@ const syncAndSeed = async () => {
                     label: album.label,
                     artistId: art.id,
                 });
+                //create the tracks and give it the product ID
                 album.tracks.items.map(track => {
                     Track.create({
                         name: track.name,
