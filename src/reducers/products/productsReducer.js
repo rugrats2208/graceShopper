@@ -33,7 +33,12 @@ export const addProduct = (form) => {
 export const delProduct = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(`/api/shop/albums/${id}`);
+      const token = window.localStorage.getItem('token');
+      const { data } = await axios.delete(`/api/shop/albums/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
       dispatch({ type: DEL_PRODUCT, payload: data.id });
     } catch (error) {
       console.log(error);
