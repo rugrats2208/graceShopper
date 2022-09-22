@@ -2,6 +2,7 @@ import axios from 'axios';
 
 //ACTION TYPE
 const SET_ALBUMS = 'SET_ALBUMS';
+const ADD_PRODUCT = 'ADD_PRODUCT';
 const DEL_PRODUCT = 'DEL_PRODUCT';
 
 //ACTION CREATOR
@@ -9,8 +10,6 @@ const setAlbums = (albums) => ({
   type: SET_ALBUMS,
   albums,
 });
-
-const _delProduct = (id) => ({ type: DEL_PRODUCT, id });
 
 //THUNKS
 export const getAlbums = () => {
@@ -20,17 +19,34 @@ export const getAlbums = () => {
   };
 };
 
-export const delProduct = (id) => {
-  const token = window.localStorage.getItem('token');
+export const addProduct = (form) => {
   return async (dispatch) => {
-    const product = await axios.delete(`/api/shop/albums/${id}`, {
-      headers: {
-        authorization: token,
-      },
-    });
-    dispatch(_delProduct(id));
-  };
-};
+    try {
+      const { data } = await axios.post(`/api/shop/albums`, form);
+      dispatch({ type: ADD_PRODUCT, payload: data });
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const delProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem('token');
+      const { data } = await axios.delete(`/api/shop/albums/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch({ type: DEL_PRODUCT, payload: data.id });
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 const initialState = [];
 
@@ -39,9 +55,10 @@ const albumsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ALBUMS:
       return action.albums;
+    case ADD_PRODUCT:
+      return [...state, action.payload];
     case DEL_PRODUCT:
-      const products = state.filter((product) => product.id !== action.id);
-      return products;
+      return state.filter(product => product.id !== action.payload);
     default:
       return state;
   }

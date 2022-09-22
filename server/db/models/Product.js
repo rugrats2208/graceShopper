@@ -22,7 +22,7 @@ const Product = conn.define('product', {
     },
     totalTrack: {
         type: Sequelize.INTEGER,
-        notNull: true,
+        // notNull: true,
     },
     releaseDate: {
         type: Sequelize.STRING,

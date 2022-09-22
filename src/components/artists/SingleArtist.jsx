@@ -40,7 +40,10 @@ function SingleArtist() {
                 <br></br>
                 <p>Price: {displayPrice(product.price)}</p>
                 <br></br>
-                <button>Add to Cart</button>
+                <button>Add to Cart</button>{' '}
+                <Link to={'/'}>
+                  <button>Go Back</button>
+                </Link>
               </li>
             ))
           : null}
