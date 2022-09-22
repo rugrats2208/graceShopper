@@ -15,10 +15,12 @@ function SingleAlbum() {
     dispatch(getSingleAlbum(params.id));
   }, []);
 
-  console.log(artist);
-
   function displayPrice(price) {
-    return `$${price / 100}0`;
+    let priceDisplayed = `$${price / 100}`;
+    JSON.stringify(priceDisplayed).length === 8
+      ? (priceDisplayed = priceDisplayed)
+      : (priceDisplayed = `${priceDisplayed}0`);
+    return priceDisplayed;
   }
 
   function trackLength(length) {
@@ -26,6 +28,9 @@ function SingleAlbum() {
     let trackString = JSON.stringify(trackLength);
     return trackString.replace('.', ':');
   }
+
+  function capitalizeGenre() {}
+
   return (
     <div>
       <div className="single-album">
@@ -34,8 +39,8 @@ function SingleAlbum() {
         <Link to={`/singleArtist/${artist.id}`}>
           <h3>{artist.name}</h3>
         </Link>
-        {/* <p>Genre(s): {singleAlbum.artists[0].genres.join(', ')}</p> */}
         <h3>Label: {album.label}</h3>
+        {artist.genre ? <p>Genre: {artist.genre}</p> : null}
         <p>Date Released: {album.releaseDate}</p>
         <p>Price: {displayPrice(album.price)}</p>
         <p>Tracks: {album.totalTrack}</p>
