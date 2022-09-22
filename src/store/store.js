@@ -4,6 +4,7 @@ import albumsReducer from '../reducers/albums/albumsReducer';
 import singleAlbumsReducer from '../reducers/albums/singleAlbumReducer';
 import singleArtistReducer from '../reducers/artists/singleArtistReducer';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import reduxLogger from 'redux-logger';
 
 const store = configureStore({
   reducer: {
@@ -14,7 +15,7 @@ const store = configureStore({
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reduxLogger),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

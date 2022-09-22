@@ -1,14 +1,18 @@
 import axios from 'axios';
 
-//action type
+//ACTION TYPE
 const SET_ALBUMS = 'SET_ALBUMS';
+const DEL_PRODUCT = 'DEL_PRODUCT';
 
+//ACTION CREATOR
 const setAlbums = (albums) => ({
   type: SET_ALBUMS,
   albums,
 });
 
-// thunk for data
+const _delProduct = (id) => ({ type: DEL_PRODUCT, id })
+
+//THUNKS
 export const getAlbums = () => {
   return async (dispatch) => {
     const { data } = await axios.get('/api/shop');
@@ -16,7 +20,14 @@ export const getAlbums = () => {
   };
 };
 
-//const initialState = [];
+export const delProduct = (id) => {
+  return async (dispatch) => {
+    const product = await axios.delete(`/api/shop/albums/${id}`);
+    dispatch(_delProduct(id));
+  }
+}
+
+
 const initialState = [];
 
 //reducer
@@ -24,6 +35,9 @@ const albumsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ALBUMS:
       return action.albums;
+    case DEL_PRODUCT:
+      const products = state.filter(product => product.id !== action.id)
+      return products;
     default:
       return state;
   }
