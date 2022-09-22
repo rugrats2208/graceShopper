@@ -11,7 +11,7 @@ const Artist = conn.define('artist', {
     },
     img: {
         type: Sequelize.STRING,
-        defaultValue: '../../../public/artist-default.jpg',
+        defaultValue: '/artist-default.jpg',
     },
     genre: {
         type: Sequelize.STRING,

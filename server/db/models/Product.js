@@ -15,7 +15,7 @@ const Product = conn.define('product', {
     },
     img: {
         type: Sequelize.STRING,
-        defaultValue: '../../../public/music-note.jpg',
+        defaultValue: '/music-note.jpg',
     },
     spotifyId: {
         type: Sequelize.STRING,
