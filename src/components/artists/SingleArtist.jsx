@@ -9,12 +9,15 @@ function SingleAlbum() {
   const params = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('get artist');
     dispatch(getSingleArtist(params.id));
   }, []);
   useEffect(() => {
+    console.log('set artist album');
     setArtistAlbum(artist.products);
   }, [artist]);
 
+  console.log(artist);
   console.log(artistAlbums);
   return (
     <div className="single-artist">
