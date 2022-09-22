@@ -2,7 +2,7 @@ body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
-.albums {
+.all-albums-list {
   display: flex;
   flex-wrap: wrap;
 }
