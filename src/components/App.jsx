@@ -12,12 +12,12 @@ import {
   Admin,
 } from './index';
 import Signup from './auth/Signup';
-import Navbar from './navbar/Navbar';
+import Navigation from './navbar/Navbar';
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <Routes>
         <Route index element={<GuestMain />} />
         <Route path={'/signedInMain'} element={<SignedInMain />} />

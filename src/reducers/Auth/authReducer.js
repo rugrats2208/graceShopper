@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const TOKEN = 'token';
 
 /**
@@ -23,6 +22,7 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
+    window.localStorage.setItem('username', res.data.username);
     return dispatch(setAuth(res.data));
   }
 };
@@ -47,7 +47,7 @@ export const authenticate =
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  // history.push('/login');
+  window.localStorage.removeItem('username');
   return {
     type: SET_AUTH,
     auth: {},
@@ -57,10 +57,14 @@ export const logout = () => {
 /**
  * REDUCER
  */
-const authReducer = (state = {}, action) => {
+const initialState = {
+  username: window.localStorage.getItem('username'),
+};
+
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTH:
-      return action.auth;
+      return { ...state, id: action.auth.id, username: action.auth.username };
     default:
       return state;
   }
