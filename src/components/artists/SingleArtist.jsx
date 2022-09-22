@@ -15,13 +15,13 @@ function SingleArtist() {
 
   function displayPrice(price) {
     let priceDisplayed = `$${price / 100}`;
-    console.log(JSON.stringify(priceDisplayed));
-    console.log(JSON.stringify(priceDisplayed).length);
+
     JSON.stringify(priceDisplayed).length === 8
       ? (priceDisplayed = priceDisplayed)
       : (priceDisplayed = `${priceDisplayed}0`);
     return priceDisplayed;
   }
+
   return (
     <div className="single-artist">
       <h1>{artist.name}</h1>

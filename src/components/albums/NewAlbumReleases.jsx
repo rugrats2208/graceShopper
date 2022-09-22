@@ -34,7 +34,7 @@ function NewAlbumReleases() {
   useEffect(() => {
     setFilteredAlbums(getNewReleases(albums));
   }, [albums]);
-
+  
   return (
     <div>
       <h1>New Releases</h1>
