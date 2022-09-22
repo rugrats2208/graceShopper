@@ -11,7 +11,7 @@ const getUsers = async () => {
             fName: user.firstName,
             lName: user.lastName,
             username: user.username,
-            password: user.password,
+            password: 'password',
             email: user.email,
             isAdmin: admin,
         }
