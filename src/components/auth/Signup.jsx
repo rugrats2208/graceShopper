@@ -45,6 +45,19 @@ const SignupSchema = Yup.object().shape({
     .required('Required'),
 });
 
+const LoginSchema = Yup.object().shape({
+  username: Yup.string()
+    .trim()
+    .min(7, 'Too Short!')
+    .max(25, 'Too Long!')
+    .required('Required'),
+  password: Yup.string()
+    .trim()
+    .min(7, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+});
+
 export default function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();

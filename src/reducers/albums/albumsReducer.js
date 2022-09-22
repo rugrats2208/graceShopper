@@ -10,7 +10,7 @@ const setAlbums = (albums) => ({
   albums,
 });
 
-const _delProduct = (id) => ({ type: DEL_PRODUCT, id })
+const _delProduct = (id) => ({ type: DEL_PRODUCT, id });
 
 //THUNKS
 export const getAlbums = () => {
@@ -21,12 +21,16 @@ export const getAlbums = () => {
 };
 
 export const delProduct = (id) => {
+  const token = window.localStorage.getItem('token');
   return async (dispatch) => {
-    const product = await axios.delete(`/api/shop/albums/${id}`);
+    const product = await axios.delete(`/api/shop/albums/${id}`, {
+      headers: {
+        authorization: token,
+      },
+    });
     dispatch(_delProduct(id));
-  }
-}
-
+  };
+};
 
 const initialState = [];
 
@@ -36,7 +40,7 @@ const albumsReducer = (state = initialState, action) => {
     case SET_ALBUMS:
       return action.albums;
     case DEL_PRODUCT:
-      const products = state.filter(product => product.id !== action.id)
+      const products = state.filter((product) => product.id !== action.id);
       return products;
     default:
       return state;
