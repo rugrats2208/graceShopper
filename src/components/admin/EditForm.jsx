@@ -2,10 +2,10 @@ import React from "react";
 
 const EditForm = ({ data: { product, setItemEdit } }) => {
   const [form, setForm] = React.useState({
-    name: product.title || "",
+    name: product.name || "",
     price: product.price || "",
-    qty: product.stock || "",
-    description: product.description || "",
+    qty: product.qty || "",
+    img: product.img || "",
   });
 
   const handleSubmit = (evt) => {
@@ -46,14 +46,14 @@ const EditForm = ({ data: { product, setItemEdit } }) => {
           setForm({ ...form, qty: evt.target.value });
         }}
       />
-      <label>Description</label>
+      <label>Image Url</label>
       <input
         required
         type="text"
-        name="descrption"
-        value={form.description}
+        name="img"
+        value={form.img}
         onChange={(evt) => {
-          setForm({ ...form, description: evt.target.value });
+          setForm({ ...form, img: evt.target.value });
         }}
       />
       <button type="submit">Submit</button>

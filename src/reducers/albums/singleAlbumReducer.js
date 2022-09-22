@@ -4,17 +4,17 @@ import axios from 'axios';
 const SET_SINGLE_ALBUM = 'SET_SINGLE_ALBUM';
 
 const setSingleAlbum = (album) => ({
-  type: SET_ALBUMS,
+  type: SET_SINGLE_ALBUM,
   album,
 });
 
 // thunk for data
-// export const getSingleAlbum = () => {
-//   return async (dispatch) => {
-//     const { data } = await axios.get();
-//     dispatch(setSingleAlbum(data));
-//   };
-// };
+export const getSingleAlbum = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`/api/shop/album/${id}`);
+    dispatch(setSingleAlbum(data));
+  };
+};
 
 const initialState = {};
 

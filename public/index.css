@@ -6,12 +6,21 @@ body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
-.albums {
+.all-albums-list {
   display: flex;
-  justify-content: start;
   flex-wrap: wrap;
 }
 
 .album {
   margin: 10px;
+}
+
+.featured-albums-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.new-albums-list {
+  display: flex;
+  flex-wrap: wrap;
 }
