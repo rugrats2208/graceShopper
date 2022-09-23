@@ -59,7 +59,7 @@ function Navigation() {
                 >
                   Products
                 </NavLink>
-                =
+
                 {isAdmin ? (
                   <NavLink
                     to="/admin"
