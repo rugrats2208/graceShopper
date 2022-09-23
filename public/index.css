@@ -1,6 +1,4 @@
 html {
-  /* background: linear-gradient(#2a9489, #ceefd3); */
-  background: linear-gradient(#289d3d, #ceefd3);
   margin: 0;
   padding: 0;
 }
@@ -33,10 +31,19 @@ body {
   box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
 }
 
+.product-button {
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.product-button:hover {
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
+}
+
 .product h1:hover,
 .product h3:hover {
   text-shadow: 1px 1px 1px;
 }
+
 .product h1,
 .product h3 {
   color: white;
@@ -66,7 +73,6 @@ a.link {
 /************************ featured products component ************************/
 
 .featured-products {
-  /* background-color: rgba(50, 42, 42, 0.905); */
   background: linear-gradient(#289d3d, #ceefd3);
   padding-top: 5px;
 }
@@ -77,8 +83,6 @@ a.link {
 
 /************************ new products component ************************/
 .new-products {
-  /* background-color: rgba(50, 42, 42, 0.905); */
-  /* background: linear-gradient(#2a9489, #ceefd3); */
   background: linear-gradient(#289d3d, #ceefd3);
   padding-top: 5px;
 }
@@ -89,8 +93,6 @@ a.link {
 
 /************************ all products component ************************/
 .all-products {
-  /* background-color: rgba(50, 42, 42, 0.905); */
-  /* background: linear-gradient(#2a9489, #ceefd3); */
   background: linear-gradient(#289d3d, #ceefd3);
   padding-top: 5px;
 }
@@ -106,26 +108,13 @@ a.link {
 
 .single-product {
   color: black;
-  /* background: linear-gradient(#2a9489, #ceefd3); */
   background: linear-gradient(#289d3d, #ceefd3);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.single-view-button {
-  margin-top: 10px;
-}
-
-/************************ single artist component ************************/
-/* .single-artist img {
-  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
-}
-.single-product img {
-  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
-} */
 .single-artist {
-  /* background: linear-gradient(#2a9489, #ceefd3); */
   background: linear-gradient(#289d3d, #ceefd3);
   display: flex;
   flex-direction: column;
@@ -135,7 +124,34 @@ a.link {
 /************************ dashboard ************************/
 
 .dashboard {
+  height: 100vh;
   background: #313131;
+}
+
+/************************ navbar ************************/
+
+.nav-header-links a {
+  color: lightgray;
+  margin: 3px;
+  padding: 3px;
+  text-decoration: none;
+}
+
+.nav-header-links a:hover {
+  color: white;
+  transition: all ease-in-out 0.2s;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-header-links {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-header-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /************************ shopping cart ************************/
@@ -151,7 +167,33 @@ a.link {
 }
 
 /************************ admin page ************************/
+
 .selected {
   box-sizing: border-box;
-  border-bottom: 2px solid #00b74a;
+  border-bottom: 3px solid #00b74a;
+}
+
+.pageNumbers {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+.pageNumbers li {
+  margin: 0.5rem;
+}
+.pageNumbers li a {
+  color: #f9f9f9;
+}
+.pageNumbers li a:hover {
+  cursor: pointer;
+  color: #00b74a;
+}
+.pageNumbers li a.active {
+  color: #00b74a;
+}
+
+@media (max-width: 560px) {
+  .admin {
+    margin-top: 1.5rem;
+  }
 }
