@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -7,9 +7,25 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../reducers/Auth/authReducer';
 import Signup from '../auth/Signup';
-// import { MDBBtn } from 'mdb-react-ui-kit';
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarToggler,
+  MDBIcon,
+  MDBNavbarNav,
+  MDBNavbarItem,
+  MDBNavbarLink,
+  MDBBtn,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+  MDBCollapse,
+} from 'mdb-react-ui-kit';
 
-function Navigation() {
+export default function Navigation() {
+  const [showBasic, setShowBasic] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //grab the username if logged in
@@ -37,20 +53,25 @@ function Navigation() {
   return (
     <>
       {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
-      <Navbar
-        className="shadow"
-        bg="dark"
-        expand="md"
-        variant="dark"
-        fixed="top"
-      >
-        <Container>
-          <Navbar.Brand>Grace Shopper</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <div className="nav-header-links">
+      <MDBNavbar expand="lg" dark bgColor="dark" fixed="top">
+        <MDBContainer fluid>
+          <MDBNavbarBrand href="#">Grace Shopper</MDBNavbarBrand>
+
+          <MDBNavbarToggler
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            onClick={() => setShowBasic(!showBasic)}
+          >
+            <MDBIcon icon="bars" fas />
+          </MDBNavbarToggler>
+
+          <MDBCollapse navbar show={showBasic}>
+            <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
+              <MDBNavbarItem className="nav-header-links">
                 <NavLink to="/">Home</NavLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem className="nav-header-links">
                 <NavLink
                   to="/allProducts"
                   style={({ isActive }) => ({
@@ -58,8 +79,9 @@ function Navigation() {
                   })}
                 >
                   Products
-                </NavLink>
-
+                </NavLink>{' '}
+              </MDBNavbarItem>
+              <MDBNavbarItem className="nav-header-links">
                 {isAdmin ? (
                   <NavLink
                     to="/admin"
@@ -72,33 +94,31 @@ function Navigation() {
                 ) : (
                   ''
                 )}
-              </div>
-            </Nav>
+              </MDBNavbarItem>
+            </MDBNavbarNav>
             <div className="nav-header-container">
-              <Navbar.Text>
+              <Navbar.Text className="me-2">
                 Signed in as: <a href="#login">{username || 'guest'} </a>
               </Navbar.Text>
 
               {window.localStorage.getItem('username') === null && (
-                <Button
-                  className="ms-3"
+                <MDBBtn
+                  color="secondary"
                   variant="primary"
                   onClick={handleShowLog}
                 >
                   Sign In
-                </Button>
+                </MDBBtn>
               )}
               {window.localStorage.getItem('username') !== null && (
-                <Button className variant="secondary" onClick={handleLogout}>
+                <MDBBtn color="secondary" onClick={handleLogout}>
                   Log Out
-                </Button>
+                </MDBBtn>
               )}
             </div>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+          </MDBCollapse>
+        </MDBContainer>
+      </MDBNavbar>
     </>
   );
 }
-
-export default Navigation;

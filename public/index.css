@@ -151,6 +151,14 @@ a.link {
   text-decoration: none;
 }
 
+.nav-header-container {
+  display: flex;
+  flex-direction: row;
+  max-height: 50px;
+  min-width: 300px;
+  justify-content: flex-end;
+}
+
 @media screen and (max-width: 768px) {
   .nav-header-links {
     display: flex;
@@ -159,6 +167,7 @@ a.link {
   .nav-header-container {
     display: flex;
     flex-direction: column;
+    max-height: none;
   }
 }
 
