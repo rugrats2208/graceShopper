@@ -13,7 +13,6 @@ function FeaturedProducts() {
       featuredProducts.push(productArray[i]);
     }
     featuredProducts.sort((product1, product2) => {
-      console.log(product1);
       return product2.artist.popularity - product1.artist.popularity;
     });
 
@@ -26,7 +25,7 @@ function FeaturedProducts() {
 
   return (
     <div className="featured-products">
-      <h1>Featured Products</h1>
+      <h1 className="list-title">Featured Products</h1>
       <div className="featured-products-list">
         {filteredProducts.map((product) => (
           <Product key={product.id} data={product} />

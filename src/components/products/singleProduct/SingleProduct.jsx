@@ -36,9 +36,11 @@ function SingleProduct() {
   }
 
   return (
-    <div>
-      <div className="single-product">
-        <img src={product.img}></img>
+    <div className="single-product">
+      <div className="single-product-image">
+        <img src={product.img} height="500px" width="500px" />
+      </div>
+      <div className="single-product-info">
         <h1>{product.name}</h1>
         <Link to={`/singleArtist/${artist.id}`}>
           <h3>{artist.name}</h3>
@@ -57,9 +59,16 @@ function SingleProduct() {
               </li>
             ))}
         </ol>
-        <button>Add to Cart</button> <button>Buy Now</button>
+        <button className="single-view-button btn btn-dark" type="button">
+          Add to Cart
+        </button>{' '}
+        {/* <button className="single-view-button" type="button" class="btn btn-dark">
+        Buy Now
+      </button> */}
         <Link to={'/'}>
-          <button>Back to Home</button>
+          <button className="single-view-button btn btn-dark" type="button">
+            Back to Home
+          </button>
         </Link>
       </div>
     </div>

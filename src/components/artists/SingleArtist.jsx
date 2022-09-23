@@ -24,7 +24,7 @@ function SingleArtist() {
   return (
     <div className="single-artist">
       <h1>{artist.name}</h1>
-      <img src={artist.img}></img>
+      <img src={artist.img} height="500" width="500"></img>
       <h3> Artist Products:</h3>
       <ul>
         {artist.products
@@ -39,9 +39,19 @@ function SingleArtist() {
                 <br></br>
                 <p>Price: {displayPrice(product.price)}</p>
                 <br></br>
-                <button>Add to Cart</button>{' '}
+                <button
+                  className="single-view-button btn btn-dark"
+                  type="button"
+                >
+                  Add to Cart
+                </button>{' '}
                 <Link to={'/'}>
-                  <button>Go Back</button>
+                  <button
+                    className="single-view-button btn btn-dark"
+                    type="button"
+                  >
+                    Back to Home
+                  </button>
                 </Link>
               </li>
             ))

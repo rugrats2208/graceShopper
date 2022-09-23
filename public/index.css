@@ -1,27 +1,120 @@
+html {
+  /* background: linear-gradient(#2a9489, #ceefd3); */
+  background: linear-gradient(#289d3d, #ceefd3);
+  margin: 0;
+  padding: 0;
+}
+
 main {
   padding-top: 60px;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
 }
 
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
-.all-albums-list {
+.product {
+  margin: 25px;
+  width: fit-content;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.album {
-  margin: 10px;
+.product img,
+button {
+  box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
 }
 
-.featured-albums-list {
-  display: flex;
-  flex-wrap: wrap;
+.product img:hover,
+button:hover {
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
 }
 
-.new-albums-list {
+.product h1:hover,
+.product h3:hover {
+  text-shadow: 1px 1px 1px;
+}
+
+/* .featured-products {
+}
+.new-products {
+} */
+
+.list-title {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+  color: white;
+}
+.product h1,
+.product h3 {
+  color: white;
+  width: 300px;
+}
+
+.link {
+  width: 300px;
+}
+
+.featured-products {
+  /* background-color: rgba(50, 42, 42, 0.905); */
+  background: linear-gradient(#289d3d, #ceefd3);
+  padding-top: 5px;
+}
+.featured-products-list {
+  display: flex;
+  overflow: scroll;
+}
+.new-products {
+  /* background-color: rgba(50, 42, 42, 0.905); */
+  /* background: linear-gradient(#2a9489, #ceefd3); */
+  background: linear-gradient(#289d3d, #ceefd3);
+  padding-top: 5px;
+}
+.new-products-list {
+  display: flex;
+  overflow: scroll;
+}
+
+.all-products {
+  /* background-color: rgba(50, 42, 42, 0.905); */
+  /* background: linear-gradient(#2a9489, #ceefd3); */
+  background: linear-gradient(#289d3d, #ceefd3);
+  padding-top: 5px;
+}
+.all-products-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  border: 20px;
+  width: fit-content;
+}
+
+.single-product {
+  color: black;
+  /* background: linear-gradient(#2a9489, #ceefd3); */
+  background: linear-gradient(#289d3d, #ceefd3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .single-artist img {
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
+}
+.single-product img {
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
+} */
+.single-artist {
+  /* background: linear-gradient(#2a9489, #ceefd3); */
+  background: linear-gradient(#289d3d, #ceefd3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.single-view-button {
+  margin-top: 10px;
 }
