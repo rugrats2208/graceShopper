@@ -1,5 +1,17 @@
 import axios from 'axios';
 const TOKEN = 'token';
+import { toast } from 'react-toastify';
+
+//Toast defaults
+const defaultToast = {
+  position: 'top-center',
+  autoClose: 600,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+};
 
 /**
  * ACTION TYPES
@@ -41,6 +53,8 @@ export const authenticate =
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
     } catch (authError) {
+      toast.error('error logging in', defaultToast);
+
       return dispatch(setAuth({ error: authError }));
     }
   };
@@ -64,7 +78,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTH:
-      return { ...state, id: action.auth.id, username: action.auth.username };
+      return action.auth;
     default:
       return state;
   }

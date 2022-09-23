@@ -18,10 +18,10 @@ const setOrders = orders => ({
 const initialState = {};
 
 //REDUCER
-export default ordersReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case SET_ORDERS:
-        case SET_ACTIVE_ORDER:
+        // case SET_ACTIVE_ORDER:
         case ADD_ORDER:
         case DEL_ORDER:
         default:

@@ -1,43 +1,207 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
 main {
-    padding-top: 60px;
-    background-color: #f2f2f2;
+  padding-top: 56px;
+  /* background-color: #f2f2f2; */
 }
 
 body {
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
-.all-albums-list {
-    display: flex;
-    flex-wrap: wrap;
+/************************ product component in featured/new/all products views ************************/
+
+.product {
+  margin: 25px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.album {
-    margin: 10px;
+.product img {
+  box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
 }
 
-.featured-albums-list {
-    display: flex;
-    flex-wrap: wrap;
+.product img:hover
+/* button:hover { */ {
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
 }
 
-.new-albums-list {
-    display: flex;
-    flex-wrap: wrap;
+.product-button {
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
 }
+
+.product-button:hover {
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
+}
+
+.product h1:hover,
+.product h3:hover {
+  text-shadow: 1px 1px 1px;
+}
+
+.product h1,
+.product h3 {
+  color: white;
+  width: 300px;
+}
+
+a.link {
+  text-decoration: none;
+}
+
+.link {
+  width: 300px;
+}
+/* .featured-products {
+}
+.new-products {
+} */
+
+/************************ header for new/featured/all products view ************************/
+.list-title {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+  color: white;
+}
+
+/************************ featured products component ************************/
+
+.featured-products {
+  background: linear-gradient(#289d3d, #ceefd3);
+  padding-top: 5px;
+}
+.featured-products-list {
+  display: flex;
+  overflow: scroll;
+}
+
+/************************ new products component ************************/
+.new-products {
+  background: linear-gradient(#289d3d, #ceefd3);
+  padding-top: 5px;
+}
+.new-products-list {
+  display: flex;
+  overflow: scroll;
+}
+
+/************************ all products component ************************/
+.all-products {
+  background: linear-gradient(#289d3d, #ceefd3);
+  padding-top: 5px;
+}
+.all-products-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 20px;
+  width: fit-content;
+}
+
+/************************ single product component ************************/
+
+.single-product {
+  color: black;
+  background: linear-gradient(#289d3d, #ceefd3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.single-product h3 {
+  text-decoration: none;
+}
+
+/************************ single artist component ************************/
+.single-artist {
+  background: linear-gradient(#289d3d, #ceefd3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.single-artist li {
+  list-style: none;
+}
+/************************ dashboard ************************/
 
 .dashboard {
-    background: #313131;
+  height: 100vh;
+  background: #313131;
+}
+
+/************************ navbar ************************/
+
+.nav-header-links a {
+  color: lightgray;
+  margin: 3px;
+  padding: 3px;
+  text-decoration: none;
+}
+
+.nav-header-links a:hover {
+  color: white;
+  transition: all ease-in-out 0.2s;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-header-links {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-header-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /************************ shopping cart ************************/
 #cart {
-    background-color: white;
-    position: fixed;
-    right: 0vw;
-    top: 60px;
+  background-color: white;
+  position: fixed;
+  right: 0vw;
+  top: 60px;
 }
 #cart img {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
+}
+
+/************************ admin page ************************/
+
+.selected {
+  box-sizing: border-box;
+  border-bottom: 3px solid #00b74a;
+}
+
+.pageNumbers {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+.pageNumbers li {
+  margin: 0.5rem;
+}
+.pageNumbers li a {
+  color: #f9f9f9;
+}
+.pageNumbers li a:hover {
+  cursor: pointer;
+  color: #00b74a;
+}
+.pageNumbers li a.active {
+  color: #00b74a;
+}
+
+@media (max-width: 560px) {
+  .admin {
+    margin-top: 1.5rem;
+  }
 }

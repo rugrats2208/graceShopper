@@ -6,10 +6,28 @@ import singleArtistReducer from '../reducers/artists/singleArtistReducer';
 import ordersReducer from '../reducers/orders/ordersReducer';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import reduxLogger from 'redux-logger';
+import storage from 'redux-persist/lib/storage';
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist';
 
-const store = configureStore({
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, authReducer);
+
+export const store = configureStore({
     reducer: {
-        auth: authReducer,
+        auth: persistedReducer,
         products: productsReducer,
         singleProduct: singleProductReducer,
         singleArtist: singleArtistReducer,
@@ -18,11 +36,22 @@ const store = configureStore({
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: getDefaultMiddleware =>
-        getDefaultMiddleware().concat(reduxLogger),
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }).concat(reduxLogger),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
 // see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
 setupListeners(store.dispatch);
 
-export default store;
+export let persistor = persistStore(store);

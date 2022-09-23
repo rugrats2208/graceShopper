@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <DropdownActions set={{ selection, setSelection }} />
-      <ProductsTable set={setSelection} />
+      <ProductsTable set={{ selection, setSelection }} />
     </div>
   );
 };

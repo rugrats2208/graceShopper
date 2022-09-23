@@ -26,7 +26,6 @@ function FormActions(props) {
         });
         return;
       case "edit":
-        // console.log(props);
         setForm({
           name: props.data.selection.name,
           price: props.data.selection.price,
@@ -48,7 +47,7 @@ function FormActions(props) {
           price: "",
           qty: "",
         });
-        // props.data.setSelection("");
+        props.data.setOption("");
         return;
       case "edit":
         console.log("edit submitted");
@@ -92,6 +91,13 @@ function FormActions(props) {
         </Col>
         <Button type="submit" variant="outline-success">
           Submit
+        </Button>
+        <Button
+          onClick={() => props.data.setOption("")}
+          type="reset"
+          variant="outline-success"
+        >
+          Cancel
         </Button>
       </Row>
     </Form>

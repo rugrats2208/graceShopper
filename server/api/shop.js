@@ -65,6 +65,17 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
     }
 });
 
+//TODO: GET PRODUCT FROM DB AND UPDATE WITH NEW INFORMATION
+router.put('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
+    try {
+        console.log('in the put route');
+        res.send('something');
+    }
+    catch (error) {
+        next(error)
+    }
+})
+
 router.delete('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
     try {
         const product = await Product.findByPk(req.params.id);
