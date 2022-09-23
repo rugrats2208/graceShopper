@@ -114,6 +114,11 @@ a.link {
   align-items: center;
 }
 
+.single-product h3 {
+  text-decoration: none;
+}
+
+/************************ single artist component ************************/
 .single-artist {
   background: linear-gradient(#289d3d, #ceefd3);
   display: flex;
@@ -121,6 +126,9 @@ a.link {
   align-items: center;
 }
 
+.single-artist li {
+  list-style: none;
+}
 /************************ dashboard ************************/
 
 .dashboard {
