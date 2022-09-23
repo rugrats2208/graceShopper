@@ -47,7 +47,6 @@ export default function Navigation() {
     e.preventDefault();
     dispatch(logout());
     navigate('/');
-    window.location.reload();
   }
 
   return (
@@ -78,7 +77,7 @@ export default function Navigation() {
                     fontWeight: isActive ? 'bold' : 'normal',
                   })}
                 >
-                  Products
+                  Vinyl
                 </NavLink>{' '}
               </MDBNavbarItem>
               <MDBNavbarItem className="nav-header-links">
@@ -101,7 +100,7 @@ export default function Navigation() {
                 Signed in as: <a href="#login">{username || 'guest'} </a>
               </Navbar.Text>
 
-              {window.localStorage.getItem('username') === null && (
+              {!window.localStorage.getItem('isLoggedIn') && (
                 <MDBBtn
                   color="secondary"
                   variant="primary"
@@ -110,7 +109,7 @@ export default function Navigation() {
                   Sign In
                 </MDBBtn>
               )}
-              {window.localStorage.getItem('username') !== null && (
+              {window.localStorage.getItem('isLoggedIn') && (
                 <MDBBtn color="secondary" onClick={handleLogout}>
                   Log Out
                 </MDBBtn>

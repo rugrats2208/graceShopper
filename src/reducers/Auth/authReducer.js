@@ -34,7 +34,6 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-    window.localStorage.setItem('username', res.data.username);
     return dispatch(setAuth(res.data));
   }
 };
@@ -51,6 +50,7 @@ export const authenticate =
         email,
       });
       window.localStorage.setItem(TOKEN, res.data.token);
+      window.localStorage.setItem('isLoggedIn', true);
       dispatch(me());
     } catch (authError) {
       toast.error('error logging in', defaultToast);
@@ -61,7 +61,8 @@ export const authenticate =
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  window.localStorage.removeItem('username');
+  window.localStorage.removeItem('isLoggedIn');
+
   return {
     type: SET_AUTH,
     auth: {},
@@ -72,7 +73,7 @@ export const logout = () => {
  * REDUCER
  */
 const initialState = {
-  username: window.localStorage.getItem('username'),
+  username: null,
 };
 
 const authReducer = (state = initialState, action) => {
