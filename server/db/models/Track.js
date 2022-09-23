@@ -12,9 +12,11 @@ const Track = conn.define('track', {
     },
     length: {
         type: Sequelize.INTEGER,
+        notNull: true,
     },
     explicit: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
     },
 });
 
