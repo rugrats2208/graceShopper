@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Product from "./Product";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import Product from './Product';
+import { useSelector } from 'react-redux';
 function FeaturedProducts() {
   const products = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -13,7 +13,7 @@ function FeaturedProducts() {
       featuredProducts.push(productArray[i]);
     }
     featuredProducts.sort((product1, product2) => {
-      return product2.artist.popularity - product1.artist.popularity;
+      return product2.popularity - product1.popularity;
     });
 
     return featuredProducts.slice(0, 30);
