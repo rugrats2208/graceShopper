@@ -1,31 +1,43 @@
 main {
-  padding-top: 60px;
-  background-color: #f2f2f2;
+    padding-top: 60px;
+    background-color: #f2f2f2;
 }
 
 body {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 .all-albums-list {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .album {
-  margin: 10px;
+    margin: 10px;
 }
 
 .featured-albums-list {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .new-albums-list {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .dashboard {
-  background: #313131;
+    background: #313131;
+}
+
+/************************ shopping cart ************************/
+#cart {
+    background-color: white;
+    position: fixed;
+    right: 0vw;
+    top: 60px;
+}
+#cart img {
+    width: 60px;
+    height: 60px;
 }

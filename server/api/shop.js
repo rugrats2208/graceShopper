@@ -3,6 +3,7 @@ const { Product, Track, Artist, Order } = require('../db');
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 // GET api/shop
+//TODO: change price and track length to human readable here
 router.get('/', async (req, res, next) => {
     try {
         const data = await Product.findAll({
@@ -42,6 +43,7 @@ router.get('/artist/:id', async (req, res, next) => {
 });
 
 // CART PATHS
+//TODO: write backend routes
 // GET api/order/:id
 router.get('/order/:id', async (req, res, next) => {
     try {
