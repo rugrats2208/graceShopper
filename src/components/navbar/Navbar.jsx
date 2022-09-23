@@ -1,12 +1,12 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { useNavigate, Link, NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../reducers/Auth/authReducer';
-import Signup from '../auth/Signup';
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { useNavigate, Link, NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../reducers/Auth/authReducer";
+import Signup from "../auth/Signup";
 
 function Navigation() {
   const navigate = useNavigate();
@@ -22,13 +22,13 @@ function Navigation() {
   //login  handler
   function handleLogin(e) {
     e.preventDefault();
-    navigate('/signup');
+    navigate("/signup");
   }
   //logout  handler
   function handleLogout(e) {
     e.preventDefault();
     dispatch(logout());
-    navigate('/');
+    navigate("/");
     window.location.reload();
   }
 
@@ -42,7 +42,7 @@ function Navigation() {
           <Navbar.Collapse id="navbarScroll">
             <Nav
               className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
+              style={{ maxHeight: "100px" }}
               navbarScroll
             >
               <div className="nav-header-links">
@@ -50,7 +50,7 @@ function Navigation() {
                 <NavLink
                   to="/allProducts"
                   style={({ isActive }) => ({
-                    'font-weight': isActive ? 'bold' : 'normal',
+                    fontWeight: isActive ? "bold" : "normal",
                   })}
                 >
                   Products
@@ -58,7 +58,7 @@ function Navigation() {
                 <NavLink
                   to="/admin"
                   style={({ isActive }) => ({
-                    'font-weight': isActive ? 'bold' : 'normal',
+                    fontWeight: isActive ? "bold" : "normal",
                   })}
                 >
                   Admin
@@ -67,7 +67,7 @@ function Navigation() {
             </Nav>
 
             <Navbar.Text>
-              Signed in as: <a href="#login">{username || 'guest'} </a>
+              Signed in as: <a href="#login">{username || "guest"} </a>
             </Navbar.Text>
 
             {username === null && (

@@ -155,19 +155,13 @@ button:hover {
   border-bottom: 2px solid #00b74a;
 }
 
-@media (max-width: 991px) {
-  .admin {
-    margin-top: 0.8rem;
-  }
-}
-
-@media (max-width: 630px) {
+@media (max-width: 654px) {
   .admin {
     margin-top: 1.5rem;
   }
 }
 
-@media (max-width: 545px) {
+@media (max-width: 560px) {
   .admin {
     margin-top: 3.1rem;
   }
