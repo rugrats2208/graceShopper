@@ -3,9 +3,9 @@ import Dashboard from "./Dashboard";
 
 const Admin = () => {
   return (
-    <div className="admin">
+    <>
       <Dashboard />
-    </div>
+    </>
   );
 };
 

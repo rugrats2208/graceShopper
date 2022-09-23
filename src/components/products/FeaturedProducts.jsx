@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Product from './Product';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import Product from "./Product";
+import { useSelector } from "react-redux";
 function FeaturedProducts() {
   const products = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
