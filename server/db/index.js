@@ -6,19 +6,25 @@ const Order = require('./models/Order');
 const Product = require('./models/Product');
 const Track = require('./models/Track');
 const Artist = require('./models/Artist');
-const Tag = require('./models/Tag');
+const Tag = require('./models/Tag'); //TODO: seed and implement tags...genres?
+//may not need line item as we can use front end to 'put' update quantity of Product after checkout
 const LineItem = require('./models/LineItem'); //line item is the product and the amount of that product to buy
 
 //ASSOCIATIONS
 User.hasMany(Order);
-Tag.hasMany(Product);
-LineItem.belongsTo(Product);
 Order.belongsTo(User);
-Order.hasMany(LineItem);
+
+Product.belongsToMany(Order, { through: 'orderProduct' });
+Order.belongsToMany(Product, { through: 'orderProduct' });
+
+Tag.belongsToMany(Product, { through: 'productTag' });
+Product.belongsToMany(Tag, { through: 'productTag' });
+
 Product.hasMany(Track);
 Track.belongsTo(Product);
-Product.belongsTo(Artist);
+
 Artist.hasMany(Product);
+Product.belongsTo(Artist);
 
 module.exports = {
     conn,

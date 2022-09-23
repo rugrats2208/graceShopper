@@ -1,10 +1,12 @@
 //Get our database and models used in seed
-const { conn, User, Artist, Product, Track } = require('./');
+const { conn, User, Artist, Product, Track, Order } = require('./');
 //GET DATA FROM SPOTIFY API
 const getAlbumData = require('./grabAlbums');
 // GET USERS
 const getUsers = require('./getUsers');
 
+//SYNC AND SEED THE DATABASE
+//seed users->albums->orders. Give some albums to orders then give those orders to users
 (async () => {
     try {
         //WITH FORCE TRUE ENABLED, THE DATABASE WILL DROP THE TABLE BEFORE CREATING A NEW ONE
@@ -12,12 +14,14 @@ const getUsers = require('./getUsers');
         await conn.sync({ force: true });
 
         //LOADING USERS
-        const users = await getUsers();
-        await Promise.all(users.map(user => User.create(user)));
+        const usersData = await getUsers();
+        const users = await Promise.all(
+            usersData.map(user => User.create(user))
+        );
 
         //LOAD ALBUMS
         const [albums, artists] = await getAlbumData();
-        await Promise.all(
+        const products = await Promise.all(
             albums.map(async album => {
                 //find artist to assign to product
                 let art = await Artist.findOne({
@@ -58,8 +62,17 @@ const getUsers = require('./getUsers');
                         productId: prod.id,
                     });
                 });
+                return prod;
             })
         );
+
+        //LOAD ORDERS
+        for (let i = 0; i < 10; i++) {
+            const order = await Order.create({ complete: i % 4 === 0 });
+            order.addProducts(products.slice(i, i + 4));
+            users[Math.floor(i / 4)].addOrder(order);
+        }
+
         console.log('Seeding successful!');
     } catch (err) {
         console.log(err);
