@@ -29,7 +29,7 @@ function SingleArtist() {
       <ul>
         {artist.products
           ? artist.products.map((product) => (
-              <li key={product.id}>
+              <li className="single-artist-products" key={product.id}>
                 <Link to={`/singleProduct/${product.id}`}>
                   <h5>{product.name}</h5>
                 </Link>

@@ -17,7 +17,7 @@ function Product(props) {
         <img src={product.img} height="300px" width="300px"></img>
       </Link>
       <br></br>
-      <button type="button" className="btn btn-dark">
+      <button type="button" className="product-button btn btn-dark">
         Add to Cart
       </button>
     </div>

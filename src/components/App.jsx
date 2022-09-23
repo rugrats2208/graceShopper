@@ -9,8 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   AllProducts,
   SingleProduct,
-  // FeaturedProducts,
-  // NewProductReleases,
+  FeaturedProducts,
+  NewProductReleases,
   GuestMain,
   SignedInMain,
   Navigation,

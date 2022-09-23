@@ -4,13 +4,15 @@ html {
 }
 
 main {
-  padding-top: 60px;
-
+  padding-top: 56px;
+  /* background-color: #f2f2f2; */
 }
 
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+/************************ product component in featured/new/all products views ************************/
 
 .product {
   margin: 25px;
@@ -20,13 +22,20 @@ body {
   justify-content: space-between;
 }
 
-.product img,
-button {
+.product img {
   box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
 }
 
-.product img:hover,
-button:hover {
+.product img:hover
+/* button:hover { */ {
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
+}
+
+.product-button {
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.product-button:hover {
   box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
 }
 
@@ -35,21 +44,33 @@ button:hover {
   text-shadow: 1px 1px 1px;
 }
 
-.list-title {
-  margin-bottom: 20px;
-  margin-top: 20px;
-  text-align: center;
-  color: white;
-}
 .product h1,
 .product h3 {
   color: white;
   width: 300px;
 }
 
+a.link {
+  text-decoration: none;
+}
+
 .link {
   width: 300px;
 }
+/* .featured-products {
+}
+.new-products {
+} */
+
+/************************ header for new/featured/all products view ************************/
+.list-title {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+  color: white;
+}
+
+/************************ featured products component ************************/
 
 .featured-products {
   background: linear-gradient(#289d3d, #ceefd3);
@@ -59,6 +80,8 @@ button:hover {
   display: flex;
   overflow: scroll;
 }
+
+/************************ new products component ************************/
 .new-products {
   background: linear-gradient(#289d3d, #ceefd3);
   padding-top: 5px;
@@ -68,6 +91,7 @@ button:hover {
   overflow: scroll;
 }
 
+/************************ all products component ************************/
 .all-products {
   background: linear-gradient(#289d3d, #ceefd3);
   padding-top: 5px;
@@ -80,6 +104,8 @@ button:hover {
   width: fit-content;
 }
 
+/************************ single product component ************************/
+
 .single-product {
   color: black;
   background: linear-gradient(#289d3d, #ceefd3);
@@ -88,6 +114,11 @@ button:hover {
   align-items: center;
 }
 
+.single-product h3 {
+  text-decoration: none;
+}
+
+/************************ single artist component ************************/
 .single-artist {
   background: linear-gradient(#289d3d, #ceefd3);
   display: flex;
@@ -95,9 +126,10 @@ button:hover {
   align-items: center;
 }
 
-.single-view-button {
-  margin-top: 10px;
+.single-artist li {
+  list-style: none;
 }
+/************************ dashboard ************************/
 
 .dashboard {
   height: 100vh;

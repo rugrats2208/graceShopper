@@ -59,14 +59,20 @@ function SingleProduct() {
               </li>
             ))}
         </ol>
-        <button className="single-view-button btn btn-dark" type="button">
+        <button
+          className="product-button single-view-button btn btn-dark"
+          type="button"
+        >
           Add to Cart
         </button>{' '}
         {/* <button className="single-view-button" type="button" class="btn btn-dark">
         Buy Now
       </button> */}
         <Link to={'/'}>
-          <button className="single-view-button btn btn-dark" type="button">
+          <button
+            className="product-button single-view-button btn btn-dark"
+            type="button"
+          >
             Back to Home
           </button>
         </Link>
