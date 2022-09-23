@@ -16,9 +16,6 @@ const Artist = conn.define('artist', {
     genre: {
         type: Sequelize.STRING,
     },
-    popularity: {
-        type: Sequelize.INTEGER,
-    },
 });
 
 module.exports = Artist;
