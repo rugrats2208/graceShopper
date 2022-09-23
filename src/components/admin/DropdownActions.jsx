@@ -1,8 +1,11 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import FormActions from "./FormActions";
+import { useDispatch } from "react-redux";
+import { delProduct } from "../../reducers/products/productsReducer";
 
 function DropdownActions({ set: { selection = {}, setSelection } }) {
+  const dispatch = useDispatch();
   const [option, setOption] = React.useState("");
 
   return (
@@ -19,13 +22,24 @@ function DropdownActions({ set: { selection = {}, setSelection } }) {
           <Dropdown.Item onClick={() => setOption("edit")} href="#/action-2">
             Edit Selection
           </Dropdown.Item>
-          <Dropdown.Item onClick={() => setOption("delete")} href="#/action-3">
+          <Dropdown.Item
+            onClick={() => {
+              if (selection.id) {
+                dispatch(delProduct(selection.id));
+              }
+            }}
+            href="#/action-3"
+          >
             Delete Selection
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
-      {option ? <FormActions data={{ selection, setSelection, option }} /> : ""}
+      {option ? (
+        <FormActions data={{ selection, setSelection, option, setOption }} />
+      ) : (
+        ""
+      )}
     </>
   );
 }
