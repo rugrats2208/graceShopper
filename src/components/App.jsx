@@ -11,8 +11,7 @@ import {
   SingleProduct,
   FeaturedProducts,
   NewProductReleases,
-  GuestMain,
-  SignedInMain,
+  Main,
   Navigation,
   Admin,
   SingleArtist,
@@ -32,11 +31,8 @@ function App() {
       <Cart />
       <ToastContainer />
       <Routes>
-        <Route index element={<GuestMain />} />
-
-        <Route path={'/signedInMain'} element={<SignedInMain />} />
+        <Route index element={<Main />} />
         <Route path={'/signup'} element={<Signup />} />
-        <Route path={'/signedInMain'} element={<SignedInMain />} />
         <Route path={'/allProducts'} element={<AllProducts />} />
         <Route path={'/singleProduct/:id'} element={<SingleProduct />} />
         <Route path={'/singleArtist/:id'} element={<SingleArtist />} />

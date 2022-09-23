@@ -22,10 +22,11 @@ function SingleProduct() {
   }
 
   function convertTrackLength(length) {
-    //console.log(length);
+    console.log(length);
     let trackLength = Math.round((100 * length) / 60000) / 100;
     let seconds = Math.round((trackLength % 1) * 60);
     let trackString = `${Math.floor(trackLength)}:${seconds}`;
+
     return trackString;
   }
 
