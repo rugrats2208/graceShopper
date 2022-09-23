@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 
 import Table from "react-bootstrap/Table";
 
-function ProductsTable({ set: setSelection }) {
+function ProductsTable({ set: { selection, setSelection } }) {
   const data = useSelector((state) => state.products);
+  console.log(selection);
 
   return (
     <Table striped bordered hover variant="dark">
@@ -21,6 +22,7 @@ function ProductsTable({ set: setSelection }) {
           const price = `${product.price}`;
           return (
             <tr
+              className={selection.id === product.id ? "selected" : ""}
               key={product.id}
               onClick={() => {
                 setSelection(product);
