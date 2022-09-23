@@ -1,13 +1,11 @@
 html {
-  /* background: linear-gradient(#2a9489, #ceefd3); */
-  background: linear-gradient(#289d3d, #ceefd3);
   margin: 0;
   padding: 0;
 }
 
 main {
-  padding-top: 56px;
-  /* background-color: #f2f2f2; */
+  padding-top: 60px;
+
 }
 
 body {
@@ -37,11 +35,6 @@ button:hover {
   text-shadow: 1px 1px 1px;
 }
 
-/* .featured-products {
-}
-.new-products {
-} */
-
 .list-title {
   margin-bottom: 20px;
   margin-top: 20px;
@@ -59,7 +52,6 @@ button:hover {
 }
 
 .featured-products {
-  /* background-color: rgba(50, 42, 42, 0.905); */
   background: linear-gradient(#289d3d, #ceefd3);
   padding-top: 5px;
 }
@@ -68,8 +60,6 @@ button:hover {
   overflow: scroll;
 }
 .new-products {
-  /* background-color: rgba(50, 42, 42, 0.905); */
-  /* background: linear-gradient(#2a9489, #ceefd3); */
   background: linear-gradient(#289d3d, #ceefd3);
   padding-top: 5px;
 }
@@ -79,8 +69,6 @@ button:hover {
 }
 
 .all-products {
-  /* background-color: rgba(50, 42, 42, 0.905); */
-  /* background: linear-gradient(#2a9489, #ceefd3); */
   background: linear-gradient(#289d3d, #ceefd3);
   padding-top: 5px;
 }
@@ -94,21 +82,13 @@ button:hover {
 
 .single-product {
   color: black;
-  /* background: linear-gradient(#2a9489, #ceefd3); */
   background: linear-gradient(#289d3d, #ceefd3);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* .single-artist img {
-  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
-}
-.single-product img {
-  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
-} */
 .single-artist {
-  /* background: linear-gradient(#2a9489, #ceefd3); */
   background: linear-gradient(#289d3d, #ceefd3);
   display: flex;
   flex-direction: column;
@@ -120,6 +100,7 @@ button:hover {
 }
 
 .dashboard {
+  height: 100vh;
   background: #313131;
 }
 
@@ -162,19 +143,33 @@ button:hover {
 }
 
 /************************ admin page ************************/
+
 .selected {
   box-sizing: border-box;
-  border-bottom: 2px solid #00b74a;
+  border-bottom: 3px solid #00b74a;
 }
 
-@media (max-width: 654px) {
-  .admin {
-    margin-top: 1.5rem;
-  }
+.pageNumbers {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+.pageNumbers li {
+  margin: 0.5rem;
+}
+.pageNumbers li a {
+  color: #f9f9f9;
+}
+.pageNumbers li a:hover {
+  cursor: pointer;
+  color: #00b74a;
+}
+.pageNumbers li a.active {
+  color: #00b74a;
 }
 
 @media (max-width: 560px) {
   .admin {
-    margin-top: 3.1rem;
+    margin-top: 1.5rem;
   }
 }

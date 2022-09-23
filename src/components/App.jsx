@@ -9,10 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   AllProducts,
   SingleProduct,
-  FeaturedProducts,
+  // FeaturedProducts,
+  // NewProductReleases,
   GuestMain,
   SignedInMain,
-  NewProductReleases,
   Navigation,
   Admin,
   SingleArtist,
@@ -33,6 +33,7 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route index element={<GuestMain />} />
+
         <Route path={'/signedInMain'} element={<SignedInMain />} />
         <Route path={'/signup'} element={<Signup />} />
         <Route path={'/signedInMain'} element={<SignedInMain />} />
