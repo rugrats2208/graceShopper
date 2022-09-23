@@ -41,23 +41,23 @@ export const me = () => async (dispatch) => {
 
 export const authenticate =
   (method, username, password, email = null, fName = null, lName = null) =>
-  async (dispatch) => {
-    try {
-      const res = await axios.post(`/api/auth/${method}`, {
-        username,
-        password,
-        fName,
-        lName,
-        email,
-      });
-      window.localStorage.setItem(TOKEN, res.data.token);
-      dispatch(me());
-    } catch (authError) {
-      toast.error('error logging in', defaultToast);
+    async (dispatch) => {
+      try {
+        const res = await axios.post(`/api/auth/${method}`, {
+          username,
+          password,
+          fName,
+          lName,
+          email,
+        });
+        window.localStorage.setItem(TOKEN, res.data.token);
+        dispatch(me());
+      } catch (authError) {
+        toast.error('error logging in', defaultToast);
 
-      return dispatch(setAuth({ error: authError }));
-    }
-  };
+        return dispatch(setAuth({ error: authError }));
+      }
+    };
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
@@ -67,6 +67,8 @@ export const logout = () => {
     auth: {},
   };
 };
+
+
 
 /**
  * REDUCER
