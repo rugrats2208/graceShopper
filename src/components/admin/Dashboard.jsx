@@ -1,10 +1,13 @@
 import React from "react";
-import Products from "./Products";
+import ProductsTable from "./ProductsTable";
+import DropdownActions from "./DropdownActions";
 
 const Dashboard = () => {
+  const [selection, setSelection] = React.useState("");
   return (
-    <div style={{ background: "lightblue" }} className="dashboard">
-      <Products />
+    <div className="dashboard">
+      <DropdownActions set={{ selection, setSelection }} />
+      <ProductsTable set={{ selection, setSelection }} />
     </div>
   );
 };

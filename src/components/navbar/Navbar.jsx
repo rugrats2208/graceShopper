@@ -3,12 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../reducers/Auth/authReducer';
 import Signup from '../auth/Signup';
-
 
 function Navigation() {
   const navigate = useNavigate();
@@ -24,13 +22,13 @@ function Navigation() {
   //login  handler
   function handleLogin(e) {
     e.preventDefault();
-    navigate("/signup");
+    navigate('/signup');
   }
   //logout  handler
   function handleLogout(e) {
     e.preventDefault();
     dispatch(logout());
-    navigate("/");
+    navigate('/');
     window.location.reload();
   }
 
@@ -38,30 +36,22 @@ function Navigation() {
     <>
       {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
       <Navbar className='shadow' bg='dark' variant='dark' fixed='top'>
-
         <Container fluid>
-          <Navbar.Brand href="#">Grace Shopper</Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
+          <Navbar.Brand href='#'>Grace Shopper</Navbar.Brand>
+          <Navbar.Toggle aria-controls='navbarScroll' />
+          <Navbar.Collapse id='navbarScroll'>
             <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
+              className='me-auto my-2 my-lg-0'
+              style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/allAlbums">Products</Nav.Link>
-              <Nav.Link href="/admin">Admin</Nav.Link>
+              <Nav.Link href='/'>Home</Nav.Link>
+              <Nav.Link href='/allProducts'>Products</Nav.Link>
+              <Nav.Link href='/admin'>Admin</Nav.Link>
             </Nav>
 
             <Navbar.Text>
-<<<<<<< HEAD
-              Signed in as:{' '}
-              <span onClick={() => handleShowLog()}>
-                <a href='#login'>{username || 'guest'} </a>
-              </span>
-=======
-              Signed in as: <a href="#login">{username || "guest"} </a>
->>>>>>> caf93344f4f2812b0809def53c5aaf75b5b7ce7a
+              Signed in as: <a href='#login'>{username || 'guest'} </a>
             </Navbar.Text>
 
             {username === null && (
@@ -75,8 +65,8 @@ function Navigation() {
             )}
             {username !== null && (
               <Button
-                className="ms-3"
-                variant="outline-success"
+                className='ms-3'
+                variant='outline-success'
                 onClick={handleLogout}
               >
                 Log Out
