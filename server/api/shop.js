@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, Track, Artist, Order } = require('../db');
+const { Product, Track, Artist, Order, User } = require('../db');
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 // GET api/shop
@@ -48,6 +48,26 @@ router.get('/artist/:id', async (req, res, next) => {
 router.get('/order/:id', async (req, res, next) => {
   try {
     res.send('hi');
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.get('/pastOrders/:id', async (req, res, next) => {
+  try {
+    //getting the user instance with the previous orders attached
+    let userWithPastOrders = await User.findByPk(req.params.id, {
+      include: {
+        model: Order,
+        where: {
+          complete: true,
+        },
+      },
+    });
+    //extracting the orders object from the user instance and returning just that
+    let pastOrders = userWithPastOrders.orders;
+    res.send(pastOrders);
   } catch (error) {
     console.error(error);
     next(error);
