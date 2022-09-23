@@ -13,6 +13,9 @@ const Product = conn.define('product', {
         type: Sequelize.INTEGER,
         defaultValue: 5,
     },
+    popularity: {
+        type: Sequelize.INTEGER,
+    },
     img: {
         type: Sequelize.STRING,
         defaultValue: '/music-note.jpg',
