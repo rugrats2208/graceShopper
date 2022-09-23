@@ -5,7 +5,6 @@ import Table from "react-bootstrap/Table";
 
 function ProductsTable({ set: { selection, setSelection } }) {
   const data = useSelector((state) => state.products);
-  console.log(selection);
 
   return (
     <Table striped bordered hover variant="dark">
