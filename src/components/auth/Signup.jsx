@@ -160,6 +160,7 @@ export default function Signup(props) {
                     {/* username */}
                     <Form.Group controlId="formUsername" className="mb-4">
                       <Form.Control
+                        id="username"
                         type="text"
                         name="username"
                         placeholder="username"
@@ -179,6 +180,7 @@ export default function Signup(props) {
                     {/* password */}
                     <Form.Group controlId="formPassword" className="mb-4">
                       <Form.Control
+                        id="password"
                         type="password"
                         name="password"
                         placeholder="password"

@@ -3,12 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../reducers/Auth/authReducer';
 import Signup from '../auth/Signup';
-import { MDBBtn } from 'mdb-react-ui-kit';
+// import { MDBBtn } from 'mdb-react-ui-kit';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -59,20 +58,20 @@ function Navigation() {
                   })}
                 >
                   Products
-                </NavLink>=
+                </NavLink>
+                =
                 {isAdmin ? (
                   <NavLink
                     to="/admin"
                     style={({ isActive }) => ({
-                      fontWeight: isActive ? "bold" : "normal",
+                      fontWeight: isActive ? 'bold' : 'normal',
                     })}
                   >
                     Admin
                   </NavLink>
                 ) : (
-                  ""
+                  ''
                 )}
-
               </div>
             </Nav>
             <div className="nav-header-container">
@@ -81,18 +80,18 @@ function Navigation() {
               </Navbar.Text>
 
               {window.localStorage.getItem('username') === null && (
-                <MDBBtn
+                <Button
                   className="ms-3"
                   variant="primary"
                   onClick={handleShowLog}
                 >
                   Sign In
-                </MDBBtn>
+                </Button>
               )}
               {window.localStorage.getItem('username') !== null && (
-                <MDBBtn className variant="secondary" onClick={handleLogout}>
+                <Button className variant="secondary" onClick={handleLogout}>
                   Log Out
-                </MDBBtn>
+                </Button>
               )}
             </div>
           </Navbar.Collapse>
