@@ -1,12 +1,12 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../reducers/Auth/authReducer";
-import Signup from "../auth/Signup";
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../reducers/Auth/authReducer';
+import Signup from '../auth/Signup';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ function Navigation() {
       {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
       <Navbar className="shadow" bg="dark" variant="dark" fixed="top">
         <Container fluid>
-          <Navbar.Brand href="#">Grace Shopper</Navbar.Brand>
+          <Navbar.Brand>Grace Shopper</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -45,9 +45,25 @@ function Navigation() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/allProducts">Products</Nav.Link>
-              <Nav.Link href="/admin">Admin</Nav.Link>
+              <div className="nav-header-links">
+                <NavLink to="/">Home</NavLink>
+                <NavLink
+                  to="/allProducts"
+                  style={({ isActive }) => ({
+                    'font-weight': isActive ? 'bold' : 'normal',
+                  })}
+                >
+                  Products
+                </NavLink>
+                <NavLink
+                  to="/admin"
+                  style={({ isActive }) => ({
+                    'font-weight': isActive ? 'bold' : 'normal',
+                  })}
+                >
+                  Admin
+                </NavLink>
+              </div>
             </Nav>
 
             <Navbar.Text>

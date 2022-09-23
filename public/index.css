@@ -123,6 +123,20 @@ button:hover {
   background: #313131;
 }
 
+/************************ navbar ************************/
+
+.nav-header-links a {
+  color: lightgray;
+  margin: 3px;
+  padding: 3px;
+}
+
+.nav-header-links a:hover {
+  color: white;
+  font-weight: bolder;
+  transition: all ease-in-out 0.2s;
+}
+
 /************************ shopping cart ************************/
 #cart {
   background-color: white;
