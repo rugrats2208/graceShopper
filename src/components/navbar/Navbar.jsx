@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../reducers/Auth/authReducer';
 import Signup from '../auth/Signup';
@@ -35,29 +35,45 @@ function Navigation() {
   return (
     <>
       {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
-      <Navbar className='shadow' bg='dark' variant='dark' fixed='top'>
+      <Navbar className="shadow" bg="dark" variant="dark" fixed="top">
         <Container fluid>
-          <Navbar.Brand href='#'>Grace Shopper</Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbarScroll' />
-          <Navbar.Collapse id='navbarScroll'>
+          <Navbar.Brand>Grace Shopper</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
             <Nav
-              className='me-auto my-2 my-lg-0'
+              className="me-auto my-2 my-lg-0"
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href='/'>Home</Nav.Link>
-              <Nav.Link href='/allProducts'>Products</Nav.Link>
-              <Nav.Link href='/admin'>Admin</Nav.Link>
+              <div className="nav-header-links">
+                <NavLink to="/">Home</NavLink>
+                <NavLink
+                  to="/allProducts"
+                  style={({ isActive }) => ({
+                    'font-weight': isActive ? 'bold' : 'normal',
+                  })}
+                >
+                  Products
+                </NavLink>
+                <NavLink
+                  to="/admin"
+                  style={({ isActive }) => ({
+                    'font-weight': isActive ? 'bold' : 'normal',
+                  })}
+                >
+                  Admin
+                </NavLink>
+              </div>
             </Nav>
 
             <Navbar.Text>
-              Signed in as: <a href='#login'>{username || 'guest'} </a>
+              Signed in as: <a href="#login">{username || 'guest'} </a>
             </Navbar.Text>
 
             {username === null && (
               <Button
-                className='ms-3'
-                variant='outline-success'
+                className="ms-3"
+                variant="outline-success"
                 onClick={handleShowLog}
               >
                 Sign In
@@ -65,8 +81,8 @@ function Navigation() {
             )}
             {username !== null && (
               <Button
-                className='ms-3'
-                variant='outline-success'
+                className="ms-3"
+                variant="outline-success"
                 onClick={handleLogout}
               >
                 Log Out
