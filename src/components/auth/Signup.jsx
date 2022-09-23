@@ -79,7 +79,7 @@ export default function Signup(props) {
           <Modal.Title>Login/Signup</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <MDBTabs pills justify className='mb-3'>
+          <MDBTabs pills justify className="mb-3">
             <MDBTabsItem>
               <MDBTabsLink
                 onClick={() => handleLoginRegisterClick('login')}
@@ -134,70 +134,71 @@ export default function Signup(props) {
                   handleSubmit,
                   isSubmitting,
                 }) => (
-                  <Form onSubmit={handleSubmit} className='row g-3'>
-                    <div className='text-center mb-3'>
+                  <Form onSubmit={handleSubmit} className="row g-3">
+                    <div className="text-center mb-3">
                       <p>Sign in with:</p>
 
-                      <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='facebook-f' />
+                      <MDBBtn floating className="mx-1">
+                        <MDBIcon fab icon="facebook-f" />
                       </MDBBtn>
 
-                      <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='google' />
+                      <MDBBtn floating className="mx-1">
+                        <MDBIcon fab icon="google" />
                       </MDBBtn>
 
-                      <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='twitter' />
+                      <MDBBtn floating className="mx-1">
+                        <MDBIcon fab icon="twitter" />
                       </MDBBtn>
 
-                      <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='github' />
+                      <MDBBtn floating className="mx-1">
+                        <MDBIcon fab icon="github" />
                       </MDBBtn>
                     </div>
 
-                    <p className='text-center'>or:</p>
+                    <p className="text-center">or:</p>
+
                     {/* username */}
-                    <Form.Group controlId='formUsername' className='mb-4'>
+                    <Form.Group controlId="formUsername" className="mb-4">
                       <Form.Control
-                        type='text'
-                        name='username'
-                        placeholder='username'
+                        type="text"
+                        name="username"
+                        placeholder="username"
                         autoFocus
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.username}
-                        autoComplete='username'
+                        autoComplete="username"
                         className={
                           touched.username && errors.username ? 'error' : null
                         }
                       />
                       {errors.username && touched.username ? (
-                        <div className='error-message'>{errors.username}</div>
+                        <div className="error-message">{errors.username}</div>
                       ) : null}
                     </Form.Group>
                     {/* password */}
-                    <Form.Group controlId='formPassword' className='mb-4'>
+                    <Form.Group controlId="formPassword" className="mb-4">
                       <Form.Control
-                        type='password'
-                        name='password'
-                        placeholder='password'
+                        type="password"
+                        name="password"
+                        placeholder="password"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.password}
-                        autoComplete='new-password'
+                        autoComplete="new-password"
                         className={
                           touched.password && errors.password ? 'error' : null
                         }
                       />
                       {errors.password && touched.password ? (
-                        <div className='error-message'>{errors.password}</div>
+                        <div className="error-message">{errors.password}</div>
                       ) : null}
                     </Form.Group>
                     {/* buttons */}
-                    <Form.Group controlId='submit' className='col-12'>
+                    <Form.Group controlId="submit" className="col-12">
                       <MDBBtn
-                        type='submit'
-                        className='mb-4'
+                        type="submit"
+                        className="mb-4"
                         block
                         disabled={isSubmitting}
                       >
@@ -208,22 +209,22 @@ export default function Signup(props) {
                 )}
               </Formik>
 
-              <MDBRow className='mb-4'>
-                <MDBCol className='d-flex justify-content-center'>
+              <MDBRow className="mb-4">
+                <MDBCol className="d-flex justify-content-center">
                   <MDBCheckbox
-                    id='form7Example3'
-                    label='Remember me'
+                    id="form7Example3"
+                    label="Remember me"
                     defaultChecked
                   />
                 </MDBCol>
                 <MDBCol>
-                  <a href='#!'>Forgot password?</a>
+                  <a href="#!">Forgot password?</a>
                 </MDBCol>
               </MDBRow>
 
-              <div className='text-center'>
+              <div className="text-center">
                 <p>
-                  Not a member? <a href='#!'>Register</a>
+                  Not a member? <a href="#!">Register</a>
                 </p>
               </div>
             </MDBTabsPane>
@@ -268,34 +269,34 @@ export default function Signup(props) {
                   handleSubmit,
                   isSubmitting,
                 }) => (
-                  <Form onSubmit={handleSubmit} className='row g-3'>
-                    <div className='text-center mb-3'>
+                  <Form onSubmit={handleSubmit} className="row g-3">
+                    <div className="text-center mb-3">
                       <p>Sign up with:</p>
 
-                      <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='facebook-f' />
+                      <MDBBtn floating className="mx-1">
+                        <MDBIcon fab icon="facebook-f" />
                       </MDBBtn>
 
-                      <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='google' />
+                      <MDBBtn floating className="mx-1">
+                        <MDBIcon fab icon="google" />
                       </MDBBtn>
 
-                      <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='twitter' />
+                      <MDBBtn floating className="mx-1">
+                        <MDBIcon fab icon="twitter" />
                       </MDBBtn>
 
-                      <MDBBtn floating className='mx-1'>
-                        <MDBIcon fab icon='github' />
+                      <MDBBtn floating className="mx-1">
+                        <MDBIcon fab icon="github" />
                       </MDBBtn>
                     </div>
 
-                    <p className='text-center'>or:</p>
+                    <p className="text-center">or:</p>
                     {/* first name */}
-                    <Form.Group controlId='formFirstName' className='mb-4'>
+                    <Form.Group controlId="formFirstName" className="mb-4">
                       <Form.Control
-                        type='text'
-                        name='fName'
-                        placeholder='first name'
+                        type="text"
+                        name="fName"
+                        placeholder="first name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.fName}
@@ -304,15 +305,15 @@ export default function Signup(props) {
                         }
                       />
                       {errors.fName && touched.fName ? (
-                        <div className='error-message'>{errors.fName}</div>
+                        <div className="error-message">{errors.fName}</div>
                       ) : null}
                     </Form.Group>
                     {/* last name */}
-                    <Form.Group controlId='formLastName' className='mb-4'>
+                    <Form.Group controlId="formLastName" className="mb-4">
                       <Form.Control
-                        type='text'
-                        name='lName'
-                        placeholder='last name'
+                        type="text"
+                        name="lName"
+                        placeholder="last name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.lName}
@@ -321,15 +322,15 @@ export default function Signup(props) {
                         }
                       />
                       {errors.lName && touched.lName ? (
-                        <div className='error-message'>{errors.lName}</div>
+                        <div className="error-message">{errors.lName}</div>
                       ) : null}
                     </Form.Group>
                     {/* email */}
-                    <Form.Group controlId='formEmail' className='mb-4'>
+                    <Form.Group controlId="formEmail" className="mb-4">
                       <Form.Control
-                        type='email'
-                        name='email'
-                        placeholder='email'
+                        type="email"
+                        name="email"
+                        placeholder="email"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.email}
@@ -338,50 +339,50 @@ export default function Signup(props) {
                         }
                       />
                       {errors.email && touched.email ? (
-                        <div className='error-message'>{errors.email}</div>
+                        <div className="error-message">{errors.email}</div>
                       ) : null}
                     </Form.Group>
                     {/* username */}
-                    <Form.Group controlId='formUsername' className='mb-4'>
+                    <Form.Group controlId="formUsername" className="mb-4">
                       <Form.Control
-                        type='text'
-                        name='username'
-                        placeholder='username'
+                        type="text"
+                        name="username"
+                        placeholder="username"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.username}
-                        autoComplete='username'
+                        autoComplete="username"
                         className={
                           touched.username && errors.username ? 'error' : null
                         }
                       />
                       {errors.username && touched.username ? (
-                        <div className='error-message'>{errors.username}</div>
+                        <div className="error-message">{errors.username}</div>
                       ) : null}
                     </Form.Group>
                     {/* password */}
-                    <Form.Group controlId='formPassword' className='mb-4'>
+                    <Form.Group controlId="formPassword" className="mb-4">
                       <Form.Control
-                        type='password'
-                        name='password'
-                        placeholder='password'
+                        type="password"
+                        name="password"
+                        placeholder="password"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.password}
-                        autoComplete='new-password'
+                        autoComplete="new-password"
                         className={
                           touched.password && errors.password ? 'error' : null
                         }
                       />
                       {errors.password && touched.password ? (
-                        <div className='error-message'>{errors.password}</div>
+                        <div className="error-message">{errors.password}</div>
                       ) : null}
                     </Form.Group>
                     {/* buttons */}
-                    <Form.Group controlId='submit' className='col-12'>
+                    <Form.Group controlId="submit" className="col-12">
                       <MDBBtn
-                        type='submit'
-                        className='mb-4'
+                        type="submit"
+                        className="mb-4"
                         block
                         disabled={isSubmitting}
                       >

@@ -3,10 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useNavigate, Link, NavLink } from 'react-router-dom';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../reducers/Auth/authReducer';
 import Signup from '../auth/Signup';
+import { MDBBtn } from 'mdb-react-ui-kit';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -35,16 +37,18 @@ function Navigation() {
   return (
     <>
       {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
-      <Navbar className="shadow" bg="dark" variant="dark" fixed="top">
-        <Container fluid>
+      <Navbar
+        className="shadow"
+        bg="dark"
+        expand="md"
+        variant="dark"
+        fixed="top"
+      >
+        <Container>
           <Navbar.Brand>Grace Shopper</Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
-              navbarScroll
-            >
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
               <div className="nav-header-links">
                 <NavLink to="/">Home</NavLink>
                 <NavLink
@@ -65,29 +69,26 @@ function Navigation() {
                 </NavLink>
               </div>
             </Nav>
+            <div className="nav-header-container">
+              <Navbar.Text>
+                Signed in as: <a href="#login">{username || 'guest'} </a>
+              </Navbar.Text>
 
-            <Navbar.Text>
-              Signed in as: <a href="#login">{username || 'guest'} </a>
-            </Navbar.Text>
-
-            {username === null && (
-              <Button
-                className="ms-3"
-                variant="outline-success"
-                onClick={handleShowLog}
-              >
-                Sign In
-              </Button>
-            )}
-            {username !== null && (
-              <Button
-                className="ms-3"
-                variant="outline-success"
-                onClick={handleLogout}
-              >
-                Log Out
-              </Button>
-            )}
+              {window.localStorage.getItem('username') === null && (
+                <MDBBtn
+                  className="ms-3"
+                  variant="primary"
+                  onClick={handleShowLog}
+                >
+                  Sign In
+                </MDBBtn>
+              )}
+              {window.localStorage.getItem('username') !== null && (
+                <MDBBtn className variant="secondary" onClick={handleLogout}>
+                  Log Out
+                </MDBBtn>
+              )}
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
