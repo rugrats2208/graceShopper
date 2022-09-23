@@ -297,6 +297,7 @@ export default function Signup(props) {
                     {/* first name */}
                     <Form.Group controlId="formFirstName" className="mb-4">
                       <Form.Control
+                        id="reg-fName"
                         type="text"
                         name="fName"
                         placeholder="first name"
@@ -314,6 +315,7 @@ export default function Signup(props) {
                     {/* last name */}
                     <Form.Group controlId="formLastName" className="mb-4">
                       <Form.Control
+                        id="reg-lName"
                         type="text"
                         name="lName"
                         placeholder="last name"
@@ -331,6 +333,7 @@ export default function Signup(props) {
                     {/* email */}
                     <Form.Group controlId="formEmail" className="mb-4">
                       <Form.Control
+                        id="reg-email"
                         type="email"
                         name="email"
                         placeholder="email"
@@ -348,6 +351,7 @@ export default function Signup(props) {
                     {/* username */}
                     <Form.Group controlId="formUsername" className="mb-4">
                       <Form.Control
+                        id="reg-username"
                         type="text"
                         name="username"
                         placeholder="username"
@@ -366,6 +370,7 @@ export default function Signup(props) {
                     {/* password */}
                     <Form.Group controlId="formPassword" className="mb-4">
                       <Form.Control
+                        id="reg-password"
                         type="password"
                         name="password"
                         placeholder="password"
