@@ -38,8 +38,8 @@ function NewProductReleases() {
   }, [products]);
 
   return (
-    <div>
-      <h1>New Releases</h1>
+    <div className="new-products">
+      <h1 className="list-title">New Releases</h1>
       <div className="new-products-list">
         {filteredProducts.map((product) => (
           <Product key={product.id} data={product} />
