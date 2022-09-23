@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FeaturedProducts, NewProductReleases, AllProducts } from '../';
+import { FeaturedProducts, NewProductReleases, AllProducts } from '..';
 
 function GuestMain() {
   return (
