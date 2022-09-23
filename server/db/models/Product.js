@@ -8,6 +8,7 @@ const Product = conn.define('product', {
     },
     price: {
         type: Sequelize.INTEGER,
+        notNull: true,
     },
     qty: {
         type: Sequelize.INTEGER,
@@ -15,6 +16,7 @@ const Product = conn.define('product', {
     },
     popularity: {
         type: Sequelize.INTEGER,
+        defaultValue: 50,
     },
     img: {
         type: Sequelize.STRING,
@@ -25,10 +27,10 @@ const Product = conn.define('product', {
     },
     totalTrack: {
         type: Sequelize.INTEGER,
-        // notNull: true,
     },
     releaseDate: {
         type: Sequelize.STRING,
+        notNull: true,
     },
     label: {
         type: Sequelize.STRING,
