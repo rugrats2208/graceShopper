@@ -19,6 +19,7 @@ import {
   MDBTabsContent,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 
 //define the Yup validation schema for SIGNUP
 const SignupSchema = Yup.object().shape({
