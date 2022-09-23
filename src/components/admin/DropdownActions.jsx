@@ -19,7 +19,14 @@ function DropdownActions({ set: { selection = {}, setSelection } }) {
           <Dropdown.Item onClick={() => setOption("add")} href="#/action-1">
             Add Item
           </Dropdown.Item>
-          <Dropdown.Item onClick={() => setOption("edit")} href="#/action-2">
+          <Dropdown.Item
+            onClick={() => {
+              if (selection) {
+                setOption("edit");
+              }
+            }}
+            href="#/action-2"
+          >
             Edit Selection
           </Dropdown.Item>
           <Dropdown.Item

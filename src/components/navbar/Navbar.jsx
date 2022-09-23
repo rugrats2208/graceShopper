@@ -13,6 +13,7 @@ function Navigation() {
   const dispatch = useDispatch();
   //grab the username if logged in
   const username = useSelector((state) => state.auth.username);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
 
   //modal handlers
   const [showLog, setShowLog] = React.useState(false);
@@ -55,14 +56,18 @@ function Navigation() {
                 >
                   Products
                 </NavLink>
-                <NavLink
-                  to="/admin"
-                  style={({ isActive }) => ({
-                    fontWeight: isActive ? "bold" : "normal",
-                  })}
-                >
-                  Admin
-                </NavLink>
+                {isAdmin ? (
+                  <NavLink
+                    to="/admin"
+                    style={({ isActive }) => ({
+                      fontWeight: isActive ? "bold" : "normal",
+                    })}
+                  >
+                    Admin
+                  </NavLink>
+                ) : (
+                  ""
+                )}
               </div>
             </Nav>
 

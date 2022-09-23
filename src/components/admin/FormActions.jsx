@@ -92,6 +92,9 @@ function FormActions(props) {
         <Button type="submit" variant="outline-success">
           Submit
         </Button>
+        <Button type="reset" variant="outline-success">
+          Cancel
+        </Button>
       </Row>
     </Form>
   );

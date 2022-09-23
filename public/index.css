@@ -1,6 +1,6 @@
 html {
   /* background: linear-gradient(#2a9489, #ceefd3); */
-  background: linear-gradient(#289d3d, #ceefd3);
+  /* background: linear-gradient(#289d3d, #ceefd3); */
   margin: 0;
   padding: 0;
 }
@@ -152,7 +152,7 @@ button:hover {
 /************************ admin page ************************/
 .selected {
   box-sizing: border-box;
-  border-bottom: 2px solid #00b74a;
+  border-bottom: 3px solid #00b74a;
 }
 
 @media (max-width: 654px) {
