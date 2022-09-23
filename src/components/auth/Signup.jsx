@@ -1,12 +1,11 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { authenticate, logout } from '../../reducers/Auth/authReducer';
+import { authenticate } from '../../reducers/Auth/authReducer';
 import {
   MDBRow,
   MDBCol,
@@ -74,6 +73,7 @@ export default function Signup(props) {
 
   return (
     <div>
+      {/* forms render as a MODAL */}
       <Modal show={props.show} onHide={props.onHide}>
         <Modal.Header closeButton>
           <Modal.Title>Login/Signup</Modal.Title>

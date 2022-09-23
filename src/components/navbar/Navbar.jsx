@@ -60,7 +60,10 @@ function Navigation() {
               <Button variant='outline-success'>Search</Button>
             </Form> */}
             <Navbar.Text>
-              Signed in as: <a href='#login'>{username || 'guest'} </a>
+              Signed in as:{' '}
+              <span onClick={() => handleShowLog()}>
+                <a href='#login'>{username || 'guest'} </a>
+              </span>
             </Navbar.Text>
 
             {username === null && (
