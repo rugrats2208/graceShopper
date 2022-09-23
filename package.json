@@ -5,14 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build-watch & npm run start-server ",
-    "build": "webpack -w",
-    "build:dev": "npm run build -- --watch --mode=development",
-    "test": "mocha spec.js",
-    "test:dev": "QUIET=true JWT=shh DATABASE_URL=postgres://localhost/acme_db_test npm test -- --watch",
-    "start:dev": "JWT=shhh nodemon server --ignore src/ --ignore dist/ & npm run build:dev",
-    "testDev": "nodemon --watch server -e js,html server/index.js",
     "build-watch": "webpack -w",
-    "start-server": "nodemon --watch server -e js,html server/index.js"
+    "start-server": "nodemon --watch server -e js,html server/index.js",
+    "seed": "node server/seed",
+    "build-pro": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -32,7 +28,6 @@
     "pg": "^8.7.3",
     "react-bootstrap": "^2.5.0",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^6.0.0",
     "sequelize": "^6.21.3",
     "style-loader": "^3.3.1",
     "yup": "^0.32.11"

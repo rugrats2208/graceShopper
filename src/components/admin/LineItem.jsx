@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { delProduct } from "../../reducers/albums/albumsReducer";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { delProduct } from '../../reducers/products/productsReducer';
 
 const LineItem = ({ data: { product, setItemEdit } }) => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const LineItem = ({ data: { product, setItemEdit } }) => {
   };
 
   return (
-    <div style={{ display: "flex" }} className="lineItem">
+    <div style={{ display: 'flex' }} className="lineItem">
       <div>{`ID: ${product.id}`}</div>
       <div>{`Name: ${product.name}`}</div>
       <div>{`Price: ${product.price}`}</div>
