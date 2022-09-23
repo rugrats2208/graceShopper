@@ -1,14 +1,12 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../reducers/Auth/authReducer';
-import Signup from '../auth/Signup';
-
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../reducers/Auth/authReducer";
+import Signup from "../auth/Signup";
 
 function Navigation() {
   const navigate = useNavigate();
@@ -37,8 +35,7 @@ function Navigation() {
   return (
     <>
       {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
-      <Navbar className='shadow' bg='dark' variant='dark' fixed='top'>
-
+      <Navbar className="shadow" bg="dark" variant="dark" fixed="top">
         <Container fluid>
           <Navbar.Brand href="#">Grace Shopper</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -59,8 +56,8 @@ function Navigation() {
 
             {username === null && (
               <Button
-                className='ms-3'
-                variant='outline-success'
+                className="ms-3"
+                variant="outline-success"
                 onClick={handleShowLog}
               >
                 Sign In

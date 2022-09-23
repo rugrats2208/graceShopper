@@ -25,3 +25,7 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
+
+.dashboard {
+  background: #313131;
+}
