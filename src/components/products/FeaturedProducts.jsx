@@ -25,7 +25,7 @@ function FeaturedProducts() {
 
   return (
     <div className="featured-products">
-      <h1>Featured Products</h1>
+      <h1 className="list-title">Featured Products</h1>
       <div className="featured-products-list">
         {filteredProducts.map((product) => (
           <Product key={product.id} data={product} />
