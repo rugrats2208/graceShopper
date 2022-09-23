@@ -9,10 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   AllProducts,
   SingleProduct,
-  // FeaturedProducts,
+  FeaturedProducts,
   GuestMain,
   SignedInMain,
-  // NewProductReleases,
+  NewProductReleases,
   Navigation,
   Admin,
   SingleArtist,
@@ -39,8 +39,8 @@ function App() {
         <Route path={'/allProducts'} element={<AllProducts />} />
         <Route path={'/singleProduct/:id'} element={<SingleProduct />} />
         <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
-        {/* <Route path={'/featuredProducts'} element={<FeaturedProducts />} /> */}
-        {/* <Route path={"/newProductReleases"} element={<NewProductReleases />} /> */}
+        <Route path={'/featuredProducts'} element={<FeaturedProducts />} />
+        <Route path={'/newProductReleases'} element={<NewProductReleases />} />
         <Route path={'/admin'} element={<Admin />} />
       </Routes>
     </div>

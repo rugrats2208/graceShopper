@@ -54,7 +54,7 @@ function Navigation() {
                 <NavLink
                   to="/allProducts"
                   style={({ isActive }) => ({
-                    'font-weight': isActive ? 'bold' : 'normal',
+                    fontWeight: isActive ? 'bold' : 'normal',
                   })}
                 >
                   Products
@@ -62,7 +62,7 @@ function Navigation() {
                 <NavLink
                   to="/admin"
                   style={({ isActive }) => ({
-                    'font-weight': isActive ? 'bold' : 'normal',
+                    fontWeight: isActive ? 'bold' : 'normal',
                   })}
                 >
                   Admin
