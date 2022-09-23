@@ -33,6 +33,7 @@ function DropdownActions({ set: { selection = {}, setSelection } }) {
             onClick={() => {
               if (selection.id) {
                 dispatch(delProduct(selection.id));
+                setSelection("");
               }
             }}
             href="#/action-3"
