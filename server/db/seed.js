@@ -68,7 +68,7 @@ const getUsers = require('./getUsers');
 
         //LOAD ORDERS
         for (let i = 0; i < 10; i++) {
-            const order = await Order.create({ complete: i % 4 === 0 });
+            const order = await Order.create({ complete: !i % 4 === 0 });
             order.addProducts(products.slice(i, i + 4));
             users[Math.floor(i / 4)].addOrder(order);
         }

@@ -19,9 +19,10 @@ const dummyProduct = {
 export default function Cart() {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
-    const orders = useSelector(state =>
-        state.orders.filter(order => order.complete)
+    const activeOrder = useSelector(state =>
+        state.orders.filter(order => !order.complete)
     ); //return only the active order
+    console.log(activeOrder);
 
     //set use effeft here to set orders
     useEffect(() => {
