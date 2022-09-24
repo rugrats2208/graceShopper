@@ -9,7 +9,7 @@
     "build-watch": "webpack -w",
     "start-server": "nodemon --watch server -e js,html server/index.js",
     "seed": "node server/db/seed",
-    "build-pro": "webpack --mode production"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
