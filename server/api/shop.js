@@ -91,7 +91,6 @@ router.get('/orders/:userId', async (req, res, next) => {
             },
             attributes: ['id', 'complete'],
         });
-        console.log(data[0].dataValues);
         res.send(data);
     } catch (error) {
         console.error(error);
