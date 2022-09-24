@@ -17,6 +17,7 @@ import {
   SingleArtist,
   Signup,
   Cart,
+  OrderHistory,
 } from "./index";
 
 function App() {
@@ -33,13 +34,14 @@ function App() {
       <Routes>
         <Route index element={<Main />} />
         <Route path={"/signup"} element={<Signup />} />
+        <Route path={"/orderHistory/:id"} element={<OrderHistory />} />
         <Route path={"/allProducts"} element={<AllProducts />} />
         <Route path={"/singleProduct/:id"} element={<SingleProduct />} />
         <Route path={"/singleArtist/:id"} element={<SingleArtist />} />
         <Route path={"/featuredProducts"} element={<FeaturedProducts />} />
         <Route path={"/newProductReleases"} element={<NewProductReleases />} />
         <Route path={"/admin"} element={<AdminDashboard />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path={"*"} element={<h1>Page Not Found!</h1>} />
       </Routes>
     </div>
   );

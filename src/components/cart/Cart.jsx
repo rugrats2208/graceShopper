@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useSelector, useDispatch } from 'react-redux';
+import { getOrders } from '../../reducers/orders/ordersReducer';
 
 const dummyProduct = {
     artistId: 1,
@@ -16,11 +17,19 @@ const dummyProduct = {
 };
 
 export default function Cart() {
-    const dispatch = useDispatch();
-    // const orders = useSelector(state => state.orders.filter(order.complete)); //return only the active order
-    //TODO: set up redux store with at least quantity in the order
-
     const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch();
+    const userId = useSelector(state => state.auth.id);
+    const activeOrder = useSelector(state =>
+        state.orders.filter(order => !order.complete)
+    ); //return only the active order
+    console.log(activeOrder);
+
+    //set use effeft here to set orders
+    useEffect(() => {
+        dispatch(getOrders(userId));
+    }, [userId]);
+
     return (
         <Dropdown
             drop="start"

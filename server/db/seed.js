@@ -7,10 +7,10 @@ const getUsers = require('./getUsers');
 
 //SYNC AND SEED THE DATABASE
 //seed users->albums->orders. Give some albums to orders then give those orders to users
-(async () => {
+const seed = async () => {
     try {
         //WITH FORCE TRUE ENABLED, THE DATABASE WILL DROP THE TABLE BEFORE CREATING A NEW ONE
-        console.log('Started Seeding...');
+        console.log('Seeding started...');
         await conn.sync({ force: true });
 
         //LOADING USERS
@@ -53,8 +53,8 @@ const getUsers = require('./getUsers');
                     artistId: art.id,
                 });
                 //create the tracks and give it the product ID
-                album.tracks.items.map(track => {
-                    Track.create({
+                album.tracks.items.map(async (track) => {
+                    await Track.create({
                         name: track.name,
                         spotifyId: track.id,
                         length: track.duration_ms,
@@ -67,9 +67,14 @@ const getUsers = require('./getUsers');
         );
 
         //LOAD ORDERS
-        for (let i = 0; i < 10; i++) {
-            const order = await Order.create({ complete: i % 4 === 0 });
-            order.addProducts(products.slice(i, i + 4));
+        for (let i = 0; i < 100; i++) {
+            //every 4th order is active
+            const order = await Order.create({ complete: !(i % 4 === 0) });
+            //give each order between 1 and 5 albums
+            order.addProducts(
+                products.slice(i, i + Math.ceil(Math.random() * 4))
+            );
+            //give each user 4 orders
             users[Math.floor(i / 4)].addOrder(order);
         }
 
@@ -77,4 +82,25 @@ const getUsers = require('./getUsers');
     } catch (err) {
         console.log(err);
     }
-})();
+}
+
+
+const runSeed = async () => {
+    console.log('Start seeding...');
+    try {
+        await seed();
+    } catch (error) {
+        console.error(error);
+        process.exitCode = 1;
+    } finally {
+        console.log('Closing db connection.');
+        await conn.close();
+        console.log('Db connection closed');
+    }
+}
+
+if (module === require.main) {
+    runSeed();
+}
+
+module.exports = seed;

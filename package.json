@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build-watch & npm run start-server ",
+    "start": "node server ",
+    "start-dev": "npm run build-watch & npm run start-server ",
     "build-watch": "webpack -w",
     "start-server": "nodemon --watch server -e js,html server/index.js",
     "seed": "node server/db/seed",
-    "build-pro": "webpack --mode production"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +24,6 @@
     "jsonwebtoken": "^8.5.1",
     "mdb-react-ui-kit": "^4.2.0",
     "morgan": "^1.10.0",
-    "npm": "^8.19.2",
     "pg": "^8.7.3",
     "react-bootstrap": "^2.5.0",
     "react-loading": "^2.0.3",
@@ -46,7 +46,6 @@
     "babel-loader": "^8.2.5",
     "chai": "^4.3.6",
     "css-loader": "^6.7.1",
-    "dotenv": "^16.0.2",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
     "react": "^18.2.0",
