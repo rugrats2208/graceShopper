@@ -60,6 +60,22 @@ router.get('/order/:userId', async (req, res, next) => {
     }
 });
 
+// POST api/shop/order/:userId
+router.post('/order/:userId', async (req, res, next) => {
+    try {
+        const albumId = req.body.id;
+        const newOrder = await Order.create();
+        newOrder.addPProduct(albumId);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+// PUT api/shop/order
+
+//DELETE api/shop/order
+
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
     try {
