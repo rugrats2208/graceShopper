@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Pagination from "./Pagination";
 function UsersTable() {
   const users = useSelector((state) => state.admin.users);
+  const { option } = useSelector((state) => state.admin);
 
   const [currPage, setCurrPage] = React.useState(1);
   const [itemsPerPage] = React.useState(10);

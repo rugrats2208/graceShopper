@@ -7,11 +7,11 @@ import Dropdown from "react-bootstrap/Dropdown";
 import FormActions from "./ProductForm";
 //ACTIONS
 import { delProduct } from "../../reducers/products/productsReducer";
-import { setSelection, setOption } from "../../reducers/adminReducer";
+import { setProduct, setFormMethod } from "../../reducers/adminReducer";
 
 function DropdownActions({ page }) {
   const dispatch = useDispatch();
-  const { option, selection } = useSelector((state) => state.admin);
+  const { formMethod, product } = useSelector((state) => state.admin);
 
   return (
     <>
@@ -24,7 +24,7 @@ function DropdownActions({ page }) {
           <Dropdown.Item
             onClick={() => {
               if (!page) {
-                dispatch(setOption("add"));
+                dispatch(setFormMethod("add"));
               }
             }}
             href="#/action-1"
@@ -33,8 +33,8 @@ function DropdownActions({ page }) {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (selection.id) {
-                dispatch(setOption("edit"));
+              if (product.id) {
+                dispatch(setFormMethod("edit"));
               }
             }}
             href="#/action-2"
@@ -43,9 +43,9 @@ function DropdownActions({ page }) {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (selection.id) {
-                dispatch(delProduct(selection.id));
-                dispatch(setSelection(""));
+              if (product.id) {
+                dispatch(delProduct(product.id));
+                dispatch(setProduct(""));
               }
             }}
             href="#/action-3"
@@ -55,7 +55,7 @@ function DropdownActions({ page }) {
         </Dropdown.Menu>
       </Dropdown>
 
-      {option ? <FormActions /> : ""}
+      {formMethod ? <FormActions /> : ""}
     </>
   );
 }

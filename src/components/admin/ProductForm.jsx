@@ -9,11 +9,11 @@ import {
   addProduct,
   editProduct,
 } from "../../reducers/products/productsReducer";
-import { setOption } from "../../reducers/adminReducer";
+import { setFormMethod } from "../../reducers/adminReducer";
 
 function ProductForm() {
   const dispatch = useDispatch();
-  const { option, selection } = useSelector((state) => state.admin);
+  const { formMethod, product } = useSelector((state) => state.admin);
   const [form, setForm] = React.useState({
     name: "",
     price: "",
@@ -25,6 +25,7 @@ function ProductForm() {
   const renderForm = (sel) => {
     switch (sel) {
       case "add":
+        console.log("in the add");
         setForm({
           name: "",
           price: "",
@@ -34,12 +35,14 @@ function ProductForm() {
         });
         return;
       case "edit":
+        console.log("in the edit");
+
         setForm({
-          name: selection.name,
-          price: selection.price,
-          qty: selection.qty,
-          releaseDate: selection.releaseDate,
-          label: selection.label,
+          name: product.name,
+          price: product.price,
+          qty: product.qty,
+          releaseDate: product.releaseDate,
+          label: product.label,
         });
         return;
       default:
@@ -49,7 +52,7 @@ function ProductForm() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    switch (option) {
+    switch (formMethod) {
       case "add":
         dispatch(addProduct(form));
         setForm({
@@ -59,10 +62,10 @@ function ProductForm() {
           releaseDate: "",
           label: "",
         });
-        dispatch(setOption(""));
+        dispatch(setFormMethod(""));
         return;
       case "edit":
-        dispatch(editProduct(selection.id, form));
+        dispatch(editProduct(product.id, form));
         setForm({
           name: "",
           price: "",
@@ -70,7 +73,7 @@ function ProductForm() {
           releaseDate: "",
           label: "",
         });
-        dispatch(setOption(""));
+        dispatch(setFormMethod(""));
         return;
       default:
         return;
@@ -78,8 +81,8 @@ function ProductForm() {
   };
 
   React.useEffect(() => {
-    renderForm(option);
-  }, [option]);
+    renderForm(formMethod);
+  }, [formMethod]);
 
   return (
     <Form className="adminForm" onSubmit={handleSubmit}>
@@ -147,7 +150,7 @@ function ProductForm() {
         </Button>
 
         <Button
-          onClick={() => dispatch(setOption(""))}
+          onClick={() => dispatch(setFormMethod(""))}
           type="reset"
           variant="outline-success"
         >

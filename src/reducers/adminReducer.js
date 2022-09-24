@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const GET_USERS = 'GET_USERS'
-
-export const setSelection = (selection) => ({ type: 'SET_SELECTION', selection })
-
-export const setOption = (option) => ({ type: 'SET_OPTION', option })
+export const setProduct = (sel) => ({ type: 'SET_PRODUCT', sel });
+export const setUser = (sel) => ({ type: 'SET_USER', sel });
+export const setFormMethod = (sel) => ({ type: 'SET_FORM_METHOD', sel });
 
 //THUNK
 export const getUsers = () => {
@@ -16,7 +14,7 @@ export const getUsers = () => {
                     authorization: token,
                 },
             });
-            dispatch({ type: GET_USERS, payload: data })
+            dispatch({ type: 'GET_USERS', payload: data });
         }
         catch (error) {
             console.log(error);
@@ -25,18 +23,18 @@ export const getUsers = () => {
 }
 
 
-
-
-const initialState = { selection: '', option: '', users: [] };
+const initialState = { formMethod: '', product: '', user: '', users: [] };
 
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_SELECTION':
-            return { ...state, selection: action.selection }
-        case "SET_OPTION":
-            return { ...state, option: action.option }
         case 'GET_USERS':
             return { ...state, users: action.payload }
+        case 'SET_PRODUCT':
+            return { ...state, product: action.sel };
+        case 'SET_USER':
+            return { ...state, user: action.sel };
+        case 'SET_FORM_METHOD':
+            return { ...state, formMethod: action.sel };
         default:
             return state;
     }

@@ -2,11 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Pagination from "./Pagination";
-import { setSelection } from "../../reducers/adminReducer";
+import { setProduct } from "../../reducers/adminReducer";
 
 function ProductsTable() {
   const data = useSelector((state) => state.products);
-  const { option, selection } = useSelector((state) => state.admin);
+  const { formMethod, product } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
   const [currPage, setCurrPage] = React.useState(1);
@@ -29,27 +29,27 @@ function ProductsTable() {
           </tr>
         </thead>
         <tbody>
-          {currSlice.map((product) => {
-            const price = `${product.price}`;
+          {currSlice.map((item) => {
+            const price = `${item.price}`;
             return (
               <tr
-                className={selection.id === product.id ? "selected" : ""}
-                key={product.id}
+                className={product.id === item.id ? "selected" : ""}
+                key={item.id}
                 onClick={() => {
-                  if (!option) {
-                    dispatch(setSelection(product));
+                  if (!formMethod) {
+                    dispatch(setProduct(item));
                   }
                 }}
               >
-                <td>{product.id}</td>
-                <td>{product.name}</td>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
                 <td>
                   $
                   {`${price.slice(0, price.length - 2)}.${price.slice(
                     price.length - 2
                   )}`}
                 </td>
-                <td>{product.qty}</td>
+                <td>{item.qty}</td>
               </tr>
             );
           })}

@@ -11,7 +11,6 @@ const AdminDashboard = () => {
 
   React.useEffect(() => {
     dispatch(getUsers());
-    console.log(`what is the page?`, page);
   }, []);
 
   return (
