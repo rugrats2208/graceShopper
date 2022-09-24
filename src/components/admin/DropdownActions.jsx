@@ -51,11 +51,7 @@ function DropdownActions() {
         </Dropdown.Menu>
       </Dropdown>
 
-      {option ? (
-        <FormActions data={{ selection, setSelection, option, setOption }} />
-      ) : (
-        ""
-      )}
+      {option ? <FormActions /> : ""}
     </>
   );
 }

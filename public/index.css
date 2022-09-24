@@ -179,6 +179,13 @@ a.link {
   height: 100vh;
   background: #313131;
 }
+
+.adminDashboard .options {
+  display: flex;
+}
+.adminDashboard .options > * {
+  margin: 8px;
+}
 .adminDashboard > .dropdown {
   height: 3.5rem;
   display: flex;

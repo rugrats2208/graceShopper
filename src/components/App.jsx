@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getProducts } from "../reducers/products/productsReducer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import ProductsTable from "./admin/ProductsTable";
 //COMPONENTS
 import {
   AllProducts,
