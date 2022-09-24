@@ -94,15 +94,6 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
 
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
-<<<<<<< HEAD
-    try {
-        const { name, price, qty } = req.body;
-        const product = await Product.create({ name, price, qty });
-        res.send(product);
-    } catch (error) {
-        next(error);
-    }
-=======
   try {
     const { name, price, qty, releaseDate, label } = req.body;
     const artistId = Math.floor(Math.random() * (100 - 1) + 1);
@@ -111,7 +102,6 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
   } catch (error) {
     next(error);
   }
->>>>>>> 5693fda44637a018cfce0699d977f14f1f2bf5dc
 });
 
 //TODO: GET PRODUCT FROM DB AND UPDATE WITH NEW INFORMATION
