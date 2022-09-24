@@ -13,18 +13,10 @@ function SingleProduct() {
     dispatch(getSingleProduct(params.id));
   }, []);
 
-  function displayPrice(price) {
-    let priceDisplayed = `$${price / 100}`;
-    JSON.stringify(priceDisplayed).length === 8
-      ? (priceDisplayed = priceDisplayed)
-      : (priceDisplayed = `${priceDisplayed}0`);
-    return priceDisplayed;
-  }
-
   function convertTrackLength(length) {
-    console.log(length);
     let trackLength = Math.round((100 * length) / 60000) / 100;
     let seconds = Math.round((trackLength % 1) * 60);
+    if (seconds < 10) seconds = `0${seconds}`;
     let trackString = `${Math.floor(trackLength)}:${seconds}`;
 
     return trackString;
@@ -34,6 +26,12 @@ function SingleProduct() {
     return str.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
+  }
+
+  function displayPrice(price) {
+    price /= 100;
+    price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    return `$${price}`;
   }
 
   return (

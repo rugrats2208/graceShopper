@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getProducts } from '../reducers/products/productsReducer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import ProductsTable from './admin/ProductsTable';
 //COMPONENTS
 import {
   AllProducts,
@@ -13,7 +13,7 @@ import {
   NewProductReleases,
   Main,
   Navigation,
-  Admin,
+  AdminDashboard,
   SingleArtist,
   Signup,
   Cart,
@@ -40,7 +40,7 @@ function App() {
         <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
         <Route path={'/featuredProducts'} element={<FeaturedProducts />} />
         <Route path={'/newProductReleases'} element={<NewProductReleases />} />
-        <Route path={'/admin'} element={<Admin />} />
+        <Route path={'/admin'} element={<AdminDashboard />} />
       </Routes>
     </div>
   );

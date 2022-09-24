@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET api/album/:id
+// GET api/shop/album/:id
 router.get('/album/:id', async (req, res, next) => {
   try {
     const data = await Product.findByPk(req.params.id, {
@@ -29,25 +29,13 @@ router.get('/album/:id', async (req, res, next) => {
   }
 });
 
-// GET api/artist/:id
+// GET api/shop/artist/:id
 router.get('/artist/:id', async (req, res, next) => {
   try {
     const data = await Artist.findByPk(req.params.id, {
       include: Product,
     });
     res.send(data);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
-
-// CART PATHS
-//TODO: write backend routes
-// GET api/order/:id
-router.get('/order/:id', async (req, res, next) => {
-  try {
-    res.send('hi');
   } catch (error) {
     console.error(error);
     next(error);
@@ -84,11 +72,78 @@ router.get('/pastOrders', requireToken, async (req, res, next) => {
   }
 });
 
+// CART PATHS
+// GET api/shop/order/:userId
+router.get('/order/:userId', async (req, res, next) => {
+  try {
+    const data = await Order.findAll({
+      where: { userId: req.params.userId },
+      include: {
+        model: Product,
+        include: Artist,
+      },
+    });
+    res.send(data);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+// POST api/shop/order/:userId
+router.post('/order/:userId', async (req, res, next) => {
+  try {
+    const albumId = req.body.id;
+    const newOrder = await Order.create();
+    newOrder.addPProduct(albumId);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+// PUT api/shop/order
+
+//DELETE api/shop/order
+
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
   try {
-    const { name, price, qty } = req.body;
-    const product = await Product.create({ name, price, qty });
+    const { name, price, qty, releaseDate, label } = req.body;
+    const artistId = Math.floor(Math.random() * (100 - 1) + 1);
+    const product = await Product.create({
+      name,
+      price,
+      qty,
+      releaseDate,
+      label,
+      totalTrack: 0,
+      artistId,
+    });
+    res.send(product);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT api/shop/order
+
+//DELETE api/shop/order
+
+//ADMIN PATHS
+router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
+  try {
+    const { name, price, qty, releaseDate, label } = req.body;
+    const artistId = Math.floor(Math.random() * (100 - 1) + 1);
+    const product = await Product.create({
+      name,
+      price,
+      qty,
+      releaseDate,
+      label,
+      totalTrack: 0,
+      artistId,
+    });
     res.send(product);
   } catch (error) {
     next(error);
@@ -98,8 +153,9 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
 //TODO: GET PRODUCT FROM DB AND UPDATE WITH NEW INFORMATION
 router.put('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
-    console.log('in the put route');
-    res.send('something');
+    const { name, price, qty, releaseDate, label } = req.body;
+    const album = await Product.findByPk(req.params.id);
+    res.send(await album.update({ name, price, qty, releaseDate, label }));
   } catch (error) {
     next(error);
   }

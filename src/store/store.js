@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../reducers/Auth/authReducer';
+import adminReducer from '../reducers/adminReducer';
 import productsReducer from '../reducers/products/productsReducer';
 import singleProductReducer from '../reducers/products/singleProductReducer';
 import singleArtistReducer from '../reducers/artists/singleArtistReducer';
@@ -28,6 +29,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
     reducer: {
         auth: persistedReducer,
+        admin: adminReducer,
         products: productsReducer,
         singleProduct: singleProductReducer,
         singleArtist: singleArtistReducer,

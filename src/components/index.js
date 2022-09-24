@@ -7,8 +7,7 @@ export { default as NewProductReleases } from './products/NewProductReleases';
 export { default as Main } from './mainPages/Main';
 
 export { default as SingleArtist } from './artists/SingleArtist';
-
-export { default as Admin } from './admin/Admin';
+export { default as AdminDashboard } from './admin/AdminDashboard';
 export { default as Signup } from './auth/Signup';
 
 export { default as PastOrders } from './cart/PastOrders';
