@@ -1,28 +1,22 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { useNavigate, NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../reducers/Auth/authReducer";
-import Signup from "../auth/Signup";
 import {
+  MDBBtn,
+  MDBCollapse,
   MDBContainer,
+  MDBIcon,
   MDBNavbar,
   MDBNavbarBrand,
-  MDBNavbarToggler,
-  MDBIcon,
-  MDBNavbarNav,
   MDBNavbarItem,
-  MDBNavbarLink,
-  MDBBtn,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBCollapse,
+  MDBNavbarNav,
+  MDBNavbarToggler,
 } from "mdb-react-ui-kit";
+import React, { useState } from "react";
+import Navbar from "react-bootstrap/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../../reducers/Auth/authReducer";
+import Signup from "../auth/Signup";
+import styles from "./navbar.module.css";
+import vinyl from "./vinyl.svg";
 
 export default function Navigation() {
   const [showBasic, setShowBasic] = useState(true);
@@ -54,7 +48,16 @@ export default function Navigation() {
       {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
       <MDBNavbar expand="lg" dark bgColor="dark" fixed="top">
         <MDBContainer fluid>
-          <MDBNavbarBrand href="#">Grace Shopper</MDBNavbarBrand>
+          <img
+            className={styles.logo}
+            src={vinyl}
+            height="50"
+            alt="Grace Shopper Records Logo"
+            loading="lazy"
+          />
+          <MDBNavbarBrand className={styles.nav_title} href="#">
+            Grace Shopper Records
+          </MDBNavbarBrand>
 
           <MDBNavbarToggler
             aria-controls="navbarSupportedContent"
@@ -67,10 +70,10 @@ export default function Navigation() {
 
           <MDBCollapse navbar show={showBasic}>
             <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
-              <MDBNavbarItem className="nav-header-links">
+              <MDBNavbarItem className={styles.nav_header_links}>
                 <NavLink to="/">Home</NavLink>
               </MDBNavbarItem>
-              <MDBNavbarItem className="nav-header-links">
+              <MDBNavbarItem className={styles.nav_header_links}>
                 <NavLink
                   to="/allProducts"
                   style={({ isActive }) => ({
@@ -80,7 +83,7 @@ export default function Navigation() {
                   Vinyl
                 </NavLink>{" "}
               </MDBNavbarItem>
-              <MDBNavbarItem className="nav-header-links">
+              <MDBNavbarItem className={styles.nav_header_links}>
                 {isAdmin ? (
                   <NavLink
                     to="/admin"
@@ -95,11 +98,16 @@ export default function Navigation() {
                 )}
               </MDBNavbarItem>
             </MDBNavbarNav>
-            <div className="nav-header-container">
+            <div className={styles.nav_header_container}>
               <Navbar.Text className="me-2">
                 Signed in as: <a href="#login">{username || "guest"} </a>
               </Navbar.Text>
-
+              {/* Cart Icon */}
+              <div className={styles.cart_icon}>
+                <a class="text-reset me-3" href="#">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
               {!window.localStorage.getItem("isLoggedIn") && (
                 <MDBBtn
                   color="secondary"

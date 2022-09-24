@@ -1,25 +1,24 @@
-import React from 'react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { authenticate } from '../../reducers/Auth/authReducer';
 import {
-  MDBRow,
-  MDBCol,
-  MDBInput,
-  MDBCheckbox,
   MDBBtn,
+  MDBCheckbox,
+  MDBCol,
   MDBIcon,
+  MDBRow,
   MDBTabs,
+  MDBTabsContent,
   MDBTabsItem,
   MDBTabsLink,
-  MDBTabsContent,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import React from 'react';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { authenticate } from '../../reducers/Auth/authReducer';
 
 //define the Yup validation schema for SIGNUP
 const SignupSchema = Yup.object().shape({

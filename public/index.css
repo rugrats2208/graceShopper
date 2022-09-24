@@ -126,41 +126,6 @@ a.link {
   list-style: none;
 }
 
-/************************ navbar ************************/
-
-.nav-header-links a {
-  color: lightgray;
-  margin: 3px;
-  padding: 3px;
-  text-decoration: none;
-}
-
-.nav-header-links a:hover {
-  color: white;
-  transition: all ease-in-out 0.2s;
-  text-decoration: none;
-}
-
-.nav-header-container {
-  display: flex;
-  flex-direction: row;
-  max-height: 50px;
-  min-width: 300px;
-  justify-content: flex-end;
-}
-
-@media screen and (max-width: 768px) {
-  .nav-header-links {
-    display: flex;
-    flex-direction: column;
-  }
-  .nav-header-container {
-    display: flex;
-    flex-direction: column;
-    max-height: none;
-  }
-}
-
 /************************ shopping cart ************************/
 #cart {
   background-color: white;
