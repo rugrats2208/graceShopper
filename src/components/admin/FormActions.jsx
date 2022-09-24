@@ -4,12 +4,16 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../reducers/products/productsReducer";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addProduct,
+  editProduct,
+} from "../../reducers/products/productsReducer";
+import { setOption } from "../../reducers/adminReducer";
 
 function FormActions(props) {
   const dispatch = useDispatch();
-
+  const { option, selection } = useSelector((state) => state.admin);
   const [form, setForm] = React.useState({
     name: "",
     price: "",
@@ -31,11 +35,11 @@ function FormActions(props) {
         return;
       case "edit":
         setForm({
-          name: props.data.selection.name,
-          price: props.data.selection.price,
-          qty: props.data.selection.qty,
-          releaseDate: props.data.selection.releaseDate,
-          label: props.data.selection.label,
+          name: selection.name,
+          price: selection.price,
+          qty: selection.qty,
+          releaseDate: selection.releaseDate,
+          label: selection.label,
         });
         return;
       default:
@@ -45,7 +49,7 @@ function FormActions(props) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    switch (props.data.option) {
+    switch (option) {
       case "add":
         dispatch(addProduct(form));
         setForm({
@@ -55,9 +59,11 @@ function FormActions(props) {
           releaseDate: "",
           label: "",
         });
-        props.data.setOption("");
+        dispatch(setOption(""));
         return;
       case "edit":
+        console.log(selection);
+        dispatch(editProduct(selection.id));
         console.log("edit submitted");
         return;
       default:
@@ -66,8 +72,8 @@ function FormActions(props) {
   };
 
   React.useEffect(() => {
-    renderForm(props.data.option);
-  }, [props.data.option]);
+    renderForm(option);
+  }, [option]);
 
   return (
     <Form className="adminForm" onSubmit={handleSubmit}>
@@ -135,7 +141,7 @@ function FormActions(props) {
         </Button>
 
         <Button
-          onClick={() => props.data.setOption("")}
+          onClick={() => dispatch(setOption(""))}
           type="reset"
           variant="outline-success"
         >

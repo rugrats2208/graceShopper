@@ -3,6 +3,7 @@ import axios from 'axios';
 //ACTION TYPE
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const ADD_PRODUCT = 'ADD_PRODUCT';
+const EDIT_PRODUCT = 'EDIT_PRODUCT';
 const DEL_PRODUCT = 'DEL_PRODUCT';
 
 //ACTION CREATOR
@@ -34,6 +35,23 @@ export const addProduct = (form) => {
     }
   };
 };
+
+export const editProduct = (id, form) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem('token');
+      const { data } = await axios.get(`/api/shop/album/${id}`);
+      const response = await axios.put(`/api/shop/album/${id}`, form, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch({ type: EDIT_PRODUCT, payload: response.data });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 export const delProduct = (id) => {
   return async (dispatch) => {

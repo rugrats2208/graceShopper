@@ -1,11 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Pagination from "./Pagination";
+import { setSelection } from "../../reducers/adminReducer";
 
-function ProductsTable({ set: { selection, setSelection } }) {
+function ProductsTable() {
   const data = useSelector((state) => state.products);
+  const { option, selection } = useSelector((state) => state.admin);
+  const dispatch = useDispatch();
 
   const [currPage, setCurrPage] = React.useState(1);
   const [itemsPerPage] = React.useState(10);
@@ -34,7 +36,9 @@ function ProductsTable({ set: { selection, setSelection } }) {
                 className={selection.id === product.id ? "selected" : ""}
                 key={product.id}
                 onClick={() => {
-                  setSelection(product);
+                  if (!option) {
+                    dispatch(setSelection(product));
+                  }
                 }}
               >
                 <td>{product.id}</td>

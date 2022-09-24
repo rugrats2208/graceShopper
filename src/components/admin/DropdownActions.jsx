@@ -1,12 +1,17 @@
 import React from "react";
-import Dropdown from "react-bootstrap/Dropdown";
-import FormActions from "./FormActions";
-import { useDispatch } from "react-redux";
-import { delProduct } from "../../reducers/products/productsReducer";
+import { useSelector, useDispatch } from "react-redux";
 
-function DropdownActions({ set: { selection = {}, setSelection } }) {
+//BOOTSTRAP
+import Dropdown from "react-bootstrap/Dropdown";
+//COMPONENTS
+import FormActions from "./FormActions";
+//ACTIONS
+import { delProduct } from "../../reducers/products/productsReducer";
+import { setSelection, setOption } from "../../reducers/adminReducer";
+
+function DropdownActions() {
   const dispatch = useDispatch();
-  const [option, setOption] = React.useState("");
+  const { option, selection } = useSelector((state) => state.admin);
 
   return (
     <>
@@ -16,14 +21,15 @@ function DropdownActions({ set: { selection = {}, setSelection } }) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => setOption("add")} href="#/action-1">
+          <Dropdown.Item
+            onClick={() => dispatch(setOption("add"))}
+            href="#/action-1"
+          >
             Add Item
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (selection) {
-                setOption("edit");
-              }
+              dispatch(setOption("edit"));
             }}
             href="#/action-2"
           >
@@ -33,7 +39,7 @@ function DropdownActions({ set: { selection = {}, setSelection } }) {
             onClick={() => {
               if (selection.id) {
                 dispatch(delProduct(selection.id));
-                setSelection("");
+                dispatch(setSelection(""));
               }
             }}
             href="#/action-3"
