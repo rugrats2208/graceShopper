@@ -7,10 +7,10 @@ const getUsers = require('./getUsers');
 
 //SYNC AND SEED THE DATABASE
 //seed users->albums->orders. Give some albums to orders then give those orders to users
-(async () => {
+const seed = async () => {
     try {
         //WITH FORCE TRUE ENABLED, THE DATABASE WILL DROP THE TABLE BEFORE CREATING A NEW ONE
-        console.log('Started Seeding...');
+        console.log('Seeding started...');
         await conn.sync({ force: true });
 
         //LOADING USERS
@@ -77,4 +77,25 @@ const getUsers = require('./getUsers');
     } catch (err) {
         console.log(err);
     }
-})();
+}
+
+
+const runSeed = async () => {
+    console.log('Start seeding...');
+    try {
+        await seed();
+    } catch (error) {
+        console.error(error);
+        process.exitCode = 1;
+    } finally {
+        console.log('Closing db connection.');
+        await conn.close();
+        console.log('Db connection closed');
+    }
+}
+
+if (module === require.main) {
+    runSeed();
+}
+
+module.exports = seed;
