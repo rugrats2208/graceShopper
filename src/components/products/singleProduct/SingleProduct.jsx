@@ -40,7 +40,7 @@ function SingleProduct() {
         <img src={product.img} height="500px" width="500px" />
       </div>
       <div className="single-product-info">
-        <h1>{product.name}</h1>
+        <h3>{product.name}</h3>
         <Link to={`/singleArtist/${artist.id}`}>
           <h3>{artist.name}</h3>
         </Link>
