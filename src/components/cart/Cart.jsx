@@ -5,9 +5,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrders } from '../../reducers/orders/ordersReducer';
-import { getSingleArtist } from '../../reducers/artists/singleArtistReducer';
-import { getSingleProduct } from '../../reducers/products/singleProductReducer';
+import { getOrders } from '../../reducers/';
 
 export default function Cart() {
     const [isOpen, setIsOpen] = useState(false);
