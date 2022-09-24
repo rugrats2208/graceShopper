@@ -11,7 +11,7 @@ import {
 } from "../../reducers/products/productsReducer";
 import { setOption } from "../../reducers/adminReducer";
 
-function FormActions(props) {
+function FormActions() {
   const dispatch = useDispatch();
   const { option, selection } = useSelector((state) => state.admin);
   const [form, setForm] = React.useState({
@@ -34,13 +34,15 @@ function FormActions(props) {
         });
         return;
       case "edit":
-        setForm({
-          name: selection.name,
-          price: selection.price,
-          qty: selection.qty,
-          releaseDate: selection.releaseDate,
-          label: selection.label,
-        });
+        if (selection) {
+          setForm({
+            name: selection.name,
+            price: selection.price,
+            qty: selection.qty,
+            releaseDate: selection.releaseDate,
+            label: selection.label,
+          });
+        }
         return;
       default:
         return;
@@ -62,9 +64,15 @@ function FormActions(props) {
         dispatch(setOption(""));
         return;
       case "edit":
-        console.log(selection);
-        dispatch(editProduct(selection.id));
-        console.log("edit submitted");
+        dispatch(editProduct(selection.id, form));
+        setForm({
+          name: "",
+          price: "",
+          qty: "",
+          releaseDate: "",
+          label: "",
+        });
+        dispatch(setOption(""));
         return;
       default:
         return;

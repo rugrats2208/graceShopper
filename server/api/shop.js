@@ -69,10 +69,9 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
 //TODO: GET PRODUCT FROM DB AND UPDATE WITH NEW INFORMATION
 router.put('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
-    console.log(req.params.id)
-    console.log(req.body)
-    // const album = await Product.findByPk(req.params.id)
-    res.send('something');
+    const { name, price, qty, releaseDate, label } = req.body
+    const album = await Product.findByPk(req.params.id)
+    res.send(await album.update({ name, price, qty, releaseDate, label }));
   } catch (error) {
     next(error);
   }
