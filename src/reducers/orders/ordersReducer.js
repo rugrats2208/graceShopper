@@ -5,7 +5,6 @@ const SET_ORDERS = 'SET_ORDERS';
 const GET_ORDERS = 'GET_ORDERS';
 const ADD_ORDER = 'ADD_ORDER'; //dispatch these through thunks
 const DEL_ORDER = 'DEL_ORDER';
-const SET_PAST_ORDERS = 'SET_PAST_ORDERS';
 
 //ACTION CREATOR
 const setOrders = (orders) => ({
