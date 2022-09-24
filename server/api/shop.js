@@ -5,54 +5,92 @@ const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 // GET api/shop
 //TODO: change price and track length to human readable here
 router.get('/', async (req, res, next) => {
-  try {
-    const data = await Product.findAll({
-      include: Artist,
-    });
-    res.send(data);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
+    try {
+        const data = await Product.findAll({
+            include: Artist,
+        });
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
-// GET api/album/:id
+// GET api/shop/album/:id
 router.get('/album/:id', async (req, res, next) => {
-  try {
-    const data = await Product.findByPk(req.params.id, {
-      include: [Track, Artist],
-    });
-    res.send(data);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
+    try {
+        const data = await Product.findByPk(req.params.id, {
+            include: [Track, Artist],
+        });
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
-// GET api/artist/:id
+// GET api/shop/artist/:id
 router.get('/artist/:id', async (req, res, next) => {
-  try {
-    const data = await Artist.findByPk(req.params.id, {
-      include: Product,
-    });
-    res.send(data);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
+    try {
+        const data = await Artist.findByPk(req.params.id, {
+            include: Product,
+        });
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
 // CART PATHS
-//TODO: write backend routes
-// GET api/order/:id
-router.get('/order/:id', async (req, res, next) => {
+// GET api/shop/order/:userId
+router.get('/order/:userId', async (req, res, next) => {
+    try {
+        const data = await Order.findAll({
+            where: { userId: req.params.userId },
+            include: {
+                model: Product,
+                include: Artist,
+            },
+        });
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+// POST api/shop/order/:userId
+router.post('/order/:userId', async (req, res, next) => {
+    try {
+        const albumId = req.body.id;
+        const newOrder = await Order.create();
+        newOrder.addPProduct(albumId);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+// PUT api/shop/order
+
+//DELETE api/shop/order
+
+//ADMIN PATHS
+router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
   try {
-    res.send('hi');
+    const { name, price, qty, releaseDate, label } = req.body;
+    const artistId = Math.floor(Math.random() * (100 - 1) + 1);
+    const product = await Product.create({ name, price, qty, releaseDate, label, totalTrack: 0, artistId });
+    res.send(product);
   } catch (error) {
-    console.error(error);
     next(error);
   }
 });
+
+// PUT api/shop/order
+
+//DELETE api/shop/order
 
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
@@ -78,13 +116,13 @@ router.put('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
 });
 
 router.delete('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    await product.destroy();
-    res.send(product);
-  } catch (error) {
-    next(error);
-  }
+    try {
+        const product = await Product.findByPk(req.params.id);
+        await product.destroy();
+        res.send(product);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
