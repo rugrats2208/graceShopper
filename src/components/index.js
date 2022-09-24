@@ -11,4 +11,6 @@ export { default as SingleArtist } from './artists/SingleArtist';
 export { default as Admin } from './admin/Admin';
 export { default as Signup } from './auth/Signup';
 
+export { default as PastOrders } from './cart/PastOrders';
+
 export { default as Cart } from './cart/Cart';

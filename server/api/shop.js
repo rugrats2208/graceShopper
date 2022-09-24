@@ -54,20 +54,30 @@ router.get('/order/:id', async (req, res, next) => {
   }
 });
 
-router.get('/pastOrders/:id', async (req, res, next) => {
+//keeping this route here for the time being to reference
+router.get('/pastOrders', requireToken, async (req, res, next) => {
   try {
-    //getting the user instance with the previous orders attached
-    let userWithPastOrders = await User.findByPk(req.params.id, {
+    //getting user with their past orders
+    const userWithPastOrders = await User.findByPk(req.user.id, {
       include: {
         model: Order,
-        where: {
-          complete: true,
-        },
       },
     });
-    //extracting the orders object from the user instance and returning just that
-    let pastOrders = userWithPastOrders.orders;
-    res.send(pastOrders);
+    //extracting array of user's past orders
+    const pastOrders = userWithPastOrders.orders;
+    const ordersWithProducts = [];
+    //looping through the array of orders
+    for (let i = 0; i < pastOrders.length; i++) {
+      //using id of current order in array to query db to include all the products in the order
+      const singleOrderWithProducts = await Order.findByPk(pastOrders[i].id, {
+        include: {
+          model: Product,
+        },
+      });
+      ordersWithProducts.push(singleOrderWithProducts);
+    }
+    //sends an array of all the users past orders with the products eager loaded for each order
+    res.send(ordersWithProducts);
   } catch (error) {
     console.error(error);
     next(error);

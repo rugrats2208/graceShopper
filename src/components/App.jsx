@@ -17,6 +17,7 @@ import {
   SingleArtist,
   Signup,
   Cart,
+  PastOrders,
 } from './index';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route index element={<Main />} />
         <Route path={'/signup'} element={<Signup />} />
+        <Route path={'/pastOrders'} element={<PastOrders />} />
         <Route path={'/allProducts'} element={<AllProducts />} />
         <Route path={'/singleProduct/:id'} element={<SingleProduct />} />
         <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
