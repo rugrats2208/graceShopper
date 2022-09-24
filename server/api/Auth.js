@@ -10,6 +10,9 @@ require('dotenv').config();
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
+      // where: {
+      //   isAdmin: false
+      // },
       attributes: [
         'id',
         'username',

@@ -3,6 +3,7 @@ import axios from 'axios';
 //ACTION TYPE
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const ADD_PRODUCT = 'ADD_PRODUCT';
+const EDIT_PRODUCT = 'EDIT_PRODUCT';
 const DEL_PRODUCT = 'DEL_PRODUCT';
 
 //ACTION CREATOR
@@ -35,6 +36,23 @@ export const addProduct = (form) => {
   };
 };
 
+export const editProduct = (id, form) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem('token');
+      const { data } = await axios.get(`/api/shop/album/${id}`);
+      const req = await axios.put(`/api/shop/albums/${data.id}`, form, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch({ type: EDIT_PRODUCT, payload: req.data });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export const delProduct = (id) => {
   return async (dispatch) => {
     try {
@@ -53,13 +71,16 @@ export const delProduct = (id) => {
 
 const initialState = [];
 
-//reducer
+//REDUCER
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return action.products;
     case ADD_PRODUCT:
-      return [...state, action.payload];
+      return [action.payload, ...state];
+    case EDIT_PRODUCT:
+      let prevState = state.filter(product => product.id !== action.payload.id);
+      return [action.payload, ...prevState]
     case DEL_PRODUCT:
       return state.filter((product) => product.id !== action.payload);
     default:

@@ -57,8 +57,9 @@ router.get('/order/:id', async (req, res, next) => {
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
   try {
-    const { name, price, qty } = req.body;
-    const product = await Product.create({ name, price, qty });
+    const { name, price, qty, releaseDate, label } = req.body;
+    const artistId = Math.floor(Math.random() * (100 - 1) + 1);
+    const product = await Product.create({ name, price, qty, releaseDate, label, totalTrack: 0, artistId });
     res.send(product);
   } catch (error) {
     next(error);
@@ -68,8 +69,9 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
 //TODO: GET PRODUCT FROM DB AND UPDATE WITH NEW INFORMATION
 router.put('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
-    console.log('in the put route');
-    res.send('something');
+    const { name, price, qty, releaseDate, label } = req.body
+    const album = await Product.findByPk(req.params.id)
+    res.send(await album.update({ name, price, qty, releaseDate, label }));
   } catch (error) {
     next(error);
   }

@@ -8,15 +8,15 @@ import {
   MDBNavbarItem,
   MDBNavbarNav,
   MDBNavbarToggler,
-} from 'mdb-react-ui-kit';
-import React, { useState } from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { logout } from '../../reducers/Auth/authReducer';
-import Signup from '../auth/Signup';
-import styles from './navbar.module.css';
-import vinyl from './vinyl.svg';
+} from "mdb-react-ui-kit";
+import React, { useState } from "react";
+import Navbar from "react-bootstrap/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../../reducers/Auth/authReducer";
+import Signup from "../auth/Signup";
+import styles from "./navbar.module.css";
+import vinyl from "./vinyl.svg";
 
 export default function Navigation() {
   const [showBasic, setShowBasic] = useState(true);
@@ -34,13 +34,13 @@ export default function Navigation() {
   //login  handler
   function handleLogin(e) {
     e.preventDefault();
-    navigate('/signup');
+    navigate("/signup");
   }
   //logout  handler
   function handleLogout(e) {
     e.preventDefault();
     dispatch(logout());
-    navigate('/');
+    navigate("/");
   }
 
   return (
@@ -77,38 +77,38 @@ export default function Navigation() {
                 <NavLink
                   to="/allProducts"
                   style={({ isActive }) => ({
-                    fontWeight: isActive ? 'bold' : 'normal',
+                    fontWeight: isActive ? "bold" : "normal",
                   })}
                 >
                   Vinyl
-                </NavLink>{' '}
+                </NavLink>{" "}
               </MDBNavbarItem>
               <MDBNavbarItem className={styles.nav_header_links}>
                 {isAdmin ? (
                   <NavLink
                     to="/admin"
                     style={({ isActive }) => ({
-                      fontWeight: isActive ? 'bold' : 'normal',
+                      fontWeight: isActive ? "bold" : "normal",
                     })}
                   >
                     Admin
                   </NavLink>
                 ) : (
-                  ''
+                  ""
                 )}
               </MDBNavbarItem>
             </MDBNavbarNav>
             <div className={styles.nav_header_container}>
               <Navbar.Text className="me-2">
-                Signed in as: <a href="#login">{username || 'guest'} </a>
+                Signed in as: <a href="#login">{username || "guest"} </a>
               </Navbar.Text>
               {/* Cart Icon */}
               <div className={styles.cart_icon}>
-                <a class="text-reset me-3" href="#">
-                  <i class="fas fa-shopping-cart"></i>
+                <a className="text-reset me-3" href="#">
+                  <i className="fas fa-shopping-cart"></i>
                 </a>
               </div>
-              {!window.localStorage.getItem('isLoggedIn') && (
+              {!window.localStorage.getItem("isLoggedIn") && (
                 <MDBBtn
                   color="secondary"
                   variant="primary"
@@ -117,7 +117,7 @@ export default function Navigation() {
                   Sign In
                 </MDBBtn>
               )}
-              {window.localStorage.getItem('isLoggedIn') && (
+              {window.localStorage.getItem("isLoggedIn") && (
                 <MDBBtn color="secondary" onClick={handleLogout}>
                   Log Out
                 </MDBBtn>
