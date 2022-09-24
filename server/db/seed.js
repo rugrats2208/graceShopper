@@ -53,8 +53,8 @@ const seed = async () => {
                     artistId: art.id,
                 });
                 //create the tracks and give it the product ID
-                album.tracks.items.map(track => {
-                    Track.create({
+                album.tracks.items.map(async (track) => {
+                    await Track.create({
                         name: track.name,
                         spotifyId: track.id,
                         length: track.duration_ms,
@@ -69,8 +69,8 @@ const seed = async () => {
         //LOAD ORDERS
         for (let i = 0; i < 10; i++) {
             const order = await Order.create({ complete: i % 4 === 0 });
-            order.addProducts(products.slice(i, i + 4));
-            users[Math.floor(i / 4)].addOrder(order);
+            await order.addProducts(products.slice(i, i + 4));
+            await users[Math.floor(i / 4)].addOrder(order);
         }
 
         console.log('Seeding successful!');
