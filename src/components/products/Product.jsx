@@ -8,16 +8,14 @@ function Product(props) {
   return (
     <div className="product">
       <Link className="link" to={`/singleProduct/${product.id}`}>
+        <img src={product.img} height="300px" width="300px"></img>
+      </Link>
+      <Link className="link" to={`/singleProduct/${product.id}`}>
         <h5>{product.name}</h5>
       </Link>
       <Link className="link" to={`/singleArtist/${artist.id}`}>
         <h5>{artist.name}</h5>
       </Link>
-      <div>
-        <Link className="link" to={`/singleProduct/${product.id}`}>
-          <img src={product.img} height="300px" width="300px"></img>
-        </Link>
-      </div>
       <br></br>
       <button type="button" className="product-button btn btn-light">
         Add to Cart
