@@ -175,11 +175,11 @@ a.link {
 
 /************************ admin page ************************/
 
-.dashboard {
+.adminDashboard {
   height: 100vh;
   background: #313131;
 }
-.dashboard > .dropdown {
+.adminDashboard > .dropdown {
   height: 3.5rem;
   display: flex;
   align-items: center;

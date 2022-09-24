@@ -57,7 +57,6 @@ router.get('/order/:id', async (req, res, next) => {
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
   try {
-    console.log(req.body)
     const { name, price, qty, releaseDate, label } = req.body;
     const artistId = Math.floor(Math.random() * (100 - 1) + 1);
     const product = await Product.create({ name, price, qty, releaseDate, label, totalTrack: 0, artistId });
