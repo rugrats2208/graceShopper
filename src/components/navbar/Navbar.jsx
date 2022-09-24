@@ -104,8 +104,8 @@ export default function Navigation() {
               </Navbar.Text>
               {/* Cart Icon */}
               <div className={styles.cart_icon}>
-                <a class="text-reset me-3" href="#">
-                  <i class="fas fa-shopping-cart"></i>
+                <a className="text-reset me-3" href="#">
+                  <i className="fas fa-shopping-cart"></i>
                 </a>
               </div>
               {!window.localStorage.getItem("isLoggedIn") && (
