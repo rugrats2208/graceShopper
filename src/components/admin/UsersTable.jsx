@@ -1,10 +1,8 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import { useSelector, useDispatch } from "react-redux";
-import { getUsers } from "../../reducers/adminReducer";
+import { useSelector } from "react-redux";
 import Pagination from "./Pagination";
 function UsersTable() {
-  const dispatch = useDispatch();
   const users = useSelector((state) => state.admin.users);
 
   const [currPage, setCurrPage] = React.useState(1);
@@ -12,16 +10,7 @@ function UsersTable() {
   const indexOfLastPost = currPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currSlice = users.slice(indexOfFirstPost, indexOfLastPost);
-
   const paginate = (pageNumber) => setCurrPage(pageNumber);
-
-  const renderStudents = () => {
-    console.count(users);
-  };
-
-  React.useEffect(() => {
-    dispatch(getUsers());
-  }, []);
 
   return (
     <>
@@ -39,11 +28,15 @@ function UsersTable() {
         <tbody>
           {currSlice.map((user) => {
             return (
-              <tr key={user.id}>
+              <tr
+                // className={selection.id === product.id ? "selected" : ""}
+                key={user.id}
+              >
                 <td>{user.id}</td>
                 <td>{user.fName}</td>
                 <td>{user.lName}</td>
                 <td>{user.username}</td>
+                {/* <td>{user.password}</td> */}
                 <td>{user.email}</td>
               </tr>
             );

@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 //BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
 //COMPONENTS
-import FormActions from "./FormActions";
+import FormActions from "./ProductForm";
 //ACTIONS
 import { delProduct } from "../../reducers/products/productsReducer";
 import { setSelection, setOption } from "../../reducers/adminReducer";
 
-function DropdownActions() {
+function DropdownActions({ page }) {
   const dispatch = useDispatch();
   const { option, selection } = useSelector((state) => state.admin);
 
@@ -22,7 +22,11 @@ function DropdownActions() {
 
         <Dropdown.Menu>
           <Dropdown.Item
-            onClick={() => dispatch(setOption("add"))}
+            onClick={() => {
+              if (!page) {
+                dispatch(setOption("add"));
+              }
+            }}
             href="#/action-1"
           >
             Add Item

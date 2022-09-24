@@ -11,7 +11,7 @@ import {
 } from "../../reducers/products/productsReducer";
 import { setOption } from "../../reducers/adminReducer";
 
-function FormActions() {
+function ProductForm() {
   const dispatch = useDispatch();
   const { option, selection } = useSelector((state) => state.admin);
   const [form, setForm] = React.useState({
@@ -158,4 +158,4 @@ function FormActions() {
   );
 }
 
-export default FormActions;
+export default ProductForm;
