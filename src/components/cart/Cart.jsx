@@ -63,7 +63,7 @@ export default function Cart() {
                         </Dropdown.Item>
                         <Dropdown.Item
                             as={Link}
-                            to={`/singleArtist/${product.artistId}`}
+                            to={`/singleArtist/${product.artist.id}`}
                         >
                             <strong>Artist:</strong> {product.artist.name}
                         </Dropdown.Item>
