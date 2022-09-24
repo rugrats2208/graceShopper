@@ -14,6 +14,8 @@ function FormActions(props) {
     name: "",
     price: "",
     qty: "",
+    releaseDate: "",
+    label: "",
   });
 
   const renderForm = (sel) => {
@@ -23,6 +25,8 @@ function FormActions(props) {
           name: "",
           price: "",
           qty: "",
+          releaseDate: "",
+          label: "",
         });
         return;
       case "edit":
@@ -30,6 +34,8 @@ function FormActions(props) {
           name: props.data.selection.name,
           price: props.data.selection.price,
           qty: props.data.selection.qty,
+          releaseDate: props.data.selection.releaseDate,
+          label: props.data.selection.label,
         });
         return;
       default:
@@ -46,6 +52,8 @@ function FormActions(props) {
           name: "",
           price: "",
           qty: "",
+          releaseDate: "",
+          label: "",
         });
         props.data.setOption("");
         return;
@@ -56,42 +64,76 @@ function FormActions(props) {
         return;
     }
   };
+
   React.useEffect(() => {
     renderForm(props.data.option);
   }, [props.data.option]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="adminForm" onSubmit={handleSubmit}>
       <Row>
         <Col>
+          <label htmlFor="name">Name</label>
           <Form.Control
             required
             onChange={(evt) => setForm({ ...form, name: evt.target.value })}
-            placeholder="Name"
+            placeholder="Enter Album Name"
             value={form.name}
           />
         </Col>
+      </Row>
+      <Row>
         <Col>
+          <label htmlFor="price">Price</label>
           <Form.Control
             required
             type="number"
             onChange={(evt) => setForm({ ...form, price: evt.target.value })}
-            placeholder="Price"
+            placeholder="Enter Album Price"
             value={form.price}
           />
         </Col>
+      </Row>
+      <Row>
         <Col>
+          <label htmlFor="quantity">Quantity</label>
           <Form.Control
             required
             type="number"
             onChange={(evt) => setForm({ ...form, qty: evt.target.value })}
-            placeholder="Quantity"
+            placeholder="Enter Album Quantity"
             value={form.qty}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <label htmlFor="label">Label</label>
+          <Form.Control
+            required
+            type="text"
+            onChange={(evt) => setForm({ ...form, label: evt.target.value })}
+            placeholder="Enter Album Label"
+            value={form.label}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <label htmlFor="release-date">Release Date</label>
+          <Form.Control
+            required
+            type="date"
+            onChange={(evt) =>
+              setForm({ ...form, releaseDate: evt.target.value })
+            }
+            value={form.releaseDate}
           />
         </Col>
         <Button type="submit" variant="outline-success">
           Submit
         </Button>
+
         <Button
           onClick={() => props.data.setOption("")}
           type="reset"
