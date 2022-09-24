@@ -3,8 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../reducers/products/productsReducer";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ProductsTable from "./admin/ProductsTable";
+
 //COMPONENTS
 import {
   AllProducts,
@@ -12,6 +11,7 @@ import {
   FeaturedProducts,
   NewProductReleases,
   Main,
+  PageNotFound,
   Navigation,
   AdminDashboard,
   SingleArtist,
@@ -39,6 +39,7 @@ function App() {
         <Route path={"/featuredProducts"} element={<FeaturedProducts />} />
         <Route path={"/newProductReleases"} element={<NewProductReleases />} />
         <Route path={"/admin"} element={<AdminDashboard />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   );

@@ -5,6 +5,7 @@ export { default as FeaturedProducts } from './products/FeaturedProducts';
 export { default as NewProductReleases } from './products/NewProductReleases';
 
 export { default as Main } from './mainPages/Main';
+export { default as PageNotFound } from './PageNotFound'
 
 export { default as SingleArtist } from './artists/SingleArtist';
 export { default as AdminDashboard } from './admin/AdminDashboard';
