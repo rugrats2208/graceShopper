@@ -34,15 +34,13 @@ function FormActions() {
         });
         return;
       case "edit":
-        if (selection) {
-          setForm({
-            name: selection.name,
-            price: selection.price,
-            qty: selection.qty,
-            releaseDate: selection.releaseDate,
-            label: selection.label,
-          });
-        }
+        setForm({
+          name: selection.name,
+          price: selection.price,
+          qty: selection.qty,
+          releaseDate: selection.releaseDate,
+          label: selection.label,
+        });
         return;
       default:
         return;

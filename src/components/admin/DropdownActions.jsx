@@ -29,7 +29,9 @@ function DropdownActions() {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              dispatch(setOption("edit"));
+              if (selection.id) {
+                dispatch(setOption("edit"));
+              }
             }}
             href="#/action-2"
           >
