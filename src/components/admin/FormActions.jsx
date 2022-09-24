@@ -4,16 +4,22 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../reducers/products/productsReducer";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addProduct,
+  editProduct,
+} from "../../reducers/products/productsReducer";
+import { setOption } from "../../reducers/adminReducer";
 
-function FormActions(props) {
+function FormActions() {
   const dispatch = useDispatch();
-
+  const { option, selection } = useSelector((state) => state.admin);
   const [form, setForm] = React.useState({
     name: "",
     price: "",
     qty: "",
+    releaseDate: "",
+    label: "",
   });
 
   const renderForm = (sel) => {
@@ -23,13 +29,17 @@ function FormActions(props) {
           name: "",
           price: "",
           qty: "",
+          releaseDate: "",
+          label: "",
         });
         return;
       case "edit":
         setForm({
-          name: props.data.selection.name,
-          price: props.data.selection.price,
-          qty: props.data.selection.qty,
+          name: selection.name,
+          price: selection.price,
+          qty: selection.qty,
+          releaseDate: selection.releaseDate,
+          label: selection.label,
         });
         return;
       default:
@@ -39,61 +49,105 @@ function FormActions(props) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    switch (props.data.option) {
+    switch (option) {
       case "add":
         dispatch(addProduct(form));
         setForm({
           name: "",
           price: "",
           qty: "",
+          releaseDate: "",
+          label: "",
         });
-        props.data.setOption("");
+        dispatch(setOption(""));
         return;
       case "edit":
-        console.log("edit submitted");
+        dispatch(editProduct(selection.id, form));
+        setForm({
+          name: "",
+          price: "",
+          qty: "",
+          releaseDate: "",
+          label: "",
+        });
+        dispatch(setOption(""));
         return;
       default:
         return;
     }
   };
+
   React.useEffect(() => {
-    renderForm(props.data.option);
-  }, [props.data.option]);
+    renderForm(option);
+  }, [option]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="adminForm" onSubmit={handleSubmit}>
       <Row>
         <Col>
+          <label htmlFor="name">Name</label>
           <Form.Control
             required
             onChange={(evt) => setForm({ ...form, name: evt.target.value })}
-            placeholder="Name"
+            placeholder="Enter Album Name"
             value={form.name}
           />
         </Col>
+      </Row>
+      <Row>
         <Col>
+          <label htmlFor="price">Price</label>
           <Form.Control
             required
             type="number"
             onChange={(evt) => setForm({ ...form, price: evt.target.value })}
-            placeholder="Price"
+            placeholder="Enter Album Price"
             value={form.price}
           />
         </Col>
+      </Row>
+      <Row>
         <Col>
+          <label htmlFor="quantity">Quantity</label>
           <Form.Control
             required
             type="number"
             onChange={(evt) => setForm({ ...form, qty: evt.target.value })}
-            placeholder="Quantity"
+            placeholder="Enter Album Quantity"
             value={form.qty}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <label htmlFor="label">Label</label>
+          <Form.Control
+            required
+            type="text"
+            onChange={(evt) => setForm({ ...form, label: evt.target.value })}
+            placeholder="Enter Album Label"
+            value={form.label}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <label htmlFor="release-date">Release Date</label>
+          <Form.Control
+            required
+            type="date"
+            onChange={(evt) =>
+              setForm({ ...form, releaseDate: evt.target.value })
+            }
+            value={form.releaseDate}
           />
         </Col>
         <Button type="submit" variant="outline-success">
           Submit
         </Button>
+
         <Button
-          onClick={() => props.data.setOption("")}
+          onClick={() => dispatch(setOption(""))}
           type="reset"
           variant="outline-success"
         >

@@ -7,7 +7,6 @@ html {
 
 main {
     padding-top: 56px;
-    /* background-color: #f2f2f2; */
 }
 
 body {
@@ -28,8 +27,7 @@ body {
     box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
 }
 
-.product img:hover
-/* button:hover { */ {
+.product img:hover {
     box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
 }
 
@@ -59,10 +57,6 @@ a.link {
 .link {
     width: 300px;
 }
-/* .featured-products {
-}
-.new-products {
-} */
 
 /************************ header for new/featured/all products view ************************/
 .list-title {
@@ -131,12 +125,6 @@ a.link {
 .single-artist li {
     list-style: none;
 }
-/************************ dashboard ************************/
-
-.dashboard {
-    height: 100vh;
-    background: #313131;
-}
 
 /************************ shopping cart ************************/
 #cart {
@@ -152,9 +140,43 @@ a.link {
 
 /************************ admin page ************************/
 
+.adminDashboard {
+    height: 100vh;
+    background: #313131;
+}
+
+.adminDashboard .options {
+    display: flex;
+}
+.adminDashboard .options > * {
+    margin: 8px;
+}
+.adminDashboard > .dropdown {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
 .selected {
     box-sizing: border-box;
     border-bottom: 3px solid #00b74a;
+}
+
+.adminForm {
+    padding: 2rem;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #f9f9f9;
+}
+
+.row > * {
+    margin: 8px;
+}
+input.form-control:focus {
+    outline: solid;
+    outline-color: #00b74a;
+    outline-width: medium;
 }
 
 .pageNumbers {
@@ -174,10 +196,4 @@ a.link {
 }
 .pageNumbers li a.active {
     color: #00b74a;
-}
-
-@media (max-width: 560px) {
-    .admin {
-        margin-top: 1.5rem;
-    }
 }
