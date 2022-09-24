@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getProducts } from "../reducers/products/productsReducer";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ProductsTable from "./admin/ProductsTable";
+import React, { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getProducts } from '../reducers/products/productsReducer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ProductsTable from './admin/ProductsTable';
 //COMPONENTS
 import {
   AllProducts,
@@ -17,7 +17,8 @@ import {
   SingleArtist,
   Signup,
   Cart,
-} from "./index";
+  OrderHistory,
+} from './index';
 
 function App() {
   const dispatch = useDispatch();
@@ -32,13 +33,15 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route index element={<Main />} />
-        <Route path={"/signup"} element={<Signup />} />
-        <Route path={"/allProducts"} element={<AllProducts />} />
-        <Route path={"/singleProduct/:id"} element={<SingleProduct />} />
-        <Route path={"/singleArtist/:id"} element={<SingleArtist />} />
-        <Route path={"/featuredProducts"} element={<FeaturedProducts />} />
-        <Route path={"/newProductReleases"} element={<NewProductReleases />} />
-        <Route path={"/admin"} element={<AdminDashboard />} />
+        <Route path={'/signup'} element={<Signup />} />
+        <Route path={'/orderHistory/:id'} element={<OrderHistory />} />
+        <Route path={'/allProducts'} element={<AllProducts />} />
+        <Route path={'/singleProduct/:id'} element={<SingleProduct />} />
+        <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
+        <Route path={'/featuredProducts'} element={<FeaturedProducts />} />
+        <Route path={'/newProductReleases'} element={<NewProductReleases />} />
+        <Route path={'/admin'} element={<AdminDashboard />} />
+        <Route path={'*'} element={<h1>Page Not Found!</h1>} />
       </Routes>
     </div>
   );
