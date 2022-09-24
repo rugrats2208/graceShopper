@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { getProducts } from "../reducers/products/productsReducer";
 import { ToastContainer } from "react-toastify";
 
+import PrivateRoutes from "./admin/PrivateRoutes";
+
 //COMPONENTS
 import {
   AllProducts,
@@ -40,8 +42,10 @@ function App() {
         <Route path={"/singleArtist/:id"} element={<SingleArtist />} />
         <Route path={"/featuredProducts"} element={<FeaturedProducts />} />
         <Route path={"/newProductReleases"} element={<NewProductReleases />} />
-        <Route path={"/admin"} element={<AdminDashboard />} />
-        <Route path={"*"} element={<h1>Page Not Found!</h1>} />
+        <Route element={<PrivateRoutes />}>
+          <Route path={"/admin"} element={<AdminDashboard />} />
+        </Route>
+        <Route path={"*"} element={<PageNotFound />} />
       </Routes>
     </div>
   );
