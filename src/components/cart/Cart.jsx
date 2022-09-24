@@ -19,6 +19,7 @@ const dummyProduct = {
 export default function Cart() {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
+    const userId = useSelector(state => state.auth.id);
     const activeOrder = useSelector(state =>
         state.orders.filter(order => !order.complete)
     ); //return only the active order
@@ -26,8 +27,8 @@ export default function Cart() {
 
     //set use effeft here to set orders
     useEffect(() => {
-        dispatch(getOrders(1));
-    }, []);
+        dispatch(getOrders(userId));
+    }, [userId]);
 
     return (
         <Dropdown
