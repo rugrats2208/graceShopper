@@ -13,6 +13,7 @@ export default function Cart() {
     const [orderQuantity, setOrderQuantity] = useState(1);
     const dispatch = useDispatch();
     const userId = useSelector(state => state.auth.id);
+
     //return only the active order products or empty array
     const { products } = useSelector(state =>
         state.orders.find(order => !order.complete)
@@ -23,11 +24,13 @@ export default function Cart() {
         dispatch(getOrders(userId));
         setTotal(products.reduce((agg, album) => agg + album.price, 0));
     }, [userId]);
+
     //set total price when products changes
     useEffect(() => {
         setTotal(products.reduce((agg, album) => agg + album.price, 0));
     }, [products]);
 
+    //set quantity when button group is clicked
     function handleQty(num, max) {
         const newQty = max ? orderQuantity + num : num;
         if (newQty > max || newQty < 1) return;
