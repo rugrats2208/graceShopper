@@ -17,7 +17,6 @@ export const getOrders = userId => {
     return async dispatch => {
         try {
             const { data } = await axios.get(`/api/shop/orders/${userId}`);
-            console.log(data);
             dispatch(setOrders(data));
         } catch (error) {
             console.error(error);

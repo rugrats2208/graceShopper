@@ -67,9 +67,14 @@ const getUsers = require('./getUsers');
         );
 
         //LOAD ORDERS
-        for (let i = 0; i < 10; i++) {
-            const order = await Order.create({ complete: !i % 4 === 0 });
-            order.addProducts(products.slice(i, i + 4));
+        for (let i = 0; i < 100; i++) {
+            //every 4th order is active
+            const order = await Order.create({ complete: !(i % 4 === 0) });
+            //give each order between 1 and 5 albums
+            order.addProducts(
+                products.slice(i, i + Math.ceil(Math.random() * 4))
+            );
+            //give each user 4 orders
             users[Math.floor(i / 4)].addOrder(order);
         }
 
