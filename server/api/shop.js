@@ -73,8 +73,8 @@ router.get('/pastOrders', requireToken, async (req, res, next) => {
 });
 
 // CART PATHS
-// GET api/shop/order/:userId
-router.get('/order/:userId', async (req, res, next) => {
+// GET api/shop/orders/:userId
+router.get('/orders/:userId', async (req, res, next) => {
   try {
     const data = await Order.findAll({
       where: { userId: req.params.userId },
@@ -90,12 +90,12 @@ router.get('/order/:userId', async (req, res, next) => {
   }
 });
 
-// POST api/shop/order/:userId
-router.post('/order/:userId', async (req, res, next) => {
+// POST api/shop/orders/:userId
+router.post('/orders/:userId', async (req, res, next) => {
   try {
     const albumId = req.body.id;
     const newOrder = await Order.create();
-    newOrder.addPProduct(albumId);
+    newOrder.addProduct(albumId);
   } catch (error) {
     console.error(error);
     next(error);
