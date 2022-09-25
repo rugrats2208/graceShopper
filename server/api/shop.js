@@ -77,7 +77,7 @@ router.get('/pastOrders', requireToken, async (req, res, next) => {
 
 // CART PATHS
 // GET api/shop/orders/:userId
-router.get('/orders/:userId', async (req, res, next) => {
+router.get('/orders/:userId', requireToken, async (req, res, next) => {
     try {
         const data = await Order.findAll({
             where: { userId: req.params.userId },
@@ -141,7 +141,7 @@ router.put('/orders/:prodId', requireToken, async (req, res, next) => {
             },
         });
         const product = await Product.findByPk(req.params.prodId);
-        await product.createLineItem({ orderId: order.id });
+        res.send(await product.createLineItem({ orderId: order.id }));
     } catch (error) {
         console.error(error);
         next(error);

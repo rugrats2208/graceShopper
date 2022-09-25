@@ -1,4 +1,5 @@
 import axios from 'axios';
+const TOKEN = 'token';
 
 //ACTION TYPE
 const SET_ORDER = 'SET_ORDER';
@@ -10,6 +11,11 @@ const CHANGE_QTY = 'CHANGE_QTY';
 const setOrders = orders => ({
     type: SET_ORDER,
     orders,
+});
+
+const addItem = item => ({
+    type: ADD_ORDER_ITEM,
+    item,
 });
 
 const deleteItem = itemId => ({
@@ -27,8 +33,34 @@ export const changeQty = (itemId, num) => ({
 export const getOrders = userId => {
     return async dispatch => {
         try {
-            const { data } = await axios.get(`/api/shop/orders/${userId}`);
+            const token = window.localStorage.getItem(TOKEN);
+
+            const { data } = await axios.get(`/api/shop/orders/${userId}`, {
+                headers: {
+                    authorization: token,
+                },
+            });
             dispatch(setOrders(data));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+};
+
+export const addOrderItem = productId => {
+    return async dispatch => {
+        try {
+            const token = window.localStorage.getItem(TOKEN);
+
+            //TODO: figure out why this has a bad auth
+            console.log(token);
+            const { data } = await axios.put(`/api/shop/orders/${productId}`, {
+                headers: {
+                    authorization: token,
+                },
+            });
+            console.log(data);
+            dispatch(addItem(data));
         } catch (error) {
             console.error(error);
         }
@@ -38,7 +70,12 @@ export const getOrders = userId => {
 export const deleteOrderItem = itemId => {
     return async dispatch => {
         try {
-            await axios.delete(`/api/shop/${itemId}`);
+            const token = window.localStorage.getItem(TOKEN);
+            await axios.delete(`/api/shop/orders/${itemId}`, {
+                headers: {
+                    authorization: token,
+                },
+            });
             dispatch(deleteItem(itemId));
         } catch (error) {
             console.error(error);
@@ -55,7 +92,14 @@ export default (state = initialState, action) => {
         case SET_ORDER:
             return [...action.orders];
         case ADD_ORDER_ITEM:
-        // return [...state, ...action.order]
+            return state.map(order =>
+                order.complete
+                    ? order
+                    : {
+                          ...order,
+                          lineItems: [...order.lineItems, action.item],
+                      }
+            );
         case DEL_ORDER_ITEM:
             return state.map(order =>
                 order.complete
