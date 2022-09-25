@@ -1,5 +1,5 @@
 //index for action generators
-import { getOrders } from './orders/ordersReducer';
+import { getOrders, deleteOrderItem } from './orders/ordersReducer';
 import { me, authenticate, logout } from './Auth/authReducer';
 import { getSingleProduct } from './products/singleProductReducer';
 import { getSingleArtist } from './artists/singleArtistReducer';
@@ -13,6 +13,7 @@ import {
 
 export {
     getOrders,
+    deleteOrderItem,
     me,
     authenticate,
     logout,

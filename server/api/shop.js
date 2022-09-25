@@ -79,15 +79,15 @@ router.get('/pastOrders', requireToken, async (req, res, next) => {
 // GET api/shop/orders/:userId
 router.get('/orders/:userId', async (req, res, next) => {
     try {
-        const data = await Order.findAll({
-            where: { userId: req.params.userId },
+        const data = await Order.findOne({
+            where: { userId: req.params.userId, complete: false },
             include: {
                 model: Product,
                 include: {
                     model: Artist,
                     attributes: ['id', 'name'],
                 },
-                attributes: ['id', 'name', 'qty', 'price'],
+                attributes: ['id', 'name', 'stock', 'price'],
             },
             attributes: ['id', 'complete'],
         });

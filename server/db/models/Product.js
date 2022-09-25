@@ -10,7 +10,7 @@ const Product = conn.define('product', {
         type: Sequelize.INTEGER,
         notNull: true,
     },
-    qty: {
+    stock: {
         type: Sequelize.INTEGER,
         defaultValue: 5,
     },
