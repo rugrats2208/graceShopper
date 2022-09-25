@@ -2,7 +2,6 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
-    /* background: linear-gradient(#289d3d, #ceefd3); */
 }
 
 main {
@@ -17,7 +16,6 @@ body {
 
 .product {
     margin: 25px;
-    /* background-color: green; */
     width: fit-content;
     display: flex;
     flex-direction: column;
@@ -34,10 +32,6 @@ body {
     box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
     width: 200px;
 }
-
-/* .product-button:hover {
-    box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.9);
-} */
 
 .product h1,
 .product h3 {
@@ -74,7 +68,6 @@ a.link {
 
 /************************ new products component ************************/
 .new-products {
-    /* background: linear-gradient(#289d3d, #ceefd3); */
     padding-top: 5px;
 }
 .new-products-list {
@@ -85,7 +78,6 @@ a.link {
 
 /************************ all products component ************************/
 .all-products {
-    /* background: linear-gradient(#289d3d, #ceefd3); */
     padding-top: 5px;
 }
 .all-products-list {
@@ -101,7 +93,6 @@ a.link {
 
 .single-product {
     color: black;
-    /* background: linear-gradient(#289d3d, #ceefd3); */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,7 +104,6 @@ a.link {
 
 /************************ single artist component ************************/
 .single-artist {
-    /* background: linear-gradient(#289d3d, #ceefd3); */
     display: flex;
     flex-direction: column;
     align-items: center;
