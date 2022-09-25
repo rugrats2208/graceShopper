@@ -13,9 +13,6 @@ const LineItem = require('./models/LineItem'); //line item is the product and th
 User.hasMany(Order);
 Order.belongsTo(User);
 
-// Product.belongsToMany(Order, { through: 'orderProduct' });
-// Order.belongsToMany(Product, { through: 'orderProduct' });
-
 Order.hasMany(LineItem);
 LineItem.belongsTo(Order);
 

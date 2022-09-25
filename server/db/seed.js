@@ -71,20 +71,32 @@ const seed = async () => {
             //every 4th order is active
             const order = await Order.create({ complete: !(i % 4 === 0) });
 
-            //give each order between 1 and 5 random albums
-            const numItems = Math.ceil(Math.random() * 4);
-            for (let j = 0; j < numItems; j++) {
+            //get available products
+            const available = products.filter(prod =>
+                order.complete ? prod : prod.stock
+            );
+
+            //give each order between 0 and 4 random albums
+            for (let j = 0; j < Math.ceil(Math.random() * 4); j++) {
                 //grab a random product, make a lineItem
-                await products[
-                    Math.floor(Math.random() * products.length)
-                ].createLineItem({
-                    qty: Math.ceil(Math.random() * 5),
-                    orderId: order.id,
-                });
+                const curProd =
+                    available[Math.floor(Math.random() * available.length)];
+
+                // ensure only new lineItems are added in seed
+                const isNew = (await order.getLineItems()).every(
+                    item => item.productId !== curProd.id
+                );
+                if (isNew)
+                    await curProd.createLineItem({
+                        qty: Math.ceil(Math.random() * curProd.stock),
+                        orderId: order.id,
+                    });
             }
 
-            //give 25 users 4 orders
+            //give 25 users 4 orders, rest an empty cart
             await users[Math.floor(i / 4)].addOrder(order);
+
+            if (i >= 25) await (await Order.create()).setUser(users[i]);
         }
 
         console.log('Seeding successful!');
