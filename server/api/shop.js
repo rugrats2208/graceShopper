@@ -138,7 +138,19 @@ router.put('/orders/:prodId', requireToken, async (req, res, next) => {
       },
     });
     const product = await Product.findByPk(req.params.prodId);
-    res.send(await product.createLineItem({ orderId: order.id }));
+    const lineItem = await product.createLineItem({ orderId: order.id });
+    const newItem = await LineItem.findByPk(lineItem.id, {
+      attributes: ['id', 'qty'],
+      include: {
+        model: Product,
+        attributes: ['id', 'name', 'stock', 'price', 'img'],
+        include: {
+          model: Artist,
+          attributes: ['id', 'name'],
+        },
+      },
+    });
+    res.send(newItem);
   } catch (error) {
     console.error(error);
     next(error);
@@ -149,6 +161,7 @@ router.put('/orders/:prodId', requireToken, async (req, res, next) => {
 router.delete('/orders/:lineId', requireToken, async (req, res, next) => {
   try {
     await LineItem.destroy({ where: { id: req.params.lineId } });
+    res.sendStatus(200);
   } catch (error) {
     console.error(error);
     next(error);

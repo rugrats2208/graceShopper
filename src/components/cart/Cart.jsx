@@ -127,6 +127,8 @@ export default function Cart() {
                                         )
                                     )
                                         dispatch(deleteOrderItem(item.id));
+                                    console.log('why');
+                                    // TODO:delete this
                                 }}
                             >
                                 Delete
