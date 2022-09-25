@@ -53,7 +53,7 @@ const seed = async () => {
                     artistId: art.id,
                 });
                 //create the tracks and give it the product ID
-                album.tracks.items.map(async (track) => {
+                album.tracks.items.map(async track => {
                     await Track.create({
                         name: track.name,
                         spotifyId: track.id,
@@ -71,19 +71,18 @@ const seed = async () => {
             //every 4th order is active
             const order = await Order.create({ complete: !(i % 4 === 0) });
             //give each order between 1 and 5 albums
-            order.addProducts(
+            await order.addProducts(
                 products.slice(i, i + Math.ceil(Math.random() * 4))
             );
             //give each user 4 orders
-            users[Math.floor(i / 4)].addOrder(order);
+            await users[Math.floor(i / 4)].addOrder(order);
         }
 
         console.log('Seeding successful!');
     } catch (err) {
         console.log(err);
     }
-}
-
+};
 
 const runSeed = async () => {
     console.log('Start seeding...');
@@ -97,7 +96,7 @@ const runSeed = async () => {
         await conn.close();
         console.log('Db connection closed');
     }
-}
+};
 
 if (module === require.main) {
     runSeed();
