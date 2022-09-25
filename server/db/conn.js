@@ -3,8 +3,8 @@ const Sequelize = require('sequelize');
 const config = {
   "logging": false
 };
-//https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
 
+//https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
 if (process.env.DATABASE_URL) {
   config.dialectOptions = {
     ssl: {

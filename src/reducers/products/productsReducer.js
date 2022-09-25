@@ -24,11 +24,13 @@ export const getProducts = () => {
   };
 };
 
+
+//ADMIN
 export const addProduct = (form) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
-      const { data } = await axios.post(`/api/shop/albums`, form, {
+      const { data } = await axios.post(`/api/admin/albums`, form, {
         headers: {
           authorization: token,
         },
@@ -45,7 +47,7 @@ export const editProduct = (id, form) => {
     try {
       const token = window.localStorage.getItem('token');
       const { data } = await axios.get(`/api/shop/album/${id}`);
-      const req = await axios.put(`/api/shop/albums/${data.id}`, form, {
+      const req = await axios.put(`/api/admin/albums/${data.id}`, form, {
         headers: {
           authorization: token,
         },
@@ -61,12 +63,13 @@ export const delProduct = (id) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
-      const { data } = await axios.delete(`/api/shop/albums/${id}`, {
+      const { data } = await axios.get(`/api/shop/album/${id}`);
+      const req = await axios.delete(`/api/admin/albums/${data.id}`, {
         headers: {
           authorization: token,
         },
       });
-      dispatch({ type: DEL_PRODUCT, payload: data.id });
+      dispatch({ type: DEL_PRODUCT, payload: req.data.id });
     } catch (error) {
       console.log(error);
     }
