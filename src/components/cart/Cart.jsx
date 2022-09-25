@@ -55,7 +55,7 @@ export default function Cart() {
             <Dropdown.Menu className="cart-dropdown">
                 {lineItems.map(item => {
                     const numDropdowns = [];
-                    for (let i = 1; i < item.product.stock; i++) {
+                    for (let i = 1; i <= item.product.stock; i++) {
                         numDropdowns.push(
                             <Dropdown.Item
                                 key={item.id + i}
