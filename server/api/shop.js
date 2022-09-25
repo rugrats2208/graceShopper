@@ -87,7 +87,7 @@ router.get('/orders/:userId', requireToken, async (req, res, next) => {
                 attributes: ['id', 'qty'],
                 include: {
                     model: Product,
-                    attributes: ['id', 'name', 'stock', 'price'],
+                    attributes: ['id', 'name', 'stock', 'price', 'img'],
                     include: {
                         model: Artist,
                         attributes: ['id', 'name'],
@@ -146,7 +146,7 @@ router.put('/orders/:prodId', requireToken, async (req, res, next) => {
             attributes: ['id', 'qty'],
             include: {
                 model: Product,
-                attributes: ['id', 'name', 'stock', 'price'],
+                attributes: ['id', 'name', 'stock', 'price', 'img'],
                 include: {
                     model: Artist,
                     attributes: ['id', 'name'],
