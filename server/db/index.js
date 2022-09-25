@@ -13,11 +13,11 @@ const LineItem = require('./models/LineItem'); //line item is the product and th
 User.hasMany(Order);
 Order.belongsTo(User);
 
-Product.belongsToMany(Order, { through: 'orderProduct' });
-Order.belongsToMany(Product, { through: 'orderProduct' });
+// Product.belongsToMany(Order, { through: 'orderProduct' });
+// Order.belongsToMany(Product, { through: 'orderProduct' });
 
-LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
+LineItem.belongsTo(Order);
 
 Product.hasMany(LineItem);
 LineItem.belongsTo(Product);
@@ -39,4 +39,5 @@ module.exports = {
     Product,
     Track,
     Artist,
+    LineItem,
 };

@@ -4,6 +4,7 @@ const { Sequelize } = conn;
 const LineItem = conn.define('lineItem', {
     qty: {
         type: Sequelize.INTEGER,
+        defaultValue: 1,
     },
 });
 
