@@ -103,8 +103,27 @@ router.get('/orders/:userId', async (req, res, next) => {
 });
 
 // POST api/shop/orders/:userId
-router.post('/orders/', requireToken, async (req, res, next) => {
+// router.post('/orders/', requireToken, async (req, res, next) => {
+//     try {
+//         await Order.create({ userId: req.user.id });
+//     } catch (error) {
+//         console.error(error);
+//         next(error);
+//     }
+// });
+
+// PUT api/shop/orders
+router.put('/orders', requireToken, async (req, res, next) => {
     try {
+        await Order.update(
+            { complete: true },
+            {
+                where: {
+                    complete: false,
+                    userId: req.user.id,
+                },
+            }
+        );
         await Order.create({ userId: req.user.id });
     } catch (error) {
         console.error(error);
@@ -112,7 +131,7 @@ router.post('/orders/', requireToken, async (req, res, next) => {
     }
 });
 
-// PUT api/shop/order
+// PUT api/shop/orders/:prodId
 router.put('/orders/:prodId', requireToken, async (req, res, next) => {
     try {
         const order = await Order.findOne({
