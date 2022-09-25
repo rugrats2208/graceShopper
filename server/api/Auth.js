@@ -66,6 +66,43 @@ router.get('/me', requireToken, async (req, res, next) => {
   }
 });
 
+//grabs the info of user based on params, no token needed
+router.get('/userInfo/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.send(user);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+//user info page, gives a logged in user their profile information
+router.get('/userInfo', requireToken, async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.user.id);
+    const { username, email, fName, lName } = req.user;
+    const userInfo = { username, password, email, fName, lName };
+    res.send(userInfo);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+//allows a user to change their profile info (not all information)
+router.put('/loggedInEdit', requireToken, async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.user.id);
+    const { username, password, email, fName, lName } = req.body;
+    await user.update({ username, password, email, fName, lName });
+    res.send(user);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 // matches POST requests to /api/auth/
 router.post('/', function (req, res, next) {
   /* etc */
