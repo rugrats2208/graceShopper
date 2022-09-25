@@ -7,7 +7,6 @@ const Product = require('./models/Product');
 const Track = require('./models/Track');
 const Artist = require('./models/Artist');
 const Tag = require('./models/Tag'); //TODO: seed and implement tags...genres?
-//may not need line item as we can use front end to 'put' update quantity of Product after checkout
 const LineItem = require('./models/LineItem'); //line item is the product and the amount of that product to buy
 
 //ASSOCIATIONS
@@ -20,8 +19,8 @@ Order.belongsToMany(Product, { through: 'orderProduct' });
 LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
 
-LineItem.belongsToMany(Product, { through: 'lineProduct' });
-Product.belongsToMany(LineItem, { through: 'lineProduct' });
+Product.hasMany(LineItem);
+LineItem.belongsTo(Product);
 
 Tag.belongsToMany(Product, { through: 'productTag' });
 Product.belongsToMany(Tag, { through: 'productTag' });

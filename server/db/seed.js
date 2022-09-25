@@ -43,7 +43,7 @@ const seed = async () => {
                 let prod = await Product.create({
                     name: album.name,
                     price: 999 + Math.ceil(album.popularity / 10) * 100,
-                    qty: Math.floor(Math.random() * 16),
+                    stock: Math.floor(Math.random() * 16),
                     popularity: album.popularity,
                     img: album.images[0].url,
                     spotifyId: album.id,

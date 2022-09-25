@@ -76,7 +76,7 @@ export default function Cart() {
                             <strong>Qty: </strong>
                             <ButtonGroup size="sm">
                                 <Button
-                                    onClick={() => handleQty(-1, product.qty)}
+                                    onClick={() => handleQty(-1, product.stock)}
                                 >
                                     -
                                 </Button>
@@ -98,13 +98,15 @@ export default function Cart() {
                                 </DropdownButton>
 
                                 <Button
-                                    onClick={() => handleQty(1, product.qty)}
+                                    onClick={() =>
+                                        handlestock(1, product.stock)
+                                    }
                                 >
                                     +
                                 </Button>
                             </ButtonGroup>
                         </Dropdown.ItemText>
-                        {/* TODO: validate that  ^^^^ is between 1 and product.qty on custom component*/}
+                        {/* TODO: validate that  ^^^^ is between 1 and product.stock on custom component*/}
                         <Dropdown.Item
                             className="cart-delete-btn"
                             onClick={() => {
