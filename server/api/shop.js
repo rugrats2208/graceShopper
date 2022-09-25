@@ -79,15 +79,15 @@ router.get('/pastOrders', requireToken, async (req, res, next) => {
 // GET api/shop/orders/:userId
 router.get('/orders/:userId', async (req, res, next) => {
     try {
-        const data = await Order.findAll({
-            where: { userId: req.params.userId },
+        const data = await Order.findOne({
+            where: { userId: req.params.userId, complete: false },
             include: {
                 model: Product,
                 include: {
                     model: Artist,
                     attributes: ['id', 'name'],
                 },
-                attributes: ['id', 'name', 'qty', 'price'],
+                attributes: ['id', 'name', 'stock', 'price'],
             },
             attributes: ['id', 'complete'],
         });
@@ -117,12 +117,12 @@ router.post('/orders/:userId', async (req, res, next) => {
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
     try {
-        const { name, price, qty, releaseDate, label } = req.body;
+        const { name, price, stock, releaseDate, label } = req.body;
         const artistId = Math.floor(Math.random() * (100 - 1) + 1);
         const product = await Product.create({
             name,
             price,
-            qty,
+            stock,
             releaseDate,
             label,
             totalTrack: 0,
@@ -141,12 +141,12 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
     try {
-        const { name, price, qty, releaseDate, label } = req.body;
+        const { name, price, stock, releaseDate, label } = req.body;
         const artistId = Math.floor(Math.random() * (100 - 1) + 1);
         const product = await Product.create({
             name,
             price,
-            qty,
+            stock,
             releaseDate,
             label,
             totalTrack: 0,
@@ -161,9 +161,11 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
 //TODO: GET PRODUCT FROM DB AND UPDATE WITH NEW INFORMATION
 router.put('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
     try {
-        const { name, price, qty, releaseDate, label } = req.body;
+        const { name, price, stock, releaseDate, label } = req.body;
         const album = await Product.findByPk(req.params.id);
-        res.send(await album.update({ name, price, qty, releaseDate, label }));
+        res.send(
+            await album.update({ name, price, stock, releaseDate, label })
+        );
     } catch (error) {
         next(error);
     }
