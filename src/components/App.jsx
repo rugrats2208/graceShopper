@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getProducts } from "../reducers/products/productsReducer";
-import { ToastContainer } from "react-toastify";
+import React, { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getProducts } from '../reducers/products/productsReducer';
+import { ToastContainer } from 'react-toastify';
 
-import PrivateRoutes from "./admin/PrivateRoutes";
+import PrivateRoutes from './admin/PrivateRoutes';
 
 //COMPONENTS
 import {
@@ -20,7 +20,10 @@ import {
   Signup,
   Cart,
   OrderHistory,
-} from "./index";
+  LoggedInInfo,
+  UserInfoPage,
+  LoggedInEdit,
+} from './index';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,17 +38,21 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route index element={<Main />} />
-        <Route path={"/signup"} element={<Signup />} />
-        <Route path={"/orderHistory/:id"} element={<OrderHistory />} />
-        <Route path={"/allProducts"} element={<AllProducts />} />
-        <Route path={"/singleProduct/:id"} element={<SingleProduct />} />
-        <Route path={"/singleArtist/:id"} element={<SingleArtist />} />
-        <Route path={"/featuredProducts"} element={<FeaturedProducts />} />
-        <Route path={"/newProductReleases"} element={<NewProductReleases />} />
+        <Route path={'/signup'} element={<Signup />} />
+        <Route path={'/orderHistory/:id'} element={<OrderHistory />} />
+        <Route path={'/allProducts'} element={<AllProducts />} />
+        <Route path={'/singleProduct/:id'} element={<SingleProduct />} />
+        <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
+        <Route path={'/featuredProducts'} element={<FeaturedProducts />} />
+        <Route path={'/newProductReleases'} element={<NewProductReleases />} />
+        <Route path={'/userInfoPage'} element={<UserInfoPage />} />
+        <Route path={'/orderHistory'} element={<OrderHistory />} />
+        <Route path={'/loggedInInfo'} element={<LoggedInInfo />} />
+        <Route path={'/loggedInEdit'} element={<LoggedInEdit />} />
         <Route element={<PrivateRoutes />}>
-          <Route path={"/admin"} element={<AdminDashboard />} />
+          <Route path={'/admin'} element={<AdminDashboard />} />
         </Route>
-        <Route path={"*"} element={<PageNotFound />} />
+        <Route path={'*'} element={<PageNotFound />} />
       </Routes>
     </div>
   );

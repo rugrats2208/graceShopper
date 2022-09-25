@@ -13,11 +13,11 @@ const _editUser = (user) => ({
   user,
 });
 
-export const getUser = () => {
+export const getLoggedInUser = () => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
-      const { data } = await axios.get('/api/aut/logggedInEdit', {
+      const { data } = await axios.get('/api/auth/loggedInInfo', {
         headers: {
           authorization: token,
         },
@@ -29,11 +29,11 @@ export const getUser = () => {
   };
 };
 
-export const editUser = (userForm) => {
+export const editLoggedInUser = (userForm) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
-      const { data } = await axios.put('/api/aut/loggedInEdit', userForm, {
+      const { data } = await axios.put('/api/auth/loggedInEdit', userForm, {
         headers: {
           authorization: token,
         },

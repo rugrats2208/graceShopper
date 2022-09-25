@@ -81,8 +81,8 @@ router.get('/userInfo/:id', requireToken, isAdmin, async (req, res, next) => {
 router.get('/loggedInInfo', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
-    const { username, email, fName, lName } = req.user;
-    const userInfo = { username, email, fName, lName };
+    const { id, username, email, fName, lName } = req.user;
+    const userInfo = { id, username, email, fName, lName };
     res.send(userInfo);
   } catch (error) {
     console.error(error);
