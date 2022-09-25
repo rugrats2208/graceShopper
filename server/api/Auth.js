@@ -66,6 +66,18 @@ router.get('/me', requireToken, async (req, res, next) => {
   }
 });
 
+//grabs the info of user based on params, no token needed
+router.get('/userInfo/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.send(user);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+//user info page, gives a logged in user their profile information
 router.get('/userInfo', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
@@ -78,6 +90,7 @@ router.get('/userInfo', requireToken, async (req, res, next) => {
   }
 });
 
+//allows a user to change their profile info (not all information)
 router.put('/loggedInEdit', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
