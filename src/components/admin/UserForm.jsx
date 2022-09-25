@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setFormMethod, addUser } from "../../reducers/adminReducer";
+import { setFormMethod, addUser, editUser } from "../../reducers/adminReducer";
 
 function UserForm() {
   const dispatch = useDispatch();
@@ -47,11 +47,11 @@ function UserForm() {
   };
 
   const handleSubmit = (evt) => {
+    let isAdmin = evt.target[4].value;
+    isAdmin === "true" ? (isAdmin = true) : (isAdmin = false);
     evt.preventDefault();
     switch (formMethod) {
       case "add":
-        let isAdmin = evt.target[4].value;
-        isAdmin === "true" ? (isAdmin = true) : (isAdmin = false);
         dispatch(addUser({ ...form, isAdmin }));
         setForm({
           fName: "",
@@ -64,7 +64,7 @@ function UserForm() {
         dispatch(setFormMethod(""));
         return;
       case "edit":
-        // dispatch(editProduct(product.id, form));
+        dispatch(editUser(user.id, { ...form, form }));
         setForm({
           fName: "",
           lName: "",

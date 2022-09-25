@@ -66,10 +66,7 @@ export const delUser = (id) => {
                     authorization: token,
                 },
             });
-            console.log(data)
-            console.log(req)
             dispatch({ type: 'DEL_USER', payload: req.data.id });
-
         } catch (error) {
 
         }
@@ -85,7 +82,7 @@ const adminReducer = (state = initialState, action) => {
         case "ADD_USER":
             return { ...state, users: [action.payload, ...state.users] };
         case "EDIT_USER":
-            let prevState = state.filter(user => user.id !== action.payload.id);
+            let prevState = state.users.filter(user => user.id !== action.payload.id);
             return { ...state, users: [action.payload, ...prevState] };
         case "DEL_USER":
             let prevUsers = state.users.filter(user => user.id !== action.payload);

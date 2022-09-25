@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 //BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
+
 //COMPONENTS
 import ProductForm from "./ProductForm";
 import UserForm from "./UserForm";
+
 //ACTIONS
 import { delProduct } from "../../reducers/products/productsReducer";
 import {
@@ -51,12 +53,10 @@ function DropdownActions({ page }) {
           <Dropdown.Item
             onClick={() => {
               if (product.id && !page) {
-                console.log("products page");
                 dispatch(delProduct(product.id));
                 dispatch(setProduct(""));
               }
               if (user.id && page) {
-                console.log("users page");
                 dispatch(delUser(user.id));
                 dispatch(setUser(""));
               }
