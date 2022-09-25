@@ -79,8 +79,8 @@ router.get('/pastOrders', requireToken, async (req, res, next) => {
 // GET api/shop/orders/:userId
 router.get('/orders/:userId', async (req, res, next) => {
     try {
-        const data = await Order.findOne({
-            where: { userId: req.params.userId, complete: false },
+        const data = await Order.findAll({
+            where: { userId: req.params.userId },
             attributes: ['id', 'complete'],
             include: {
                 model: LineItem,
