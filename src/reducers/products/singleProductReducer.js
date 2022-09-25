@@ -11,8 +11,12 @@ const setSingleProduct = (product) => ({
 // thunk for data
 export const getSingleProduct = (id) => {
   return async (dispatch) => {
-    const { data } = await axios.get(`/api/shop/album/${id}`);
-    dispatch(setSingleProduct(data));
+    try {
+      const { data } = await axios.get(`/api/shop/album/${id}`);
+      dispatch(setSingleProduct(data));
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 

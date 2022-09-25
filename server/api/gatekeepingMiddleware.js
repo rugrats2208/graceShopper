@@ -14,7 +14,7 @@ const requireToken = async (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   if (!req.user.isAdmin) {
-    res.status(403).send('you do not have correct priviledges'); //non-admins cannot get the list of users
+    res.status(403).send('you do not have correct privileges'); //non-admins cannot get the list of users
   } else {
     next();
   }

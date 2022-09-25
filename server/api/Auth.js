@@ -66,8 +66,8 @@ router.get('/me', requireToken, async (req, res, next) => {
   }
 });
 
-//grabs the info of user based on params, no token needed
-router.get('/userInfo/:id', async (req, res, next) => {
+//grabs the info of user based on params, only if the user is logged in and is anAdmin route/
+router.get('/userInfo/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     res.send(user);
@@ -77,12 +77,12 @@ router.get('/userInfo/:id', async (req, res, next) => {
   }
 });
 
-//user info page, gives a logged in user their profile information
-router.get('/userInfo', requireToken, async (req, res, next) => {
+//user info page, gives a logged in user their profile information, route: /api/auth/loggedInInfo
+router.get('/loggedInInfo', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
     const { username, email, fName, lName } = req.user;
-    const userInfo = { username, password, email, fName, lName };
+    const userInfo = { username, email, fName, lName };
     res.send(userInfo);
   } catch (error) {
     console.error(error);
@@ -90,7 +90,7 @@ router.get('/userInfo', requireToken, async (req, res, next) => {
   }
 });
 
-//allows a user to change their profile info (not all information)
+//allows a user to change their profile info (not all information) route: /api/auth/loggedInEdit
 router.put('/loggedInEdit', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
