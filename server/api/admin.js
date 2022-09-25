@@ -55,7 +55,7 @@ router.post('/users', requireToken, isAdmin, async (req, res, next) => {
 
 router.put('/users/:id', requireToken, isAdmin, async (req, res, next) => {
     try {
-
+        const { firstName, lastName, username, password, email, isAdmin } = req.body
     } catch (error) {
         next(error);
     }

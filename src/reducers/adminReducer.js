@@ -39,17 +39,35 @@ export const addUser = (form) => {
     }
 }
 
+export const editUser = (id, form) => {
+    return async (dispatch) => {
+        try {
+            const token = window.localStorage.getItem('token');
+            const { data } = await axios.get(`/api/auth/userInfo/${id}`);
+            const req = await axios.put(`/api/admin/users/${data.id}`, form, {
+                headers: {
+                    authorization: token,
+                },
+            });
+            dispatch({ type: 'EDIT_USER', payload: req.data });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 
 export const delUser = (id) => {
     return async (dispatch) => {
         try {
             const token = window.localStorage.getItem('token');
-            const { data } = await axios.get(`/api/shop/users/${id}`);
+            const { data } = await axios.get(`/api/auth/userInfo/${id}`);
             const req = await axios.delete(`/api/admin/users/${data.id}`, {
                 headers: {
                     authorization: token,
                 },
             });
+            console.log(data)
+            console.log(req)
             dispatch({ type: 'DEL_USER', payload: req.data.id });
 
         } catch (error) {
@@ -57,8 +75,6 @@ export const delUser = (id) => {
         }
     }
 }
-
-
 
 const initialState = { formMethod: '', product: '', user: '', users: [] };
 
@@ -69,9 +85,11 @@ const adminReducer = (state = initialState, action) => {
         case "ADD_USER":
             return { ...state, users: [action.payload, ...state.users] };
         case "EDIT_USER":
-            return { ...state };
+            let prevState = state.filter(user => user.id !== action.payload.id);
+            return { ...state, users: [action.payload, ...prevState] };
         case "DEL_USER":
-            return { ...state };
+            let prevUsers = state.users.filter(user => user.id !== action.payload);
+            return { ...state, users: prevUsers };
         case 'SET_PRODUCT':
             return { ...state, product: action.sel };
         case 'SET_USER':
