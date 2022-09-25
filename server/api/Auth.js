@@ -66,6 +66,30 @@ router.get('/me', requireToken, async (req, res, next) => {
   }
 });
 
+router.get('/userInfo', requireToken, async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.user.id);
+    const { username, email, fName, lName } = req.user;
+    const userInfo = { username, password, email, fName, lName };
+    res.send(userInfo);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.put('/loggedInEdit', requireToken, async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.user.id);
+    const { username, password, email, fName, lName } = req.body;
+    await user.update({ username, password, email, fName, lName });
+    res.send(user);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 // matches POST requests to /api/auth/
 router.post('/', function (req, res, next) {
   /* etc */
