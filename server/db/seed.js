@@ -76,16 +76,21 @@ const seed = async () => {
                 order.complete ? prod : prod.stock
             );
 
-            //give each order between 1 and 5 random albums
+            //give each order between 0 and 4 random albums
             for (let j = 0; j < Math.ceil(Math.random() * 4); j++) {
                 //grab a random product, make a lineItem
                 const curProd =
                     available[Math.floor(Math.random() * available.length)];
 
-                await curProd.createLineItem({
-                    qty: Math.ceil(Math.random() * curProd.stock),
-                    orderId: order.id,
-                });
+                // ensure only new lineItems are added in seed
+                const isNew = (await order.getLineItems()).every(
+                    item => item.productId !== curProd.id
+                );
+                if (isNew)
+                    await curProd.createLineItem({
+                        qty: Math.ceil(Math.random() * curProd.stock),
+                        orderId: order.id,
+                    });
             }
 
             //give 25 users 4 orders, rest an empty cart
