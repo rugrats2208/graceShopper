@@ -118,7 +118,6 @@ export default function Cart() {
                                     </Button>
                                 </ButtonGroup>
                             </Dropdown.ItemText>
-                            {/* TODO: validate that  ^^^^ is between 1 and item.product.stock on custom component*/}
                             <Dropdown.Item
                                 className="cart-delete-btn"
                                 onClick={() => {
@@ -127,9 +126,7 @@ export default function Cart() {
                                             `Are you sure you want to delete "${item.product.name}" from your cart?`
                                         )
                                     )
-                                        dispatch(
-                                            deleteOrderItem(item.product.id)
-                                        );
+                                        dispatch(deleteOrderItem(item.id));
                                 }}
                             >
                                 Delete

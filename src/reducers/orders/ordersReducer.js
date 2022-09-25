@@ -57,7 +57,16 @@ export default (state = initialState, action) => {
         case ADD_ORDER_ITEM:
         // return [...state, ...action.order]
         case DEL_ORDER_ITEM:
-            return state.filter(item => action.itemId !== item.id);
+            return state.map(order =>
+                order.complete
+                    ? order
+                    : {
+                          ...order,
+                          lineItems: order.lineItems.filter(
+                              item => item.id !== action.itemId
+                          ),
+                      }
+            );
         case CHANGE_QTY:
             const orderIndex = state.findIndex(order => !order.complete);
             const itemIndex = state[orderIndex].lineItems.findIndex(
