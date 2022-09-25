@@ -6,14 +6,14 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    getActiveOrder,
+    getOrders,
     deleteOrderItem,
+    changeQty,
 } from '../../reducers/orders/ordersReducer';
 
 export default function Cart() {
     const [isOpen, setIsOpen] = useState(false);
     const [total, setTotal] = useState(0);
-    const [orderQuantity, setOrderQuantity] = useState(1);
     const dispatch = useDispatch();
     const userId = useSelector(state => state.auth.id);
 
@@ -25,21 +25,18 @@ export default function Cart() {
 
     //set all the orders when user logs in
     useEffect(() => {
-        dispatch(getActiveOrder(userId));
-        setTotal(lineItems.reduce((agg, album) => agg + album.price, 0));
+        dispatch(getOrders(userId));
     }, [userId]);
 
     //set total price when lineItems changes
     useEffect(() => {
-        setTotal(lineItems.reduce((agg, album) => agg + album.price, 0));
+        setTotal(
+            lineItems.reduce(
+                (agg, item) => agg + item.product.price * item.qty,
+                0
+            )
+        );
     }, [lineItems]);
-
-    //set quantity when button group is clicked
-    function handleQty(num, max) {
-        const newQty = max ? orderQuantity + num : num;
-        if (newQty > max || newQty < 1) return;
-        setOrderQuantity(newQty);
-    }
 
     return (
         <Dropdown
@@ -79,7 +76,9 @@ export default function Cart() {
                             <ButtonGroup size="sm">
                                 <Button
                                     onClick={() =>
-                                        handleQty(-1, item.product.stock)
+                                        dispatch(
+                                            changeQty(item.id, item.qty - 1)
+                                        )
                                     }
                                 >
                                     -
@@ -88,22 +87,36 @@ export default function Cart() {
                                 <DropdownButton
                                     as={ButtonGroup}
                                     title={item.qty}
-                                    drop="right"
+                                    drop="down"
                                 >
-                                    <Dropdown.Item onClick={() => handleQty(1)}>
+                                    <Dropdown.Item
+                                        onClick={() =>
+                                            dispatch(changeQty(item.id, 1))
+                                        }
+                                    >
                                         1
                                     </Dropdown.Item>
-                                    <Dropdown.Item onClick={() => handleQty(2)}>
+                                    <Dropdown.Item
+                                        onClick={() =>
+                                            dispatch(changeQty(item.id, 2))
+                                        }
+                                    >
                                         2
                                     </Dropdown.Item>
-                                    <Dropdown.Item onClick={() => handleQty(3)}>
+                                    <Dropdown.Item
+                                        onClick={() =>
+                                            dispatch(changeQty(item.id, 3))
+                                        }
+                                    >
                                         3
                                     </Dropdown.Item>
                                 </DropdownButton>
 
                                 <Button
                                     onClick={() =>
-                                        handleQty(1, item.product.stock)
+                                        dispatch(
+                                            changeQty(item.id, item.qty + 1)
+                                        )
                                     }
                                 >
                                     +

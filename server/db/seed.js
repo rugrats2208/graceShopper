@@ -71,14 +71,19 @@ const seed = async () => {
             //every 4th order is active
             const order = await Order.create({ complete: !(i % 4 === 0) });
 
+            //get available products
+            const available = products.filter(prod =>
+                order.complete ? prod : prod.stock
+            );
+
             //give each order between 1 and 5 random albums
-            const numItems = Math.ceil(Math.random() * 4);
-            for (let j = 0; j < numItems; j++) {
+            for (let j = 0; j < Math.ceil(Math.random() * 4); j++) {
                 //grab a random product, make a lineItem
-                await products[
-                    Math.floor(Math.random() * products.length)
-                ].createLineItem({
-                    qty: Math.ceil(Math.random() * 5),
+                const curProd =
+                    available[Math.floor(Math.random() * available.length)];
+
+                await curProd.createLineItem({
+                    qty: Math.ceil(Math.random() * curProd.stock),
                     orderId: order.id,
                 });
             }

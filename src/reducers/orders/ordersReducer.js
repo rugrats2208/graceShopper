@@ -17,14 +17,14 @@ const deleteItem = itemId => ({
     itemId,
 });
 
-export const changeQty = (id, num) => ({
+export const changeQty = (itemId, num) => ({
     type: CHANGE_QTY,
-    id,
+    itemId,
     num,
 });
 
 //THUNKS
-export const getActiveOrder = userId => {
+export const getOrders = userId => {
     return async dispatch => {
         try {
             const { data } = await axios.get(`/api/shop/orders/${userId}`);
@@ -59,6 +59,19 @@ export default (state = initialState, action) => {
         case DEL_ORDER_ITEM:
             return state.filter(item => action.itemId !== item.id);
         case CHANGE_QTY:
+            const orderIndex = state.findIndex(order => !order.complete);
+            const itemIndex = state[orderIndex].lineItems.findIndex(
+                item => action.itemId === item.id
+            );
+            if (
+                action.num <= 0 ||
+                action.num >
+                    state[orderIndex].lineItems[itemIndex].product.stock
+            )
+                return state;
+            const nextState = JSON.parse(JSON.stringify(state));
+            nextState[orderIndex].lineItems[itemIndex].qty = action.num;
+            return nextState;
         default:
             return state;
     }
