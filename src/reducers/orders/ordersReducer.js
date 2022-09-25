@@ -38,7 +38,7 @@ export const getOrders = userId => {
 export const deleteOrderItem = itemId => {
     return async dispatch => {
         try {
-            // await axios.delete(`/api/shop/`)
+            await axios.delete(`/api/shop/${itemId}`);
             dispatch(deleteItem(itemId));
         } catch (error) {
             console.error(error);

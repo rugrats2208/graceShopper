@@ -103,11 +103,9 @@ router.get('/orders/:userId', async (req, res, next) => {
 });
 
 // POST api/shop/orders/:userId
-router.post('/orders/:userId', async (req, res, next) => {
+router.post('/orders/', requireToken, async (req, res, next) => {
     try {
-        const albumId = req.body.id;
-        const newOrder = await Order.create();
-        newOrder.addProduct(albumId);
+        await Order.create({ userId: req.user.id });
     } catch (error) {
         console.error(error);
         next(error);
@@ -115,8 +113,31 @@ router.post('/orders/:userId', async (req, res, next) => {
 });
 
 // PUT api/shop/order
+router.put('/orders/:prodId', requireToken, async (req, res, next) => {
+    try {
+        const order = await Order.findOne({
+            where: {
+                complete: false,
+                userId: req.user.id,
+            },
+        });
+        const product = await Product.findByPk(req.params.prodId);
+        await product.createLineItem({ orderId: order.id });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
 
-//DELETE api/shop/order
+//DELETE api/shop/orders/:lineId
+router.delete('/orders/:lineId', requireToken, async (req, res, next) => {
+    try {
+        await LineItem.destroy({ where: { id: req.params.lineId } });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
 
 //ADMIN PATHS
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
