@@ -17,6 +17,12 @@ Order.belongsTo(User);
 Product.belongsToMany(Order, { through: 'orderProduct' });
 Order.belongsToMany(Product, { through: 'orderProduct' });
 
+LineItem.belongsTo(Order);
+Order.hasMany(LineItem);
+
+LineItem.belongsToMany(Product, { through: 'lineProduct' });
+Product.belongsToMany(LineItem, { through: 'lineProduct' });
+
 Tag.belongsToMany(Product, { through: 'productTag' });
 Product.belongsToMany(Tag, { through: 'productTag' });
 
