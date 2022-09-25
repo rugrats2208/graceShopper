@@ -17,7 +17,7 @@ const deleteItem = itemId => ({
 });
 
 //THUNKS
-export const getOrders = userId => {
+export const getActiveOrder = userId => {
     return async dispatch => {
         try {
             const { data } = await axios.get(`/api/shop/orders/${userId}`);

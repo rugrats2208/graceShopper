@@ -6,7 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    getOrders,
+    getActiveOrder,
     deleteOrderItem,
 } from '../../reducers/orders/ordersReducer';
 
@@ -22,7 +22,7 @@ export default function Cart() {
 
     //set all the orders when user logs in
     useEffect(() => {
-        dispatch(getOrders(userId));
+        dispatch(getActiveOrder(userId));
         setTotal(products.reduce((agg, album) => agg + album.price, 0));
     }, [userId]);
 
