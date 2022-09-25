@@ -58,8 +58,8 @@ router.post('/signup', async (req, res, next) => {
 // matches GET requests to /api/auth/me - returns logged in user data
 router.get('/me', requireToken, async (req, res, next) => {
   try {
-    const { id, username, isAdmin } = req.user;
-    const userData = { id, username, isAdmin };
+    const { id, username, isAdmin, fName, lName, email } = req.user;
+    const userData = { id, username, fName, lName, email, isAdmin };
     res.json(userData);
   } catch (err) {
     next(err);

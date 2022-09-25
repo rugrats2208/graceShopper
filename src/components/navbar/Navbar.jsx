@@ -3,6 +3,7 @@ import {
   MDBCollapse,
   MDBContainer,
   MDBIcon,
+  MDBBadge,
   MDBNavbar,
   MDBNavbarBrand,
   MDBNavbarItem,
@@ -24,6 +25,7 @@ export default function Navigation() {
   const dispatch = useDispatch();
   //grab the username if logged in
   const username = useSelector((state) => state.auth.username);
+  const userId = useSelector((state) => state.auth.id);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
 
   //modal handlers
@@ -42,6 +44,12 @@ export default function Navigation() {
     dispatch(logout());
     navigate('/');
   }
+
+  //return only the active order lineItems or empty array
+  const activeOrder = useSelector((state) =>
+    state.orders.find((order) => !order.complete)
+  ) || { lineItems: [] };
+  const { lineItems } = activeOrder;
 
   return (
     <>
@@ -102,25 +110,32 @@ export default function Navigation() {
             </MDBNavbarNav>
             <div className={styles.nav_header_container}>
               <Navbar.Text className="me-2">
-                Signed in as: <a href="#login">{username || 'guest'} </a>
+                Signed in as:{' '}
+                <NavLink to={`/orderHistory/${userId}`}>
+                  {username || 'guest'}{' '}
+                </NavLink>
               </Navbar.Text>
               {/* Cart Icon */}
               <div className={styles.cart_icon}>
-                <a className="text-reset me-3" href="#">
-                  <i className="fas fa-shopping-cart"></i>
+                <a className="text-reset me-3" href="/checkout">
+                  <MDBIcon fas icon="shopping-cart" size="lg" />{' '}
+                  <MDBBadge color="danger" notification pill>
+                    {lineItems.length === 0 ? '' : lineItems.length}
+                  </MDBBadge>
                 </a>
               </div>
               {!window.localStorage.getItem('isLoggedIn') && (
                 <MDBBtn
                   color="secondary"
                   variant="primary"
+                  size="sm"
                   onClick={handleShowLog}
                 >
                   Sign In
                 </MDBBtn>
               )}
               {window.localStorage.getItem('isLoggedIn') && (
-                <MDBBtn color="secondary" onClick={handleLogout}>
+                <MDBBtn color="secondary" size="sm" onClick={handleLogout}>
                   Log Out
                 </MDBBtn>
               )}
