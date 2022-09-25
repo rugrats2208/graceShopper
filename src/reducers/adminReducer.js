@@ -48,7 +48,7 @@ const adminReducer = (state = initialState, action) => {
         case 'GET_USERS':
             return { ...state, users: action.payload };
         case "ADD_USER":
-            return { ...state };
+            return { ...state, users: [action.payload, ...state.users] };
         case "EDIT_USER":
             return { ...state };
         case "DEL_USER":

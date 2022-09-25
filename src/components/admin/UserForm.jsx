@@ -50,10 +50,8 @@ function UserForm() {
     evt.preventDefault();
     switch (formMethod) {
       case "add":
-        console.log(form);
         let isAdmin = evt.target[4].value;
         isAdmin === "true" ? (isAdmin = true) : (isAdmin = false);
-
         dispatch(addUser({ ...form, isAdmin }));
         setForm({
           fName: "",
