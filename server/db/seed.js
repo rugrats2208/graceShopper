@@ -88,8 +88,10 @@ const seed = async () => {
                 });
             }
 
-            //give 25 users 4 orders
+            //give 25 users 4 orders, rest an empty cart
             await users[Math.floor(i / 4)].addOrder(order);
+
+            if (i >= 25) await (await Order.create()).setUser(users[i]);
         }
 
         console.log('Seeding successful!');
