@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrders } from '../../reducers/orders/ordersReducer';
+import { getOrders } from '../../reducers/';
 
 export default function Cart() {
     const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +63,7 @@ export default function Cart() {
                         </Dropdown.Item>
                         <Dropdown.Item
                             as={Link}
-                            to={`/singleArtist/${product.artistId}`}
+                            to={`/singleArtist/${product.artist.id}`}
                         >
                             <strong>Artist:</strong> {product.artist.name}
                         </Dropdown.Item>
