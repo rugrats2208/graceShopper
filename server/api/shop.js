@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, Track, Artist, Order, User } = require('../db');
+const { Product, Track, Artist, Order, User, LineItem } = require('../db');
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 // GET api/shop
@@ -81,15 +81,19 @@ router.get('/orders/:userId', async (req, res, next) => {
     try {
         const data = await Order.findOne({
             where: { userId: req.params.userId, complete: false },
-            include: {
-                model: Product,
-                include: {
-                    model: Artist,
-                    attributes: ['id', 'name'],
-                },
-                attributes: ['id', 'name', 'stock', 'price'],
-            },
             attributes: ['id', 'complete'],
+            include: {
+                model: LineItem,
+                attributes: ['id', 'qty'],
+                include: {
+                    model: Product,
+                    attributes: ['id', 'name', 'stock', 'price'],
+                    include: {
+                        model: Artist,
+                        attributes: ['id', 'name'],
+                    },
+                },
+            },
         });
         res.send(data);
     } catch (error) {
