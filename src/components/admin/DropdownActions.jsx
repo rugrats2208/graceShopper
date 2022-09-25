@@ -4,14 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 //BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
 //COMPONENTS
-import FormActions from "./ProductForm";
+import ProductForm from "./ProductForm";
+import UserForm from "./UserForm";
 //ACTIONS
 import { delProduct } from "../../reducers/products/productsReducer";
 import { setProduct, setFormMethod } from "../../reducers/adminReducer";
 
 function DropdownActions({ page }) {
   const dispatch = useDispatch();
-  const { formMethod, product } = useSelector((state) => state.admin);
+  const { formMethod, product, user } = useSelector((state) => state.admin);
 
   return (
     <>
@@ -23,9 +24,7 @@ function DropdownActions({ page }) {
         <Dropdown.Menu>
           <Dropdown.Item
             onClick={() => {
-              if (!page) {
-                dispatch(setFormMethod("add"));
-              }
+              dispatch(setFormMethod("add"));
             }}
             href="#/action-1"
           >
@@ -55,7 +54,7 @@ function DropdownActions({ page }) {
         </Dropdown.Menu>
       </Dropdown>
 
-      {formMethod ? <FormActions /> : ""}
+      {formMethod ? page ? <UserForm /> : <ProductForm /> : ""}
     </>
   );
 }

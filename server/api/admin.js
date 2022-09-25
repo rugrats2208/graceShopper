@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Product, User } = require('../db');
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
+//ADMING ALBUMS ROUTES
 router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
     try {
         const { name, price, qty, releaseDate, label } = req.body;
@@ -41,9 +42,13 @@ router.delete('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
     }
 });
 
+//ADMIN USER ROUTES
+
 router.post('/users', requireToken, isAdmin, async (req, res, next) => {
     try {
-
+        const { fName, lName, username, password, email, isAdmin } = req.body;
+        const user = await User.create({ fName, lName, username, password, email, isAdmin });
+        res.send(user)
     } catch (error) {
         next(error);
     }

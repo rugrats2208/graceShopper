@@ -3,7 +3,7 @@ import DropdownActions from "./DropdownActions";
 import ProductsTable from "./ProductsTable";
 import UsersTable from "./UsersTable";
 import { useDispatch } from "react-redux";
-import { getUsers } from "../../reducers/adminReducer";
+import { getUsers, setFormMethod } from "../../reducers/adminReducer";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
@@ -20,9 +20,10 @@ const AdminDashboard = () => {
         <button
           onClick={() => {
             setPage(!page);
+            dispatch(setFormMethod(""));
           }}
         >
-          {page ? "Products" : "Users"}
+          {page ? "Switch to Products" : "Switch to Users"}
         </button>
       </div>
       {page ? <UsersTable /> : <ProductsTable />}

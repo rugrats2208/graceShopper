@@ -25,7 +25,6 @@ function ProductForm() {
   const renderForm = (sel) => {
     switch (sel) {
       case "add":
-        console.log("in the add");
         setForm({
           name: "",
           price: "",
@@ -35,8 +34,6 @@ function ProductForm() {
         });
         return;
       case "edit":
-        console.log("in the edit");
-
         setForm({
           name: product.name,
           price: product.price,
@@ -91,6 +88,7 @@ function ProductForm() {
           <label htmlFor="name">Name</label>
           <Form.Control
             required
+            type="text"
             onChange={(evt) => setForm({ ...form, name: evt.target.value })}
             placeholder="Enter Album Name"
             value={form.name}

@@ -22,13 +22,37 @@ export const getUsers = () => {
     }
 }
 
+export const addUser = (form) => {
+    return async (dispatch) => {
+        try {
+            const token = window.localStorage.getItem('token');
+            const { data } = await axios.post(`/api/admin/users`, form, {
+                headers: {
+                    authorization: token,
+                },
+            });
+            dispatch({ type: 'ADD_USER', payload: data });
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
 
 const initialState = { formMethod: '', product: '', user: '', users: [] };
 
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_USERS':
-            return { ...state, users: action.payload }
+            return { ...state, users: action.payload };
+        case "ADD_USER":
+            return { ...state };
+        case "EDIT_USER":
+            return { ...state };
+        case "DEL_USER":
+            return { ...state };
         case 'SET_PRODUCT':
             return { ...state, product: action.sel };
         case 'SET_USER':
