@@ -26,15 +26,26 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'svg-url-loader',
-            options: {
-              limit: 10000,
-            },
-          },
-        ],
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      // {
+      //   test: /\.svg$/,
+      //   use: [
+      //     {
+      //       loader: 'svg-url-loader',
+      //       options: {
+      //         limit: 10000,
+      //       },
+      //     },
+      //   ],
+      // },
+      {
+        test: /\.(png|jpeg|jpg|gif|svg)$/,
+        use: {
+          loader: 'file-loader',
+        },
       },
     ],
   },
