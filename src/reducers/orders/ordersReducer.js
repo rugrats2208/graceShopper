@@ -88,7 +88,26 @@ export const deleteOrderItem = itemId => {
         }
     };
 };
-//TODO: change qty thunk
+
+export const updateQty = (itemId, num) => {
+    return async dispatch => {
+        try {
+            const token = window.localStorage.getItem('token');
+            await axios.put(
+                '/api/shop/orders/qty',
+                { itemId, num },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+            dispatch(changeQty(itemId, num));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+};
 
 //INITIAL STATE
 const initialState = [];

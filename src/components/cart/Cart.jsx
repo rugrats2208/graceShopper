@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     getOrders,
     deleteOrderItem,
-    changeQty,
+    updateQty,
 } from '../../reducers/orders/ordersReducer';
 
 export default function Cart() {
@@ -60,7 +60,7 @@ export default function Cart() {
                         numDropdowns.push(
                             <Dropdown.Item
                                 key={item.id + i}
-                                onClick={() => dispatch(changeQty(item.id, i))}
+                                onClick={() => dispatch(updateQty(item.id, i))}
                             >
                                 {i}
                             </Dropdown.Item>
@@ -93,7 +93,7 @@ export default function Cart() {
                                     <Button
                                         onClick={() =>
                                             dispatch(
-                                                changeQty(item.id, item.qty - 1)
+                                                updateQty(item.id, item.qty - 1)
                                             )
                                         }
                                     >
@@ -111,7 +111,7 @@ export default function Cart() {
                                     <Button
                                         onClick={() =>
                                             dispatch(
-                                                changeQty(item.id, item.qty + 1)
+                                                updateQty(item.id, item.qty + 1)
                                             )
                                         }
                                     >
