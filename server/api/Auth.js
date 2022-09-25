@@ -77,6 +77,40 @@ router.get('/userInfo/:id', async (req, res, next) => {
   }
 });
 
+//route for determining if username exists on registration. returns true if ok, false if it exists
+router.get('/userExists/:username', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { username: req.params.username },
+    });
+    if (user) {
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+//route for determining if email exists on registration. returns true if ok, false if it exists
+router.get('/emailExists/:email', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { email: req.params.email },
+    });
+    if (user) {
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 //user info page, gives a logged in user their profile information
 router.get('/userInfo', requireToken, async (req, res, next) => {
   try {
