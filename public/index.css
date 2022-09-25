@@ -135,7 +135,7 @@ a.link {
     height: 60px;
 }
 
-#cart .dropdown-menu {
+.dropdown-menu {
     max-height: 120px;
     overflow-y: scroll;
 }

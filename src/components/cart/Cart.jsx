@@ -53,94 +53,92 @@ export default function Cart() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="cart-dropdown">
-                {lineItems.map(item => (
-                    <div key={item.id}>
-                        <Dropdown.Item
-                            className="cart-title"
-                            as={Link}
-                            to={`/singleProduct/${item.product.id}`}
-                        >
-                            {item.product.name}
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                            as={Link}
-                            to={`/singleArtist/${item.product.artist.id}`}
-                        >
-                            <strong>Artist:</strong> {item.product.artist.name}
-                        </Dropdown.Item>
-                        <Dropdown.ItemText>
-                            <strong>Price:</strong> ${item.product.price / 100}
-                        </Dropdown.ItemText>
-                        <Dropdown.ItemText>
-                            <strong>Qty: </strong>
-                            <ButtonGroup size="sm">
-                                <Button
-                                    onClick={() =>
-                                        dispatch(
-                                            changeQty(item.id, item.qty - 1)
-                                        )
-                                    }
-                                >
-                                    -
-                                </Button>
+                {lineItems.map(item => {
+                    const numDropdowns = [];
+                    for (let i = 1; i < item.product.stock; i++) {
+                        numDropdowns.push(
+                            <Dropdown.Item
+                                key={item.id + i}
+                                onClick={() => dispatch(changeQty(item.id, i))}
+                            >
+                                {i}
+                            </Dropdown.Item>
+                        );
+                    }
+                    // start map of line items
+                    return (
+                        <div key={item.id}>
+                            <Dropdown.Item
+                                className="cart-title"
+                                as={Link}
+                                to={`/singleProduct/${item.product.id}`}
+                            >
+                                {item.product.name}
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                as={Link}
+                                to={`/singleArtist/${item.product.artist.id}`}
+                            >
+                                <strong>Artist:</strong>{' '}
+                                {item.product.artist.name}
+                            </Dropdown.Item>
+                            <Dropdown.ItemText>
+                                <strong>Price:</strong> $
+                                {item.product.price / 100}
+                            </Dropdown.ItemText>
+                            <Dropdown.ItemText>
+                                <strong>Qty: </strong>
+                                <ButtonGroup size="sm">
+                                    <Button
+                                        onClick={() =>
+                                            dispatch(
+                                                changeQty(item.id, item.qty - 1)
+                                            )
+                                        }
+                                    >
+                                        -
+                                    </Button>
 
-                                <DropdownButton
-                                    as={ButtonGroup}
-                                    title={item.qty}
-                                    drop="down"
-                                >
-                                    <Dropdown.Item
-                                        onClick={() =>
-                                            dispatch(changeQty(item.id, 1))
-                                        }
+                                    <DropdownButton
+                                        as={ButtonGroup}
+                                        title={item.qty}
+                                        drop="down"
                                     >
-                                        1
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        onClick={() =>
-                                            dispatch(changeQty(item.id, 2))
-                                        }
-                                    >
-                                        2
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        onClick={() =>
-                                            dispatch(changeQty(item.id, 3))
-                                        }
-                                    >
-                                        3
-                                    </Dropdown.Item>
-                                </DropdownButton>
+                                        {numDropdowns}
+                                    </DropdownButton>
 
-                                <Button
-                                    onClick={() =>
-                                        dispatch(
-                                            changeQty(item.id, item.qty + 1)
+                                    <Button
+                                        onClick={() =>
+                                            dispatch(
+                                                changeQty(item.id, item.qty + 1)
+                                            )
+                                        }
+                                    >
+                                        +
+                                    </Button>
+                                </ButtonGroup>
+                            </Dropdown.ItemText>
+                            {/* TODO: validate that  ^^^^ is between 1 and item.product.stock on custom component*/}
+                            <Dropdown.Item
+                                className="cart-delete-btn"
+                                onClick={() => {
+                                    if (
+                                        confirm(
+                                            `Are you sure you want to delete "${item.product.name}" from your cart?`
                                         )
-                                    }
-                                >
-                                    +
-                                </Button>
-                            </ButtonGroup>
-                        </Dropdown.ItemText>
-                        {/* TODO: validate that  ^^^^ is between 1 and item.product.stock on custom component*/}
-                        <Dropdown.Item
-                            className="cart-delete-btn"
-                            onClick={() => {
-                                if (
-                                    confirm(
-                                        `Are you sure you want to delete "${item.product.name}" from your cart?`
                                     )
-                                )
-                                    dispatch(deleteOrderItem(item.product.id));
-                            }}
-                        >
-                            Delete
-                        </Dropdown.Item>
+                                        dispatch(
+                                            deleteOrderItem(item.product.id)
+                                        );
+                                }}
+                            >
+                                Delete
+                            </Dropdown.Item>
 
-                        <Dropdown.Divider />
-                    </div>
-                ))}
+                            <Dropdown.Divider />
+                        </div>
+                    );
+                })}
                 <Dropdown.ItemText id="checkout-section">
                     <button className="product-button btn btn-dark">
                         Checkout
