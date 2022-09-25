@@ -4,6 +4,7 @@ import axios from 'axios';
 const SET_ORDER = 'SET_ORDER';
 const ADD_ORDER_ITEM = 'ADD_ORDER_ITEM';
 const DEL_ORDER_ITEM = 'DEL_ORDER_ITEM';
+const CHANGE_QTY = 'CHANGE_QTY';
 
 //ACTION CREATOR
 const setOrders = orders => ({
@@ -14,6 +15,12 @@ const setOrders = orders => ({
 const deleteItem = itemId => ({
     type: DEL_ORDER_ITEM,
     itemId,
+});
+
+export const changeQty = (id, num) => ({
+    type: CHANGE_QTY,
+    id,
+    num,
 });
 
 //THUNKS
@@ -51,6 +58,7 @@ export default (state = initialState, action) => {
         // return [...state, ...action.order]
         case DEL_ORDER_ITEM:
             return state.filter(item => action.itemId !== item.id);
+        case CHANGE_QTY:
         default:
             return state;
     }

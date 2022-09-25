@@ -17,19 +17,22 @@ export default function Cart() {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.auth.id);
 
-    //return only the active order products or empty array
-    const products = useSelector(state => state.orders) || [];
+    //return only the active order lineItems or empty array
+    const activeOrder = useSelector(state =>
+        state.orders.find(order => !order.complete)
+    ) || { lineItems: [] };
+    const { lineItems } = activeOrder;
 
     //set all the orders when user logs in
     useEffect(() => {
         dispatch(getActiveOrder(userId));
-        setTotal(products.reduce((agg, album) => agg + album.price, 0));
+        setTotal(lineItems.reduce((agg, album) => agg + album.price, 0));
     }, [userId]);
 
-    //set total price when products changes
+    //set total price when lineItems changes
     useEffect(() => {
-        setTotal(products.reduce((agg, album) => agg + album.price, 0));
-    }, [products]);
+        setTotal(lineItems.reduce((agg, album) => agg + album.price, 0));
+    }, [lineItems]);
 
     //set quantity when button group is clicked
     function handleQty(num, max) {
@@ -53,37 +56,38 @@ export default function Cart() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="cart-dropdown">
-                {products.map(product => (
-                    <div key={product.id}>
-                        {/*TODO: implement line item for this {console.log(product)} */}
+                {lineItems.map(item => (
+                    <div key={item.id}>
                         <Dropdown.Item
                             className="cart-title"
                             as={Link}
-                            to={`/singleProduct/${product.id}`}
+                            to={`/singleProduct/${item.product.id}`}
                         >
-                            {product.name}
+                            {item.product.name}
                         </Dropdown.Item>
                         <Dropdown.Item
                             as={Link}
-                            to={`/singleArtist/${product.artist.id}`}
+                            to={`/singleArtist/${item.product.artist.id}`}
                         >
-                            <strong>Artist:</strong> {product.artist.name}
+                            <strong>Artist:</strong> {item.product.artist.name}
                         </Dropdown.Item>
                         <Dropdown.ItemText>
-                            <strong>Price:</strong> ${product.price / 100}
+                            <strong>Price:</strong> ${item.product.price / 100}
                         </Dropdown.ItemText>
                         <Dropdown.ItemText>
                             <strong>Qty: </strong>
                             <ButtonGroup size="sm">
                                 <Button
-                                    onClick={() => handleQty(-1, product.stock)}
+                                    onClick={() =>
+                                        handleQty(-1, item.product.stock)
+                                    }
                                 >
                                     -
                                 </Button>
 
                                 <DropdownButton
                                     as={ButtonGroup}
-                                    title={orderQuantity}
+                                    title={item.qty}
                                     drop="right"
                                 >
                                     <Dropdown.Item onClick={() => handleQty(1)}>
@@ -99,23 +103,23 @@ export default function Cart() {
 
                                 <Button
                                     onClick={() =>
-                                        handlestock(1, product.stock)
+                                        handleQty(1, item.product.stock)
                                     }
                                 >
                                     +
                                 </Button>
                             </ButtonGroup>
                         </Dropdown.ItemText>
-                        {/* TODO: validate that  ^^^^ is between 1 and product.stock on custom component*/}
+                        {/* TODO: validate that  ^^^^ is between 1 and item.product.stock on custom component*/}
                         <Dropdown.Item
                             className="cart-delete-btn"
                             onClick={() => {
                                 if (
                                     confirm(
-                                        `Are you sure you want to delete "${product.name}" from your cart?`
+                                        `Are you sure you want to delete "${item.product.name}" from your cart?`
                                     )
                                 )
-                                    dispatch(deleteOrderItem(product.id));
+                                    dispatch(deleteOrderItem(item.product.id));
                             }}
                         >
                             Delete
