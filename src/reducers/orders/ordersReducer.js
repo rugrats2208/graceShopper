@@ -1,5 +1,9 @@
 import axios from 'axios';
-const TOKEN = 'token';
+/*
+TODO: refactor to have active order
+    -initial state = {activeOrder: {}, pastOrders: []}
+    -send active order id in body of put requests
+*/
 
 //ACTION TYPE
 const SET_ORDER = 'SET_ORDER';
@@ -33,7 +37,7 @@ export const changeQty = (itemId, num) => ({
 export const getOrders = userId => {
     return async dispatch => {
         try {
-            const token = window.localStorage.getItem(TOKEN);
+            const token = window.localStorage.getItem('token');
 
             const { data } = await axios.get(`/api/shop/orders/${userId}`, {
                 headers: {
@@ -50,15 +54,17 @@ export const getOrders = userId => {
 export const addOrderItem = productId => {
     return async dispatch => {
         try {
-            const token = window.localStorage.getItem(TOKEN);
+            const token = window.localStorage.getItem('token');
 
-            //TODO: figure out why this has a bad auth
-            console.log(token);
-            const { data } = await axios.put(`/api/shop/orders/${productId}`, {
-                headers: {
-                    authorization: token,
-                },
-            });
+            const { data } = await axios.put(
+                `/api/shop/orders/${productId}`,
+                {},
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
             console.log(data);
             dispatch(addItem(data));
         } catch (error) {
@@ -70,7 +76,7 @@ export const addOrderItem = productId => {
 export const deleteOrderItem = itemId => {
     return async dispatch => {
         try {
-            const token = window.localStorage.getItem(TOKEN);
+            const token = window.localStorage.getItem('token');
             await axios.delete(`/api/shop/orders/${itemId}`, {
                 headers: {
                     authorization: token,
@@ -82,6 +88,7 @@ export const deleteOrderItem = itemId => {
         }
     };
 };
+//TODO: change qty thunk
 
 //INITIAL STATE
 const initialState = [];
