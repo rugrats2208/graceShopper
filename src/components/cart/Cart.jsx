@@ -54,6 +54,7 @@ export default function Cart() {
 
             <Dropdown.Menu className="cart-dropdown">
                 {lineItems.map(item => {
+                    //perhaps make this its own component
                     const numDropdowns = [];
                     for (let i = 1; i <= item.product.stock; i++) {
                         numDropdowns.push(
@@ -127,8 +128,6 @@ export default function Cart() {
                                         )
                                     )
                                         dispatch(deleteOrderItem(item.id));
-                                    console.log('why');
-                                    // TODO:delete this
                                 }}
                             >
                                 Delete
@@ -142,7 +141,7 @@ export default function Cart() {
                     <button className="product-button btn btn-dark">
                         Checkout
                     </button>
-                    <span>Subtotal: ${total / 100}</span>
+                    <span>Subtotal: ${(total / 100).toFixed(2)}</span>
                 </Dropdown.ItemText>
             </Dropdown.Menu>
         </Dropdown>
