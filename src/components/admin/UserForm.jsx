@@ -36,7 +36,7 @@ function UserForm() {
           fName: user.fName,
           lName: user.lName,
           username: user.username,
-          password: user.password,
+          password: "",
           email: user.email,
           isAdmin: user.isAdmin,
         });
@@ -113,25 +113,42 @@ function UserForm() {
       <Row>
         <Col>
           <label htmlFor="username">Username</label>
-          <Form.Control
-            required
-            type="text"
-            onChange={(evt) => setForm({ ...form, username: evt.target.value })}
-            placeholder="Enter Username"
-            value={form.username}
-          />
+          {
+            <Form.Control
+              required
+              type="text"
+              onChange={(evt) =>
+                setForm({ ...form, username: evt.target.value })
+              }
+              placeholder="Enter Username"
+              value={form.username}
+            />
+          }
         </Col>
       </Row>
       <Row>
         <Col>
           <label htmlFor="password">Password</label>
-          <Form.Control
-            required
-            type="text"
-            onChange={(evt) => setForm({ ...form, password: evt.target.value })}
-            placeholder="Enter Password"
-            value={form.password}
-          />
+          {formMethod === "edit" ? (
+            <Form.Control
+              type="text"
+              onChange={(evt) =>
+                setForm({ ...form, password: evt.target.value })
+              }
+              placeholder="Enter Password"
+              value={form.password}
+            />
+          ) : (
+            <Form.Control
+              required
+              type="text"
+              onChange={(evt) =>
+                setForm({ ...form, password: evt.target.value })
+              }
+              placeholder="Enter Password"
+              value={form.password}
+            />
+          )}
         </Col>
       </Row>
       <Row>

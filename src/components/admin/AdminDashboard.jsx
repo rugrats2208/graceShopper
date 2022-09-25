@@ -7,8 +7,8 @@ import { getUsers, setFormMethod } from "../../reducers/adminReducer";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
-  const [page, setPage] = React.useState(false);
   const { formMethod } = useSelector((state) => state.admin);
+  const [page, setPage] = React.useState(false);
 
   React.useEffect(() => {
     dispatch(getUsers());

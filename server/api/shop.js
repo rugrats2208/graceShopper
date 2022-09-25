@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Product, Track, Artist, Order, User } = require('../db');
-const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
+const { requireToken } = require('./gatekeepingMiddleware');
 
 // GET api/shop
 //TODO: change price and track length to human readable here
@@ -105,26 +105,6 @@ router.post('/orders/:userId', async (req, res, next) => {
 // PUT api/shop/order
 
 //DELETE api/shop/order
-
-//ADMIN PATHS
-router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
-  try {
-    const { name, price, qty, releaseDate, label } = req.body;
-    const artistId = Math.floor(Math.random() * (100 - 1) + 1);
-    const product = await Product.create({
-      name,
-      price,
-      qty,
-      releaseDate,
-      label,
-      totalTrack: 0,
-      artistId,
-    });
-    res.send(product);
-  } catch (error) {
-    next(error);
-  }
-});
 
 // PUT api/shop/order
 

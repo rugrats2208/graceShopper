@@ -2,7 +2,6 @@ const conn = require('../conn');
 const { Sequelize } = conn;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const axios = require('axios');
 
 //hash salting rounds
 const SALT_ROUNDS = 5;
@@ -100,16 +99,16 @@ User.beforeUpdate(async (user, options) => {
 });
 
 //CART
-User.prototype.getCart = async function () {};
+User.prototype.getCart = async function () { };
 
 User.prototype.addToCart = async function () {
   //grab the order associated with the user
   //orders are your cart
 };
 
-User.prototype.removeFromToCart = async function () {};
+User.prototype.removeFromToCart = async function () { };
 
 //convert order model from cart to actual placed order
-User.prototype.createOrder = async function () {};
+User.prototype.createOrder = async function () { };
 
 module.exports = User;

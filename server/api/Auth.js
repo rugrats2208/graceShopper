@@ -66,17 +66,4 @@ router.get('/me', requireToken, async (req, res, next) => {
   }
 });
 
-// matches POST requests to /api/auth/
-router.post('/', function (req, res, next) {
-  /* etc */
-});
-// matches PUT requests to /api/auth/:userId
-router.put('/:userId', function (req, res, next) {
-  /* etc */
-});
-// matches DELETE requests to /api/auth/:userId
-router.delete('/:userId', function (req, res, next) {
-  /* etc */
-});
-
 module.exports = router;

@@ -1,10 +1,13 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Pagination from "./Pagination";
+import { setUser } from "../../reducers/adminReducer";
+
 function UsersTable() {
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.admin.users);
-  const { option } = useSelector((state) => state.admin);
+  const { formMethod, user } = useSelector((state) => state.admin);
 
   const [currPage, setCurrPage] = React.useState(1);
   const [itemsPerPage] = React.useState(10);
@@ -22,23 +25,28 @@ function UsersTable() {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Username</th>
-            {/* <th>Password</th> */}
+            <th>Password</th>
             <th>Email</th>
           </tr>
         </thead>
         <tbody>
-          {currSlice.map((user) => {
+          {currSlice.map((endUser) => {
             return (
               <tr
-                // className={selection.id === product.id ? "selected" : ""}
-                key={user.id}
+                onClick={() => {
+                  if (!formMethod) {
+                    dispatch(setUser(endUser));
+                  }
+                }}
+                className={endUser.id === user.id ? "selected" : ""}
+                key={endUser.id}
               >
-                <td>{user.id}</td>
-                <td>{user.fName}</td>
-                <td>{user.lName}</td>
-                <td>{user.username}</td>
-                {/* <td>{user.password}</td> */}
-                <td>{user.email}</td>
+                <td>{endUser.id}</td>
+                <td>{endUser.fName}</td>
+                <td>{endUser.lName}</td>
+                <td>{endUser.username}</td>
+                <td>{"*******"}</td>
+                <td>{endUser.email}</td>
               </tr>
             );
           })}

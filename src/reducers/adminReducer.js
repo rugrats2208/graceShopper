@@ -40,6 +40,25 @@ export const addUser = (form) => {
 }
 
 
+export const delUser = (id) => {
+    return async (dispatch) => {
+        try {
+            const token = window.localStorage.getItem('token');
+            const { data } = await axios.get(`/api/shop/users/${id}`);
+            const req = await axios.delete(`/api/admin/users/${data.id}`, {
+                headers: {
+                    authorization: token,
+                },
+            });
+            dispatch({ type: 'DEL_USER', payload: req.data.id });
+
+        } catch (error) {
+
+        }
+    }
+}
+
+
 
 const initialState = { formMethod: '', product: '', user: '', users: [] };
 

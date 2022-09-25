@@ -43,7 +43,6 @@ router.delete('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
 });
 
 //ADMIN USER ROUTES
-
 router.post('/users', requireToken, isAdmin, async (req, res, next) => {
     try {
         const { fName, lName, username, password, email, isAdmin } = req.body;
@@ -64,7 +63,9 @@ router.put('/users/:id', requireToken, isAdmin, async (req, res, next) => {
 
 router.delete('/users/:id', requireToken, isAdmin, async (req, res, next) => {
     try {
-
+        const user = await User.findByPk(req.params.id);
+        await user.destroy();
+        res.send(user);
     } catch (error) {
         next(error);
     }

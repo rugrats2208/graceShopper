@@ -8,7 +8,12 @@ import ProductForm from "./ProductForm";
 import UserForm from "./UserForm";
 //ACTIONS
 import { delProduct } from "../../reducers/products/productsReducer";
-import { setProduct, setFormMethod } from "../../reducers/adminReducer";
+import {
+  setProduct,
+  setFormMethod,
+  delUser,
+  setUser,
+} from "../../reducers/adminReducer";
 
 function DropdownActions({ page }) {
   const dispatch = useDispatch();
@@ -32,7 +37,10 @@ function DropdownActions({ page }) {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (product.id) {
+              if (product.id && !page) {
+                dispatch(setFormMethod("edit"));
+              }
+              if (user.id && page) {
                 dispatch(setFormMethod("edit"));
               }
             }}
@@ -42,9 +50,15 @@ function DropdownActions({ page }) {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (product.id) {
+              if (product.id && !page) {
+                console.log("products page");
                 dispatch(delProduct(product.id));
                 dispatch(setProduct(""));
+              }
+              if (user.id && page) {
+                console.log("users page");
+                dispatch(delUser(user.id));
+                dispatch(setUser(""));
               }
             }}
             href="#/action-3"

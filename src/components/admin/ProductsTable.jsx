@@ -33,7 +33,7 @@ function ProductsTable() {
             const price = `${item.price}`;
             return (
               <tr
-                className={product.id === item.id ? "selected" : ""}
+                className={item.id === product.id ? "selected" : ""}
                 key={item.id}
                 onClick={() => {
                   if (!formMethod) {
