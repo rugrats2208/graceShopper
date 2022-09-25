@@ -108,8 +108,9 @@ export default function Navigation() {
                 )}
               </MDBNavbarItem>
             </MDBNavbarNav>
+            {/* Signed in as */}
             <div className={styles.nav_header_container}>
-              <Navbar.Text className="me-2">
+              <Navbar.Text className="me-3">
                 Signed in as:{' '}
                 <NavLink to={`/orderHistory/${userId}`}>
                   {username || 'guest'}{' '}
@@ -124,6 +125,7 @@ export default function Navigation() {
                   </MDBBadge>
                 </a>
               </div>
+              {/* signin / sign out */}
               {!window.localStorage.getItem('isLoggedIn') && (
                 <MDBBtn
                   color="secondary"
