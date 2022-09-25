@@ -3,15 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 
 //BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
+
 //COMPONENTS
-import FormActions from "./FormActions";
+import ProductForm from "./ProductForm";
+import UserForm from "./UserForm";
+
 //ACTIONS
 import { delProduct } from "../../reducers/products/productsReducer";
-import { setSelection, setOption } from "../../reducers/adminReducer";
+import {
+  setProduct,
+  setFormMethod,
+  delUser,
+  setUser,
+} from "../../reducers/adminReducer";
 
-function DropdownActions() {
+function DropdownActions({ page }) {
   const dispatch = useDispatch();
-  const { option, selection } = useSelector((state) => state.admin);
+  const { formMethod, product, user } = useSelector((state) => state.admin);
 
   return (
     <>
@@ -22,15 +30,20 @@ function DropdownActions() {
 
         <Dropdown.Menu>
           <Dropdown.Item
-            onClick={() => dispatch(setOption("add"))}
+            onClick={() => {
+              dispatch(setFormMethod("add"));
+            }}
             href="#/action-1"
           >
             Add Item
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (selection.id) {
-                dispatch(setOption("edit"));
+              if (product.id && !page) {
+                dispatch(setFormMethod("edit"));
+              }
+              if (user.id && page) {
+                dispatch(setFormMethod("edit"));
               }
             }}
             href="#/action-2"
@@ -39,9 +52,13 @@ function DropdownActions() {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (selection.id) {
-                dispatch(delProduct(selection.id));
-                dispatch(setSelection(""));
+              if (product.id && !page) {
+                dispatch(delProduct(product.id));
+                dispatch(setProduct(""));
+              }
+              if (user.id && page) {
+                dispatch(delUser(user.id));
+                dispatch(setUser(""));
               }
             }}
             href="#/action-3"
@@ -51,7 +68,7 @@ function DropdownActions() {
         </Dropdown.Menu>
       </Dropdown>
 
-      {option ? <FormActions /> : ""}
+      {formMethod ? page ? <UserForm /> : <ProductForm /> : ""}
     </>
   );
 }

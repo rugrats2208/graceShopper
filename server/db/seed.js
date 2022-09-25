@@ -1,5 +1,5 @@
 //Get our database and models used in seed
-const { conn, User, Artist, Product, Track, Order } = require('./');
+const { conn, User, Artist, Product, Track, Order, LineItem } = require('./');
 //GET DATA FROM SPOTIFY API
 const getAlbumData = require('./grabAlbums');
 // GET USERS
@@ -43,7 +43,7 @@ const seed = async () => {
                 let prod = await Product.create({
                     name: album.name,
                     price: 999 + Math.ceil(album.popularity / 10) * 100,
-                    qty: Math.floor(Math.random() * 16),
+                    stock: Math.floor(Math.random() * 16),
                     popularity: album.popularity,
                     img: album.images[0].url,
                     spotifyId: album.id,
@@ -70,11 +70,20 @@ const seed = async () => {
         for (let i = 0; i < 100; i++) {
             //every 4th order is active
             const order = await Order.create({ complete: !(i % 4 === 0) });
-            //give each order between 1 and 5 albums
-            await order.addProducts(
-                products.slice(i, i + Math.ceil(Math.random() * 4))
-            );
-            //give each user 4 orders
+
+            //give each order between 1 and 5 random albums
+            const numItems = Math.ceil(Math.random() * 4);
+            for (let j = 0; j < numItems; j++) {
+                //grab a random product, make a lineItem
+                await products[
+                    Math.floor(Math.random() * products.length)
+                ].createLineItem({
+                    qty: Math.ceil(Math.random() * 5),
+                    orderId: order.id,
+                });
+            }
+
+            //give 25 users 4 orders
             await users[Math.floor(i / 4)].addOrder(order);
         }
 

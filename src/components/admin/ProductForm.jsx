@@ -9,11 +9,11 @@ import {
   addProduct,
   editProduct,
 } from "../../reducers/products/productsReducer";
-import { setOption } from "../../reducers/adminReducer";
+import { setFormMethod } from "../../reducers/adminReducer";
 
-function FormActions() {
+function ProductForm() {
   const dispatch = useDispatch();
-  const { option, selection } = useSelector((state) => state.admin);
+  const { formMethod, product } = useSelector((state) => state.admin);
   const [form, setForm] = React.useState({
     name: "",
     price: "",
@@ -35,11 +35,11 @@ function FormActions() {
         return;
       case "edit":
         setForm({
-          name: selection.name,
-          price: selection.price,
-          qty: selection.qty,
-          releaseDate: selection.releaseDate,
-          label: selection.label,
+          name: product.name,
+          price: product.price,
+          qty: product.qty,
+          releaseDate: product.releaseDate,
+          label: product.label,
         });
         return;
       default:
@@ -49,7 +49,7 @@ function FormActions() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    switch (option) {
+    switch (formMethod) {
       case "add":
         dispatch(addProduct(form));
         setForm({
@@ -59,10 +59,10 @@ function FormActions() {
           releaseDate: "",
           label: "",
         });
-        dispatch(setOption(""));
+        dispatch(setFormMethod(""));
         return;
       case "edit":
-        dispatch(editProduct(selection.id, form));
+        dispatch(editProduct(product.id, form));
         setForm({
           name: "",
           price: "",
@@ -70,7 +70,7 @@ function FormActions() {
           releaseDate: "",
           label: "",
         });
-        dispatch(setOption(""));
+        dispatch(setFormMethod(""));
         return;
       default:
         return;
@@ -78,8 +78,8 @@ function FormActions() {
   };
 
   React.useEffect(() => {
-    renderForm(option);
-  }, [option]);
+    renderForm(formMethod);
+  }, [formMethod]);
 
   return (
     <Form className="adminForm" onSubmit={handleSubmit}>
@@ -88,6 +88,7 @@ function FormActions() {
           <label htmlFor="name">Name</label>
           <Form.Control
             required
+            type="text"
             onChange={(evt) => setForm({ ...form, name: evt.target.value })}
             placeholder="Enter Album Name"
             value={form.name}
@@ -147,7 +148,7 @@ function FormActions() {
         </Button>
 
         <Button
-          onClick={() => dispatch(setOption(""))}
+          onClick={() => dispatch(setFormMethod(""))}
           type="reset"
           variant="outline-success"
         >
@@ -158,4 +159,4 @@ function FormActions() {
   );
 }
 
-export default FormActions;
+export default ProductForm;

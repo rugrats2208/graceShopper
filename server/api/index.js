@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 //POINT TO CUSTOM ROUTES
 router.use('/auth', require('./Auth'));
-
+router.use('/admin', require('./admin'));
 router.use('/shop', require('./shop'));
 
 // 404 ERROR HANDLING

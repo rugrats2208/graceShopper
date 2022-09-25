@@ -20,7 +20,7 @@ app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-// ERROR HANDLING FOR SERVER SIDE ISSUES
+//ERROR HANDLING FOR SERVER SIDE ISSUES
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error');

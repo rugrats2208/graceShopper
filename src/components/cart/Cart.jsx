@@ -5,7 +5,10 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrders } from '../../reducers/';
+import {
+    getActiveOrder,
+    deleteOrderItem,
+} from '../../reducers/orders/ordersReducer';
 
 export default function Cart() {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,13 +18,11 @@ export default function Cart() {
     const userId = useSelector(state => state.auth.id);
 
     //return only the active order products or empty array
-    const { products } = useSelector(state =>
-        state.orders.find(order => !order.complete)
-    ) || { products: [] };
+    const products = useSelector(state => state.orders) || [];
 
     //set all the orders when user logs in
     useEffect(() => {
-        dispatch(getOrders(userId));
+        dispatch(getActiveOrder(userId));
         setTotal(products.reduce((agg, album) => agg + album.price, 0));
     }, [userId]);
 
@@ -54,6 +55,7 @@ export default function Cart() {
             <Dropdown.Menu className="cart-dropdown">
                 {products.map(product => (
                     <div key={product.id}>
+                        {/*TODO: implement line item for this {console.log(product)} */}
                         <Dropdown.Item
                             className="cart-title"
                             as={Link}
@@ -74,7 +76,7 @@ export default function Cart() {
                             <strong>Qty: </strong>
                             <ButtonGroup size="sm">
                                 <Button
-                                    onClick={() => handleQty(-1, product.qty)}
+                                    onClick={() => handleQty(-1, product.stock)}
                                 >
                                     -
                                 </Button>
@@ -96,13 +98,15 @@ export default function Cart() {
                                 </DropdownButton>
 
                                 <Button
-                                    onClick={() => handleQty(1, product.qty)}
+                                    onClick={() =>
+                                        handlestock(1, product.stock)
+                                    }
                                 >
                                     +
                                 </Button>
                             </ButtonGroup>
                         </Dropdown.ItemText>
-                        {/* TODO: validate that  ^^^^ is between 1 and product.qty on custom component*/}
+                        {/* TODO: validate that  ^^^^ is between 1 and product.stock on custom component*/}
                         <Dropdown.Item
                             className="cart-delete-btn"
                             onClick={() => {
@@ -111,8 +115,7 @@ export default function Cart() {
                                         `Are you sure you want to delete "${product.name}" from your cart?`
                                     )
                                 )
-                                    console.log('deleted');
-                                // TODO: dispatch delete thunk
+                                    dispatch(deleteOrderItem(product.id));
                             }}
                         >
                             Delete
