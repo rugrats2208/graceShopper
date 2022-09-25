@@ -5,7 +5,10 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrders } from '../../reducers/';
+import {
+    getOrders,
+    deleteOrderItem,
+} from '../../reducers/orders/ordersReducer';
 
 export default function Cart() {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,9 +18,7 @@ export default function Cart() {
     const userId = useSelector(state => state.auth.id);
 
     //return only the active order products or empty array
-    const { products } = useSelector(state =>
-        state.orders.find(order => !order.complete)
-    ) || { products: [] };
+    const products = useSelector(state => state.orders) || [];
 
     //set all the orders when user logs in
     useEffect(() => {
@@ -54,6 +55,7 @@ export default function Cart() {
             <Dropdown.Menu className="cart-dropdown">
                 {products.map(product => (
                     <div key={product.id}>
+                        {/*TODO: implement line item for this {console.log(product)} */}
                         <Dropdown.Item
                             className="cart-title"
                             as={Link}
@@ -111,8 +113,7 @@ export default function Cart() {
                                         `Are you sure you want to delete "${product.name}" from your cart?`
                                     )
                                 )
-                                    console.log('deleted');
-                                // TODO: dispatch delete thunk
+                                    dispatch(deleteOrderItem(product.id));
                             }}
                         >
                             Delete
