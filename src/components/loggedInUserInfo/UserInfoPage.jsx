@@ -23,7 +23,7 @@ function UserInfoPage() {
     <div className="user-info-page">
       {infoRetrieved ? (
         <div className="guest-attempt">
-          <h1>You must be signed in to view your information</h1>
+          <h2>You must be signed in to view your information</h2>
           <Link to="/">Back to home</Link>
         </div>
       ) : (

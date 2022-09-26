@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-const SET_USER = 'SET_USER';
-const EDIT_USER = 'EDIT_USER';
+const SET_SIGNED_IN_USER = 'SET_SIGNED_IN_USER';
+const EDIT_SIGNED_IN_USER = 'EDIT_SIGNED_IN_USER';
 
-const setUser = (user) => ({
-  type: SET_USER,
+const setLoggedInUser = (user) => ({
+  type: SET_SIGNED_IN_USER,
   user,
 });
 
-const _editUser = (user) => ({
-  type: EDIT_USER,
+const _editLoggedInUser = (user) => ({
+  type: EDIT_SIGNED_IN_USER,
   user,
 });
 
@@ -22,7 +22,7 @@ export const getLoggedInUser = () => {
           authorization: token,
         },
       });
-      dispatch(setUser(data));
+      dispatch(setLoggedInUser(data));
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +38,7 @@ export const editLoggedInUser = (userForm) => {
           authorization: token,
         },
       });
-      dispatch(_editUser(data));
+      dispatch(_editLoggedInUser(data));
     } catch (error) {
       console.error(error);
     }
@@ -49,9 +49,9 @@ const initialState = {};
 
 const signedInUserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_USER:
+    case SET_SIGNED_IN_USER:
       return action.user;
-    case EDIT_USER:
+    case EDIT_SIGNED_IN_USER:
       return action.user;
     default:
       return state;

@@ -112,7 +112,7 @@ router.get('/emailExists/:email', async (req, res, next) => {
 });
 
 //user info page, gives a logged in user their profile information
-router.get('/userInfo', requireToken, async (req, res, next) => {
+router.get('/loggedInInfo', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
     const { id, username, email, fName, lName } = req.user;

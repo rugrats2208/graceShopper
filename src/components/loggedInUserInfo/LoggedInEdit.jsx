@@ -24,8 +24,6 @@ function LoggedInEdit() {
   //   const [formInputs, setFormInputs] = useState(user);
 
   const onSubmit = async (values, actions) => {
-    // event.preventDefault();
-    console.log(values);
     await dispatch(editLoggedInUser(values));
     await dispatch(getLoggedInUser());
   };
@@ -34,10 +32,6 @@ function LoggedInEdit() {
     validationSchema: editUserSchema,
     onSubmit,
   });
-
-  //   const handleChange = (event) => {
-  //     setFormInputs({ ...formInputs, [event.target.name]: event.target.value });
-  //   };
 
   return (
     <form
