@@ -65,7 +65,6 @@ export const addOrderItem = (productId) => {
           },
         }
       );
-      console.log(data);
       dispatch(addItem(data));
     } catch (error) {
       console.error(error);
@@ -122,20 +121,20 @@ export default (state = initialState, action) => {
         order.complete
           ? order
           : {
-              ...order,
-              lineItems: [...order.lineItems, action.item],
-            }
+            ...order,
+            lineItems: [...order.lineItems, action.item],
+          }
       );
     case DEL_ORDER_ITEM:
       return state.map((order) =>
         order.complete
           ? order
           : {
-              ...order,
-              lineItems: order.lineItems.filter(
-                (item) => item.id !== action.itemId
-              ),
-            }
+            ...order,
+            lineItems: order.lineItems.filter(
+              (item) => item.id !== action.itemId
+            ),
+          }
       );
     case CHANGE_QTY:
       const orderIndex = state.findIndex((order) => !order.complete);

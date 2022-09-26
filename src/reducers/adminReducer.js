@@ -62,7 +62,11 @@ export const editUser = (id, form) => {
     return async (dispatch) => {
         try {
             const token = window.localStorage.getItem('token');
-            const { data } = await axios.get(`/api/auth/userInfo/${id}`);
+            const { data } = await axios.get(`/api/auth/userInfo/${id}`, {
+                headers: {
+                    authorization: token,
+                },
+            });
             const req = await axios.put(`/api/admin/users/${data.id}`, form, {
                 headers: {
                     authorization: token,

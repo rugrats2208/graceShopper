@@ -163,7 +163,3 @@ export const sortedUsersArray = (arr, method, sel) => {
             return arr;
     }
 };
-
-export const protectPassword = (str) => {
-
-}

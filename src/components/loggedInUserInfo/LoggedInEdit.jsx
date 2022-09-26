@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getLoggedInUser,
   editLoggedInUser,
-} from '../../reducers/signedInUserReducer';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
+} from "../../reducers/signedInUserReducer";
+import * as yup from "yup";
+import { useFormik } from "formik";
 
 const editUserSchema = yup.object().shape({
-  fName: yup.string().trim().min(2, 'Too Short!').max(50, 'Too Long!'),
-  lName: yup.string().trim().min(2, 'Too Short!').max(50, 'Too Long!'),
-  username: yup.string().trim().min(5, 'Too Short!').max(25, 'Too Long!'),
-  email: yup.string().trim().email('Invalid email').required('Required'),
-  password: yup.string().trim().min(7, 'Too Short!').max(50, 'Too Long!'),
+  fName: yup.string().trim().min(2, "Too Short!").max(50, "Too Long!"),
+  lName: yup.string().trim().min(2, "Too Short!").max(50, "Too Long!"),
+  username: yup.string().trim().min(5, "Too Short!").max(25, "Too Long!"),
+  email: yup.string().trim().email("Invalid email").required("Required"),
+  password: yup.string().trim().min(7, "Too Short!").max(50, "Too Long!"),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
 function LoggedInEdit() {
   const user = useSelector((state) => state.signedInUser);
   const dispatch = useDispatch();
-  //   const [formInputs, setFormInputs] = useState(user);
 
   const onSubmit = async (values, actions) => {
     await dispatch(editLoggedInUser(values));
@@ -48,7 +47,7 @@ function LoggedInEdit() {
           id="fName"
           className="form-control"
           name="fName"
-          value={formik.values.fName || ''}
+          value={formik.values.fName || ""}
           placeholder="First Name"
           onChange={formik.handleChange}
         />
@@ -64,7 +63,7 @@ function LoggedInEdit() {
           id="lName"
           className="form-control"
           name="lName"
-          value={formik.values.lName || ''}
+          value={formik.values.lName || ""}
           placeholder="Last Name"
           onChange={formik.handleChange}
         />
@@ -80,7 +79,7 @@ function LoggedInEdit() {
           id="email"
           className="form-control"
           name="email"
-          value={formik.values.email || ''}
+          value={formik.values.email || ""}
           placeholder="Email"
           onChange={formik.handleChange}
         />
@@ -96,7 +95,7 @@ function LoggedInEdit() {
           id="username"
           className="form-control"
           name="username"
-          value={formik.values.username || ''}
+          value={formik.values.username || ""}
           placeholder="Username"
           onChange={formik.handleChange}
         />
@@ -112,7 +111,7 @@ function LoggedInEdit() {
           id="password"
           className="form-control"
           name="password"
-          value={formik.values.password || ''}
+          value={formik.values.password || ""}
           placeholder="Password"
           onChange={formik.handleChange}
         />

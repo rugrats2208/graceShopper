@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { getOrders } from "../../reducers/orders/ordersReducer";
 
 function OrderHistory() {
@@ -8,7 +7,6 @@ function OrderHistory() {
   const [pastOrders, setPastOrders] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
-  const params = useParams();
 
   useEffect(() => {
     dispatch(getOrders(user.id));
@@ -45,7 +43,7 @@ function OrderHistory() {
                     width="100px"
                   />
                   <h5>
-                    Total:{' '}
+                    Total:{" "}
                     {displayPrice(
                       lineItem.qty > 0
                         ? lineItem.qty * lineItem.product.price
