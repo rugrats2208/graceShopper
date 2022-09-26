@@ -27,7 +27,7 @@ const deleteItem = itemId => ({
     itemId,
 });
 
-export const changeQty = (itemId, num) => ({
+const changeQty = (itemId, num) => ({
     type: CHANGE_QTY,
     itemId,
     num,

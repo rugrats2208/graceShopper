@@ -138,6 +138,7 @@ router.put('/orders/qty', requireToken, async (req, res, next) => {
             { qty: req.body.num },
             {
                 where: { id: req.body.itemId },
+                individualHooks: true,
             }
         );
         res.sendStatus(200);
