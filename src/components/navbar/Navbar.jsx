@@ -112,9 +112,7 @@ export default function Navigation() {
             <div className={styles.nav_header_container}>
               <Navbar.Text className="me-3">
                 Signed in as:{' '}
-                <NavLink to={`/orderHistory/${userId}`}>
-                  {username || 'guest'}{' '}
-                </NavLink>
+                <NavLink to={`/userInfoPage`}>{username || 'guest'} </NavLink>
               </Navbar.Text>
               {/* Cart Icon */}
               <div className={styles.cart_icon}>

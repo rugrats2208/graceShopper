@@ -5,51 +5,46 @@ import productsReducer from '../reducers/products/productsReducer';
 import singleProductReducer from '../reducers/products/singleProductReducer';
 import singleArtistReducer from '../reducers/artists/singleArtistReducer';
 import ordersReducer from '../reducers/orders/ordersReducer';
+import signedInUserReducer from '../reducers/signedInUserReducer';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import reduxLogger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
 import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
 } from 'redux-persist';
 
 const persistConfig = {
-    key: 'root',
-    storage,
+  key: 'root',
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
-    reducer: {
-        auth: persistedReducer,
-        admin: adminReducer,
-        products: productsReducer,
-        singleProduct: singleProductReducer,
-        singleArtist: singleArtistReducer,
-        orders: ordersReducer,
-    },
-    // Adding the api middleware enables caching, invalidation, polling,
-    // and other useful features of `rtk-query`.
-    middleware: getDefaultMiddleware =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [
-                    FLUSH,
-                    REHYDRATE,
-                    PAUSE,
-                    PERSIST,
-                    PURGE,
-                    REGISTER,
-                ],
-            },
-        }).concat(reduxLogger),
+  reducer: {
+    auth: persistedReducer,
+    admin: adminReducer,
+    products: productsReducer,
+    singleProduct: singleProductReducer,
+    singleArtist: singleArtistReducer,
+    orders: ordersReducer,
+    signedInUser: signedInUserReducer,
+  },
+  // Adding the api middleware enables caching, invalidation, polling,
+  // and other useful features of `rtk-query`.
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(reduxLogger),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
