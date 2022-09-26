@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector, useDispatch } from 'react-redux';
+import { MDBIcon, MDBBadge } from 'mdb-react-ui-kit';
 import {
     getOrders,
     deleteOrderItem,
@@ -49,7 +50,21 @@ export default function Cart() {
                 id="cart"
                 title="Dropdown button"
             >
-                <img src={isOpen ? '/x-icon.png' : '/shopping-cart-icon.jpg'} />
+                {isOpen ? (
+                    <MDBIcon fas icon="times" size="lg" className="cart-icon" />
+                ) : (
+                    <>
+                        <MDBIcon
+                            fas
+                            icon="shopping-cart"
+                            size="lg"
+                            className="cart-icon"
+                        />{' '}
+                        <MDBBadge color="danger" notification pill>
+                            {lineItems.length === 0 ? '' : lineItems.length}
+                        </MDBBadge>
+                    </>
+                )}
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="cart-dropdown">
