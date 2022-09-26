@@ -5,15 +5,14 @@ import Pagination from "./Pagination";
 import { setProduct } from "../../reducers/adminReducer";
 
 function ProductsTable() {
-  const data = useSelector((state) => state.products);
-  const { formMethod, product } = useSelector((state) => state.admin);
+  const { formMethod, product, products } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
   const [currPage, setCurrPage] = React.useState(1);
   const [itemsPerPage] = React.useState(10);
   const indexOfLastPost = currPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currSlice = data.slice(indexOfFirstPost, indexOfLastPost);
+  const currSlice = products.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
@@ -59,7 +58,7 @@ function ProductsTable() {
       <Pagination
         currPage={currPage}
         itemsPerPage={itemsPerPage}
-        total={data.length}
+        total={products.length}
         paginate={paginate}
       />
     </>

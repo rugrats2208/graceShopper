@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { returnFilteredArray } from '../components/admin/helperFuncs';
+import { sortedUsersArray, sortedProductsArray } from '../components/admin/helperFuncs';
 
 
 export const setProduct = (sel) => ({ type: 'SET_PRODUCT', sel });
@@ -8,6 +8,7 @@ export const setFormMethod = (sel) => ({ type: 'SET_FORM_METHOD', sel });
 export const setSortMethod = (sel) => ({ type: 'SET_SORT_METHOD', sel });
 export const setView = (sel) => ({ type: 'SET_VIEW', sel })
 export const sortUsers = (sel) => ({ type: 'SORT_USERS', sel });
+export const sortProducts = (sel) => ({ type: 'SORT_PRODUCTS', sel });
 
 
 //THUNKS
@@ -27,6 +28,18 @@ export const getUsers = () => {
         }
     }
 }
+
+export const getProducts = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get('/api/shop');
+            dispatch({ type: 'GET_PRODUCTS', payload: data });
+        } catch (error) {
+            console.log(error)
+        }
+    };
+};
+
 
 export const addUser = (form) => {
     return async (dispatch) => {
@@ -80,19 +93,17 @@ export const delUser = (id) => {
     }
 }
 
-const initialState = { view: false, sortMethod: "", formMethod: '', product: '', user: '', users: [] };
+const initialState = { view: false, sortMethod: "", formMethod: '', product: '', user: '', users: [], products: [] };
 
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'GET_PRODUCTS':
+            return { ...state, products: action.payload };
         case 'GET_USERS':
-            console.log(action)
             return { ...state, users: action.payload };
         case "ADD_USER":
             return { ...state, users: [action.payload, ...state.users] };
         case "EDIT_USER":
-            // if (action.error) {
-            //     return ({ ...state, error: action.error })
-            // }
             let prevState = state.users.filter(user => user.id !== action.payload.id);
             return { ...state, users: [action.payload, ...prevState] };
         case "DEL_USER":
@@ -109,7 +120,9 @@ const adminReducer = (state = initialState, action) => {
         case 'SET_SORT_METHOD':
             return { ...state, sortMethod: action.sel };
         case 'SORT_USERS':
-            return { ...state, users: returnFilteredArray(state.users, state.sortMethod, action.sel) };
+            return { ...state, users: sortedUsersArray(state.users, state.sortMethod, action.sel) };
+        case 'SORT_PRODUCTS':
+            return { ...state, products: sortedProductsArray(state.products, state.sortMethod, action.sel) };
         default:
             return state;
     }

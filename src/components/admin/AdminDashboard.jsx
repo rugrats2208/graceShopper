@@ -17,17 +17,23 @@ import {
   setFormMethod,
   setView,
   setSortMethod,
+  getProducts,
 } from "../../reducers/adminReducer";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const { view, formMethod, sortMethod } = useSelector((state) => state.admin);
+  const products = useSelector((state) => state.products);
 
   const renderTable = (sel) => (sel ? <UsersTable /> : <ProductsTable />);
 
   React.useEffect(() => {
     dispatch(getUsers());
   }, []);
+
+  React.useEffect(() => {
+    dispatch(getProducts());
+  }, [products]);
 
   return (
     <div className="adminDashboard">

@@ -16,7 +16,65 @@ export const removeDecimal = (str) => {
     return returnString;
 }
 
-export const returnFilteredArray = (arr, method, sel) => {
+export const sortedProductsArray = (arr, method, sel) => {
+    const array = [...arr];
+    switch (method) {
+        case "id":
+            return sel ? array.sort((a, b) => a.id - b.id) : array.sort((a, b) => b.id - a.id);
+        case 'name':
+            if (sel) {
+                return array.sort((a, b) => {
+                    if (a.name < b.name) {
+                        return -1
+                    }
+                    return 0
+                });
+            } else {
+                return array.sort((a, b) => {
+                    if (b.name < a.name) {
+                        return -1
+                    }
+                    return 0
+                });
+            }
+        case 'price':
+            if (sel) {
+                return array.sort((a, b) => {
+                    if (a.price < b.price) {
+                        return -1
+                    }
+                    return 0
+                });
+            } else {
+                return array.sort((a, b) => {
+                    if (b.price < a.price) {
+                        return -1
+                    }
+                    return 0
+                });
+            }
+        case 'stock':
+            if (sel) {
+                return array.sort((a, b) => {
+                    if (a.stock < b.stock) {
+                        return -1
+                    }
+                    return 0
+                });
+            } else {
+                return array.sort((a, b) => {
+                    if (b.stock < a.stock) {
+                        return -1
+                    }
+                    return 0
+                });
+            }
+        default:
+            return arr;
+    }
+};
+
+export const sortedUsersArray = (arr, method, sel) => {
     const array = [...arr]
     switch (method) {
         case "id":

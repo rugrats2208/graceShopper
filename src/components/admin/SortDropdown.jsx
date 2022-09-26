@@ -7,14 +7,16 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 
 //ACTIONS
-import { setSortMethod, sortUsers } from "../../reducers/adminReducer";
+import {
+  setSortMethod,
+  sortUsers,
+  sortProducts,
+} from "../../reducers/adminReducer";
 
 function SortDropdown() {
   const dispatch = useDispatch();
   const [dir, setDir] = React.useState(false);
-  const { formMethod, user, sortMethod, view } = useSelector(
-    (state) => state.admin
-  );
+  const { sortMethod, view } = useSelector((state) => state.admin);
 
   return (
     <>
@@ -26,9 +28,8 @@ function SortDropdown() {
               setDir(!dir);
             }
             if (sortMethod && !view) {
-              let productDir = false;
-              dispatch(sortProducts(productDir));
-              productDir = !productDir;
+              dispatch(sortProducts(dir));
+              setDir(!dir);
             }
           }}
           variant="secondary"
