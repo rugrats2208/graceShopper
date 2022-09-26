@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Dropdown from "react-bootstrap/Dropdown";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   getOrders,
   deleteOrderItem,
   changeQty,
-} from "../../reducers/orders/ordersReducer";
+} from '../../reducers/orders/ordersReducer';
 
 export default function Cart() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +42,7 @@ export default function Cart() {
       onToggle={() => setIsOpen(!isOpen)}
     >
       <Dropdown.Toggle variant="success" id="cart" title="Dropdown button">
-        <img src={isOpen ? "/x-icon.png" : "/shopping-cart-icon.jpg"} />
+        <img src={isOpen ? '/x-icon.png' : '/shopping-cart-icon.jpg'} />
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="cart-dropdown">

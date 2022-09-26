@@ -21,7 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10px;==
+  gap: 10px;
 }
 
 .product img {
@@ -253,3 +253,7 @@ footer {
   text-align: center;
   bottom: 0;
 } */
+
+.checkout {
+  margin-left: 50px;
+}

@@ -7,7 +7,7 @@ function AllProducts() {
 
   return (
     <div className="all-products">
-      <h1 className="list-title">All Products</h1>
+      <h1 className="list-title">All Vinyls</h1>
       <div className="all-products-list">
         {allProducts.map((product) => (
           <Product key={product.id} data={product} />
