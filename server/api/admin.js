@@ -26,8 +26,7 @@ router.put('/albums/:id', requireToken, isAdmin, async (req, res, next) => {
     try {
         const { name, price, qty, releaseDate, label } = req.body;
         const album = await Product.findByPk(req.params.id);
-        // res.send(await album.update({ name, price, stock: qty, releaseDate, label }));
-        res.send(await album.update({ name, price, qty, releaseDate, label }));
+        res.send(await album.update({ name, price, stock: qty, releaseDate, label }));
     } catch (error) {
         next(error);
     }

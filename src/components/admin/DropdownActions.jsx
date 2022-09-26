@@ -17,9 +17,11 @@ import {
   setUser,
 } from "../../reducers/adminReducer";
 
-function DropdownActions({ page }) {
+function SortDropdown() {
   const dispatch = useDispatch();
-  const { formMethod, product, user } = useSelector((state) => state.admin);
+  const { formMethod, product, user, view } = useSelector(
+    (state) => state.admin
+  );
 
   return (
     <>
@@ -39,10 +41,10 @@ function DropdownActions({ page }) {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (product.id && !page) {
+              if (product.id && !view) {
                 dispatch(setFormMethod("edit"));
               }
-              if (user.id && page) {
+              if (user.id && view) {
                 dispatch(setFormMethod("edit"));
               }
             }}
@@ -52,11 +54,11 @@ function DropdownActions({ page }) {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              if (product.id && !page) {
+              if (product.id && !view) {
                 dispatch(delProduct(product.id));
                 dispatch(setProduct(""));
               }
-              if (user.id && page) {
+              if (user.id && view) {
                 dispatch(delUser(user.id));
                 dispatch(setUser(""));
               }
@@ -68,9 +70,9 @@ function DropdownActions({ page }) {
         </Dropdown.Menu>
       </Dropdown>
 
-      {formMethod ? page ? <UserForm /> : <ProductForm /> : ""}
+      {formMethod ? view ? <UserForm /> : <ProductForm /> : ""}
     </>
   );
 }
 
-export default DropdownActions;
+export default SortDropdown;

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getOrders } from '../../reducers/orders/ordersReducer';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getOrders } from "../../reducers/orders/ordersReducer";
 
 function OrderHistory() {
   const allOrders = useSelector((state) => state.orders);
@@ -24,7 +24,7 @@ function OrderHistory() {
 
   function displayPrice(price) {
     price /= 100;
-    price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    price.toLocaleString("en-US", { style: "currency", currency: "USD" });
     return `$${price}`;
   }
 

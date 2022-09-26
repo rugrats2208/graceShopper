@@ -1,33 +1,59 @@
 import React from "react";
-import DropdownActions from "./DropdownActions";
-import ProductsTable from "./ProductsTable";
-import UsersTable from "./UsersTable";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, setFormMethod } from "../../reducers/adminReducer";
+
+//COMPONENTS
+import UsersTable from "./UsersTable";
+import ProductsTable from "./ProductsTable";
+import DropdownActions from "./DropdownActions";
+import SortDropdown from "./SortDropdown";
+import ErrorMessage from "./ErrorMessage";
+
+//BOOTSTRAP
+import Button from "react-bootstrap/Button";
+
+//ACTIONS
+import {
+  getUsers,
+  setFormMethod,
+  setView,
+  setSortMethod,
+  getProducts,
+} from "../../reducers/adminReducer";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
-  const { formMethod } = useSelector((state) => state.admin);
-  const [page, setPage] = React.useState(false);
+  const { view, formMethod, sortMethod } = useSelector((state) => state.admin);
+  const products = useSelector((state) => state.products);
+
+  const renderTable = (sel) => (sel ? <UsersTable /> : <ProductsTable />);
 
   React.useEffect(() => {
     dispatch(getUsers());
   }, []);
 
+  React.useEffect(() => {
+    dispatch(getProducts());
+  }, [products]);
+
   return (
     <div className="adminDashboard">
       <div className="options">
-        <DropdownActions page={page} />
-        <button
+        <DropdownActions />
+        <SortDropdown />
+        <Button
+          variant="primary"
+          size="sm"
           onClick={() => {
             if (formMethod) dispatch(setFormMethod(""));
-            setPage(!page);
+            if (sortMethod) dispatch(setSortMethod(""));
+            dispatch(setView(!view));
           }}
         >
-          {page ? "Switch to Products" : "Switch to Users"}
-        </button>
+          {view ? "Switch to Products" : "Switch to Users"}
+        </Button>
       </div>
-      {page ? <UsersTable /> : <ProductsTable />}
+      {renderTable(view)}
+      {<ErrorMessage />}
     </div>
   );
 };

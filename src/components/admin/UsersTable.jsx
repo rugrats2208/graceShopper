@@ -6,8 +6,12 @@ import { setUser } from "../../reducers/adminReducer";
 
 function UsersTable() {
   const dispatch = useDispatch();
+  const [id, setID] = React.useState(false);
   const users = useSelector((state) => state.admin.users);
-  const { formMethod, user } = useSelector((state) => state.admin);
+
+  const { formMethod, user, sortMethod, view } = useSelector(
+    (state) => state.admin
+  );
 
   const [currPage, setCurrPage] = React.useState(1);
   const [itemsPerPage] = React.useState(10);
@@ -27,6 +31,7 @@ function UsersTable() {
             <th>Username</th>
             <th>Password</th>
             <th>Email</th>
+            <th>Privileges</th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +52,7 @@ function UsersTable() {
                 <td>{endUser.username}</td>
                 <td>{"*******"}</td>
                 <td>{endUser.email}</td>
+                <td>{endUser.isAdmin ? "Administrator" : "User"}</td>
               </tr>
             );
           })}
