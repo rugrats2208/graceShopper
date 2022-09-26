@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-
+import { usdCurrencyFormatter, removeDecimal } from "./helperFuncs";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addProduct,
@@ -37,7 +37,7 @@ function ProductForm() {
         setForm({
           name: product.name,
           price: product.price,
-          qty: product.qty,
+          qty: product.stock,
           releaseDate: product.releaseDate,
           label: product.label,
         });
@@ -47,7 +47,7 @@ function ProductForm() {
     }
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     switch (formMethod) {
       case "add":
@@ -101,9 +101,12 @@ function ProductForm() {
           <Form.Control
             required
             type="number"
-            onChange={(evt) => setForm({ ...form, price: evt.target.value })}
+            onChange={(evt) => {
+              const cost = removeDecimal(`${evt.target.value}`);
+              setForm({ ...form, price: cost });
+            }}
             placeholder="Enter Album Price"
-            value={form.price}
+            value={form ? usdCurrencyFormatter(form.price) : ""}
           />
         </Col>
       </Row>
@@ -113,7 +116,9 @@ function ProductForm() {
           <Form.Control
             required
             type="number"
-            onChange={(evt) => setForm({ ...form, qty: evt.target.value })}
+            onChange={(evt) =>
+              setForm({ ...form, qty: Math.floor(evt.target.value) })
+            }
             placeholder="Enter Album Quantity"
             value={form.qty}
           />

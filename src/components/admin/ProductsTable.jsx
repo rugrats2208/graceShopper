@@ -49,7 +49,7 @@ function ProductsTable() {
                     price.length - 2
                   )}`}
                 </td>
-                <td>{item.qty}</td>
+                <td>{item.stock}</td>
               </tr>
             );
           })}

@@ -52,6 +52,7 @@ export const editUser = (id, form) => {
             dispatch({ type: 'EDIT_USER', payload: req.data });
         } catch (error) {
             console.log(error)
+            dispatch({ type: 'EDIT_USER', error: error })
         }
     }
 }
@@ -68,7 +69,7 @@ export const delUser = (id) => {
             });
             dispatch({ type: 'DEL_USER', payload: req.data.id });
         } catch (error) {
-
+            console.log(error)
         }
     }
 }
@@ -78,10 +79,14 @@ const initialState = { formMethod: '', product: '', user: '', users: [] };
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_USERS':
+            console.log(action)
             return { ...state, users: action.payload };
         case "ADD_USER":
             return { ...state, users: [action.payload, ...state.users] };
         case "EDIT_USER":
+            // if (action.error) {
+            //     return ({ ...state, error: action.error })
+            // }
             let prevState = state.users.filter(user => user.id !== action.payload.id);
             return { ...state, users: [action.payload, ...prevState] };
         case "DEL_USER":

@@ -4,7 +4,7 @@ import ProductsTable from "./ProductsTable";
 import UsersTable from "./UsersTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, setFormMethod } from "../../reducers/adminReducer";
-
+import ErrorMessage from "./ErrorMessage";
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const { formMethod } = useSelector((state) => state.admin);
@@ -28,6 +28,7 @@ const AdminDashboard = () => {
         </button>
       </div>
       {page ? <UsersTable /> : <ProductsTable />}
+      {<ErrorMessage />}
     </div>
   );
 };
