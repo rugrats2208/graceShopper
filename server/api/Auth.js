@@ -94,8 +94,8 @@ router.get('/loggedInInfo', requireToken, async (req, res, next) => {
 router.put('/loggedInEdit', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
-    const { username, password, email, fName, lName } = req.body;
-    await user.update({ username, password, email, fName, lName });
+    const { username, password, email, fName, lName, id } = req.body;
+    await user.update({ username, password, email, fName, lName, id });
     res.send(user);
   } catch (error) {
     console.error(error);

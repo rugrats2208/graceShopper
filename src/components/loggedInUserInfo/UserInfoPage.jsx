@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { LoggedInInfo, OrderHistory } from '../index';
+import { LoggedInInfo, OrderHistory, LoggedInEdit } from '../index';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../../reducers/signedInUserReducer';
@@ -15,7 +15,6 @@ function UserInfoPage() {
 
   useEffect(() => {
     if (userInfo !== {}) {
-      console.log('userInfo', userInfo);
       setInfoRetrieved(!infoRetrieved);
     }
   }, [userInfo]);
@@ -29,7 +28,8 @@ function UserInfoPage() {
         </div>
       ) : (
         <div className="successful-login">
-          <div className="logged-in-info">{<LoggedInInfo />}</div>
+          {/* <div className="logged-in-info">{<LoggedInInfo />}</div> */}
+          <div className="logged-in-edit">{<LoggedInEdit />}</div>
           <div className="order-history"> {<OrderHistory />}</div>
         </div>
       )}

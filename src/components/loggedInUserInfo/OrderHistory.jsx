@@ -27,9 +27,8 @@ function OrderHistory() {
     return `$${price}`;
   }
 
-  console.log(pastOrders);
   return (
-    <div>
+    <div className="past-orders">
       {pastOrders && pastOrders.length > 0 ? (
         <>
           <h1>Order History</h1>
@@ -37,21 +36,21 @@ function OrderHistory() {
             order.lineItems.map((lineItem) => {
               return (
                 <div key={lineItem.id}>
-                  <h3>Product: {lineItem.product.name}</h3>
+                  <h4>Product: {lineItem.product.name}</h4>
                   <h6>by: {lineItem.product.artist.name}</h6>
                   <img
                     src={lineItem.product.img}
                     height="100px"
                     width="100px"
                   />
-                  <h3>
+                  <h4>
                     Total:{' '}
                     {displayPrice(
                       lineItem.qty > 0
                         ? lineItem.qty * lineItem.product.price
                         : lineItem.product.price
                     )}
-                  </h3>
+                  </h4>
                 </div>
               );
             })

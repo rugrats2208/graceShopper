@@ -229,3 +229,13 @@ input.form-control:focus {
 .user-info-page {
   margin: 30px;
 }
+
+/************************ Logged In Edit Form ************************/
+
+#logged-in-form {
+  margin: 50px;
+}
+
+.past-orders {
+  margin: 50px;
+}
