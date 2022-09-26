@@ -1,52 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { Formik } from "formik";
-import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
-import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
+import React, { useState, useEffect } from 'react';
+import { Formik } from 'formik';
+import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 import {
   getOrders,
   deleteOrderItem,
-  updateQty,
-} from "../../reducers/orders/ordersReducer";
-import styles from "./form-validation.module.css";
+  changeQty,
+} from '../../reducers/orders/ordersReducer';
+import styles from './form-validation.module.css';
 
 //country and state data for form fill
-import { Country, State, City } from "country-state-city";
+import { Country, State, City } from 'country-state-city';
 const countries = Country.getAllCountries();
-const states = State.getStatesOfCountry("US");
+const states = State.getStatesOfCountry('US');
 
 //define the Yup validation schema for checkout
 const CheckoutSchema = Yup.object().shape({
   fName: Yup.string()
     .trim()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
   lName: Yup.string()
     .trim()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
   username: Yup.string()
     .trim()
-    .min(5, "Too Short!")
-    .max(25, "Too Long!")
-    .required("Required"),
-  email: Yup.string().trim().email("Invalid email").required("Required"),
-  address: Yup.string().trim().required("Required"),
-  address2: Yup.string().trim().max(20, "Too long!"),
-  country: Yup.string().trim().required("Required"),
-  state: Yup.string().trim().required("Required"),
+    .min(5, 'Too Short!')
+    .max(25, 'Too Long!')
+    .required('Required'),
+  email: Yup.string().trim().email('Invalid email').required('Required'),
+  address: Yup.string().trim().required('Required'),
+  address2: Yup.string().trim().max(20, 'Too long!'),
+  country: Yup.string().trim().required('Required'),
+  state: Yup.string().trim().required('Required'),
   zip: Yup.string()
     .required()
-    .matches(/^[0-9]+$/, "Must be only digits")
-    .min(5, "Must be exactly 5 digits")
-    .max(5, "Must be exactly 5 digits"),
+    .matches(/^[0-9]+$/, 'Must be only digits')
+    .min(5, 'Must be exactly 5 digits')
+    .max(5, 'Must be exactly 5 digits'),
 });
 
 export default function Checkout() {
@@ -165,15 +165,15 @@ export default function Checkout() {
         <div className="row g-3">
           <Formik
             initialValues={{
-              username: "",
-              email: "",
-              fName: "",
-              lName: "",
-              address: "",
-              address2: "",
-              country: "",
-              state: "",
-              zip: "",
+              username: '',
+              email: '',
+              fName: '',
+              lName: '',
+              address: '',
+              address2: '',
+              country: '',
+              state: '',
+              zip: '',
             }}
             validationSchema={CheckoutSchema}
             onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -184,7 +184,7 @@ export default function Checkout() {
               resetForm();
               setSubmitting(false);
               props.onHide();
-              navigate("/");
+              navigate('/');
             }}
           >
             {({
@@ -212,7 +212,7 @@ export default function Checkout() {
                         onBlur={handleBlur}
                         value={values.fName}
                         className={
-                          touched.firstName && errors.firstName ? "error" : null
+                          touched.firstName && errors.firstName ? 'error' : null
                         }
                       />
                       {errors.fName && touched.fName ? (
@@ -234,7 +234,7 @@ export default function Checkout() {
                         onBlur={handleBlur}
                         value={values.lName}
                         className={
-                          touched.lName && errors.lName ? "error" : null
+                          touched.lName && errors.lName ? 'error' : null
                         }
                       />
                       {errors.lName && touched.lName ? (
@@ -256,7 +256,7 @@ export default function Checkout() {
                         onBlur={handleBlur}
                         value={values.email}
                         className={
-                          touched.email && errors.email ? "error" : null
+                          touched.email && errors.email ? 'error' : null
                         }
                       />
                       {errors.email && touched.email ? (
@@ -282,7 +282,7 @@ export default function Checkout() {
                         value={values.username}
                         autoComplete="username"
                         className={
-                          touched.username && errors.username ? "error" : null
+                          touched.username && errors.username ? 'error' : null
                         }
                       />
                       {errors.username && touched.username ? (
@@ -307,7 +307,7 @@ export default function Checkout() {
                         onBlur={handleBlur}
                         value={values.address}
                         className={
-                          touched.address && errors.address ? "error" : null
+                          touched.address && errors.address ? 'error' : null
                         }
                       />
                       {errors.address && touched.address ? (
@@ -332,7 +332,7 @@ export default function Checkout() {
                         onBlur={handleBlur}
                         value={values.address2}
                         className={
-                          touched.address2 && errors.address2 ? "error" : null
+                          touched.address2 && errors.address2 ? 'error' : null
                         }
                       />
                       {errors.address2 && touched.address2 ? (
@@ -355,7 +355,7 @@ export default function Checkout() {
                         onBlur={handleBlur}
                         value={values.country}
                         className={
-                          touched.country && errors.country ? "error" : null
+                          touched.country && errors.country ? 'error' : null
                         }
                       >
                         <option value={0}>Choose a country</option>
@@ -388,7 +388,7 @@ export default function Checkout() {
                         onBlur={handleBlur}
                         value={values.state}
                         className={
-                          touched.state && errors.state ? "error" : null
+                          touched.state && errors.state ? 'error' : null
                         }
                       >
                         <option value={0}>Choose a state</option>
@@ -416,7 +416,7 @@ export default function Checkout() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.zip}
-                        className={touched.zip && errors.zip ? "error" : null}
+                        className={touched.zip && errors.zip ? 'error' : null}
                       />
                       {errors.zip && touched.zip ? (
                         <div className="error-message">{errors.zip}</div>

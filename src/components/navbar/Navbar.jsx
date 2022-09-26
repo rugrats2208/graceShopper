@@ -81,11 +81,14 @@ export default function Navigation() {
           <MDBCollapse navbar show={showBasic}>
             <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
               <MDBNavbarItem className={styles.nav_header_links}>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/" onClick={() => setShowBasic(!showBasic)}>
+                  Home
+                </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem className={styles.nav_header_links}>
                 <NavLink
                   to="/allProducts"
+                  onClick={() => setShowBasic(!showBasic)}
                   style={({ isActive }) => ({
                     fontWeight: isActive ? 'bold' : 'normal',
                   })}
@@ -97,6 +100,7 @@ export default function Navigation() {
                 {isAdmin ? (
                   <NavLink
                     to="/admin"
+                    onClick={() => setShowBasic(!showBasic)}
                     style={({ isActive }) => ({
                       fontWeight: isActive ? 'bold' : 'normal',
                     })}
@@ -112,7 +116,12 @@ export default function Navigation() {
             <div className={styles.nav_header_container}>
               <Navbar.Text className="me-3">
                 Signed in as:{' '}
-                <NavLink to={`/userInfoPage`}>{username || 'guest'} </NavLink>
+                <NavLink
+                  to={`/userInfoPage`}
+                  onClick={() => setShowBasic(!showBasic)}
+                >
+                  {username || 'guest'}{' '}
+                </NavLink>
               </Navbar.Text>
               {/* Cart Icon */}
               <div className={styles.cart_icon}>
