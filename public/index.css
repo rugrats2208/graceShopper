@@ -1,225 +1,254 @@
 html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 main {
-    padding-top: 56px;
+  padding-top: 56px;
 }
 
 body {
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 /************************ product component in featured/new/all products views ************************/
 
 .product {
-    margin: 25px;
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  margin: 25px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .product img {
-    box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
-    height: 200px;
-    width: 200px;
+  box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
+  height: 200px;
+  width: 200px;
 }
 
 .product-button {
-    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
-    width: 200px;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
+  width: 200px;
 }
 
 .product h1,
 .product h3 {
-    font-size: 150%;
+  font-size: 150%;
 }
 
 a.link {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .link {
-    width: 200px;
+  width: 200px;
 }
 
 /************************ header for new/featured/all products view ************************/
 .list-title {
-    margin-bottom: 20px;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 80px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 80px;
 }
 
 /************************ featured products component ************************/
 
 .featured-products {
-    padding-top: 5px;
+  padding-top: 5px;
 }
 .featured-products-list {
-    background-color: #313131;
-    display: flex;
-    overflow: scroll;
+  background-color: #313131;
+  display: flex;
+  overflow: scroll;
 }
 
 /************************ new products component ************************/
 .new-products {
-    padding-top: 5px;
+  padding-top: 5px;
 }
 .new-products-list {
-    background-color: #313131;
-    display: flex;
-    overflow: scroll;
+  background-color: #313131;
+  display: flex;
+  overflow: scroll;
 }
 
 /************************ all products component ************************/
 .all-products {
-    padding-top: 5px;
+  padding-top: 5px;
 }
 .all-products-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    border: 20px;
-    width: fit-content;
-    background-color: #313131;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 20px;
+  width: fit-content;
+  background-color: #313131;
 }
 
 /************************ single product component ************************/
 
 .single-product {
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .single-product h3 {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 /************************ single artist component ************************/
 .single-artist {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .single-artist li {
-    list-style: none;
+  list-style: none;
 }
 
 /************************ shopping cart ************************/
 #cart {
-    background-color: white;
-    position: fixed;
-    right: 0vw;
-    top: 74px;
+  background-color: white;
+  position: fixed;
+  right: 0vw;
+  top: 74px;
 }
 #cart img {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 .dropdown-menu {
-    max-height: 120px;
-    overflow-y: scroll;
+  max-height: 120px;
+  overflow-y: scroll;
 }
 
 .dropdown-menu.cart-dropdown {
-    min-height: 300px;
-    max-height: 500px;
-    overflow-y: scroll;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 .cart-title {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 a.cart-delete-btn:hover {
-    background-color: red;
+  background-color: red;
 }
 
 #checkout-section {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 /************************ admin page ************************/
 
 .adminDashboard {
-    height: 100vh;
-    background: #313131;
+  height: 100vh;
+  background: #313131;
 }
 
 .adminDashboard .options {
-    display: flex;
+  display: flex;
 }
 .adminDashboard .options > * {
-    margin: 8px;
+  margin: 8px;
 }
 .adminDashboard > .dropdown {
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
 }
 .selected {
-    box-sizing: border-box;
-    border-bottom: 3px solid #00b74a;
+  box-sizing: border-box;
+  border-bottom: 3px solid #00b74a;
 }
 
 .adminForm {
-    padding: 2rem;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: #f9f9f9;
+  padding: 2rem;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #f9f9f9;
 }
 
 .row > * {
-    margin: 8px;
+  margin: 8px;
 }
 input.form-control:focus {
-    outline: solid;
-    outline-color: #00b74a;
-    outline-width: medium;
+  outline: solid;
+  outline-color: #00b74a;
+  outline-width: medium;
 }
 
 .pageNumbers {
-    display: flex;
-    list-style: none;
-    justify-content: center;
+  display: flex;
+  list-style: none;
+  justify-content: center;
 }
 .pageNumbers li {
-    margin: 0.5rem;
+  margin: 0.5rem;
 }
 .pageNumbers li a {
-    color: #f9f9f9;
+  color: #f9f9f9;
 }
 .pageNumbers li a:hover {
-    cursor: pointer;
-    color: #00b74a;
+  cursor: pointer;
+  color: #00b74a;
 }
 .pageNumbers li a.active {
-    color: #00b74a;
+  color: #00b74a;
 }
 
 /************************ PAGE NOT FOUND ************************/
 .pageNotFound {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pageNotFound p {
-    text-align: center;
+  text-align: center;
 }
+
+/************************ User Info Page ************************/
+.user-info-page {
+  margin: 30px;
+}
+
+/************************ Logged In Edit Form ************************/
+
+#logged-in-form {
+  margin: 50px;
+}
+
+.past-orders {
+  margin-top: 100px;
+  margin-left: 50px;
+}
+
+.past-order {
+  margin-top: 40px;
+}
+
+/************************ Footer ************************/
+/* 
+footer {
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+} */
