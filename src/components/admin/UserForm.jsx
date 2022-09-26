@@ -47,7 +47,7 @@ function UserForm() {
   };
 
   const handleSubmit = (evt) => {
-    let isAdmin = evt.target[4].value;
+    let isAdmin = evt.target[5].value;
     isAdmin === "true" ? (isAdmin = true) : (isAdmin = false);
     evt.preventDefault();
     switch (formMethod) {
@@ -64,7 +64,7 @@ function UserForm() {
         dispatch(setFormMethod(""));
         return;
       case "edit":
-        dispatch(editUser(user.id, { ...form, form }));
+        dispatch(editUser(user.id, { ...form, isAdmin }));
         setForm({
           fName: "",
           lName: "",
@@ -169,7 +169,7 @@ function UserForm() {
         <Col>
           <label htmlFor="privileges">Admin Privileges</label>
           <Form.Select size="sm">
-            <option value={false}>Select Privileges</option>
+            <option value={"false"}>Select Privileges</option>
             <option value={false}>User</option>
             <option value={true}>Administrator</option>
           </Form.Select>

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getLoggedInUser } from '../../reducers/signedInUserReducer';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function LoggedInInfo() {
   const userInfo = useSelector((state) => state.signedInUser);

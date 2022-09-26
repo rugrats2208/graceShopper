@@ -6,12 +6,9 @@ import { setUser } from "../../reducers/adminReducer";
 
 function UsersTable() {
   const dispatch = useDispatch();
-  const [id, setID] = React.useState(false);
   const users = useSelector((state) => state.admin.users);
 
-  const { formMethod, user, sortMethod, view } = useSelector(
-    (state) => state.admin
-  );
+  const { formMethod, user } = useSelector((state) => state.admin);
 
   const [currPage, setCurrPage] = React.useState(1);
   const [itemsPerPage] = React.useState(10);

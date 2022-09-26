@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { LoggedInInfo, OrderHistory, LoggedInEdit } from '../index';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getLoggedInUser } from '../../reducers/signedInUserReducer';
+import React, { useState, useEffect } from "react";
+import { OrderHistory, LoggedInEdit } from "../index";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getLoggedInUser } from "../../reducers/signedInUserReducer";
 
 function UserInfoPage() {
   const [infoRetrieved, setInfoRetrieved] = useState(false);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getLoggedInUser,
@@ -148,7 +148,7 @@ function LoggedInEdit() {
           className="form-control"
           name="password"
           value={formik.values.password || ''}
-          placeholder="**********"
+          placeholder="Password"
           onChange={formik.handleChange}
         />
         {formik.errors.password && formik.touched.password && (
