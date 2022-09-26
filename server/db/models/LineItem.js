@@ -12,8 +12,19 @@ const LineItem = conn.define(
     {
         hooks: {
             beforeCreate: async lineItem => {
-                //TODO: check for duplicate items
-                console.log('does before create fire?');
+                const currentItems = await LineItem.findAll({
+                    where: { orderId: lineItem.orderId },
+                });
+                console.log('new item id: ', lineItem.productId);
+                currentItems.forEach(item =>
+                    console.log('product ids: ', item.productId)
+                );
+                if (
+                    currentItems.some(
+                        item => item.productId === lineItem.productId
+                    )
+                )
+                    throw new Error('Item already exists in order');
             },
             beforeSave: async lineItem => {
                 if (lineItem.qty < 1)
