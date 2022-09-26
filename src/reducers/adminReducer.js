@@ -3,8 +3,10 @@ import axios from 'axios';
 export const setProduct = (sel) => ({ type: 'SET_PRODUCT', sel });
 export const setUser = (sel) => ({ type: 'SET_USER', sel });
 export const setFormMethod = (sel) => ({ type: 'SET_FORM_METHOD', sel });
+export const setSortMethod = (sel) => ({ type: 'SET_SORT_METHOD', sel });
+export const setView = (sel) => ({ type: 'SET_VIEW', sel })
 
-//THUNK
+//THUNKS
 export const getUsers = () => {
     return async (dispatch) => {
         try {
@@ -74,7 +76,7 @@ export const delUser = (id) => {
     }
 }
 
-const initialState = { formMethod: '', product: '', user: '', users: [] };
+const initialState = { view: false, sortMethod: "", formMethod: '', product: '', user: '', users: [] };
 
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -92,12 +94,16 @@ const adminReducer = (state = initialState, action) => {
         case "DEL_USER":
             let prevUsers = state.users.filter(user => user.id !== action.payload);
             return { ...state, users: prevUsers };
+        case 'SET_VIEW':
+            return { ...state, view: action.sel };
         case 'SET_PRODUCT':
             return { ...state, product: action.sel };
         case 'SET_USER':
             return { ...state, user: action.sel };
         case 'SET_FORM_METHOD':
             return { ...state, formMethod: action.sel };
+        case 'SET_SORT_METHOD':
+            return { ...state, sortMethod: action.sel };
         default:
             return state;
     }

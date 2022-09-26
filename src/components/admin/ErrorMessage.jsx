@@ -3,8 +3,16 @@ import { useSelector } from "react-redux";
 import "./css/style.css";
 
 const ErrorMessage = () => {
+  const [state, setState] = React.useState(false);
   const error = useSelector((state) => state.admin.error);
-  return <div className="error">{error?.message}</div>;
+  if (error?.message) {
+    setState(!state);
+    setTimeout(() => {
+      setState(!state);
+    }, 100);
+  }
+
+  return state ? <div className="error">{error?.message}</div> : "";
 };
 
 export default ErrorMessage;
