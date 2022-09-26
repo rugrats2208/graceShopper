@@ -157,7 +157,9 @@ function UserForm() {
           <Form.Control
             required
             type="email"
-            onChange={(evt) => setForm({ ...form, email: evt.target.value })}
+            onChange={(evt) =>
+              setForm({ ...form, email: evt.target.value.toLowerCase() })
+            }
             placeholder="Enter Email Address"
             value={form.email}
           />
