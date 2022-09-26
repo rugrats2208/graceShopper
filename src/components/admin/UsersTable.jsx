@@ -31,6 +31,7 @@ function UsersTable() {
             <th>Username</th>
             <th>Password</th>
             <th>Email</th>
+            <th>Privileges</th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +52,7 @@ function UsersTable() {
                 <td>{endUser.username}</td>
                 <td>{"*******"}</td>
                 <td>{endUser.email}</td>
+                <td>{endUser.isAdmin ? "Administrator" : "User"}</td>
               </tr>
             );
           })}
