@@ -16,46 +16,91 @@ export const removeDecimal = (str) => {
     return returnString;
 }
 
-export const returnFilteredArray = (arr, method) => {
+export const returnFilteredArray = (arr, method, sel) => {
     const array = [...arr]
     switch (method) {
         case "id":
-            return array.sort((a, b) => a.id - b.id);
+            return sel ? array.sort((a, b) => a.id - b.id) : array.sort((a, b) => b.id - a.id);
         case 'first':
-            return array.sort((a, b) => {
-                if (a.fName < b.fName) {
-                    return -1
-                }
-                return 0
-            });
+            if (sel) {
+                return array.sort((a, b) => {
+                    if (a.fName < b.fName) {
+                        return -1
+                    }
+                    return 0
+                });
+            } else {
+                return array.sort((a, b) => {
+                    if (b.fName < a.fName) {
+                        return -1
+                    }
+                    return 0
+                });
+            }
         case 'last':
-            return array.sort((a, b) => {
-                if (a.lName < b.lName) {
-                    return -1
-                }
-                return 0
-            });
+            if (sel) {
+                return array.sort((a, b) => {
+                    if (a.lName < b.lName) {
+                        return -1
+                    }
+                    return 0
+                });
+            } else {
+                return array.sort((a, b) => {
+                    if (b.lName < a.lName) {
+                        return -1
+                    }
+                    return 0
+                });
+            }
         case 'username':
-            return array.sort((a, b) => {
-                if (a.username < b.username) {
-                    return -1
-                }
-                return 0
-            });
+            if (sel) {
+                return array.sort((a, b) => {
+                    if (a.username < b.username) {
+                        return -1
+                    }
+                    return 0
+                });
+            } else {
+                return array.sort((a, b) => {
+                    if (b.username < a.username) {
+                        return -1
+                    }
+                    return 0
+                });
+            }
         case 'email':
-            return array.sort((a, b) => {
-                if (a.email < b.email) {
-                    return -1
-                }
-                return 0
-            });
+            if (sel) {
+                return array.sort((a, b) => {
+                    if (a.email < b.email) {
+                        return -1
+                    }
+                    return 0
+                });
+            } else {
+                return array.sort((a, b) => {
+                    if (b.email < a.email) {
+                        return -1
+                    }
+                    return 0
+                });
+            }
         case 'admin':
-            return array.sort((a, b) => {
-                if (a.isAdmin < b.isAdmin) {
-                    return -1
-                }
-                return 0
-            });
+            if (sel) {
+                return array.sort((a, b) => {
+                    if (a.isAdmin < b.isAdmin) {
+                        return -1
+                    }
+                    return 0
+                });
+            } else {
+                return array.sort((a, b) => {
+                    if (b.isAdmin < a.isAdmin) {
+                        return -1
+                    }
+                    return 0
+                });
+            }
         default:
             return arr;
     }

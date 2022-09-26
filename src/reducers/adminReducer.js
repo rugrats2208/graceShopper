@@ -7,7 +7,7 @@ export const setUser = (sel) => ({ type: 'SET_USER', sel });
 export const setFormMethod = (sel) => ({ type: 'SET_FORM_METHOD', sel });
 export const setSortMethod = (sel) => ({ type: 'SET_SORT_METHOD', sel });
 export const setView = (sel) => ({ type: 'SET_VIEW', sel })
-export const sortUsers = () => ({ type: 'SORT_USERS' });
+export const sortUsers = (sel) => ({ type: 'SORT_USERS', sel });
 
 
 //THUNKS
@@ -109,7 +109,7 @@ const adminReducer = (state = initialState, action) => {
         case 'SET_SORT_METHOD':
             return { ...state, sortMethod: action.sel };
         case 'SORT_USERS':
-            return { ...state, users: returnFilteredArray(state.users, state.sortMethod) };
+            return { ...state, users: returnFilteredArray(state.users, state.sortMethod, action.sel) };
         default:
             return state;
     }

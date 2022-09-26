@@ -11,6 +11,7 @@ import { setSortMethod, sortUsers } from "../../reducers/adminReducer";
 
 function SortDropdown() {
   const dispatch = useDispatch();
+  const [dir, setDir] = React.useState(false);
   const { formMethod, user, sortMethod, view } = useSelector(
     (state) => state.admin
   );
@@ -21,7 +22,13 @@ function SortDropdown() {
         <Button
           onClick={() => {
             if (sortMethod && view) {
-              dispatch(sortUsers());
+              dispatch(sortUsers(dir));
+              setDir(!dir);
+            }
+            if (sortMethod && !view) {
+              let productDir = false;
+              dispatch(sortProducts(productDir));
+              productDir = !productDir;
             }
           }}
           variant="secondary"
@@ -71,10 +78,30 @@ function SortDropdown() {
           </Dropdown.Menu>
         ) : (
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">ID</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Name</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Price</Dropdown.Item>
-            <Dropdown.Item href="#/action-4">Stock</Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => dispatch(setSortMethod("id"))}
+              href="#/action-1"
+            >
+              ID
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => dispatch(setSortMethod("name"))}
+              href="#/action-2"
+            >
+              Name
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => dispatch(setSortMethod("price"))}
+              href="#/action-3"
+            >
+              Price
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => dispatch(setSortMethod("stock"))}
+              href="#/action-4"
+            >
+              Stock
+            </Dropdown.Item>
           </Dropdown.Menu>
         )}
       </Dropdown>
