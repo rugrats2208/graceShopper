@@ -7,17 +7,22 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 
 //ACTIONS
-import { setSortMethod } from "../../reducers/adminReducer";
+import { setSortMethod, sortUsers } from "../../reducers/adminReducer";
 
 function SortDropdown() {
   const dispatch = useDispatch();
-  const { sortMethod, view } = useSelector((state) => state.admin);
+  const { formMethod, user, sortMethod, view } = useSelector(
+    (state) => state.admin
+  );
+
   return (
     <>
       <Dropdown as={ButtonGroup}>
         <Button
           onClick={() => {
-            console.log("toggled");
+            if (sortMethod && view) {
+              dispatch(sortUsers());
+            }
           }}
           variant="secondary"
         >

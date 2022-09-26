@@ -12,11 +12,16 @@ import ErrorMessage from "./ErrorMessage";
 import Button from "react-bootstrap/Button";
 
 //ACTIONS
-import { getUsers, setFormMethod, setView } from "../../reducers/adminReducer";
+import {
+  getUsers,
+  setFormMethod,
+  setView,
+  setSortMethod,
+} from "../../reducers/adminReducer";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
-  const { formMethod, view } = useSelector((state) => state.admin);
+  const { view, formMethod, sortMethod } = useSelector((state) => state.admin);
 
   const renderTable = (sel) => (sel ? <UsersTable /> : <ProductsTable />);
 
@@ -34,6 +39,7 @@ const AdminDashboard = () => {
           size="sm"
           onClick={() => {
             if (formMethod) dispatch(setFormMethod(""));
+            if (sortMethod) dispatch(setSortMethod(""));
             dispatch(setView(!view));
           }}
         >

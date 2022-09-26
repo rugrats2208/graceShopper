@@ -1,10 +1,14 @@
 import axios from 'axios';
+import { returnFilteredArray } from '../components/admin/helperFuncs';
+
 
 export const setProduct = (sel) => ({ type: 'SET_PRODUCT', sel });
 export const setUser = (sel) => ({ type: 'SET_USER', sel });
 export const setFormMethod = (sel) => ({ type: 'SET_FORM_METHOD', sel });
 export const setSortMethod = (sel) => ({ type: 'SET_SORT_METHOD', sel });
 export const setView = (sel) => ({ type: 'SET_VIEW', sel })
+export const sortUsers = () => ({ type: 'SORT_USERS' });
+
 
 //THUNKS
 export const getUsers = () => {
@@ -104,9 +108,13 @@ const adminReducer = (state = initialState, action) => {
             return { ...state, formMethod: action.sel };
         case 'SET_SORT_METHOD':
             return { ...state, sortMethod: action.sel };
+        case 'SORT_USERS':
+            return { ...state, users: returnFilteredArray(state.users, state.sortMethod) };
         default:
             return state;
     }
 }
 
 export default adminReducer;
+
+
