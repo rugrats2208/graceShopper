@@ -64,15 +64,16 @@ export default function Navigation() {
               loading="lazy"
             />
           </NavLink>
-          <MDBNavbarBrand className={styles.nav_title} href="/">
-            Grace Shopper Records
-          </MDBNavbarBrand>
-
+          <NavLink to="/">
+            <MDBNavbarBrand className={styles.nav_title}>
+              Grace Shopper Records
+            </MDBNavbarBrand>
+          </NavLink>
           <MDBNavbarToggler
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            onClick={() => setShowBasic(!showBasic)}
+            onClick={() => setShowBasic(showBasic ? false : true)}
           >
             <MDBIcon icon="bars" fas />
           </MDBNavbarToggler>
@@ -80,11 +81,17 @@ export default function Navigation() {
           <MDBCollapse navbar show={showBasic}>
             <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
               <MDBNavbarItem className={styles.nav_header_links}>
-                <NavLink to="/">Home</NavLink>
+                <NavLink
+                  to="/"
+                  onClick={() => setShowBasic(showBasic ? false : true)}
+                >
+                  Home
+                </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem className={styles.nav_header_links}>
                 <NavLink
                   to="/allProducts"
+                  onClick={() => setShowBasic(showBasic ? false : true)}
                   style={({ isActive }) => ({
                     fontWeight: isActive ? "bold" : "normal",
                   })}
@@ -96,6 +103,7 @@ export default function Navigation() {
                 {isAdmin ? (
                   <NavLink
                     to="/admin"
+                    onClick={() => setShowBasic(showBasic ? false : true)}
                     style={({ isActive }) => ({
                       fontWeight: isActive ? "bold" : "normal",
                     })}
@@ -111,7 +119,12 @@ export default function Navigation() {
             <div className={styles.nav_header_container}>
               <Navbar.Text className="me-3">
                 Signed in as:{" "}
-                <NavLink to={`/userInfoPage`}>{username || "guest"} </NavLink>
+                <NavLink
+                  to={`/userInfoPage`}
+                  onClick={() => setShowBasic(showBasic ? false : true)}
+                >
+                  {username || "guest"}{" "}
+                </NavLink>
               </Navbar.Text>
               {/* Cart Icon */}
               <div className={styles.cart_icon}>
