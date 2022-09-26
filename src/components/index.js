@@ -18,3 +18,5 @@ export { default as LoggedInEdit } from './loggedInUserInfo/LoggedInEdit';
 export { default as UserInfoPage } from './loggedInUserInfo/UserInfoPage';
 
 export { default as Cart } from './cart/Cart';
+
+export { default as Checkout } from './checkout/Checkout';

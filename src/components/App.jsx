@@ -20,9 +20,7 @@ import {
   Signup,
   Cart,
   OrderHistory,
-  LoggedInInfo,
-  UserInfoPage,
-  LoggedInEdit,
+  Checkout,
 } from './index';
 
 function App() {
@@ -45,10 +43,7 @@ function App() {
         <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
         <Route path={'/featuredProducts'} element={<FeaturedProducts />} />
         <Route path={'/newProductReleases'} element={<NewProductReleases />} />
-        <Route path={'/userInfoPage'} element={<UserInfoPage />} />
-        <Route path={'/orderHistory'} element={<OrderHistory />} />
-        <Route path={'/loggedInInfo'} element={<LoggedInInfo />} />
-        <Route path={'/loggedInEdit'} element={<LoggedInEdit />} />
+        <Route path={'/checkout'} element={<Checkout />} />
         <Route element={<PrivateRoutes />}>
           <Route path={'/admin'} element={<AdminDashboard />} />
         </Route>

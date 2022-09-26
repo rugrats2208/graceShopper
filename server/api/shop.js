@@ -128,6 +128,23 @@ router.put('/orders', requireToken, async (req, res, next) => {
   }
 });
 
+//PUT api/shop/orders/qty
+router.put('/orders/qty', requireToken, async (req, res, next) => {
+    try {
+        await LineItem.update(
+            { qty: req.body.num },
+            {
+                where: { id: req.body.itemId },
+                individualHooks: true,
+            }
+        );
+        res.sendStatus(200);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
 // PUT api/shop/orders/:prodId
 router.put('/orders/:prodId', requireToken, async (req, res, next) => {
   try {

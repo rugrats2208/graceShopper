@@ -3,6 +3,7 @@ import {
   MDBCollapse,
   MDBContainer,
   MDBIcon,
+  MDBBadge,
   MDBNavbar,
   MDBNavbarBrand,
   MDBNavbarItem,
@@ -24,6 +25,7 @@ export default function Navigation() {
   const dispatch = useDispatch();
   //grab the username if logged in
   const username = useSelector((state) => state.auth.username);
+  const userId = useSelector((state) => state.auth.id);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
 
   //modal handlers
@@ -43,19 +45,27 @@ export default function Navigation() {
     navigate('/');
   }
 
+  //return only the active order lineItems or empty array
+  const activeOrder = useSelector((state) =>
+    state.orders.find((order) => !order.complete)
+  ) || { lineItems: [] };
+  const { lineItems } = activeOrder;
+
   return (
     <>
       {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
       <MDBNavbar expand="lg" dark bgColor="dark" fixed="top">
         <MDBContainer fluid>
-          <img
-            className={styles.logo}
-            src={vinyl}
-            height="50"
-            alt="Grace Shopper Records Logo"
-            loading="lazy"
-          />
-          <MDBNavbarBrand className={styles.nav_title} href="#">
+          <NavLink to="/">
+            <img
+              className={styles.logo}
+              src={vinyl}
+              height="50"
+              alt="Grace Shopper Records Logo"
+              loading="lazy"
+            />
+          </NavLink>
+          <MDBNavbarBrand className={styles.nav_title} href="/">
             Grace Shopper Records
           </MDBNavbarBrand>
 
@@ -98,28 +108,36 @@ export default function Navigation() {
                 )}
               </MDBNavbarItem>
             </MDBNavbarNav>
+            {/* Signed in as */}
             <div className={styles.nav_header_container}>
-              <Navbar.Text className="me-2">
+              <Navbar.Text className="me-3">
                 Signed in as:{' '}
-                <NavLink to="/userInfoPage">{username || 'guest'}</NavLink>
+                <NavLink to={`/orderHistory/${userId}`}>
+                  {username || 'guest'}{' '}
+                </NavLink>
               </Navbar.Text>
               {/* Cart Icon */}
               <div className={styles.cart_icon}>
-                <a className="text-reset me-3" href="#">
-                  <i className="fas fa-shopping-cart"></i>
+                <a className="text-reset me-3" href="/checkout">
+                  <MDBIcon fas icon="shopping-cart" size="lg" />{' '}
+                  <MDBBadge color="danger" notification pill>
+                    {lineItems.length === 0 ? '' : lineItems.length}
+                  </MDBBadge>
                 </a>
               </div>
+              {/* signin / sign out */}
               {!window.localStorage.getItem('isLoggedIn') && (
                 <MDBBtn
                   color="secondary"
                   variant="primary"
+                  size="sm"
                   onClick={handleShowLog}
                 >
                   Sign In
                 </MDBBtn>
               )}
               {window.localStorage.getItem('isLoggedIn') && (
-                <MDBBtn color="secondary" onClick={handleLogout}>
+                <MDBBtn color="secondary" size="sm" onClick={handleLogout}>
                   Log Out
                 </MDBBtn>
               )}

@@ -58,8 +58,8 @@ router.post('/signup', async (req, res, next) => {
 // matches GET requests to /api/auth/me - returns logged in user data
 router.get('/me', requireToken, async (req, res, next) => {
   try {
-    const { id, username, isAdmin } = req.user;
-    const userData = { id, username, isAdmin };
+    const { id, username, isAdmin, fName, lName, email } = req.user;
+    const userData = { id, username, fName, lName, email, isAdmin };
     res.json(userData);
   } catch (err) {
     next(err);
@@ -77,8 +77,42 @@ router.get('/userInfo/:id', requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-//user info page, gives a logged in user their profile information, route: /api/auth/loggedInInfo
-router.get('/loggedInInfo', requireToken, async (req, res, next) => {
+//route for determining if username exists on registration. returns true if ok, false if it exists
+router.get('/userExists/:username', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { username: req.params.username },
+    });
+    if (user) {
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+//route for determining if email exists on registration. returns true if ok, false if it exists
+router.get('/emailExists/:email', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { email: req.params.email },
+    });
+    if (user) {
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+//user info page, gives a logged in user their profile information
+router.get('/userInfo', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
     const { id, username, email, fName, lName } = req.user;
