@@ -28,7 +28,6 @@ function UserInfoPage() {
         </div>
       ) : (
         <div className="successful-login">
-          {/* <div className="logged-in-info">{<LoggedInInfo />}</div> */}
           <div className="logged-in-edit">{<LoggedInEdit />}</div>
           <div className="order-history"> {<OrderHistory />}</div>
         </div>

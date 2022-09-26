@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,21 +8,55 @@ import {
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-const editUserSchema = yup.object().shape({
-  fName: yup.string().trim().min(2, 'Too Short!').max(50, 'Too Long!'),
-  lName: yup.string().trim().min(2, 'Too Short!').max(50, 'Too Long!'),
-  username: yup.string().trim().min(5, 'Too Short!').max(25, 'Too Long!'),
-  email: yup.string().trim().email('Invalid email').required('Required'),
-  password: yup.string().trim().min(7, 'Too Short!').max(50, 'Too Long!'),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
-});
-
 function LoggedInEdit() {
   const user = useSelector((state) => state.signedInUser);
   const dispatch = useDispatch();
-  //   const [formInputs, setFormInputs] = useState(user);
+
+  const editUserSchema = yup.object().shape({
+    fName: yup.string().trim().min(2, 'Too Short!').max(50, 'Too Long!'),
+    lName: yup.string().trim().min(2, 'Too Short!').max(50, 'Too Long!'),
+    username: yup
+      .string()
+      .trim()
+      .min(5, 'Too Short!')
+      .max(25, 'Too Long!')
+      .test(
+        'Unique Username',
+        'Username already in use', // <- key, message
+        function (value) {
+          return new Promise((resolve, reject) => {
+            axios.get(`/api/auth/userExists/${value}`).then((res) => {
+              if (!res.data && String(value) !== String(user.username)) {
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            });
+          });
+        }
+      ),
+    email: yup
+      .string()
+      .trim()
+      .email('Invalid email')
+      .required('Required')
+      .test(
+        'Unique Email',
+        'Email address already in use', // <- key, message
+        function (value) {
+          return new Promise((resolve, reject) => {
+            axios.get(`/api/auth/emailExists/${value}`).then((res) => {
+              if (!res.data && String(value) !== String(user.email)) {
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            });
+          });
+        }
+      ),
+    password: yup.string().trim().min(7, 'Too Short!').max(50, 'Too Long!'),
+  });
 
   const onSubmit = async (values, actions) => {
     await dispatch(editLoggedInUser(values));
@@ -113,7 +148,7 @@ function LoggedInEdit() {
           className="form-control"
           name="password"
           value={formik.values.password || ''}
-          placeholder="Password"
+          placeholder="**********"
           onChange={formik.handleChange}
         />
         {formik.errors.password && formik.touched.password && (
