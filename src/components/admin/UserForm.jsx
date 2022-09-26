@@ -131,7 +131,7 @@ function UserForm() {
           <label htmlFor="password">Password</label>
           {formMethod === "edit" ? (
             <Form.Control
-              type="text"
+              type="password"
               onChange={(evt) =>
                 setForm({ ...form, password: evt.target.value })
               }
