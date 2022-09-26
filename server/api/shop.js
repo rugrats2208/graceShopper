@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { Product, Track, Artist, Order, User } = require('../db');
-const { requireToken } = require('./gatekeepingMiddleware');
+const { Product, Track, Artist, Order, User, LineItem } = require('../db');
+const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 // GET api/shop
 //TODO: change price and track length to human readable here
@@ -77,19 +77,23 @@ router.get('/pastOrders', requireToken, async (req, res, next) => {
 
 // CART PATHS
 // GET api/shop/orders/:userId
-router.get('/orders/:userId', async (req, res, next) => {
+router.get('/orders/:userId', requireToken, async (req, res, next) => {
     try {
-        const data = await Order.findOne({
-            where: { userId: req.params.userId, complete: false },
-            include: {
-                model: Product,
-                include: {
-                    model: Artist,
-                    attributes: ['id', 'name'],
-                },
-                attributes: ['id', 'name', 'stock', 'price'],
-            },
+        const data = await Order.findAll({
+            where: { userId: req.params.userId },
             attributes: ['id', 'complete'],
+            include: {
+                model: LineItem,
+                attributes: ['id', 'qty'],
+                include: {
+                    model: Product,
+                    attributes: ['id', 'name', 'stock', 'price', 'img'],
+                    include: {
+                        model: Artist,
+                        attributes: ['id', 'name'],
+                    },
+                },
+            },
         });
         res.send(data);
     } catch (error) {
@@ -99,20 +103,90 @@ router.get('/orders/:userId', async (req, res, next) => {
 });
 
 // POST api/shop/orders/:userId
-router.post('/orders/:userId', async (req, res, next) => {
+// router.post('/orders/', requireToken, async (req, res, next) => {
+//     try {
+//         await Order.create({ userId: req.user.id });
+//     } catch (error) {
+//         console.error(error);
+//         next(error);
+//     }
+// });
+
+// PUT api/shop/orders
+router.put('/orders', requireToken, async (req, res, next) => {
     try {
-        const albumId = req.body.id;
-        const newOrder = await Order.create();
-        newOrder.addProduct(albumId);
+        await Order.update(
+            { complete: true },
+            {
+                where: {
+                    complete: false,
+                    userId: req.user.id,
+                },
+            }
+        );
+        await Order.create({ userId: req.user.id });
     } catch (error) {
         console.error(error);
         next(error);
     }
 });
 
-// PUT api/shop/order
+//PUT api/shop/orders/qty
+router.put('/orders/qty', requireToken, async (req, res, next) => {
+    try {
+        await LineItem.update(
+            { qty: req.body.num },
+            {
+                where: { id: req.body.itemId },
+                individualHooks: true,
+            }
+        );
+        res.sendStatus(200);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
 
-//DELETE api/shop/order
+// PUT api/shop/orders/:prodId
+router.put('/orders/:prodId', requireToken, async (req, res, next) => {
+    try {
+        const order = await Order.findOne({
+            where: {
+                complete: false,
+                userId: req.user.id,
+            },
+        });
+        const product = await Product.findByPk(req.params.prodId);
+        const lineItem = await product.createLineItem({ orderId: order.id });
+        const newItem = await LineItem.findByPk(lineItem.id, {
+            attributes: ['id', 'qty'],
+            include: {
+                model: Product,
+                attributes: ['id', 'name', 'stock', 'price', 'img'],
+                include: {
+                    model: Artist,
+                    attributes: ['id', 'name'],
+                },
+            },
+        });
+        res.send(newItem);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+//DELETE api/shop/orders/:lineId
+router.delete('/orders/:lineId', requireToken, async (req, res, next) => {
+    try {
+        await LineItem.destroy({ where: { id: req.params.lineId } });
+        res.sendStatus(200);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
 
 // PUT api/shop/order
 
