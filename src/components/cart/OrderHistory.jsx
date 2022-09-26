@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getActiveOrder } from "../../reducers/orders/ordersReducer";
+import { getOrders } from "../../reducers/orders/ordersReducer";
 
 function OrderHistory() {
   const allOrders = useSelector((state) => state.orders);
@@ -10,7 +10,7 @@ function OrderHistory() {
   const params = useParams();
 
   useEffect(() => {
-    dispatch(getActiveOrder(params.id));
+    dispatch(getOrders(params.id));
   }, []);
 
   useEffect(() => {
