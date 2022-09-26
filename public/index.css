@@ -4,14 +4,15 @@ html {
   height: 100%;
 }
 
-main {
-  padding-top: 56px;
-}
-
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
+.app {
+  position: absolute;
+  top: 70px;
+  width: 100vw;
+}
 /************************ product component in featured/new/all products views ************************/
 
 .product {
@@ -20,7 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10px;
+  gap: 10px;==
 }
 
 .product img {
