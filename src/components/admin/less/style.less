@@ -1,5 +1,58 @@
-.formError {
+/************************ admin page ************************/
+.adminDashboard {
+  height: 100vh;
+  background: #313131;
+}
+
+.adminDashboard .options {
+  display: flex;
+}
+.adminDashboard .options > * {
+  margin: 8px;
+}
+.adminDashboard > .dropdown {
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+}
+.selected {
+  box-sizing: border-box;
+  border-bottom: 3px solid #00b74a;
+}
+
+.adminForm {
+  padding: 2rem;
   position: fixed;
-  bottom: 0;
-  color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #f9f9f9;
+}
+
+.row > * {
+  margin: 8px;
+}
+input.form-control:focus {
+  outline: solid;
+  outline-color: #00b74a;
+  outline-width: medium;
+}
+
+.pageNumbers {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+.pageNumbers li {
+  margin: 0.5rem;
+}
+.pageNumbers li a {
+  color: #f9f9f9;
+}
+.pageNumbers li a:hover {
+  cursor: pointer;
+  color: #00b74a;
+}
+.pageNumbers li a.active {
+  color: #00b74a;
 }

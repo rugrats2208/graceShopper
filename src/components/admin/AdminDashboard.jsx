@@ -1,12 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+//CSS
+import "./css/style.css";
+
 //COMPONENTS
 import UsersTable from "./UsersTable";
 import ProductsTable from "./ProductsTable";
 import DropdownActions from "./DropdownActions";
 import SortDropdown from "./SortDropdown";
-import ErrorMessage from "./ErrorMessage";
 
 //BOOTSTRAP
 import Button from "react-bootstrap/Button";
@@ -53,7 +55,6 @@ const AdminDashboard = () => {
         </Button>
       </div>
       {renderTable(view)}
-      {<ErrorMessage />}
     </div>
   );
 };
