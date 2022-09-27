@@ -90,7 +90,7 @@ export const addOrderItem = productId => {
                 const { data } = await axios.get(
                     `/api/shop/album/${productId}`
                 );
-                const item = { qty: 1, product: data };
+                const item = { id: data.id, qty: 1, product: data };
                 const newOrder = JSON.parse(order);
                 newOrder.lineItems.push(item);
                 localStorage.order = JSON.stringify(newOrder);
@@ -113,8 +113,13 @@ export const deleteOrderItem = itemId => {
                 });
                 dispatch(deleteItem(itemId));
             } else {
-                //TODO: delete line item from local storage
                 const order = window.localStorage.getItem('order');
+                const newOrder = JSON.parse(order);
+                newOrder.lineItems = newOrder.lineItems.filter(
+                    item => item.id !== itemId
+                );
+                localStorage.order = JSON.stringify(newOrder);
+                dispatch(deleteItem(itemId));
             }
         } catch (error) {
             console.error(error);
