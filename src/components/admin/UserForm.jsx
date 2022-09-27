@@ -1,11 +1,21 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+//BOOTSTRAP
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import { useSelector, useDispatch } from "react-redux";
+//TOAST
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+//ACTIONS
 import { setFormMethod, addUser, editUser } from "../../reducers/adminReducer";
+
+//HELPERS
+import { checkUsername, checkEmail } from "./helperFuncs";
 
 function UserForm() {
   const dispatch = useDispatch();
@@ -18,6 +28,18 @@ function UserForm() {
     email: "",
     isAdmin: "",
   });
+
+  const inputUnavailable = (str) =>
+    toast.error(str, {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 2000,
+    });
+
+  const inputAvailable = () =>
+    toast.success("Success!", {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 2000,
+    });
 
   const renderForm = (sel) => {
     switch (sel) {
@@ -46,10 +68,29 @@ function UserForm() {
     }
   };
 
-  const handleSubmit = (evt) => {
-    let isAdmin = evt.target[4].value;
-    isAdmin === "true" ? (isAdmin = true) : (isAdmin = false);
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
+    const nameAvailability = await checkUsername(evt.target[2].value);
+    const emailAvailability = await checkEmail(evt.target[4].value);
+    let isAdmin = evt.target[5].value;
+    if (!isAdmin) {
+      if (isAdmin === "") {
+        inputUnavailable("Please select user privilege");
+        return;
+      }
+    }
+    isAdmin === "true" ? (isAdmin = true) : (isAdmin = false);
+
+    if (user.username !== form.username && !nameAvailability) {
+      inputUnavailable("Username is already in use.");
+      return;
+    }
+    if (user.email !== form.email && !emailAvailability) {
+      inputUnavailable("Email is already in use");
+      return;
+    }
+
+    inputAvailable();
     switch (formMethod) {
       case "add":
         dispatch(addUser({ ...form, isAdmin }));
@@ -64,7 +105,7 @@ function UserForm() {
         dispatch(setFormMethod(""));
         return;
       case "edit":
-        dispatch(editUser(user.id, { ...form, form }));
+        dispatch(editUser(user.id, { ...form, isAdmin }));
         setForm({
           fName: "",
           lName: "",
@@ -113,17 +154,16 @@ function UserForm() {
       <Row>
         <Col>
           <label htmlFor="username">Username</label>
-          {
-            <Form.Control
-              required
-              type="text"
-              onChange={(evt) =>
-                setForm({ ...form, username: evt.target.value })
-              }
-              placeholder="Enter Username"
-              value={form.username}
-            />
-          }
+          <small htmlFor="username"> </small>
+          <Form.Control
+            required
+            type="text"
+            onChange={(evt) => {
+              setForm({ ...form, username: evt.target.value });
+            }}
+            placeholder="Enter Username"
+            value={form.username}
+          />
         </Col>
       </Row>
       <Row>
@@ -157,9 +197,9 @@ function UserForm() {
           <Form.Control
             required
             type="email"
-            onChange={(evt) =>
-              setForm({ ...form, email: evt.target.value.toLowerCase() })
-            }
+            onChange={(evt) => {
+              setForm({ ...form, email: evt.target.value.toLowerCase() });
+            }}
             placeholder="Enter Email Address"
             value={form.email}
           />
@@ -169,7 +209,7 @@ function UserForm() {
         <Col>
           <label htmlFor="privileges">Admin Privileges</label>
           <Form.Select size="sm">
-            <option value={false}>Select Privileges</option>
+            <option value={""}>Select Privileges</option>
             <option value={false}>User</option>
             <option value={true}>Administrator</option>
           </Form.Select>

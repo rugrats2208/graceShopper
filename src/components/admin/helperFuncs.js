@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const usdCurrencyFormatter = (num) => {
     const str = `${num}`;
     if (str.length <= 2) {
@@ -164,6 +166,20 @@ export const sortedUsersArray = (arr, method, sel) => {
     }
 };
 
-export const protectPassword = (str) => {
+export const checkUsername = async (value) => {
+    try {
+        const { data } = await axios.get(`api/auth/userExists/${value}`);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
-}
+export const checkEmail = async (value) => {
+    try {
+        const { data } = await axios.get(`api/auth/emailExists/${value}`);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};

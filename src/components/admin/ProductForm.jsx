@@ -1,15 +1,25 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+//BOOTSTRAP
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { usdCurrencyFormatter, removeDecimal } from "./helperFuncs";
-import { useSelector, useDispatch } from "react-redux";
+
+//TOAST
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+//ACTIONS
 import {
   addProduct,
   editProduct,
 } from "../../reducers/products/productsReducer";
 import { setFormMethod } from "../../reducers/adminReducer";
+
+//HELPERS
+import { usdCurrencyFormatter, removeDecimal } from "./helperFuncs";
 
 function ProductForm() {
   const dispatch = useDispatch();
@@ -21,6 +31,18 @@ function ProductForm() {
     releaseDate: "",
     label: "",
   });
+
+  const inputUnavailable = (str) =>
+    toast.error(str, {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 2000,
+    });
+
+  const inputAvailable = () =>
+    toast.success("Success!", {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 2000,
+    });
 
   const renderForm = (sel) => {
     switch (sel) {
@@ -48,7 +70,9 @@ function ProductForm() {
   };
 
   const handleSubmit = async (evt) => {
+    console.dir(evt.target[2].value);
     evt.preventDefault();
+    inputAvailable();
     switch (formMethod) {
       case "add":
         dispatch(addProduct(form));
