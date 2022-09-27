@@ -85,7 +85,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className={styles.container_checkout}>
+    <div className={`${styles.container_checkout} checkout`}>
       {/* HEADER */}
       <div className="py-5 text-center">
         <h2>Checkout</h2>
