@@ -15,13 +15,9 @@ const LineItem = conn.define(
                 const currentItems = await LineItem.findAll({
                     where: { orderId: lineItem.orderId },
                 });
-                console.log('new item id: ', lineItem.productId);
-                currentItems.forEach(item =>
-                    console.log('product ids: ', item.productId)
-                );
                 if (
                     currentItems.some(
-                        item => item.productId === lineItem.productId
+                        item => item.productId === Number(lineItem.productId)
                     )
                 )
                     throw new Error('Item already exists in order');

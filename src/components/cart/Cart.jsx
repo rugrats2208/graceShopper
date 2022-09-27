@@ -13,10 +13,10 @@ import {
 } from "../../reducers/orders/ordersReducer";
 
 export default function Cart() {
-  const [isOpen, setIsOpen] = useState(false);
+  //TODO: put total on store
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.auth.id);
+  const user = useSelector((state) => state.auth);
 
   //return only the active order lineItems or empty array
   const activeOrder = useSelector((state) =>
@@ -26,8 +26,8 @@ export default function Cart() {
 
   //set all the orders when user logs in
   useEffect(() => {
-    dispatch(getOrders(userId));
-  }, [userId]);
+    dispatch(getOrders(user.id));
+  }, [user]);
 
   //set total price when lineItems changes
   useEffect(() => {
@@ -37,22 +37,14 @@ export default function Cart() {
   }, [lineItems]);
 
   return (
-    <Dropdown
-      drop="start"
-      autoClose="outside"
-      onToggle={() => setIsOpen(!isOpen)}
-    >
+    <Dropdown drop="down" autoClose="outside">
       <Dropdown.Toggle variant="success" id="cart" title="Dropdown button">
-        {isOpen ? (
-          <MDBIcon fas icon="times" size="lg" className="cart-icon" />
-        ) : (
-          <>
-            <MDBIcon fas icon="shopping-cart" size="lg" className="cart-icon" />{" "}
-            <MDBBadge color="danger" notification pill>
-              {lineItems.length === 0 ? "" : lineItems.length}
-            </MDBBadge>
-          </>
-        )}
+        <>
+          <MDBIcon fas icon="shopping-cart" size="lg" className="cart-icon" />{" "}
+          <MDBBadge color="danger" notification pill>
+            {lineItems.length === 0 ? "" : lineItems.length}
+          </MDBBadge>
+        </>
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="cart-dropdown">

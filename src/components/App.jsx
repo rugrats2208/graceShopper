@@ -36,7 +36,6 @@ function App() {
   return (
     <div className="app">
       <Navigation />
-      <Cart />
       <ToastContainer />
       <Routes>
         <Route index element={<Main />} />
