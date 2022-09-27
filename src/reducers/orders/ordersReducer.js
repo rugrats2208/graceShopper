@@ -1,5 +1,8 @@
 import axios from 'axios';
 const token = window.localStorage.getItem('token');
+
+//{complete: false, lineItems: []}
+
 /*
 TODO: refactor to have active order
     -initial state = {activeOrder: {}, pastOrders: []}
@@ -46,8 +49,21 @@ export const getOrders = userId => {
                 });
                 dispatch(setOrders(data));
             } else {
-                window.localStorage.setItem('order', []);
-                window.localStorage.getItem('order', []);
+                const order = window.localStorage.getItem('order');
+                if (!order)
+                    window.localStorage.setItem(
+                        'order',
+                        JSON.stringify({
+                            complete: false,
+                            lineItems: [],
+                        })
+                    );
+
+                dispatch(
+                    setOrders([
+                        JSON.parse(window.localStorage.getItem('order')),
+                    ])
+                );
             }
         } catch (error) {
             console.error(error);
@@ -58,16 +74,28 @@ export const getOrders = userId => {
 export const addOrderItem = productId => {
     return async dispatch => {
         try {
-            const { data } = await axios.put(
-                `/api/shop/orders/${productId}`,
-                {},
-                {
-                    headers: {
-                        authorization: token,
-                    },
-                }
-            );
-            dispatch(addItem(data));
+            if (token) {
+                const { data } = await axios.put(
+                    `/api/shop/orders/${productId}`,
+                    {},
+                    {
+                        headers: {
+                            authorization: token,
+                        },
+                    }
+                );
+                dispatch(addItem(data));
+            } else {
+                const order = window.localStorage.getItem('order');
+                const { data } = await axios.get(
+                    `/api/shop/album/${productId}`
+                );
+                const item = { qty: 1, product: data };
+                const newOrder = JSON.parse(order);
+                newOrder.lineItems.push(item);
+                localStorage.order = JSON.stringify(newOrder);
+                dispatch(addItem(item));
+            }
         } catch (error) {
             console.error(error);
         }
@@ -77,12 +105,17 @@ export const addOrderItem = productId => {
 export const deleteOrderItem = itemId => {
     return async dispatch => {
         try {
-            await axios.delete(`/api/shop/orders/${itemId}`, {
-                headers: {
-                    authorization: token,
-                },
-            });
-            dispatch(deleteItem(itemId));
+            if (token) {
+                await axios.delete(`/api/shop/orders/${itemId}`, {
+                    headers: {
+                        authorization: token,
+                    },
+                });
+                dispatch(deleteItem(itemId));
+            } else {
+                //TODO: delete line item from local storage
+                const order = window.localStorage.getItem('order');
+            }
         } catch (error) {
             console.error(error);
         }
@@ -92,16 +125,21 @@ export const deleteOrderItem = itemId => {
 export const changeQty = (itemId, num) => {
     return async dispatch => {
         try {
-            await axios.put(
-                '/api/shop/orders/qty',
-                { itemId, num },
-                {
-                    headers: {
-                        authorization: token,
-                    },
-                }
-            );
-            dispatch(updateQty(itemId, num));
+            if (token) {
+                await axios.put(
+                    '/api/shop/orders/qty',
+                    { itemId, num },
+                    {
+                        headers: {
+                            authorization: token,
+                        },
+                    }
+                );
+                dispatch(updateQty(itemId, num));
+            } else {
+                //TODO: edit qty of line item in local storage
+                const order = window.localStorage.getItem('order');
+            }
         } catch (error) {
             console.error(error);
         }
@@ -115,6 +153,7 @@ const initialState = [];
 export default (state = initialState, action) => {
     switch (action.type) {
         case SET_ORDER:
+            if (!action.orders) return state;
             return [...action.orders];
         case ADD_ORDER_ITEM:
             return state.map(order =>
