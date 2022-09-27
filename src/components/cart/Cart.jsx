@@ -74,7 +74,7 @@ export default function Cart() {
                     for (let i = 1; i <= item.product.stock; i++) {
                         numDropdowns.push(
                             <Dropdown.Item
-                                key={item.id + i}
+                                key={item.product.id + i}
                                 onClick={() => dispatch(changeQty(item.id, i))}
                             >
                                 {i}
@@ -83,7 +83,7 @@ export default function Cart() {
                     }
                     // start map of line items
                     return (
-                        <div key={item.id}>
+                        <div key={item.product.id}>
                             <Dropdown.Item
                                 className="cart-title"
                                 as={Link}

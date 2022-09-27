@@ -11,7 +11,7 @@ body {
 .app {
     position: absolute;
     top: 70px;
-    width: 100vw;
+    width: 99.5vw;
 }
 /************************ product component in featured/new/all products views ************************/
 
@@ -66,6 +66,7 @@ a.link {
     background-color: #313131;
     display: flex;
     overflow: scroll;
+    overflow-y: hidden;
 }
 
 /************************ new products component ************************/
@@ -76,6 +77,7 @@ a.link {
     background-color: #313131;
     display: flex;
     overflow: scroll;
+    overflow-y: hidden;
 }
 
 /************************ all products component ************************/
