@@ -205,7 +205,7 @@ a.link {
 }
 .cart-icon {
   color: lightgray;
-  vertical-align: -7px;
+  /* vertical-align: -7px; */
 }
 
 .dropdown-menu {

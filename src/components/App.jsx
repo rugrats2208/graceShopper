@@ -3,9 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../reducers/products/productsReducer";
 import { ToastContainer } from "react-toastify";
-
+import "react-toastify/dist/ReactToastify.css";
 import PrivateRoutes from "./admin/PrivateRoutes";
-import Share from "./sharing/Share";
 
 //COMPONENTS
 import {
@@ -25,6 +24,8 @@ import {
   LoggedInInfo,
   UserInfoPage,
   LoggedInEdit,
+  PaymentSuccess,
+  PaymentCancel,
 } from "./index";
 
 function App() {
@@ -50,6 +51,8 @@ function App() {
         <Route path={"/userInfoPage"} element={<UserInfoPage />} />
         <Route path={"/loggedInEdit"} element={<LoggedInEdit />} />
         <Route path={"/checkout"} element={<Checkout />} />
+        <Route path={"/paymentSuccess"} element={<PaymentSuccess />} />
+        <Route path={"/paymentCancel"} element={<PaymentCancel />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path={"/admin"} element={<AdminDashboard />} />
