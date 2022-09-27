@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getSingleProduct } from "../../../reducers/products/singleProductReducer";
+import React, { useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSingleProduct } from '../../../reducers/products/singleProductReducer';
 
 function SingleProduct() {
   const product = useSelector((state) => state.singleProduct);
   const artist = product.artist || {};
   const params = useParams();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     dispatch(getSingleProduct(params.id));
@@ -30,7 +34,7 @@ function SingleProduct() {
 
   function displayPrice(price) {
     price /= 100;
-    price.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     return `$${price}`;
   }
 
@@ -53,7 +57,7 @@ function SingleProduct() {
           {product.tracks &&
             product.tracks.map((track) => (
               <li key={track.id}>
-                Name: {track.name} <br></br>Length:{" "}
+                Name: {track.name} <br></br>Length:{' '}
                 {convertTrackLength(track.length)} mins
               </li>
             ))}
@@ -64,7 +68,7 @@ function SingleProduct() {
         >
           Add to Cart
         </button>
-        <Link to={"/"}>
+        <Link to={'/'}>
           <button
             className="product-button single-view-button btn btn-dark"
             type="button"
