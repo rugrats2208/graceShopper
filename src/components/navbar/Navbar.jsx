@@ -3,13 +3,13 @@ import {
   MDBCollapse,
   MDBContainer,
   MDBIcon,
-  MDBBadge,
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarItem,
   MDBNavbarNav,
   MDBNavbarToggler,
 } from 'mdb-react-ui-kit';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import React, { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,6 +50,13 @@ export default function Navigation() {
     state.orders.find((order) => !order.complete)
   ) || { lineItems: [] };
   const { lineItems } = activeOrder;
+
+  //render tooltip
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Shopping Cart
+    </Tooltip>
+  );
 
   return (
     <>
@@ -116,14 +123,9 @@ export default function Navigation() {
                 )}
               </MDBNavbarItem>
             </MDBNavbarNav>
-
+            {/* Signed in as */}
             <div className={styles.nav_header_container}>
-              {/* Cart Icon */}
-              <div className={styles.cart_icon}>
-                <Cart />
-              </div>
-              {/* Signed in as */}
-              <Navbar.Text className="me-3">
+              <Navbar.Text>
                 Signed in as:{' '}
                 <NavLink
                   to={`/userInfoPage`}
@@ -132,7 +134,17 @@ export default function Navigation() {
                   {username || 'guest'}{' '}
                 </NavLink>
               </Navbar.Text>
+              {/* Cart Icon */}
 
+              <OverlayTrigger
+                placement="bottom"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+              >
+                <div className={styles.cart_icon}>
+                  <Cart />
+                </div>
+              </OverlayTrigger>
               {/* signin / sign out */}
               {!window.localStorage.getItem('isLoggedIn') && (
                 <MDBBtn
