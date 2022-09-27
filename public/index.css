@@ -195,14 +195,12 @@ a.link {
 
 /************************ shopping cart ************************/
 #cart {
-    background-color: white;
-    position: fixed;
-    right: 0vw;
-    top: 74px;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
     width: 5vw;
 }
 .cart-icon {
-    color: black;
+    color: rgb(98, 98, 98);
     vertical-align: -7px;
 }
 
@@ -212,6 +210,7 @@ a.link {
 }
 
 .dropdown-menu.cart-dropdown {
+    margin-top: 15px;
     min-height: 300px;
     max-height: 500px;
     overflow-y: scroll;

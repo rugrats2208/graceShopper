@@ -18,6 +18,7 @@ import { logout } from '../../reducers/Auth/authReducer';
 import Signup from '../auth/Signup';
 import styles from './navbar.module.css';
 import vinyl from './vinyl.svg';
+import Cart from '../cart/Cart';
 
 export default function Navigation() {
     const [showBasic, setShowBasic] = useState(true);
@@ -127,8 +128,13 @@ export default function Navigation() {
                                 )}
                             </MDBNavbarItem>
                         </MDBNavbarNav>
-                        {/* Signed in as */}
+
                         <div className={styles.nav_header_container}>
+                            {/* Cart Icon */}
+                            <div className={styles.cart_icon}>
+                                <Cart />
+                            </div>
+                            {/* Signed in as */}
                             <Navbar.Text className="me-3">
                                 Signed in as:{' '}
                                 <NavLink
@@ -140,24 +146,7 @@ export default function Navigation() {
                                     {username || 'guest'}{' '}
                                 </NavLink>
                             </Navbar.Text>
-                            {/* Cart Icon */}
-                            <div className={styles.cart_icon}>
-                                <NavLink
-                                    className="text-reset me-3"
-                                    to="/checkout"
-                                >
-                                    <MDBIcon
-                                        fas
-                                        icon="shopping-cart"
-                                        size="lg"
-                                    />{' '}
-                                    <MDBBadge color="danger" notification pill>
-                                        {lineItems.length === 0
-                                            ? ''
-                                            : lineItems.length}
-                                    </MDBBadge>
-                                </NavLink>
-                            </div>
+
                             {/* signin / sign out */}
                             {!window.localStorage.getItem('isLoggedIn') && (
                                 <MDBBtn
