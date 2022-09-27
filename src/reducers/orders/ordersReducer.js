@@ -90,8 +90,12 @@ export const addOrderItem = productId => {
                 const { data } = await axios.get(
                     `/api/shop/album/${productId}`
                 );
-                const item = { id: data.id, qty: 1, product: data };
                 const newOrder = JSON.parse(order);
+                const item = {
+                    id: newOrder.lineItems.length + 1,
+                    qty: 1,
+                    product: data,
+                };
                 newOrder.lineItems.push(item);
                 localStorage.order = JSON.stringify(newOrder);
                 dispatch(addItem(item));
@@ -142,8 +146,16 @@ export const changeQty = (itemId, num) => {
                 );
                 dispatch(updateQty(itemId, num));
             } else {
-                //TODO: edit qty of line item in local storage
                 const order = window.localStorage.getItem('order');
+                const newOrder = JSON.parse(order);
+                if (
+                    num < 1 ||
+                    num > newOrder.lineItems[itemId - 1].product.stock
+                )
+                    return;
+                newOrder.lineItems[itemId - 1].qty = num;
+                localStorage.order = JSON.stringify(newOrder);
+                dispatch(updateQty(itemId, num));
             }
         } catch (error) {
             console.error(error);
