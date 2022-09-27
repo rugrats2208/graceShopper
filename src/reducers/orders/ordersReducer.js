@@ -1,5 +1,4 @@
 import axios from 'axios';
-const token = window.localStorage.getItem('token');
 
 /*
 TODO: refactor to have active order
@@ -39,6 +38,8 @@ const updateQty = (itemId, num) => ({
 export const getOrders = userId => {
     return async dispatch => {
         try {
+            const token = window.localStorage.getItem('token');
+            const order = window.localStorage.getItem('order');
             if (token) {
                 const { data } = await axios.get(`/api/shop/orders/${userId}`, {
                     headers: {
@@ -46,8 +47,13 @@ export const getOrders = userId => {
                     },
                 });
                 dispatch(setOrders(data));
+                if (order) {
+                    JSON.parse(order).lineItems.forEach(item => {
+                        dispatch(addOrderItem(item.product.id));
+                    });
+                    window.localStorage.removeItem('order');
+                }
             } else {
-                const order = window.localStorage.getItem('order');
                 if (!order)
                     window.localStorage.setItem(
                         'order',
@@ -72,6 +78,7 @@ export const getOrders = userId => {
 export const addOrderItem = productId => {
     return async dispatch => {
         try {
+            const token = window.localStorage.getItem('token');
             if (token) {
                 const { data } = await axios.put(
                     `/api/shop/orders/${productId}`,
@@ -107,6 +114,7 @@ export const addOrderItem = productId => {
 export const deleteOrderItem = itemId => {
     return async dispatch => {
         try {
+            const token = window.localStorage.getItem('token');
             if (token) {
                 await axios.delete(`/api/shop/orders/${itemId}`, {
                     headers: {
@@ -132,6 +140,7 @@ export const deleteOrderItem = itemId => {
 export const changeQty = (itemId, num) => {
     return async dispatch => {
         try {
+            const token = window.localStorage.getItem('token');
             if (token) {
                 await axios.put(
                     '/api/shop/orders/qty',
