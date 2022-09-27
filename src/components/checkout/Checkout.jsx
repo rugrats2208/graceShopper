@@ -46,6 +46,11 @@ export default function Checkout() {
   const submitCheckout = () => {
     const checkoutItems = lineItems.map((item) => {
       return {
+        adjustable_quantity: {
+          enabled: true,
+          minimum: 1,
+          maximum: item.product.stock,
+        },
         price_data: {
           currency: 'usd',
           product_data: {

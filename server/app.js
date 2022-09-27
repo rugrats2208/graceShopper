@@ -12,6 +12,15 @@ const app = express();
 const stripe = require('stripe')(process.env.REACT_APP_STRIPE_TEST_SECRET_KEY);
 const { v4: uuidv4 } = require('uuid');
 
+//This is an attempt to get the redirects to play nice with Stripe on Heroku. We will see...
+let BASE_URL;
+if (process.env.BASE_URL) {
+  BASE_URL = process.env.BASE_URL;
+} else {
+  BASE_URL = 'https://rugrats-grace-shopper.herokuapp.com';
+}
+console.log(BASE_URL);
+
 //MORGAN MIDDLEWARE
 app.use(morgan('dev'));
 
@@ -55,8 +64,8 @@ app.post('/create-checkout-session', async (req, res) => {
       line_items: req.body.items,
       customer_email: req.body.email,
       mode: 'payment',
-      success_url: 'http://localhost:3000/paymentSuccess',
-      cancel_url: 'http://localhost:3000/paymentCancel',
+      success_url: `${BASE_URL}/paymentSuccess`,
+      cancel_url: `${BASE_URL}/paymentCancel`,
     });
 
     res.json({ url: session.url });
