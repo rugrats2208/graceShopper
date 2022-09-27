@@ -6,13 +6,31 @@
 .adminDashboard .options {
   display: flex;
 }
-.adminDashboard .options > * {
+.adminDashboard .options * {
   margin: 8px;
 }
-.adminDashboard > .dropdown {
+.adminDashboard .dropdown {
   height: 3.5rem;
   display: flex;
   align-items: center;
+}
+.pageNumbers {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+.pageNumbers li {
+  margin: 0.5rem;
+}
+.pageNumbers li a {
+  color: #f9f9f9;
+}
+.pageNumbers li a:hover {
+  cursor: pointer;
+  color: #00b74a;
+}
+.pageNumbers li a.active {
+  color: #00b74a;
 }
 .selected {
   box-sizing: border-box;
@@ -34,21 +52,9 @@ input.form-control:focus {
   outline-color: #00b74a;
   outline-width: medium;
 }
-.pageNumbers {
+.cardsContainer {
+  padding-top: 2rem;
   display: flex;
-  list-style: none;
-  justify-content: center;
-}
-.pageNumbers li {
-  margin: 0.5rem;
-}
-.pageNumbers li a {
-  color: #f9f9f9;
-}
-.pageNumbers li a:hover {
-  cursor: pointer;
-  color: #00b74a;
-}
-.pageNumbers li a.active {
-  color: #00b74a;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }

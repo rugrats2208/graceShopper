@@ -1,8 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+//BOOTSTRAP
 import Table from "react-bootstrap/Table";
-import Pagination from "./Pagination";
+
+//FUNCTIONS
 import { setProduct } from "../../reducers/adminReducer";
+import Pagination from "./Pagination";
 
 function ProductsTable() {
   const { formMethod, product, products } = useSelector((state) => state.admin);

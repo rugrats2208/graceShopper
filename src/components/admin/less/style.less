@@ -2,19 +2,38 @@
 .adminDashboard {
   height: 100vh;
   background: #313131;
+  .options {
+    display: flex;
+    * {
+      margin: 8px;
+    }
+  }
+  .dropdown {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+  }
 }
 
-.adminDashboard .options {
+.pageNumbers {
   display: flex;
+  list-style: none;
+  justify-content: center;
+  li {
+    margin: 0.5rem;
+    a {
+      color: #f9f9f9;
+    }
+    a:hover {
+      cursor: pointer;
+      color: #00b74a;
+    }
+    a.active {
+      color: #00b74a;
+    }
+  }
 }
-.adminDashboard .options > * {
-  margin: 8px;
-}
-.adminDashboard > .dropdown {
-  height: 3.5rem;
-  display: flex;
-  align-items: center;
-}
+
 .selected {
   box-sizing: border-box;
   border-bottom: 3px solid #00b74a;
@@ -38,21 +57,9 @@ input.form-control:focus {
   outline-width: medium;
 }
 
-.pageNumbers {
+.cardsContainer {
+  padding-top: 2rem;
   display: flex;
-  list-style: none;
-  justify-content: center;
-}
-.pageNumbers li {
-  margin: 0.5rem;
-}
-.pageNumbers li a {
-  color: #f9f9f9;
-}
-.pageNumbers li a:hover {
-  cursor: pointer;
-  color: #00b74a;
-}
-.pageNumbers li a.active {
-  color: #00b74a;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
