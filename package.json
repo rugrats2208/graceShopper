@@ -15,10 +15,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.11.0",
+    "@stripe/stripe-js": "^1.38.1",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.2.1",
-    "country-state-city": "^3.1.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "formik": "^2.2.9",
@@ -34,7 +36,9 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "sequelize": "^6.21.3",
+    "stripe": "^10.11.0",
     "toast": "^0.5.4",
+    "uuid": "^9.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -48,6 +52,7 @@
     "babel-loader": "^8.2.5",
     "chai": "^4.3.6",
     "css-loader": "^6.7.1",
+    "dotenv-webpack": "^8.0.1",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
     "react": "^18.2.0",
