@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import {
   getOrders,
   deleteOrderItem,
-  updateQty,
+  changeQty,
 } from "../../reducers/orders/ordersReducer";
 import styles from "./form-validation.module.css";
 

@@ -10,7 +10,7 @@ router.post('/albums', requireToken, isAdmin, async (req, res, next) => {
         const product = await Product.create({
             name,
             price,
-            qty,
+            stock: qty,
             releaseDate,
             label,
             totalTrack: 0,

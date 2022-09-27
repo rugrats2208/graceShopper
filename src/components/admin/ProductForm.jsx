@@ -70,7 +70,6 @@ function ProductForm() {
   };
 
   const handleSubmit = async (evt) => {
-    console.dir(evt.target[2].value);
     evt.preventDefault();
     inputAvailable();
     switch (formMethod) {
