@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getProducts } from '../reducers/products/productsReducer';
-import { ToastContainer } from 'react-toastify';
+import React, { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProducts } from "../reducers/products/productsReducer";
+import { ToastContainer } from "react-toastify";
 
-import PrivateRoutes from './admin/PrivateRoutes';
+import PrivateRoutes from "./admin/PrivateRoutes";
+import Share from "./sharing/Share";
 
 //COMPONENTS
 import {
@@ -24,7 +25,7 @@ import {
   LoggedInInfo,
   UserInfoPage,
   LoggedInEdit,
-} from './index';
+} from "./index";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,24 +40,25 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route index element={<Main />} />
-        <Route path={'/signup'} element={<Signup />} />
-        <Route path={'/orderHistory/:id'} element={<OrderHistory />} />
-        <Route path={'/allProducts'} element={<AllProducts />} />
-        <Route path={'/singleProduct/:id'} element={<SingleProduct />} />
-        <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
-        <Route path={'/featuredProducts'} element={<FeaturedProducts />} />
-        <Route path={'/newProductReleases'} element={<NewProductReleases />} />
-        <Route path={'/loggedInInfo'} element={<LoggedInInfo />} />
-        <Route path={'/userInfoPage'} element={<UserInfoPage />} />
-        <Route path={'/loggedInEdit'} element={<LoggedInEdit />} />
-        <Route path={'/checkout'} element={<Checkout />} />
+        <Route path={"/signup"} element={<Signup />} />
+        <Route path={"/orderHistory/:id"} element={<OrderHistory />} />
+        <Route path={"/allProducts"} element={<AllProducts />} />
+        <Route path={"/singleProduct/:id"} element={<SingleProduct />} />
+        <Route path={"/singleArtist/:id"} element={<SingleArtist />} />
+        <Route path={"/featuredProducts"} element={<FeaturedProducts />} />
+        <Route path={"/newProductReleases"} element={<NewProductReleases />} />
+        <Route path={"/loggedInInfo"} element={<LoggedInInfo />} />
+        <Route path={"/userInfoPage"} element={<UserInfoPage />} />
+        <Route path={"/loggedInEdit"} element={<LoggedInEdit />} />
+        <Route path={"/checkout"} element={<Checkout />} />
 
         <Route element={<PrivateRoutes />}>
-          <Route path={'/admin'} element={<AdminDashboard />} />
+          <Route path={"/admin"} element={<AdminDashboard />} />
         </Route>
-        <Route path={'*'} element={<PageNotFound />} />
+        <Route path={"*"} element={<PageNotFound />} />
       </Routes>
       <footer className="my-5 pt-5 text-muted text-center text-small">
+        <Share />
         <p className="mb-1">&copy; 2017–2022 Grace Shopper Records Ltd.</p>
         <ul className="list-inline">
           <li className="list-inline-item">
