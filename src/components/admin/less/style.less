@@ -13,30 +13,33 @@
     display: flex;
     align-items: center;
   }
-}
-
-.pageNumbers {
-  display: flex;
-  list-style: none;
-  justify-content: center;
-  li {
-    margin: 0.5rem;
-    a {
-      color: #f9f9f9;
-    }
-    a:hover {
-      cursor: pointer;
-      color: #00b74a;
-    }
-    a.active {
-      color: #00b74a;
+  table {
+    .selected {
+      box-sizing: border-box;
+      border-bottom: 3px solid #00b74a;
     }
   }
-}
-
-.selected {
-  box-sizing: border-box;
-  border-bottom: 3px solid #00b74a;
+  .pageNumbers {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    background: rgb(38, 38, 38);
+    align-items: center;
+    border-radius: 0.3rem;
+    li {
+      margin: 0.5rem;
+      a {
+        color: #f9f9f9;
+      }
+      a:hover {
+        cursor: pointer;
+        color: #00b74a;
+      }
+      a.active {
+        color: #00b74a;
+      }
+    }
+  }
 }
 
 .adminForm {
@@ -46,6 +49,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   background: #f9f9f9;
+  z-index: 10;
 }
 
 .row > * {
@@ -62,4 +66,5 @@ input.form-control:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  text-align: center;
 }
