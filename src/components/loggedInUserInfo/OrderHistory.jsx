@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getOrders } from "../../reducers/orders/ordersReducer";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getOrders } from '../../reducers/orders/ordersReducer';
 
 function OrderHistory() {
   const allOrders = useSelector((state) => state.orders);
   const [pastOrders, setPastOrders] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
-  const params = useParams();
 
   useEffect(() => {
     dispatch(getOrders(user.id));
@@ -24,7 +22,7 @@ function OrderHistory() {
 
   function displayPrice(price) {
     price /= 100;
-    price.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     return `$${price}`;
   }
 
@@ -41,8 +39,8 @@ function OrderHistory() {
                   <h6>by: {lineItem.product.artist.name}</h6>
                   <img
                     src={lineItem.product.img}
-                    height="100px"
-                    width="100px"
+                    height="200px"
+                    width="200px"
                   />
                   <h5>
                     Total:{' '}

@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { useSelector, useDispatch } from "react-redux";
+import { MDBIcon, MDBBadge } from "mdb-react-ui-kit";
 import {
   getOrders,
   deleteOrderItem,
@@ -42,7 +43,16 @@ export default function Cart() {
       onToggle={() => setIsOpen(!isOpen)}
     >
       <Dropdown.Toggle variant="success" id="cart" title="Dropdown button">
-        <img src={isOpen ? "/x-icon.png" : "/shopping-cart-icon.jpg"} />
+        {isOpen ? (
+          <MDBIcon fas icon="times" size="lg" className="cart-icon" />
+        ) : (
+          <>
+            <MDBIcon fas icon="shopping-cart" size="lg" className="cart-icon" />{" "}
+            <MDBBadge color="danger" notification pill>
+              {lineItems.length === 0 ? "" : lineItems.length}
+            </MDBBadge>
+          </>
+        )}
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="cart-dropdown">
@@ -117,7 +127,9 @@ export default function Cart() {
           );
         })}
         <Dropdown.ItemText id="checkout-section">
-          <button className="product-button btn btn-dark">Checkout</button>
+          <Link to="/checkout">
+            <button className="product-button btn btn-dark">Checkout</button>
+          </Link>
           <span>Subtotal: ${(total / 100).toFixed(2)}</span>
         </Dropdown.ItemText>
       </Dropdown.Menu>

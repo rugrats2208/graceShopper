@@ -76,7 +76,7 @@ export default function Checkout() {
   }, [lineItems]);
 
   return (
-    <div className={styles.container_checkout}>
+    <div className={`${styles.container_checkout} checkout`}>
       {/* HEADER */}
       <div className="py-5 text-center">
         <h2>Checkout</h2>
@@ -470,21 +470,6 @@ export default function Checkout() {
           </Formik>
         </div>
       </div>
-
-      {/* <footer className="my-5 pt-5 text-muted text-center text-small">
-        <p className="mb-1">&copy; 2017–2022 Grace shopper Records Ltd.</p>
-        <ul className="list-inline">
-          <li className="list-inline-item">
-            <a href="#">Privacy</a>
-          </li>
-          <li className="list-inline-item">
-            <a href="#">Terms</a>
-          </li>
-          <li className="list-inline-item">
-            <a href="#">Support</a>
-          </li>
-        </ul>
-      </footer> */}
     </div>
   );
 }

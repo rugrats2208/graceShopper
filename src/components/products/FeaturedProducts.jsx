@@ -16,7 +16,7 @@ function FeaturedProducts() {
       return product2.popularity - product1.popularity;
     });
 
-    return featuredProducts.slice(0, 30);
+    return featuredProducts.slice(0, 20);
   }
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function FeaturedProducts() {
 
   return (
     <div className="featured-products">
-      <h1 className="list-title">Featured Products</h1>
+      <h1 className="list-title">Featured</h1>
       <div className="featured-products-list">
         {filteredProducts.map((product) => (
           <Product key={product.id} data={product} />

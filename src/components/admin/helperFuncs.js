@@ -164,6 +164,27 @@ export const sortedUsersArray = (arr, method, sel) => {
         default:
             return arr;
     }
+<<<<<<< HEAD
+};
+
+export const checkUsername = async (value) => {
+    try {
+        const { data } = await axios.get(`api/auth/userExists/${value}`);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const checkEmail = async (value) => {
+    try {
+        const { data } = await axios.get(`api/auth/emailExists/${value}`);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+=======
+>>>>>>> e38451340d357900a14f9cd4edf7e98c49d7aafc
 };
 
 export const checkUsername = async (value) => {
