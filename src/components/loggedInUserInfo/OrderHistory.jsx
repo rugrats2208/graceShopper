@@ -7,10 +7,11 @@ function OrderHistory() {
   const allOrders = useSelector((state) => state.orders);
   const [pastOrders, setPastOrders] = useState([]);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth);
   const params = useParams();
 
   useEffect(() => {
-    dispatch(getOrders(params.id));
+    dispatch(getOrders(user.id));
   }, []);
 
   useEffect(() => {
@@ -28,18 +29,29 @@ function OrderHistory() {
   }
 
   return (
-    <div>
+    <div className="past-orders">
       {pastOrders && pastOrders.length > 0 ? (
         <>
           <h1>Order History</h1>
           {pastOrders.map((order) =>
-            order.products.map((product) => {
+            order.lineItems.map((lineItem) => {
               return (
-                <div key={product.id}>
-                  <h2>{product.name}</h2>
-                  <h2>{product.artist.name}</h2>
-                  <img src={product.img} height="300px" width="300px" />
-                  <h3>Purchased for: {displayPrice(product.price)}</h3>
+                <div key={lineItem.id} className="past-order">
+                  <h5>Product: {lineItem.product.name}</h5>
+                  <h6>by: {lineItem.product.artist.name}</h6>
+                  <img
+                    src={lineItem.product.img}
+                    height="100px"
+                    width="100px"
+                  />
+                  <h5>
+                    Total:{' '}
+                    {displayPrice(
+                      lineItem.qty > 0
+                        ? lineItem.qty * lineItem.product.price
+                        : lineItem.product.price
+                    )}
+                  </h5>
                 </div>
               );
             })

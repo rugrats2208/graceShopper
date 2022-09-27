@@ -21,6 +21,9 @@ import {
   Cart,
   OrderHistory,
   Checkout,
+  LoggedInInfo,
+  UserInfoPage,
+  LoggedInEdit,
 } from './index';
 
 function App() {
@@ -43,12 +46,30 @@ function App() {
         <Route path={'/singleArtist/:id'} element={<SingleArtist />} />
         <Route path={'/featuredProducts'} element={<FeaturedProducts />} />
         <Route path={'/newProductReleases'} element={<NewProductReleases />} />
+        <Route path={'/loggedInInfo'} element={<LoggedInInfo />} />
+        <Route path={'/userInfoPage'} element={<UserInfoPage />} />
+        <Route path={'/loggedInEdit'} element={<LoggedInEdit />} />
         <Route path={'/checkout'} element={<Checkout />} />
+
         <Route element={<PrivateRoutes />}>
           <Route path={'/admin'} element={<AdminDashboard />} />
         </Route>
         <Route path={'*'} element={<PageNotFound />} />
       </Routes>
+      <footer className="my-5 pt-5 text-muted text-center text-small">
+        <p className="mb-1">&copy; 2017–2022 Grace Shopper Records Ltd.</p>
+        <ul className="list-inline">
+          <li className="list-inline-item">
+            <a href="#">Privacy</a>
+          </li>
+          <li className="list-inline-item">
+            <a href="#">Terms</a>
+          </li>
+          <li className="list-inline-item">
+            <a href="#">Support</a>
+          </li>
+        </ul>
+      </footer>
     </div>
   );
 }

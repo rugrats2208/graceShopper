@@ -471,7 +471,7 @@ export default function Checkout() {
         </div>
       </div>
 
-      <footer className="my-5 pt-5 text-muted text-center text-small">
+      {/* <footer className="my-5 pt-5 text-muted text-center text-small">
         <p className="mb-1">&copy; 2017–2022 Grace shopper Records Ltd.</p>
         <ul className="list-inline">
           <li className="list-inline-item">
@@ -484,7 +484,7 @@ export default function Checkout() {
             <a href="#">Support</a>
           </li>
         </ul>
-      </footer>
+      </footer> */}
     </div>
   );
 }
