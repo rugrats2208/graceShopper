@@ -13,9 +13,10 @@ import {
 } from '../../reducers/orders/ordersReducer';
 
 export default function Cart() {
+    //TODO: put total on store
     const [total, setTotal] = useState(0);
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.auth.id);
+    const user = useSelector(state => state.auth);
 
     //return only the active order lineItems or empty array
     const activeOrder = useSelector(state =>
@@ -25,8 +26,8 @@ export default function Cart() {
 
     //set all the orders when user logs in
     useEffect(() => {
-        dispatch(getOrders(userId));
-    }, [userId]);
+        dispatch(getOrders(user.id));
+    }, [user]);
 
     //set total price when lineItems changes
     useEffect(() => {
