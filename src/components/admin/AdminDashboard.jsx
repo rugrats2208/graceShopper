@@ -50,17 +50,19 @@ const AdminDashboard = () => {
       <div className="options">
         <DropdownActions />
         <SortDropdown />
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => {
-            if (formMethod) dispatch(setFormMethod(""));
-            if (sortMethod) dispatch(setSortMethod(""));
-            dispatch(setView(!view));
-          }}
-        >
-          {view ? "Switch to Products" : "Switch to Users"}
-        </Button>
+        <div className="dropdown">
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => {
+              if (formMethod) dispatch(setFormMethod(""));
+              if (sortMethod) dispatch(setSortMethod(""));
+              dispatch(setView(!view));
+            }}
+          >
+            {view ? "Switch to Products" : "Switch to Users"}
+          </Button>
+        </div>
       </div>
       {cardView > 900 ? renderTable(view) : <ProductCards />}
     </div>

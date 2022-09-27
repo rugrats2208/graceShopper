@@ -1,13 +1,26 @@
+// 991
 /************************ admin page ************************/
 .adminDashboard {
-  background: #313131;
   .options {
     display: flex;
-    justify-content: space-evenly;
 
     .dropdown {
+      margin: 2rem 1rem;
       display: flex;
       align-items: center;
+    }
+    @media (max-width: 990px) {
+      justify-content: space-around;
+    }
+    @media (max-width: 400px) {
+      flex-direction: column;
+      // justify-content: center;
+      .dropdown {
+        margin: 0;
+        * {
+          flex: 1 1 auto;
+        }
+      }
     }
   }
   table {
@@ -20,9 +33,7 @@
     display: flex;
     list-style: none;
     justify-content: center;
-    background: rgb(38, 38, 38);
-    align-items: center;
-    border-radius: 0.3rem;
+    background: #313131;
     li {
       margin: 0.5rem;
       a {
@@ -59,4 +70,17 @@
   justify-content: space-around;
   text-align: center;
   width: 100%;
+}
+
+.card-header {
+  background: #383838;
+  color: white;
+  font-weight: bold;
+}
+.list-group {
+  label {
+    background: #383838;
+    color: white;
+    font-weight: bold;
+  }
 }

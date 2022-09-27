@@ -20,7 +20,6 @@ function ProductCards() {
   const currSlice = products.slice(indexOfFirstPost, indexOfLastPost);
 
   const item = currSlice[0];
-  console.log(item);
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   return (
@@ -28,7 +27,12 @@ function ProductCards() {
       {currSlice.map((item) => {
         const price = `${item.price}`;
         return (
-          <Card className="mb-4" bg={"light"} style={{ width: "18rem" }}>
+          <Card
+            key={item.id}
+            className="mb-4"
+            bg={"light"}
+            style={{ width: "18rem" }}
+          >
             <Card.Header>{`ID#${item.id}`}</Card.Header>
             <Card.Body>
               <Card.Title>{`${item.name}`}</Card.Title>

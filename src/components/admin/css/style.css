@@ -1,14 +1,27 @@
 /************************ admin page ************************/
-.adminDashboard {
-  background: #313131;
-}
 .adminDashboard .options {
   display: flex;
-  justify-content: space-evenly;
 }
 .adminDashboard .options .dropdown {
+  margin: 2rem 1rem;
   display: flex;
   align-items: center;
+}
+@media (max-width: 990px) {
+  .adminDashboard .options {
+    justify-content: space-around;
+  }
+}
+@media (max-width: 400px) {
+  .adminDashboard .options {
+    flex-direction: column;
+  }
+  .adminDashboard .options .dropdown {
+    margin: 0;
+  }
+  .adminDashboard .options .dropdown * {
+    flex: 1 1 auto;
+  }
 }
 .adminDashboard table .selected {
   box-sizing: border-box;
@@ -18,9 +31,7 @@
   display: flex;
   list-style: none;
   justify-content: center;
-  background: #262626;
-  align-items: center;
-  border-radius: 0.3rem;
+  background: #313131;
 }
 .adminDashboard .pageNumbers li {
   margin: 0.5rem;
@@ -54,4 +65,14 @@
   justify-content: space-around;
   text-align: center;
   width: 100%;
+}
+.card-header {
+  background: #383838;
+  color: white;
+  font-weight: bold;
+}
+.list-group label {
+  background: #383838;
+  color: white;
+  font-weight: bold;
 }
