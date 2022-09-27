@@ -16,7 +16,7 @@ function FeaturedProducts() {
       return product2.popularity - product1.popularity;
     });
 
-    return featuredProducts.slice(0, 30);
+    return featuredProducts.slice(0, 20);
   }
 
   useEffect(() => {
