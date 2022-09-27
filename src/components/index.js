@@ -3,6 +3,7 @@ export { default as AllProducts } from './products/AllProducts';
 export { default as SingleProduct } from './products/singleProduct/SingleProduct';
 export { default as FeaturedProducts } from './products/FeaturedProducts';
 export { default as NewProductReleases } from './products/NewProductReleases';
+export { default as OtherProducts } from './products/OtherProducts';
 
 export { default as Main } from './Main';
 export { default as PageNotFound } from './PageNotFound';
