@@ -1,8 +1,6 @@
 import axios from 'axios';
 const token = window.localStorage.getItem('token');
 
-//{complete: false, lineItems: []}
-
 /*
 TODO: refactor to have active order
     -initial state = {activeOrder: {}, pastOrders: []}
