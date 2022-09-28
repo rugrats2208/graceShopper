@@ -47,9 +47,17 @@ body {
   font-size: 150%;
 }
 
+.product h5:hover {
+  color: rgb(162, 157, 157);
+}
+
 a.link {
   color: white;
   text-decoration: none;
+}
+
+a.link:hover {
+  color: rgb(165, 164, 164);
 }
 
 .link {
@@ -107,7 +115,7 @@ a.link {
 
 .genre-select {
   margin: 20px;
-  margin-left: 40px;
+  margin-left: 80px;
   width: 250px;
 }
 
@@ -121,21 +129,78 @@ a.link {
 
 .product-filter {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+
+  /* margin-left: 20px; */
+  margin-top: 30px;
 }
 
 .product-sort-buttons {
   display: flex;
-  flex-direction: column;
-  margin-right: 145px;
-  margin-top: 10px;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  margin-top: 25px;
+  gap: 10px;
 }
 
 .product-sort-buttons button {
   margin-bottom: 10px;
 }
 
+/************************ searchbar component ************************/
+
+.searchInputs {
+  display: flex;
+  border-top: 15px;
+}
+.search input {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  font-size: 18px;
+  padding: 15px;
+  height: 30px;
+  width: 300px;
+}
+.searchIcon {
+  height: 30px;
+  width: 50px;
+  display: grid;
+  place-items: center;
+}
+.searchIcon svg {
+  font-size: 35px;
+}
+.data {
+  width: 298px;
+  max-height: 250px;
+  background-color: white;
+  position: absolute;
+  overflow: hidden;
+  overflow-y: auto;
+  outline: 1px solid #313131;
+  margin-left: 1px;
+}
+
+.data .data-item {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: #313131;
+}
+
+.data-item p {
+  margin-left: 10px;
+}
+
+a.data-item:hover {
+  background-color: lightgrey;
+}
+
+.clear-button {
+  cursor: pointer;
+}
 /************************ other products component ************************/
 
 .other-products {
