@@ -44,17 +44,18 @@ export default function Checkout() {
 
   //go to stripe checkout
   const submitCheckout = () => {
+    //we map through the line items to create stripe-ready objects for each product
     const checkoutItems = lineItems.map((item) => {
       return {
-        adjustable_quantity: {
-          enabled: true,
-          minimum: 1,
-          maximum: item.product.stock,
-        },
+        // adjustable_quantity: {
+        //   enabled: true,
+        //   minimum: 1,
+        //   maximum: item.product.stock,
+        // },
         price_data: {
           currency: "usd",
           product_data: {
-            name: item.product.artist.name + " " + item.product.name,
+            name: item.product.artist.name + " - " + item.product.name,
             description: "Vinyl LP",
             images: [item.product.img],
           },
@@ -64,6 +65,15 @@ export default function Checkout() {
       };
     });
 
+    //because of how stripe works, we need to pass along our internal product ids
+    // so that we can adjust the inventory on the backend. We pass it through
+    // with the metadata field. There SHOULD be metadata fields on the line items
+    // objects, but I can't get access to them on the backend! Stripe fail.
+    const getProductIds = lineItems.map((item, index) => {
+      return `${item.product.id}`;
+    });
+
+    //now that the objects are created, we send them to our stripe route on the backend
     fetch("/create-checkout-session", {
       method: "POST",
       headers: {
@@ -73,6 +83,7 @@ export default function Checkout() {
       body: JSON.stringify({
         items: checkoutItems,
         email: userData.username !== null ? userData.email : null,
+        metadata: { GSR_order_id: activeOrder.id, ...getProductIds },
       }),
     })
       .then((res) => {
