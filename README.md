@@ -28,6 +28,7 @@ Add as many records as you'd like to your cart (up to the maximum we have in our
 
   <h2>Testing Stripe Checkout</h2>
 To test Stripe Checkout locally, install `stripe-cli`
+<br>
   `$ npm i stripe-cli`
   
   Then type 
