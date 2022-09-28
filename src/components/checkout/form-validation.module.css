@@ -15,6 +15,11 @@
   }
 }
 
+.priceWidth {
+  min-width: 60px;
+  text-align: center;
+}
+
 .trashcan {
   cursor: pointer;
   margin-left: 5px;
