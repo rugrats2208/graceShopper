@@ -50,7 +50,7 @@ export default function Cart() {
                     <MDBIcon
                         fas
                         icon="shopping-cart"
-                        size="lg"
+                        size="2x"
                         className="cart-icon"
                     />{' '}
                     <MDBBadge color="danger" notification pill>
