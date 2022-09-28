@@ -18,6 +18,10 @@ const Track = conn.define('track', {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
     },
+    preview: {
+        type: Sequelize.STRING,
+        defaultValue: null,
+    },
 });
 
 module.exports = Track;
