@@ -98,17 +98,4 @@ User.beforeUpdate(async (user, options) => {
   user.password = hashedPassword;
 });
 
-//CART
-User.prototype.getCart = async function () { };
-
-User.prototype.addToCart = async function () {
-  //grab the order associated with the user
-  //orders are your cart
-};
-
-User.prototype.removeFromToCart = async function () { };
-
-//convert order model from cart to actual placed order
-User.prototype.createOrder = async function () { };
-
 module.exports = User;
