@@ -45,7 +45,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-  // .concat(reduxLogger),
+      .concat(reduxLogger),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
