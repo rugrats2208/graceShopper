@@ -45,7 +45,7 @@ function SingleArtist() {
             ))
           : null}
       </ul>
-      <div>
+      <div className="single-artist-buttons">
         <button
           className="single-view-button btn btn-dark"
           type="button"

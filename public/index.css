@@ -64,6 +64,11 @@ a.link:hover {
   width: 200px;
 }
 
+.product h6 {
+  color: white;
+  align-self: center;
+}
+
 /************************ header for new/featured/all products view ************************/
 .list-title {
   margin-bottom: 20px;

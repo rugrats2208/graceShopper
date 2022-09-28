@@ -70,7 +70,11 @@ function SingleProduct() {
             <h4>Artist: {artist.name}</h4>
           </Link>
           <h4>Label: {product.label}</h4>
-          {artist.genre ? <h4>Genre: {toTitleCase(artist.genre)}</h4> : 'N/A'}
+          {artist.genre ? (
+            <h4>Genre: {toTitleCase(artist.genre)}</h4>
+          ) : (
+            <h4>Genre: N/A</h4>
+          )}
           <h4>Date Released: {product.releaseDate}</h4>
         </div>
       </div>
@@ -119,13 +123,17 @@ function SingleProduct() {
       </div>
       <h4>Price: {displayPrice(product.price)}</h4>
       <div className="single-product-buttons">
-        <button
-          className="product-button single-view-button btn btn-dark"
-          type="button"
-          onClick={() => dispatch(addOrderItem(product.id))}
-        >
-          Add to Cart
-        </button>
+        {product.stock < 0 ? (
+          <button
+            className="product-button single-view-button btn btn-dark"
+            type="button"
+            onClick={() => dispatch(addOrderItem(product.id))}
+          >
+            Add to Cart
+          </button>
+        ) : (
+          <p>Out of Stock</p>
+        )}
         <Link to={'/'}>
           <button
             className="product-button single-view-button btn btn-dark"
