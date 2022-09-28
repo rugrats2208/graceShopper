@@ -84,7 +84,11 @@ export const delUser = (id) => {
     return async (dispatch) => {
         try {
             const token = window.localStorage.getItem('token');
-            const { data } = await axios.get(`/api/auth/userInfo/${id}`);
+            const { data } = await axios.get(`/api/auth/userInfo/${id}`, {
+                headers: {
+                    authorization: token,
+                },
+            });
             const req = await axios.delete(`/api/admin/users/${data.id}`, {
                 headers: {
                     authorization: token,

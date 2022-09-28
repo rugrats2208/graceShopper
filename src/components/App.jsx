@@ -19,6 +19,7 @@ import {
   SingleArtist,
   Signup,
   Share,
+  Cart,
   OrderHistory,
   Checkout,
   LoggedInInfo,

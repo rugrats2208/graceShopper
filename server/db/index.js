@@ -16,7 +16,7 @@ Order.belongsTo(User);
 Order.hasMany(LineItem);
 LineItem.belongsTo(Order);
 
-Product.hasMany(LineItem);
+Product.hasMany(LineItem, { onDelete: 'CASCADE' });
 LineItem.belongsTo(Product);
 
 Tag.belongsToMany(Product, { through: 'productTag' });
