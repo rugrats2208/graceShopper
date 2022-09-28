@@ -110,7 +110,6 @@ export const addOrderItem = (productId) => {
         dispatch(addItem(item));
       }
     } catch (error) {
-      toast.error('already in your cart', defaultToast);
       console.error(error);
     }
   };
@@ -167,7 +166,6 @@ export const changeQty = (itemId, num) => {
         dispatch(updateQty(itemId, num));
       }
     } catch (error) {
-      toast.error('please delete to remove', defaultToast);
       console.error(error);
     }
   };
