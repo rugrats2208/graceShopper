@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { MDBIcon } from "mdb-react-ui-kit";
 import { getSingleProduct } from "../../../reducers/products/singleProductReducer";
+import { addOrderItem } from "../../../reducers/orders/ordersReducer";
 
 function SingleProduct() {
   const product = useSelector((state) => state.singleProduct);
   const artist = product.artist || {};
   const params = useParams();
   const dispatch = useDispatch();
+  const [playingId, setPlayingId] = useState(-1);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     dispatch(getSingleProduct(params.id));
@@ -34,6 +41,23 @@ function SingleProduct() {
     return `$${price}`;
   }
 
+  function handleClickAudio(id) {
+    //stop old track from playing
+    const oldTrack = Array.from(document.getElementsByClassName("playing"))[0];
+    if (oldTrack) {
+      oldTrack.classList.toggle("playing");
+      oldTrack.pause();
+      oldTrack.currentTime = 0;
+    }
+    //if stop was clicked break out
+    if (id === playingId) return setPlayingId(-1);
+    //play a track
+    setPlayingId(id);
+    const nextTrack = document.getElementById(id);
+    nextTrack.play();
+    nextTrack.classList.toggle("playing");
+  }
+
   return (
     <div className="single-product">
       <div className="single-product-image">
@@ -52,15 +76,47 @@ function SingleProduct() {
         <ol>
           {product.tracks &&
             product.tracks.map((track) => (
-              <li key={track.id}>
-                Name: {track.name} <br></br>Length:{" "}
-                {convertTrackLength(track.length)} mins
+              <li key={track.id} className="track">
+                <div>
+                  Name: {track.name} <br></br>Length:{" "}
+                  {convertTrackLength(track.length)}{" "}
+                  {track.length < 60000 ? "secs" : "mins"}
+                </div>
+                <div>
+                  {track.preview ? (
+                    <>
+                      <audio
+                        preload="auto"
+                        src={track.preview}
+                        id={track.id}
+                      ></audio>
+                      {playingId !== track.id ? (
+                        <MDBIcon
+                          fas
+                          icon="play-circle"
+                          onClick={() => handleClickAudio(track.id)}
+                          size="2x"
+                        />
+                      ) : (
+                        <MDBIcon
+                          fas
+                          icon="stop-circle"
+                          onClick={() => handleClickAudio(track.id)}
+                          size="2x"
+                        />
+                      )}
+                    </>
+                  ) : (
+                    " Preview Not Available"
+                  )}
+                </div>
               </li>
             ))}
         </ol>
         <button
           className="product-button single-view-button btn btn-dark"
           type="button"
+          onClick={() => dispatch(addOrderItem(product.id))}
         >
           Add to Cart
         </button>

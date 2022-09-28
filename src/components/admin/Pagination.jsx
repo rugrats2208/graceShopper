@@ -16,6 +16,7 @@ const Pagination = ({ itemsPerPage, total, paginate, currPage }) => {
             onClick={(evt) => {
               evt.preventDefault();
               paginate(number);
+              window.scrollTo(0, 0);
             }}
           >
             {number}

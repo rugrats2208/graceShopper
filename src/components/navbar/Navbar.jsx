@@ -3,24 +3,25 @@ import {
   MDBCollapse,
   MDBContainer,
   MDBIcon,
-  MDBBadge,
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarItem,
   MDBNavbarNav,
   MDBNavbarToggler,
-} from "mdb-react-ui-kit";
-import React, { useState } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { logout } from "../../reducers/Auth/authReducer";
-import Signup from "../auth/Signup";
-import styles from "./navbar.module.css";
-import vinyl from "./vinyl.svg";
+} from 'mdb-react-ui-kit';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+import React, { useState } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { logout } from '../../reducers/Auth/authReducer';
+import Signup from '../auth/Signup';
+import styles from './navbar.module.css';
+import vinyl from './vinyl.svg';
+import Cart from '../cart/Cart';
 
 export default function Navigation() {
-  const [showBasic, setShowBasic] = useState(true);
+  const [showBasic, setShowBasic] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //grab the username if logged in
@@ -35,20 +36,21 @@ export default function Navigation() {
   //login  handler
   function handleLogin(e) {
     e.preventDefault();
-    navigate("/signup");
+    navigate('/signup');
   }
   //logout  handler
   function handleLogout(e) {
     e.preventDefault();
     dispatch(logout());
-    navigate("/");
+    navigate('/');
   }
 
-  //return only the active order lineItems or empty array
-  const activeOrder = useSelector((state) =>
-    state.orders.find((order) => !order.complete)
-  ) || { lineItems: [] };
-  const { lineItems } = activeOrder;
+  //render tooltip
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Shopping Cart
+    </Tooltip>
+  );
 
   return (
     <>
@@ -65,9 +67,9 @@ export default function Navigation() {
             />
           </NavLink>
           <NavLink to="/">
-            <MDBNavbarBrand className={styles.nav_title}>
-              Grace Shopper Records
-            </MDBNavbarBrand>
+            <span className="narvar-brand">
+              <span className={styles.nav_title}>Grace Shopper Records</span>
+            </span>
           </NavLink>
           <MDBNavbarToggler
             aria-controls="navbarSupportedContent"
@@ -93,11 +95,11 @@ export default function Navigation() {
                   to="/allProducts"
                   onClick={() => setShowBasic(showBasic ? false : true)}
                   style={({ isActive }) => ({
-                    fontWeight: isActive ? "bold" : "normal",
+                    fontWeight: isActive ? 'bold' : 'normal',
                   })}
                 >
                   Vinyl
-                </NavLink>{" "}
+                </NavLink>{' '}
               </MDBNavbarItem>
               <MDBNavbarItem className={styles.nav_header_links}>
                 {isAdmin ? (
@@ -105,38 +107,40 @@ export default function Navigation() {
                     to="/admin"
                     onClick={() => setShowBasic(showBasic ? false : true)}
                     style={({ isActive }) => ({
-                      fontWeight: isActive ? "bold" : "normal",
+                      fontWeight: isActive ? 'bold' : 'normal',
                     })}
                   >
                     Admin
                   </NavLink>
                 ) : (
-                  ""
+                  ''
                 )}
               </MDBNavbarItem>
             </MDBNavbarNav>
             {/* Signed in as */}
             <div className={styles.nav_header_container}>
-              <Navbar.Text className="me-3">
-                Signed in as:{" "}
+              <Navbar.Text>
+                Signed in as:{' '}
                 <NavLink
                   to={`/userInfoPage`}
                   onClick={() => setShowBasic(showBasic ? false : true)}
                 >
-                  {username || "guest"}{" "}
+                  {username || 'guest'}{' '}
                 </NavLink>
               </Navbar.Text>
               {/* Cart Icon */}
-              <div className={styles.cart_icon}>
-                <a className="text-reset me-3" href="/checkout">
-                  <MDBIcon fas icon="shopping-cart" size="lg" />{" "}
-                  <MDBBadge color="danger" notification pill>
-                    {lineItems.length === 0 ? "" : lineItems.length}
-                  </MDBBadge>
-                </a>
-              </div>
+
+              <OverlayTrigger
+                placement="bottom"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+              >
+                <div className={styles.cart_icon}>
+                  <Cart />
+                </div>
+              </OverlayTrigger>
               {/* signin / sign out */}
-              {!window.localStorage.getItem("isLoggedIn") && (
+              {!window.localStorage.getItem('isLoggedIn') && (
                 <MDBBtn
                   color="secondary"
                   variant="primary"
@@ -146,7 +150,7 @@ export default function Navigation() {
                   Sign In
                 </MDBBtn>
               )}
-              {window.localStorage.getItem("isLoggedIn") && (
+              {window.localStorage.getItem('isLoggedIn') && (
                 <MDBBtn color="secondary" size="sm" onClick={handleLogout}>
                   Log Out
                 </MDBBtn>

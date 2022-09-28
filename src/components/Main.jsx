@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { FeaturedProducts, NewProductReleases, AllProducts } from './index';
+import { FeaturedProducts, NewProductReleases, OtherProducts } from './index';
 
-function GuestMain() {
+function Main() {
   return (
     <div id="guest-main">
       <div className="featured-albums-guest">{<FeaturedProducts />}</div>
       <div className="new-releases-guest">{<NewProductReleases />}</div>
       <div className="all-albums-guest">
-        <AllProducts />
+        <OtherProducts />
       </div>
     </div>
   );
 }
 
-export default GuestMain;
+export default Main;

@@ -3,6 +3,7 @@ export { default as AllProducts } from './products/AllProducts';
 export { default as SingleProduct } from './products/singleProduct/SingleProduct';
 export { default as FeaturedProducts } from './products/FeaturedProducts';
 export { default as NewProductReleases } from './products/NewProductReleases';
+export { default as OtherProducts } from './products/OtherProducts';
 
 export { default as Main } from './Main';
 export { default as PageNotFound } from './PageNotFound';
@@ -20,3 +21,6 @@ export { default as UserInfoPage } from './loggedInUserInfo/UserInfoPage';
 export { default as Cart } from './cart/Cart';
 
 export { default as Checkout } from './checkout/Checkout';
+export { default as PaymentSuccess } from './checkout/PaymentSuccess';
+export { default as PaymentCancel } from './checkout/PaymentCancel';
+export { default as Share } from './sharing/Share'

@@ -1,9 +1,14 @@
 import axios from 'axios';
-/*
-TODO: refactor to have active order
-    -initial state = {activeOrder: {}, pastOrders: []}
-    -send active order id in body of put requests
-*/
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const defaultToast = {
+  position: 'top-center',
+  autoClose: 400,
+  closeOnClick: true,
+  pauseOnHover: true,
+  progress: undefined,
+};
 
 //ACTION TYPE
 const SET_ORDER = 'SET_ORDER';
@@ -38,13 +43,32 @@ export const getOrders = (userId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
+      const order = window.localStorage.getItem('order');
+      if (token) {
+        const { data } = await axios.get(`/api/shop/orders/${userId}`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        dispatch(setOrders(data));
+        if (order) {
+          JSON.parse(order).lineItems.forEach((item) => {
+            dispatch(addOrderItem(item.product.id));
+          });
+          window.localStorage.removeItem('order');
+        }
+      } else {
+        if (!order)
+          window.localStorage.setItem(
+            'order',
+            JSON.stringify({
+              complete: false,
+              lineItems: [],
+            })
+          );
 
-      const { data } = await axios.get(`/api/shop/orders/${userId}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      dispatch(setOrders(data));
+        dispatch(setOrders([JSON.parse(window.localStorage.getItem('order'))]));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -55,17 +79,30 @@ export const addOrderItem = (productId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
-
-      const { data } = await axios.put(
-        `/api/shop/orders/${productId}`,
-        {},
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      dispatch(addItem(data));
+      if (token) {
+        const { data } = await axios.put(
+          `/api/shop/orders/${productId}`,
+          {},
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+        );
+        dispatch(addItem(data));
+      } else {
+        const order = window.localStorage.getItem('order');
+        const { data } = await axios.get(`/api/shop/album/${productId}`);
+        const newOrder = JSON.parse(order);
+        const item = {
+          id: newOrder.lineItems.length + 1,
+          qty: 1,
+          product: data,
+        };
+        newOrder.lineItems.push(item);
+        localStorage.order = JSON.stringify(newOrder);
+        dispatch(addItem(item));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -76,12 +113,22 @@ export const deleteOrderItem = (itemId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
-      await axios.delete(`/api/shop/orders/${itemId}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      dispatch(deleteItem(itemId));
+      if (token) {
+        await axios.delete(`/api/shop/orders/${itemId}`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        dispatch(deleteItem(itemId));
+      } else {
+        const order = window.localStorage.getItem('order');
+        const newOrder = JSON.parse(order);
+        newOrder.lineItems = newOrder.lineItems.filter(
+          (item) => item.id !== itemId
+        );
+        localStorage.order = JSON.stringify(newOrder);
+        dispatch(deleteItem(itemId));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -92,16 +139,26 @@ export const changeQty = (itemId, num) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
-      await axios.put(
-        '/api/shop/orders/qty',
-        { itemId, num },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      dispatch(updateQty(itemId, num));
+      if (token) {
+        await axios.put(
+          '/api/shop/orders/qty',
+          { itemId, num },
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+        );
+        dispatch(updateQty(itemId, num));
+      } else {
+        const order = window.localStorage.getItem('order');
+        const newOrder = JSON.parse(order);
+        if (num < 1 || num > newOrder.lineItems[itemId - 1].product.stock)
+          return;
+        newOrder.lineItems[itemId - 1].qty = num;
+        localStorage.order = JSON.stringify(newOrder);
+        dispatch(updateQty(itemId, num));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -115,6 +172,7 @@ const initialState = [];
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_ORDER:
+      if (!action.orders) return state;
       return [...action.orders];
     case ADD_ORDER_ITEM:
       return state.map((order) =>

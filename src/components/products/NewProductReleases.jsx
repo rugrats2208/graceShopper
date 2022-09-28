@@ -30,7 +30,7 @@ function NewProductReleases() {
       featuredProducts[i].releaseDate = dateArr.join('');
     }
     //getting the first 30 items (which are now the albums with the 30 largest numbers for releaseDate, aka the latest release dates)
-    return featuredProducts.slice(0, 30);
+    return featuredProducts.slice(0, 20);
   }
 
   useEffect(() => {

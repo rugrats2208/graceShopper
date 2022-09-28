@@ -1,5 +1,113 @@
-.formError {
-  position: fixed;
-  bottom: 0;
+// 991
+/************************ admin page ************************/
+.adminDashboard {
+  .options {
+    display: flex;
+
+    .dropdown {
+      margin: 2rem 1rem;
+      display: flex;
+      align-items: center;
+    }
+    @media (max-width: 990px) {
+      justify-content: space-around;
+    }
+    @media (max-width: 530px) {
+      flex-direction: column;
+      margin: 20px;
+      .dropdown {
+        margin: 5px 0;
+        * {
+          flex: 1 1 auto;
+        }
+      }
+    }
+    .adminForm {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 25em;
+      background: #4e4e4e;
+      z-index: 10;
+      padding: 2rem;
+      box-shadow: 0 0 8px 8px rgba(80, 80, 80, 0.3);
+      label {
+        color: white;
+      }
+      .row:last-child {
+        margin: 10px 0;
+        * {
+          margin: 4px 0;
+        }
+      }
+    }
+  }
+  table {
+    .selected {
+      box-sizing: border-box;
+      border-bottom: 3px solid #00b74a;
+    }
+  }
+  .card {
+    .selected {
+      box-sizing: border-box;
+      border-bottom: 3px solid #00b74a;
+    }
+  }
+
+  .pageNumbers {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    background: #313131;
+    margin: 2rem 0;
+    li {
+      margin: 0.5rem;
+      a {
+        color: #f9f9f9;
+      }
+      a:hover {
+        cursor: pointer;
+        color: #00b74a;
+      }
+      a.active {
+        color: #00b74a;
+      }
+    }
+  }
+}
+
+.cardsContainer {
+  padding-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+  width: 100%;
+  .card {
+    background: pink;
+    box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
+    .card-body {
+      border-bottom: none;
+    }
+  }
+  .card.selected {
+    box-sizing: border-box;
+    border: 3px solid #00b74a;
+  }
+}
+
+.card-header {
+  background: #383838;
   color: white;
+  font-weight: bold;
+}
+.list-group {
+  label {
+    background: #383838;
+    color: white;
+    font-weight: bold;
+  }
 }

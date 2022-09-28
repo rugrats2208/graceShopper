@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { useSelector, useDispatch } from "react-redux";
+import { MDBIcon, MDBBadge } from "mdb-react-ui-kit";
 import {
   getOrders,
   deleteOrderItem,
@@ -12,10 +13,10 @@ import {
 } from "../../reducers/orders/ordersReducer";
 
 export default function Cart() {
-  const [isOpen, setIsOpen] = useState(false);
+  //TODO: put total on store
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.auth.id);
+  const user = useSelector((state) => state.auth);
 
   //return only the active order lineItems or empty array
   const activeOrder = useSelector((state) =>
@@ -25,8 +26,8 @@ export default function Cart() {
 
   //set all the orders when user logs in
   useEffect(() => {
-    dispatch(getOrders(userId));
-  }, [userId]);
+    dispatch(getOrders(user.id));
+  }, [user]);
 
   //set total price when lineItems changes
   useEffect(() => {
@@ -36,13 +37,14 @@ export default function Cart() {
   }, [lineItems]);
 
   return (
-    <Dropdown
-      drop="start"
-      autoClose="outside"
-      onToggle={() => setIsOpen(!isOpen)}
-    >
+    <Dropdown drop="down" autoClose="outside">
       <Dropdown.Toggle variant="success" id="cart" title="Dropdown button">
-        <img src={isOpen ? "/x-icon.png" : "/shopping-cart-icon.jpg"} />
+        <>
+          <MDBIcon fas icon="shopping-cart" size="2x" className="cart-icon" />{" "}
+          <MDBBadge color="danger" notification pill>
+            {lineItems.length === 0 ? "" : lineItems.length}
+          </MDBBadge>
+        </>
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="cart-dropdown">
@@ -117,7 +119,9 @@ export default function Cart() {
           );
         })}
         <Dropdown.ItemText id="checkout-section">
-          <button className="product-button btn btn-dark">Checkout</button>
+          <Link to="/checkout">
+            <button className="product-button btn btn-dark">Checkout</button>
+          </Link>
           <span>Subtotal: ${(total / 100).toFixed(2)}</span>
         </Dropdown.ItemText>
       </Dropdown.Menu>
