@@ -289,7 +289,6 @@ a.data-item:hover {
 .track {
   display: flex;
   justify-content: space-between;
-  border-radius: 5px;
 }
 
 .individual-track {
@@ -348,6 +347,9 @@ a.data-item:hover {
   align-items: center;
 }
 
+#single-artist-cart {
+  margin-left: 121px;
+}
 /************************ shopping cart ************************/
 #cart {
   background-color: rgba(0, 0, 0, 0);
