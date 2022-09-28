@@ -4,9 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 //BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
 
+//TOAST
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 //COMPONENTS
 import ProductForm from "./ProductForm";
 import UserForm from "./UserForm";
+import ProductCards from "./ProductCards";
 
 //ACTIONS
 import { delProduct } from "../../reducers/products/productsReducer";
@@ -22,6 +27,12 @@ function SortDropdown() {
   const { formMethod, product, user, view } = useSelector(
     (state) => state.admin
   );
+
+  const inputAvailable = () =>
+    toast.success("Success!", {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 2000,
+    });
 
   return (
     <>
@@ -57,10 +68,12 @@ function SortDropdown() {
               if (product.id && !view) {
                 dispatch(delProduct(product.id));
                 dispatch(setProduct(""));
+                inputAvailable();
               }
               if (user.id && view) {
                 dispatch(delUser(user.id));
                 dispatch(setUser(""));
+                inputAvailable();
               }
             }}
             href="#/action-3"
@@ -71,6 +84,7 @@ function SortDropdown() {
       </Dropdown>
 
       {formMethod ? view ? <UserForm /> : <ProductForm /> : ""}
+      {/* {formMethod ? view ? <UserForm /> : <ProductForm /> : ""} */}
     </>
   );
 }
