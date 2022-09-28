@@ -2,15 +2,12 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const { fulfillStripeOrder } = require('./fulfillStripeOrder');
-//cors is for Stripe
-const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 
 //for STRIPE
 const stripe = require('stripe')(process.env.REACT_APP_STRIPE_TEST_SECRET_KEY);
-const { v4: uuidv4 } = require('uuid');
 // Use body-parser to retrieve the raw body as a buffer
 const bodyParser = require('body-parser');
 const endpointSecret = process.env.STRIPE_WEBHOOK_KEY;
@@ -70,7 +67,7 @@ app.post(
       );
     }
 
-    response.status(200).send();
+    response.status(200).send('success');
   }
 );
 
