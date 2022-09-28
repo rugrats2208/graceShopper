@@ -11,9 +11,15 @@ body {
 
 .app {
   position: absolute;
-  top: 70px;
+  top: 73px;
   width: 99.5vw;
 }
+@media (max-width: 400px) {
+  .app {
+    top: 100px;
+  }
+}
+
 /************************ product component in featured/new/all products views ************************/
 
 .product {
@@ -185,10 +191,6 @@ a.link {
   list-style: none;
 }
 
-/* .single-artist h5 {
-  color: #4f4f4f;
-} */
-
 .single-artist button {
   margin-left: 20px;
   border-left: 30px;
@@ -230,66 +232,6 @@ a.cart-delete-btn:hover {
 #checkout-section {
   display: flex;
   justify-content: space-between;
-}
-
-/************************ admin page ************************/
-
-.adminDashboard {
-  height: 100vh;
-  background: #313131;
-}
-
-.adminDashboard .options {
-  display: flex;
-}
-.adminDashboard .options > * {
-  margin: 8px;
-}
-.adminDashboard > .dropdown {
-  height: 3.5rem;
-  display: flex;
-  align-items: center;
-}
-.selected {
-  box-sizing: border-box;
-  border-bottom: 3px solid #00b74a;
-}
-
-.adminForm {
-  padding: 2rem;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: #f9f9f9;
-}
-
-.row > * {
-  margin: 8px;
-}
-input.form-control:focus {
-  outline: solid;
-  outline-color: #00b74a;
-  outline-width: medium;
-}
-
-.pageNumbers {
-  display: flex;
-  list-style: none;
-  justify-content: center;
-}
-.pageNumbers li {
-  margin: 0.5rem;
-}
-.pageNumbers li a {
-  color: #f9f9f9;
-}
-.pageNumbers li a:hover {
-  cursor: pointer;
-  color: #00b74a;
-}
-.pageNumbers li a.active {
-  color: #00b74a;
 }
 
 /************************ PAGE NOT FOUND ************************/
