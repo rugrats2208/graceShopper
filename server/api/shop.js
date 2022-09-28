@@ -141,7 +141,6 @@ router.put('/orders/stock', async (req, res, next) => {
     if (req.body.secret !== process.env.JWT) {
       throw new Error('secret required');
     }
-    console.log('we are at least here!');
 
     //mark order as complete
     if (req.body.orderId) {

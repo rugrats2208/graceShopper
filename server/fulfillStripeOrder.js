@@ -23,7 +23,6 @@ const fulfillStripeOrder = async (session, lineItems) => {
     qtyContainer: qtyObj,
     secret: process.env.JWT,
   });
-  console.log({ orderId: order_id, qtyContainer: qtyObj });
 };
 module.exports = {
   fulfillStripeOrder,
