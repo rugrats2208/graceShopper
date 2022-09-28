@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const defaultToast = {
     position: 'top-center',
-    autoClose: 800,
+    autoClose: 1600,
     closeOnClick: true,
     pauseOnHover: true,
     progress: undefined,
@@ -114,8 +114,7 @@ export const addOrderItem = productId => {
                 dispatch(addItem(item));
             }
         } catch (error) {
-            toast.error('Item already in cart', defaultToast);
-            console.error(error);
+            toast.error(error.message, defaultToast);
         }
     };
 };
@@ -164,18 +163,17 @@ export const changeQty = (itemId, num) => {
             } else {
                 const order = window.localStorage.getItem('order');
                 const newOrder = JSON.parse(order);
-                if (
-                    num < 1 ||
-                    num > newOrder.lineItems[itemId - 1].product.stock
-                )
-                    return;
+                if (num < 1) throw new Error('Quantity cannot be less than 1');
+                if (num > newOrder.lineItems[itemId - 1].product.stock)
+                    throw new Error(
+                        'Quantity cannot be more than amount in stock'
+                    );
                 newOrder.lineItems[itemId - 1].qty = num;
                 localStorage.order = JSON.stringify(newOrder);
                 dispatch(updateQty(itemId, num));
             }
         } catch (error) {
-            toast.error('Error changing quantity', defaultToast);
-            console.error(error);
+            toast.error(error.message, defaultToast);
         }
     };
 };
