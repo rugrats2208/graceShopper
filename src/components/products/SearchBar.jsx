@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 
 function SearchBar({ placeholder, albums }) {
   const [filteredAlbums, setFilteredAlbums] = useState([]);
-  const [inputTerm, setInputTerm] = useState("");
+  const [inputTerm, setInputTerm] = useState('');
 
   function handleChange(event) {
     const searchTerm = event.target.value;
@@ -13,8 +13,8 @@ function SearchBar({ placeholder, albums }) {
     const matchingAlbums = albums.filter((album) => {
       return album.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
-    if (searchTerm === "") {
-      console.log("empty");
+    if (searchTerm === '') {
+      console.log('empty');
       setFilteredAlbums([]);
     } else {
       setFilteredAlbums(matchingAlbums);
@@ -23,11 +23,11 @@ function SearchBar({ placeholder, albums }) {
 
   function clear() {
     setFilteredAlbums([]);
-    setInputTerm("");
+    setInputTerm('');
   }
 
   return (
-    <div className="search">
+    <div className="search form-search">
       <h5>Search Vinyl</h5>
       <div className="searchInputs">
         <input
