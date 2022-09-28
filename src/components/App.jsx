@@ -18,6 +18,7 @@ import {
   AdminDashboard,
   SingleArtist,
   Signup,
+  Share,
   Cart,
   OrderHistory,
   Checkout,
@@ -60,6 +61,7 @@ function App() {
         <Route path={"*"} element={<PageNotFound />} />
       </Routes>
       <footer className="my-5 pt-5 text-muted text-center text-small">
+        <Share />
         <p className="mb-1">&copy; 2017–2022 Grace Shopper Records Ltd.</p>
         <ul className="list-inline">
           <li className="list-inline-item">

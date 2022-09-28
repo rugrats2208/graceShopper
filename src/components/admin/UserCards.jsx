@@ -6,55 +6,50 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
 //FUNCTIONS
-import { setProduct } from "../../reducers/adminReducer";
 import Pagination from "./Pagination";
+import { setUser } from "../../reducers/adminReducer";
 
-function ProductCards() {
-  const { formMethod, product, products } = useSelector((state) => state.admin);
+function UserCards() {
+  const { formMethod, user, users } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
   const [currPage, setCurrPage] = React.useState(1);
   const [itemsPerPage] = React.useState(10);
   const indexOfLastPost = currPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currSlice = products.slice(indexOfFirstPost, indexOfLastPost);
+  const currSlice = users.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   return (
     <>
       <div className="cardsContainer">
-        {currSlice.map((item) => {
-          const price = `${item.price}`;
+        {currSlice.map((endUser) => {
           return (
             <Card
-              className={item.id === product.id ? "selected mb-4" : "mb-4"}
+              className={endUser.id === user.id ? "selected mb-4" : "mb-4"}
               onClick={() => {
                 if (!formMethod) {
-                  dispatch(setProduct(item));
+                  dispatch(setUser(endUser));
                 }
               }}
-              key={item.id}
+              key={endUser.id}
               bg={"light"}
               style={{ width: "18rem" }}
             >
-              <Card.Header>{`ID#${item.id}`}</Card.Header>
+              <Card.Header>{`ID#${endUser.id}`}</Card.Header>
               <Card.Body>
-                <Card.Title>{`${item.name}`}</Card.Title>
-                <Card.Text>{`${item.label}`}</Card.Text>
+                <Card.Title>{`${endUser.fName} ${endUser.lName}`}</Card.Title>
               </Card.Body>
               <ListGroup className="list-group-flush">
-                <label>Price</label>
+                <label>Username</label>
+                <ListGroup.Item>{endUser.username}</ListGroup.Item>
+                <label>Email</label>
+                <ListGroup.Item>{endUser.email}</ListGroup.Item>
+                <label>Privileges</label>
                 <ListGroup.Item>
-                  $
-                  {`${price.slice(0, price.length - 2)}.${price.slice(
-                    price.length - 2
-                  )}`}
+                  {endUser.isAdmin ? "Administrator" : "User"}
                 </ListGroup.Item>
-                <label>Quantity</label>
-                <ListGroup.Item>{`${item.stock}`}</ListGroup.Item>
-                <label>Release Date</label>
-                <ListGroup.Item>{`${item.releaseDate}`}</ListGroup.Item>
               </ListGroup>
             </Card>
           );
@@ -63,11 +58,11 @@ function ProductCards() {
       <Pagination
         currPage={currPage}
         itemsPerPage={itemsPerPage}
-        total={products.length}
+        total={users.length}
         paginate={paginate}
       />
     </>
   );
 }
 
-export default ProductCards;
+export default UserCards;

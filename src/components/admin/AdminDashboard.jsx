@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import "./css/style.css";
 
 //COMPONENTS
-import UsersTable from "./UsersTable";
-import ProductsTable from "./ProductsTable";
 import DropdownActions from "./DropdownActions";
 import SortDropdown from "./SortDropdown";
+import ProductsTable from "./ProductsTable";
 import ProductCards from "./ProductCards";
+import UsersTable from "./UsersTable";
+import UserCards from "./UserCards";
 //BOOTSTRAP
 import Button from "react-bootstrap/Button";
 
@@ -27,10 +28,12 @@ const AdminDashboard = () => {
   const [cardView, setCardView] = React.useState(window.innerWidth);
   const { view, formMethod, sortMethod } = useSelector((state) => state.admin);
   const products = useSelector((state) => state.products);
-
-  const windowWidth = () => window.innerWidth;
-
   const renderTable = (sel) => (sel ? <UsersTable /> : <ProductsTable />);
+  const renderCards = (sel) => (sel ? <UserCards /> : <ProductCards />);
+
+  const switchToMobile = () => {
+    setCardView(window.innerWidth);
+  };
 
   React.useEffect(() => {
     dispatch(getUsers());
@@ -39,10 +42,6 @@ const AdminDashboard = () => {
   React.useEffect(() => {
     dispatch(getProducts());
   }, [products]);
-
-  const switchToMobile = () => {
-    setCardView(window.innerWidth);
-  };
 
   window.addEventListener("resize", switchToMobile);
   return (
@@ -64,32 +63,9 @@ const AdminDashboard = () => {
           </Button>
         </div>
       </div>
-      {cardView > 900 ? renderTable(view) : <ProductCards />}
+      {cardView > 900 ? renderTable(view) : renderCards(view)}
     </div>
   );
 };
 
 export default AdminDashboard;
-
-// import React from "react";
-// function MyComponent() {
-//   const [dimensions, setDimensions] = React.useState({
-//     height: window.innerHeight,
-//     width: window.innerWidth,
-//   });
-//   React.useEffect(() => {
-//     function handleResize() {
-//       setDimensions({
-//         height: window.innerHeight,
-//         width: window.innerWidth,
-//       });
-//     }
-
-//     window.addEventListener("resize", handleResize);
-//   });
-//   return (
-//     <div>
-//       Rendered at {dimensions.width} x {dimensions.height}
-//     </div>
-//   );
-// }
