@@ -80,8 +80,11 @@ export default function Checkout() {
       // Send along all the information about the items
       body: JSON.stringify({
         items: checkoutItems,
-        email: userData.username !== null ? userData.email : null,
-        metadata: { GSR_order_id: activeOrder.id, ...getProductIds },
+        email: userData.username ? userData.email : undefined,
+        metadata: {
+          GSR_order_id: activeOrder.id ? activeOrder.id : undefined,
+          ...getProductIds,
+        },
       }),
     })
       .then((res) => {

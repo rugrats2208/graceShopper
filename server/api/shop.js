@@ -98,6 +98,44 @@ router.put('/orders/qty', requireToken, async (req, res, next) => {
     }
 });
 
+//PUT api/shop/orders/stock  ----  STRIPE ONLY!  ------ No token or admin routes, but does require secret key matching
+router.put('/orders/stock', async (req, res, next) => {
+    try {
+        //requires secret key to be sent
+        if (req.body.secret !== process.env.JWT) {
+            throw new Error('secret required');
+        }
+        console.log('we are at least here!');
+
+        //mark order as complete
+        if (req.body.orderId) {
+            const grabOrder = await Order.findByPk(req.body.orderId);
+            Order.create({ userId: grabOrder.userId });
+            await Order.update(
+                { complete: true },
+                {
+                    where: { id: req.body.orderId },
+                }
+            );
+        }
+
+        //reduce inventory by the qty sold
+        for (const [key, value] of Object.entries(req.body.qtyContainer)) {
+            const product = await Product.findByPk(Number(key));
+            const newStock = product.stock - value;
+            await Product.update(
+                { stock: newStock },
+                { where: { id: Number(key) } }
+            );
+        }
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
 // PUT api/shop/orders/:prodId
 router.put('/orders/:prodId', requireToken, async (req, res, next) => {
     try {
