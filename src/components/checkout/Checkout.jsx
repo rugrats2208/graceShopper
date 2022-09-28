@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { MDBIcon } from 'mdb-react-ui-kit';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { MDBIcon } from "mdb-react-ui-kit";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   getOrders,
   deleteOrderItem,
   changeQty,
-} from '../../reducers/orders/ordersReducer';
-import styles from './form-validation.module.css';
+} from "../../reducers/orders/ordersReducer";
+import styles from "./form-validation.module.css";
 
 // -------------FUNCTION START --------------------------------------------
 
@@ -53,10 +53,10 @@ export default function Checkout() {
         //   maximum: item.product.stock,
         // },
         price_data: {
-          currency: 'usd',
+          currency: "usd",
           product_data: {
-            name: item.product.artist.name + ' - ' + item.product.name,
-            description: 'Vinyl LP',
+            name: item.product.artist.name + " - " + item.product.name,
+            description: "Vinyl LP",
             images: [item.product.img],
           },
           unit_amount: item.product.price,
@@ -74,10 +74,10 @@ export default function Checkout() {
     });
 
     //now that the objects are created, we send them to our stripe route on the backend
-    fetch('/create-checkout-session', {
-      method: 'POST',
+    fetch("/create-checkout-session", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       // Send along all the information about the items
       body: JSON.stringify({
