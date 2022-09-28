@@ -462,6 +462,21 @@ a.cart-delete-btn:hover {
   margin-left: 50px;
 }
 
+footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+footer img {
+  width: 200px;
+}
+
+@media (max-width: 550px) {
+  footer {
+    flex-direction: column;
+  }
+}
+
 /************************ scroll bar ************************/
 
 ::-webkit-scrollbar {
