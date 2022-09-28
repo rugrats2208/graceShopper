@@ -100,7 +100,9 @@ export const addOrderItem = productId => {
                     `/api/shop/album/${productId}`
                 );
                 const newOrder = JSON.parse(order);
-                if (newOrder.includes(data))
+                if (
+                    newOrder.lineItems.some(item => item.product.id === data.id)
+                )
                     throw new Error('Item already exists in order');
                 const item = {
                     id: newOrder.lineItems.length + 1,
