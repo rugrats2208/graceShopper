@@ -27,13 +27,14 @@ Please enjoy your stay.
 Add as many records as you'd like to your cart (up to the maximum we have in our warehouse).
 
   <h2>Testing Stripe Checkout</h2>
-To test Stripe Checkout locally, install `stripe-cli`
+To test Stripe Checkout locally, install stripe-cli
 <br>
+
   `$ npm i stripe-cli`
   
   Then type 
   `$ stripe login` 
-  and follow the login prompt
+  and follow the login prompt. A password will be required.
   
   After login, run `stripe listen --forward-to localhost:3000/webhook`
   While that is running, open a new terminal window and run
