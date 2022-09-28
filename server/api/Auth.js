@@ -1,6 +1,6 @@
 // apiRoutes/users.js
 const router = require('express').Router();
-const { User } = require('../db');
+const { User, Order } = require('../db');
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 //dotenv holds our secret JWT key
@@ -42,6 +42,7 @@ router.post('/signup', async (req, res, next) => {
   try {
     const { username, password, email, fName, lName } = req.body; //to prevent malicious injection
     const user = await User.create({ username, password, email, fName, lName });
+    await Order.create({ userId: user.id })
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
@@ -132,19 +133,6 @@ router.put('/loggedInEdit', requireToken, async (req, res, next) => {
     console.error(error);
     next(error);
   }
-});
-
-// matches POST requests to /api/auth/
-router.post('/', function (req, res, next) {
-  /* etc */
-});
-// matches PUT requests to /api/auth/:userId
-router.put('/:userId', function (req, res, next) {
-  /* etc */
-});
-// matches DELETE requests to /api/auth/:userId
-router.delete('/:userId', function (req, res, next) {
-  /* etc */
 });
 
 module.exports = router;

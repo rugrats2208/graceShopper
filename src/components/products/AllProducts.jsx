@@ -21,7 +21,7 @@ function AllProducts() {
   const allProducts = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(25);
+  const [productsPerPage] = useState(25);
 
   function filterByGenre(options) {
     setFilteredProducts([]);

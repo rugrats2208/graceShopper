@@ -3,7 +3,6 @@ const { Product, Track, Artist, Order, User, LineItem } = require('../db');
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 // GET api/shop
-//TODO: change price and track length to human readable here
 router.get('/', async (req, res, next) => {
     try {
         const data = await Product.findAll({
@@ -101,16 +100,6 @@ router.get('/orders/:userId', requireToken, async (req, res, next) => {
         next(error);
     }
 });
-
-// POST api/shop/orders/:userId
-// router.post('/orders/', requireToken, async (req, res, next) => {
-//     try {
-//         await Order.create({ userId: req.user.id });
-//     } catch (error) {
-//         console.error(error);
-//         next(error);
-//     }
-// });
 
 // PUT api/shop/orders
 router.put('/orders', requireToken, async (req, res, next) => {
