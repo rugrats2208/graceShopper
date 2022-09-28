@@ -100,12 +100,11 @@ router.put('/orders/qty', requireToken, async (req, res, next) => {
 
 //PUT api/shop/orders/stock  ----  STRIPE ONLY!  ------ No token or admin routes, but does require secret key matching
 router.put('/orders/stock', async (req, res, next) => {
-    try {
-        //requires secret key to be sent
-        if (req.body.secret !== process.env.JWT) {
-            throw new Error('secret required');
-        }
-        console.log('we are at least here!');
+  try {
+    //requires secret key to be sent
+    if (req.body.secret !== process.env.JWT) {
+      throw new Error('secret required');
+    }
 
         //mark order as complete
         if (req.body.orderId) {
