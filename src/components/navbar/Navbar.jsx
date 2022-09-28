@@ -21,7 +21,7 @@ import vinyl from "./vinyl.svg";
 import Cart from "../cart/Cart";
 
 export default function Navigation() {
-  const [showBasic, setShowBasic] = useState(true);
+  const [showBasic, setShowBasic] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //grab the username if logged in
