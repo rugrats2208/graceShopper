@@ -10,12 +10,6 @@ const defaultToast = {
   progress: undefined,
 };
 
-/*
-TODO: refactor to have active order
-    -initial state = {activeOrder: {}, pastOrders: []}
-    -send active order id in body of put requests
-*/
-
 //ACTION TYPE
 const SET_ORDER = 'SET_ORDER';
 const ADD_ORDER_ITEM = 'ADD_ORDER_ITEM';
@@ -187,20 +181,20 @@ export default (state = initialState, action) => {
         order.complete
           ? order
           : {
-              ...order,
-              lineItems: [...order.lineItems, action.item],
-            }
+            ...order,
+            lineItems: [...order.lineItems, action.item],
+          }
       );
     case DEL_ORDER_ITEM:
       return state.map((order) =>
         order.complete
           ? order
           : {
-              ...order,
-              lineItems: order.lineItems.filter(
-                (item) => item.id !== action.itemId
-              ),
-            }
+            ...order,
+            lineItems: order.lineItems.filter(
+              (item) => item.id !== action.itemId
+            ),
+          }
       );
     case CHANGE_QTY:
       const orderIndex = state.findIndex((order) => !order.complete);

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, User } = require('../db');
+const { Product, User, Order } = require('../db');
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 //ADMING ALBUMS ROUTES
@@ -47,6 +47,7 @@ router.post('/users', requireToken, isAdmin, async (req, res, next) => {
     try {
         const { fName, lName, username, password, email, isAdmin } = req.body;
         const user = await User.create({ fName, lName, username, password, email, isAdmin });
+        await Order.create({ userId: user.id });
         res.send(user)
     } catch (error) {
         next(error);

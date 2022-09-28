@@ -6,8 +6,8 @@ const Order = require('./models/Order');
 const Product = require('./models/Product');
 const Track = require('./models/Track');
 const Artist = require('./models/Artist');
-const Tag = require('./models/Tag'); //TODO: seed and implement tags...genres?
-const LineItem = require('./models/LineItem'); //line item is the product and the amount of that product to buy
+const Tag = require('./models/Tag');
+const LineItem = require('./models/LineItem');
 
 //ASSOCIATIONS
 User.hasMany(Order);
