@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { getSingleProduct } from '../../../reducers/products/singleProductReducer';
+import { addOrderItem } from '../../../reducers/orders/ordersReducer';
 
 function SingleProduct() {
     const product = useSelector(state => state.singleProduct);

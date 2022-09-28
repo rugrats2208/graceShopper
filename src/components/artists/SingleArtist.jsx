@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleArtist } from '../../reducers/artists/singleArtistReducer';
+import { addOrderItem } from '../../reducers/orders/ordersReducer';
 
 function SingleArtist() {
   const artist = useSelector((state) => state.singleArtist);
@@ -43,6 +44,7 @@ function SingleArtist() {
                 <button
                   className="single-view-button btn btn-dark"
                   type="button"
+                  onClick={() => dispatch(addOrderItem(product.id))}
                 >
                   Add to Cart
                 </button>{' '}
