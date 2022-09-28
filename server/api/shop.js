@@ -10,7 +10,6 @@ router.get('/', async (req, res, next) => {
         });
         res.send(data);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -23,7 +22,6 @@ router.get('/album/:id', async (req, res, next) => {
         });
         res.send(data);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -36,40 +34,6 @@ router.get('/artist/:id', async (req, res, next) => {
         });
         res.send(data);
     } catch (error) {
-        console.error(error);
-        next(error);
-    }
-});
-
-//keeping this route here for the time being to reference
-router.get('/pastOrders', requireToken, async (req, res, next) => {
-    try {
-        //getting user with their past orders
-        const userWithPastOrders = await User.findByPk(req.user.id, {
-            include: {
-                model: Order,
-            },
-        });
-        //extracting array of user's past orders
-        const pastOrders = userWithPastOrders.orders;
-        const ordersWithProducts = [];
-        //looping through the array of orders
-        for (let i = 0; i < pastOrders.length; i++) {
-            //using id of current order in array to query db to include all the products in the order
-            const singleOrderWithProducts = await Order.findByPk(
-                pastOrders[i].id,
-                {
-                    include: {
-                        model: Product,
-                    },
-                }
-            );
-            ordersWithProducts.push(singleOrderWithProducts);
-        }
-        //sends an array of all the users past orders with the products eager loaded for each order
-        res.send(ordersWithProducts);
-    } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -96,7 +60,6 @@ router.get('/orders/:userId', requireToken, async (req, res, next) => {
         });
         res.send(data);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -115,7 +78,6 @@ router.put('/orders', requireToken, async (req, res, next) => {
         );
         await Order.create({ userId: req.user.id });
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -130,6 +92,42 @@ router.put('/orders/qty', requireToken, async (req, res, next) => {
                 individualHooks: true,
             }
         );
+        res.sendStatus(200);
+    } catch (error) {
+        next(error);
+    }
+});
+
+//PUT api/shop/orders/stock  ----  STRIPE ONLY!  ------ No token or admin routes, but does require secret key matching
+router.put('/orders/stock', async (req, res, next) => {
+  try {
+    //requires secret key to be sent
+    if (req.body.secret !== process.env.JWT) {
+      throw new Error('secret required');
+    }
+
+        //mark order as complete
+        if (req.body.orderId) {
+            const grabOrder = await Order.findByPk(req.body.orderId);
+            Order.create({ userId: grabOrder.userId });
+            await Order.update(
+                { complete: true },
+                {
+                    where: { id: req.body.orderId },
+                }
+            );
+        }
+
+        //reduce inventory by the qty sold
+        for (const [key, value] of Object.entries(req.body.qtyContainer)) {
+            const product = await Product.findByPk(Number(key));
+            const newStock = product.stock - value;
+            await Product.update(
+                { stock: newStock },
+                { where: { id: Number(key) } }
+            );
+        }
+
         res.sendStatus(200);
     } catch (error) {
         console.error(error);
@@ -163,7 +161,6 @@ router.put('/orders/:prodId', requireToken, async (req, res, next) => {
         });
         res.send(newItem);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -174,7 +171,6 @@ router.delete('/orders/:lineId', requireToken, async (req, res, next) => {
         await LineItem.destroy({ where: { id: req.params.lineId } });
         res.sendStatus(200);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });

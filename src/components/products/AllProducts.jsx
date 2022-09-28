@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import Product from "./Product";
-import Select from "react-select";
-import Pagination from "./Pagination";
-import SearchBar from "./SearchBar";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import Product from './Product';
+import Select from 'react-select';
+import Pagination from './Pagination';
+import SearchBar from './SearchBar';
 
 let genres = [
-  { value: "all", label: "All" },
-  { value: "pop", label: "Pop" },
-  { value: "hip hop", label: "Hip Hop" },
-  { value: "country", label: "Country" },
-  { value: "r&b", label: "R&B" },
-  { value: "indie", label: "Indie" },
-  { value: "alternative", label: "Alternative" },
-  { value: "contemporary", label: "Contemporary" },
-  { value: "misc", label: "Misc" },
+  { value: 'all', label: 'All' },
+  { value: 'pop', label: 'Pop' },
+  { value: 'hip hop', label: 'Hip Hop' },
+  { value: 'country', label: 'Country' },
+  { value: 'r&b', label: 'R&B' },
+  { value: 'indie', label: 'Indie' },
+  { value: 'alternative', label: 'Alternative' },
+  { value: 'contemporary', label: 'Contemporary' },
+  { value: 'misc', label: 'Misc' },
 ];
 
 function AllProducts() {
@@ -32,20 +32,20 @@ function AllProducts() {
     }
     for (let i = 0; i < allProducts.length; i++) {
       for (let j = 0; j < options.length; j++) {
-        if (options[j].value === "all") {
+        if (options[j].value === 'all') {
           setFilteredProducts(allProducts);
         }
         if (
-          options[j].value !== "misc" &&
+          options[j].value !== 'misc' &&
           allProducts[i].artist.genre.includes(options[j].value) &&
           !filterArray.includes(allProducts[i])
         ) {
           filterArray.push(allProducts[i]);
           setFilteredProducts(filterArray);
-        } else if (options[j].value === "misc") {
+        } else if (options[j].value === 'misc') {
           if (
             genres
-              .filter((genre) => genre.value !== "all")
+              .filter((genre) => genre.value !== 'all')
               .every((genre) => {
                 return !allProducts[i].artist.genre
                   .toLowerCase()
@@ -60,23 +60,12 @@ function AllProducts() {
     }
   }
 
-  function sortByPopularity(productArray) {
-    let featuredProducts = [];
-    for (let i = 0; i < productArray.length; i++) {
-      featuredProducts.push(productArray[i]);
-    }
-    featuredProducts.sort((product1, product2) => {
-      return product2.popularity - product1.popularity;
-    });
-    setFilteredProducts(featuredProducts);
-  }
-
   function sortByNewest(productArray) {
     let newestProducts = [];
     for (let i = 0; i < productArray.length; i++) {
       productArray[i].releaseDate = productArray[i].releaseDate.replaceAll(
-        "-",
-        ""
+        '-',
+        ''
       );
       newestProducts.push(productArray[i]);
     }
@@ -85,9 +74,9 @@ function AllProducts() {
     });
     for (let i = 0; i < newestProducts.length; i++) {
       let dateArr = [...newestProducts[i].releaseDate];
-      dateArr.splice(4, 0, "-");
-      dateArr.splice(7, 0, "-");
-      newestProducts[i].releaseDate = dateArr.join("");
+      dateArr.splice(4, 0, '-');
+      dateArr.splice(7, 0, '-');
+      newestProducts[i].releaseDate = dateArr.join('');
     }
     setFilteredProducts(newestProducts);
   }
@@ -142,7 +131,7 @@ function AllProducts() {
   return (
     <div className="all-products">
       <div className="product-filter">
-        <SearchBar placeholder="Enter a vinyl name" albums={allProducts} />
+        <SearchBar placeholder="Enter vinyl name" albums={allProducts} />
         <h1 className="list-title"></h1>
         <div className="sort-filter">
           <div className="product-sort-buttons">

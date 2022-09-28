@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Dropdown from "react-bootstrap/Dropdown";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { useSelector, useDispatch } from "react-redux";
-import { MDBIcon, MDBBadge } from "mdb-react-ui-kit";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import { useSelector, useDispatch } from 'react-redux';
+import { MDBIcon, MDBBadge } from 'mdb-react-ui-kit';
 import {
   getOrders,
   deleteOrderItem,
   changeQty,
-} from "../../reducers/orders/ordersReducer";
+} from '../../reducers/orders/ordersReducer';
 
 export default function Cart() {
   //TODO: put total on store
@@ -40,9 +40,9 @@ export default function Cart() {
     <Dropdown drop="down" autoClose="outside">
       <Dropdown.Toggle variant="success" id="cart" title="Dropdown button">
         <>
-          <MDBIcon fas icon="shopping-cart" size="2x" className="cart-icon" />{" "}
+          <MDBIcon fas icon="shopping-cart" size="2x" className="cart-icon" />{' '}
           <MDBBadge color="danger" notification pill>
-            {lineItems.length === 0 ? "" : lineItems.length}
+            {lineItems.length === 0 ? '' : lineItems.length}
           </MDBBadge>
         </>
       </Dropdown.Toggle>
