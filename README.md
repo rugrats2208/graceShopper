@@ -39,6 +39,8 @@ To test Stripe Checkout locally, install `stripe-cli`
   `stripe trigger payment_intent.succeeded`
   To see if there's a successful webhook action!
   
+  The `stripe listen` redirect needs to be running while testing is happening.
+  
   
 When you're ready to check out, use the following dummy credit card info for Stripe:<br><br>
 **Card Number:** `4242 4242 4242 4242`<br>
