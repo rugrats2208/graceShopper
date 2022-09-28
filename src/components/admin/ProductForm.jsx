@@ -171,6 +171,8 @@ function ProductForm() {
             value={form.releaseDate}
           />
         </Col>
+      </Row>
+      <Row>
         <Button type="submit" variant="outline-success">
           Submit
         </Button>

@@ -18,7 +18,7 @@
     margin: 20px;
   }
   .adminDashboard .options .dropdown {
-    margin: 0;
+    margin: 5px 0;
   }
   .adminDashboard .options .dropdown * {
     flex: 1 1 auto;
@@ -29,9 +29,20 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background: #f9f9f9;
+  width: 25em;
+  background: #4e4e4e;
   z-index: 10;
   padding: 2rem;
+  box-shadow: 0 0 8px 8px rgba(80, 80, 80, 0.3);
+}
+.adminDashboard .options .adminForm label {
+  color: white;
+}
+.adminDashboard .options .adminForm .row:last-child {
+  margin: 10px 0;
+}
+.adminDashboard .options .adminForm .row:last-child * {
+  margin: 4px 0;
 }
 .adminDashboard table .selected {
   box-sizing: border-box;
