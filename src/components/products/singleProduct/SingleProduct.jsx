@@ -135,6 +135,7 @@ function SingleProduct() {
                     <button
                         className="product-button single-view-button btn btn-dark"
                         type="button"
+                        onClick={() => dispatch(addOrderItem(product.id))}
                     >
                         Back to Home
                     </button>
