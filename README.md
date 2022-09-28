@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+Regular User Experience:
+Admin Features:
+=======
 <h1>Team Rugrats' Grace Shopper App</h1>
 
 Welcome to Grace Shopper Records!
@@ -48,3 +52,4 @@ When you're ready to check out, use the following dummy credit card info for Str
 **Card Number:** `4242 4242 4242 4242`<br>
 **Expiration Date:** `01/23`<br>
 **CVV:** `123`<br>
+>>>>>>> 1631dfd2448e1465c26406aaaae8c7728d4b0b86

@@ -20,7 +20,7 @@ function Pagination({
         id="all-products-paginate"
         className="pagination justify-content-center"
       >
-        <li className="page-item">
+        <li id="all-products-previous" className="page-item">
           <a
             onClick={() => (page > 1 ? prevPage() : null)}
             className="page-link"
@@ -38,7 +38,7 @@ function Pagination({
             </a>
           </li>
         ))}
-        <li className="page-item">
+        <li id="all-products-next" className="page-item">
           <a
             onClick={() => (page < 4 ? nextPage() : null)}
             className="page-link"
