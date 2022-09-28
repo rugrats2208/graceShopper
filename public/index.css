@@ -64,6 +64,11 @@ a.link:hover {
   width: 200px;
 }
 
+.product h6 {
+  color: white;
+  align-self: center;
+}
+
 /************************ header for new/featured/all products view ************************/
 .list-title {
   margin-bottom: 20px;
@@ -106,7 +111,7 @@ a.link:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: 20px;
+  border-top: 20px;
   width: 100%;
   background-color: #313131;
 }
@@ -132,6 +137,7 @@ a.link:hover {
 .product-filter {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 30px;
 }
@@ -232,24 +238,65 @@ a.data-item:hover {
   align-items: center;
   gap: 20px;
   margin-top: 30px;
+  margin-bottom: 200px;
 }
 
-.single-product h3 {
+.single-product a {
+  color: #4f4f4f;
+}
+
+.single-product a:hover {
+  color: rgb(162, 157, 157);
+}
+
+.single-product-info {
+  margin-top: 10px;
+}
+
+.single-product-image-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 70px;
+}
+
+.single-product h4 {
   text-decoration: none;
+}
+
+.single-product h5 {
+  margin-bottom: 40px;
 }
 .single-product button {
   margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.single-product-tracks {
+  margin-top: 20px;
+}
+
+.single-product-tracks {
+  align-self: auto;
+}
+
+.single-product-tracks li {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 .track {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   border-radius: 5px;
 }
 
 .individual-track {
   margin-bottom: 15px;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
 }
 
 .play-button {
@@ -271,8 +318,33 @@ a.data-item:hover {
 }
 
 .single-artist button {
-  margin-left: 20px;
+  margin: 20px;
   border-left: 30px;
+  align-items: center;
+}
+
+.single-artist a {
+  color: #4f4f4f;
+}
+
+.single-artist a:hover {
+  color: rgb(162, 157, 157);
+}
+
+.single-artist h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.single-artist h5 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-content: center;
+}
+
+.single-artist h6 {
+  margin-top: 20px;
+  margin-bottom: 20px;
   align-items: center;
 }
 
@@ -371,6 +443,10 @@ a.cart-delete-btn:hover {
 }
 .past-order-price {
   margin: 20px;
+}
+.order-number {
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .past-order-image img {
