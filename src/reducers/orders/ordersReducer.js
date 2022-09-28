@@ -115,7 +115,7 @@ export const addOrderItem = productId => {
             }
         } catch (error) {
             toast.error(
-                error.reponse ? error.response.data.message : error.message,
+                error.response ? error.response.data : error.message,
                 defaultToast
             );
         }
@@ -177,7 +177,7 @@ export const changeQty = (itemId, num) => {
             }
         } catch (error) {
             toast.error(
-                error.reponse ? error.response.data.message : error.message,
+                error.response ? error.response.data : error.message,
                 defaultToast
             );
         }

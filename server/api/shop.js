@@ -22,7 +22,6 @@ router.get('/album/:id', async (req, res, next) => {
         });
         res.send(data);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -34,38 +33,6 @@ router.get('/artist/:id', async (req, res, next) => {
             include: Product,
         });
         res.send(data);
-    } catch (error) {
-        next(error);
-    }
-});
-
-//keeping this route here for the time being to reference
-router.get('/pastOrders', requireToken, async (req, res, next) => {
-    try {
-        //getting user with their past orders
-        const userWithPastOrders = await User.findByPk(req.user.id, {
-            include: {
-                model: Order,
-            },
-        });
-        //extracting array of user's past orders
-        const pastOrders = userWithPastOrders.orders;
-        const ordersWithProducts = [];
-        //looping through the array of orders
-        for (let i = 0; i < pastOrders.length; i++) {
-            //using id of current order in array to query db to include all the products in the order
-            const singleOrderWithProducts = await Order.findByPk(
-                pastOrders[i].id,
-                {
-                    include: {
-                        model: Product,
-                    },
-                }
-            );
-            ordersWithProducts.push(singleOrderWithProducts);
-        }
-        //sends an array of all the users past orders with the products eager loaded for each order
-        res.send(ordersWithProducts);
     } catch (error) {
         next(error);
     }
