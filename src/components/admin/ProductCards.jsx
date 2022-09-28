@@ -40,6 +40,7 @@ function ProductCards() {
             >
               <Card.Header>{`ID#${item.id}`}</Card.Header>
               <Card.Body>
+                <Card.Img variant="top" src={`${item.img}`} />
                 <Card.Title>{`${item.name}`}</Card.Title>
                 <Card.Text>{`${item.label}`}</Card.Text>
               </Card.Body>
