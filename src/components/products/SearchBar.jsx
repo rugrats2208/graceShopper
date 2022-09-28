@@ -28,6 +28,7 @@ function SearchBar({ placeholder, albums }) {
 
   return (
     <div className="search">
+      <h5>Search Vinyls</h5>
       <div className="searchInputs">
         <input
           type="text"

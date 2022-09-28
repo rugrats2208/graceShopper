@@ -1,11 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Bangers:regular);
-@import url(https://fonts.googleapis.com/css?family=Staatliches:regular);
-@import url(https://fonts.googleapis.com/css?family=Orbitron:regular,500,600,700,800,900);
 
 .nav_title {
   font-family: Bangers;
   font-size: 1.8em;
   margin-right: 20px;
+  color: white;
 }
 
 .logo {
@@ -37,6 +36,7 @@
   max-height: 50px;
   min-width: 400px;
   justify-content: flex-end;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -60,5 +60,5 @@
 .cart_icon {
   display: flex;
   align-items: center;
-  margin-right: 15px;
+  margin-right: 20px;
 }

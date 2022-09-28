@@ -2,6 +2,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: #eaeaea;
 }
 
 body {
@@ -40,9 +41,17 @@ body {
   font-size: 150%;
 }
 
+.product h5:hover {
+  color: rgb(162, 157, 157);
+}
+
 a.link {
   color: white;
   text-decoration: none;
+}
+
+a.link:hover {
+  color: rgb(165, 164, 164);
 }
 
 .link {
@@ -56,9 +65,10 @@ a.link {
   text-align: center;
   font-size: 80px;
   font-weight: 600;
-  color: rgb(61, 56, 56);
-  text-shadow: 0px 0px 1px #cccccd, 0px 0px 10px #bdbdbd, 0px 0px 10px #c8c8c9,
-    0px 0px 20px #c6c6c6;
+  color: white;
+  -webkit-text-stroke: 2px #19191a;
+  /* text-shadow: 0px 0px 5px #19191a, 0px 0px 10px #19191a, 0px 0px 10px #19191a,
+        0px 0px 20px #19191a; */
 }
 
 /************************ featured products component ************************/
@@ -69,8 +79,8 @@ a.link {
 .featured-products-list {
   background-color: #313131;
   display: flex;
-  overflow: auto;
-  overflow-y: auto;
+  overflow: scroll;
+  overflow-y: hidden;
 }
 
 /************************ new products component ************************/
@@ -252,15 +262,13 @@ a.data-item:hover {
 
 /************************ shopping cart ************************/
 #cart {
-  background-color: white;
-  position: fixed;
-  right: 0vw;
-  top: 74px;
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: none;
   width: 5vw;
 }
 .cart-icon {
-  color: black;
-  vertical-align: -7px;
+  color: lightgray;
+  /* vertical-align: -7px; */
 }
 
 .dropdown-menu {
@@ -269,6 +277,8 @@ a.data-item:hover {
 }
 
 .dropdown-menu.cart-dropdown {
+  /* offset: ray(180deg closest-side contain) 15px; */
+  margin-top: 15px;
   min-height: 300px;
   max-height: 500px;
   overflow-y: scroll;
