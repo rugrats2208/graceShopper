@@ -114,7 +114,10 @@ export const addOrderItem = productId => {
                 dispatch(addItem(item));
             }
         } catch (error) {
-            toast.error(error.message, defaultToast);
+            toast.error(
+                error.response ? error.response.data : error.message,
+                defaultToast
+            );
         }
     };
 };
@@ -173,7 +176,10 @@ export const changeQty = (itemId, num) => {
                 dispatch(updateQty(itemId, num));
             }
         } catch (error) {
-            toast.error(error.message, defaultToast);
+            toast.error(
+                error.response ? error.response.data : error.message,
+                defaultToast
+            );
         }
     };
 };
