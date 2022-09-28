@@ -70,7 +70,7 @@ app.post(
       );
     }
 
-    response.status(200);
+    response.status(200).send();
   }
 );
 
