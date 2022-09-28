@@ -18,6 +18,7 @@ const seed = async () => {
         const users = await Promise.all(
             usersData.map(user => User.create(user))
         );
+        User.create({ fName: "Grace", lName: "Shopper", username: 'admin', password: 'password', email: 'graceShopper@email.com', isAdmin: true })
 
         //LOAD ALBUMS
         const [albums, artists] = await getAlbumData();
