@@ -20,17 +20,13 @@ function Product(props) {
         <h5>{artist.name}</h5>
       </Link>
       <br></br>
-      {product.stock > 0 ? (
-        <button
-          type="button"
-          className="product-button btn btn-light"
-          onClick={() => dispatch(addOrderItem(product.id))}
-        >
-          Add to Cart
-        </button>
-      ) : (
-        <h6>Out of Stock</h6>
-      )}
+      <button
+        type="button"
+        className="product-button btn btn-light"
+        onClick={() => dispatch(addOrderItem(product.id))}
+      >
+        {product.stock ? 'Add to Cart' : 'Not in stock'}
+      </button>
     </div>
   );
 }

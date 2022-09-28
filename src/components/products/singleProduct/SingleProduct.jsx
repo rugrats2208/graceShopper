@@ -123,17 +123,13 @@ function SingleProduct() {
       </div>
       <h4>Price: {displayPrice(product.price)}</h4>
       <div className="single-product-buttons">
-        {product.stock < 0 ? (
-          <button
-            className="product-button single-view-button btn btn-dark"
-            type="button"
-            onClick={() => dispatch(addOrderItem(product.id))}
-          >
-            Add to Cart
-          </button>
-        ) : (
-          <p>Out of Stock</p>
-        )}
+        <button
+          className="product-button single-view-button btn btn-dark"
+          type="button"
+          onClick={() => dispatch(addOrderItem(product.id))}
+        >
+          {product.stock ? 'Add to Cart' : 'Not in stock'}
+        </button>
         <Link to={'/'}>
           <button
             className="product-button single-view-button btn btn-dark"
