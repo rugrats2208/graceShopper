@@ -10,7 +10,6 @@ router.get('/', async (req, res, next) => {
         });
         res.send(data);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -36,7 +35,6 @@ router.get('/artist/:id', async (req, res, next) => {
         });
         res.send(data);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -69,7 +67,6 @@ router.get('/pastOrders', requireToken, async (req, res, next) => {
         //sends an array of all the users past orders with the products eager loaded for each order
         res.send(ordersWithProducts);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -96,7 +93,6 @@ router.get('/orders/:userId', requireToken, async (req, res, next) => {
         });
         res.send(data);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -115,7 +111,6 @@ router.put('/orders', requireToken, async (req, res, next) => {
         );
         await Order.create({ userId: req.user.id });
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -132,7 +127,6 @@ router.put('/orders/qty', requireToken, async (req, res, next) => {
         );
         res.sendStatus(200);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -163,7 +157,6 @@ router.put('/orders/:prodId', requireToken, async (req, res, next) => {
         });
         res.send(newItem);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
@@ -174,7 +167,6 @@ router.delete('/orders/:lineId', requireToken, async (req, res, next) => {
         await LineItem.destroy({ where: { id: req.params.lineId } });
         res.sendStatus(200);
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
