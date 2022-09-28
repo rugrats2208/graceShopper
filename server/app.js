@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 //stripe route for order fulfillment
 app.post(
   '/webhook',
-  bodyParser.raw({ type: 'application/json' }),
+  express.raw({ type: 'application/json' }),
   (request, response) => {
     const payload = request.body;
     const sig = request.headers['stripe-signature'];
@@ -70,7 +70,7 @@ app.post(
       );
     }
 
-    response.status(200).send();
+    response.status(200).send('success');
   }
 );
 
