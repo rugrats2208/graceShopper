@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FeaturedProducts, NewProductReleases, OtherProducts } from './index';
 
-function GuestMain() {
+function Main() {
   return (
     <div id="guest-main">
       <div className="featured-albums-guest">{<FeaturedProducts />}</div>
@@ -14,4 +14,4 @@ function GuestMain() {
   );
 }
 
-export default GuestMain;
+export default Main;
