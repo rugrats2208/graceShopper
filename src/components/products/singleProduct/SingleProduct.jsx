@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../../../reducers/products/singleProductReducer';
+import { addOrderItem } from '../../../reducers/orders/ordersReducer';
 
 function SingleProduct() {
   const product = useSelector((state) => state.singleProduct);
@@ -65,6 +66,7 @@ function SingleProduct() {
         <button
           className="product-button single-view-button btn btn-dark"
           type="button"
+          onClick={() => dispatch(addOrderItem(product.id))}
         >
           Add to Cart
         </button>

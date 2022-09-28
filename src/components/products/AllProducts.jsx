@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Product from './Product';
 import Select from 'react-select';
 import Pagination from './Pagination';
+import SearchBar from './SearchBar';
 
 let genres = [
   { value: 'all', label: 'All' },
@@ -11,10 +12,7 @@ let genres = [
   { value: 'country', label: 'Country' },
   { value: 'r&b', label: 'R&B' },
   { value: 'indie', label: 'Indie' },
-  // { value: 'trap', label: 'Trap' },
-  // { value: 'soul', label: 'Soul ' },
   { value: 'alternative', label: 'Alternative' },
-  // { value: 'rock', label: 'Rock' },
   { value: 'contemporary', label: 'Contemporary' },
   { value: 'misc', label: 'Misc' },
 ];
@@ -25,52 +23,44 @@ function AllProducts() {
   const [page, setPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(25);
 
-  function filterByGenre(option) {
+  function filterByGenre(options) {
+    setFilteredProducts([]);
     let filterArray = [];
-    //using notNullGenres array to avoid null errors when calling methods on genres in the array
-    let notNullGenres = allProducts.filter(
-      (product) => product.artist.genre !== null
-    );
-    if (option.value !== 'all') {
-      //case 1: if 'misc' was selected
-      if (option.value === 'misc') {
-        let miscArray = [];
-        //getting all values where genre is null
-        for (let i = 0; i < allProducts.length; i++) {
-          if (allProducts[i].artist.genre === null) {
-            miscArray.push(allProducts[i]);
-          }
-        }
-        //getting all values where genre cannot be found in the genres array above
-        for (let i = 0; i < notNullGenres.length; i++) {
-          if (
-            !genres.some((genre) =>
-              notNullGenres[i].artist.genre.includes(genre.value.toLowerCase())
-            )
-          ) {
-            miscArray.push(notNullGenres[i]);
-          }
-        }
-        setFilteredProducts(miscArray);
-        //if anything other than misc was selected
-      } else {
-        for (let i = 0; i < notNullGenres.length; i++) {
-          if (
-            notNullGenres[i].artist.genre
-              .toLowerCase()
-              .includes(option.value.toLowerCase())
-          ) {
-            filterArray.push(notNullGenres[i]);
-          }
-        }
-        setFilteredProducts(filterArray);
-      }
-      //if 'all' was selected
-    } else {
+    //nothing was selected, give back everything
+    if (options.length === 0) {
       setFilteredProducts(allProducts);
     }
-    setPage(1);
+    for (let i = 0; i < allProducts.length; i++) {
+      for (let j = 0; j < options.length; j++) {
+        if (options[j].value === 'all') {
+          setFilteredProducts(allProducts);
+        }
+        if (
+          options[j].value !== 'misc' &&
+          allProducts[i].artist.genre.includes(options[j].value) &&
+          !filterArray.includes(allProducts[i])
+        ) {
+          filterArray.push(allProducts[i]);
+          setFilteredProducts(filterArray);
+        } else if (options[j].value === 'misc') {
+          if (
+            genres
+              .filter((genre) => genre.value !== 'all')
+              .every((genre) => {
+                return !allProducts[i].artist.genre
+                  .toLowerCase()
+                  .includes(genre.value.toLowerCase());
+              })
+          ) {
+            filterArray.push(allProducts[i]);
+            setFilteredProducts(filterArray);
+          }
+        }
+      }
+    }
   }
+
+  console.log(filteredProducts);
 
   function sortByPopularity(productArray) {
     let featuredProducts = [];
@@ -154,44 +144,57 @@ function AllProducts() {
   return (
     <div className="all-products">
       <div className="product-filter">
-        <Select
+        {/* <Select
           options={genres}
           onChange={filterByGenre}
           placeholder="Select Genre"
           isSearchable
           className="genre-select"
           label="Filter By Genre"
-        />
-        <h1 className="list-title">Vinyls</h1>
-        <div className="product-sort-buttons">
-          <button
-            type="button"
-            className="btn btn-primary btn-sm"
-            onClick={() => sortByPrice(filteredProducts)}
-          >
-            Sort By Price
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary btn-sm"
-            onClick={() => sortAlphabetically(filteredProducts)}
-          >
-            Sort Alphabetically
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary btn-sm"
-            onClick={() => sortByNewest(filteredProducts)}
-          >
-            Sort By Newest
-          </button>
-          {/* <button
+          isMulti
+        /> */}
+        <SearchBar placeholder="Enter a vinyl name" albums={allProducts} />
+        <h1 className="list-title"></h1>
+        <div className="sort-filter">
+          <div className="product-sort-buttons">
+            <button
+              type="button"
+              className="btn btn-primary btn-s m"
+              onClick={() => sortByPrice(filteredProducts)}
+            >
+              Sort By Price
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              onClick={() => sortAlphabetically(filteredProducts)}
+            >
+              Sort Alphabetically
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              onClick={() => sortByNewest(filteredProducts)}
+            >
+              Sort By Newest
+            </button>
+            {/* <button
             type="button"
             className="btn btn-primary btn-sm"
             onClick={() => sortByPopularity(filteredProducts)}
           >
             Sort By Popularity
           </button> */}
+          </div>
+          <Select
+            options={genres}
+            onChange={filterByGenre}
+            placeholder="Select Genre"
+            isSearchable
+            className="genre-select"
+            label="Filter By Genre"
+            isMulti
+          />
         </div>
       </div>
       <div className="all-products-list">
