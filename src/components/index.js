@@ -23,4 +23,3 @@ export { default as Cart } from './cart/Cart';
 export { default as Checkout } from './checkout/Checkout';
 export { default as PaymentSuccess } from './checkout/PaymentSuccess';
 export { default as PaymentCancel } from './checkout/PaymentCancel';
-export { default as Share } from './sharing/Share'

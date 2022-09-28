@@ -1,6 +1,6 @@
 // apiRoutes/users.js
 const router = require('express').Router();
-const { User } = require('../db');
+const { User, Order } = require('../db');
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware');
 
 //dotenv holds our secret JWT key
