@@ -28,6 +28,7 @@ Add as many records as you'd like to your cart (up to the maximum we have in our
 
   <h2>Testing Stripe Checkout</h2>
 To test Stripe Checkout locally, install `stripe-cli`
+<br>
   `$ npm i stripe-cli`
   
   Then type 
@@ -38,6 +39,8 @@ To test Stripe Checkout locally, install `stripe-cli`
   While that is running, open a new terminal window and run
   `stripe trigger payment_intent.succeeded`
   To see if there's a successful webhook action!
+  
+  The `stripe listen` redirect needs to be running while testing is happening.
   
   
 When you're ready to check out, use the following dummy credit card info for Stripe:<br><br>
