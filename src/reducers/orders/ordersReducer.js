@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const defaultToast = {
   position: 'top-center',
-  autoClose: 400,
+  autoClose: 800,
   closeOnClick: true,
   pauseOnHover: true,
   progress: undefined,
@@ -110,6 +110,7 @@ export const addOrderItem = (productId) => {
         dispatch(addItem(item));
       }
     } catch (error) {
+      toast.error('Item already in cart', defaultToast);
       console.error(error);
     }
   };
@@ -166,6 +167,7 @@ export const changeQty = (itemId, num) => {
         dispatch(updateQty(itemId, num));
       }
     } catch (error) {
+      toast.error('Error changing quantity', defaultToast);
       console.error(error);
     }
   };

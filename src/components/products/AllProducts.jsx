@@ -60,19 +60,6 @@ function AllProducts() {
     }
   }
 
-  console.log(filteredProducts);
-
-  function sortByPopularity(productArray) {
-    let featuredProducts = [];
-    for (let i = 0; i < productArray.length; i++) {
-      featuredProducts.push(productArray[i]);
-    }
-    featuredProducts.sort((product1, product2) => {
-      return product2.popularity - product1.popularity;
-    });
-    setFilteredProducts(featuredProducts);
-  }
-
   function sortByNewest(productArray) {
     let newestProducts = [];
     for (let i = 0; i < productArray.length; i++) {
@@ -144,16 +131,7 @@ function AllProducts() {
   return (
     <div className="all-products">
       <div className="product-filter">
-        {/* <Select
-          options={genres}
-          onChange={filterByGenre}
-          placeholder="Select Genre"
-          isSearchable
-          className="genre-select"
-          label="Filter By Genre"
-          isMulti
-        /> */}
-        <SearchBar placeholder="Enter a vinyl name" albums={allProducts} />
+        <SearchBar placeholder="Enter vinyl name" albums={allProducts} />
         <h1 className="list-title"></h1>
         <div className="sort-filter">
           <div className="product-sort-buttons">
@@ -178,13 +156,6 @@ function AllProducts() {
             >
               Sort By Newest
             </button>
-            {/* <button
-            type="button"
-            className="btn btn-primary btn-sm"
-            onClick={() => sortByPopularity(filteredProducts)}
-          >
-            Sort By Popularity
-          </button> */}
           </div>
           <Select
             options={genres}

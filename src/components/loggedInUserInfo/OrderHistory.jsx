@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getOrders } from '../../reducers/orders/ordersReducer';
 
 function OrderHistory() {
@@ -26,6 +27,7 @@ function OrderHistory() {
     return `$${price}`;
   }
 
+  console.log(pastOrders);
   return (
     <div className="past-orders">
       {pastOrders && pastOrders.length > 0 ? (
@@ -34,22 +36,44 @@ function OrderHistory() {
           {pastOrders.map((order) =>
             order.lineItems.map((lineItem) => {
               return (
-                <div key={lineItem.id} className="past-order">
-                  <h5>Product: {lineItem.product.name}</h5>
-                  <h6>by: {lineItem.product.artist.name}</h6>
-                  <img
-                    src={lineItem.product.img}
-                    height="200px"
-                    width="200px"
-                  />
-                  <h5>
-                    Total:{' '}
-                    {displayPrice(
-                      lineItem.qty > 0
-                        ? lineItem.qty * lineItem.product.price
-                        : lineItem.product.price
-                    )}
-                  </h5>
+                <div key={lineItem.id} id="past-order" className="card w-50">
+                  <div id="order-list" className="card-body">
+                    <div id="past-order-image-info">
+                      <div className="past-order-image">
+                        <Link to={`/singleProduct/${lineItem.product.id}`}>
+                          <img
+                            src={lineItem.product.img}
+                            height="150px"
+                            width="150px"
+                          />
+                        </Link>
+                      </div>
+                      <div className="past-order-info">
+                        <Link to={`/singleProduct/${lineItem.product.id}`}>
+                          <h5 className="card-title">
+                            Vinyl: {lineItem.product.name}
+                          </h5>
+                        </Link>
+                        <Link
+                          to={`/singleArtist/${lineItem.product.artist.id}`}
+                        >
+                          <p className="card-text">
+                            by: {lineItem.product.artist.name}
+                          </p>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="past-order-price">
+                      <h5>
+                        Total:{' '}
+                        {displayPrice(
+                          lineItem.qty > 0
+                            ? lineItem.qty * lineItem.product.price
+                            : lineItem.product.price
+                        )}
+                      </h5>
+                    </div>
+                  </div>
                 </div>
               );
             })

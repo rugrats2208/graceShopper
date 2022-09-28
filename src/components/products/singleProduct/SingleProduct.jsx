@@ -77,12 +77,12 @@ function SingleProduct() {
           {product.tracks &&
             product.tracks.map((track) => (
               <li key={track.id} className="track">
-                <div>
+                <div className="individual-track">
                   Name: {track.name} <br></br>Length:{' '}
                   {convertTrackLength(track.length)}{' '}
                   {track.length < 60000 ? 'secs' : 'mins'}
                 </div>
-                <div>
+                <div className="play-button">
                   {track.preview ? (
                     <>
                       <audio
