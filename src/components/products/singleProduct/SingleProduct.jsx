@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { MDBIcon } from 'mdb-react-ui-kit';
-import { getSingleProduct } from '../../../reducers/products/singleProductReducer';
-import { addOrderItem } from '../../../reducers/orders/ordersReducer';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { MDBIcon } from "mdb-react-ui-kit";
+import { getSingleProduct } from "../../../reducers/products/singleProductReducer";
+import { addOrderItem } from "../../../reducers/orders/ordersReducer";
 
 function SingleProduct() {
   const product = useSelector((state) => state.singleProduct);
@@ -37,15 +37,15 @@ function SingleProduct() {
 
   function displayPrice(price) {
     price /= 100;
-    price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    price.toLocaleString("en-US", { style: "currency", currency: "USD" });
     return `$${price}`;
   }
 
   function handleClickAudio(id) {
     //stop old track from playing
-    const oldTrack = Array.from(document.getElementsByClassName('playing'))[0];
+    const oldTrack = Array.from(document.getElementsByClassName("playing"))[0];
     if (oldTrack) {
-      oldTrack.classList.toggle('playing');
+      oldTrack.classList.toggle("playing");
       oldTrack.pause();
       oldTrack.currentTime = 0;
     }
@@ -55,7 +55,7 @@ function SingleProduct() {
     setPlayingId(id);
     const nextTrack = document.getElementById(id);
     nextTrack.play();
-    nextTrack.classList.toggle('playing');
+    nextTrack.classList.toggle("playing");
   }
 
   return (
@@ -78,9 +78,9 @@ function SingleProduct() {
             product.tracks.map((track) => (
               <li key={track.id} className="track">
                 <div>
-                  Name: {track.name} <br></br>Length:{' '}
-                  {convertTrackLength(track.length)}{' '}
-                  {track.length < 60000 ? 'secs' : 'mins'}
+                  Name: {track.name} <br></br>Length:{" "}
+                  {convertTrackLength(track.length)}{" "}
+                  {track.length < 60000 ? "secs" : "mins"}
                 </div>
                 <div>
                   {track.preview ? (
@@ -107,7 +107,7 @@ function SingleProduct() {
                       )}
                     </>
                   ) : (
-                    ' Preview Not Available'
+                    " Preview Not Available"
                   )}
                 </div>
               </li>
@@ -120,7 +120,7 @@ function SingleProduct() {
         >
           Add to Cart
         </button>
-        <Link to={'/'}>
+        <Link to={"/"}>
           <button
             className="product-button single-view-button btn btn-dark"
             type="button"

@@ -4,7 +4,6 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   getOrders,
   deleteOrderItem,
@@ -19,7 +18,6 @@ export default function Checkout() {
   const [total, setTotal] = useState(0);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   //grab our user data
   const userData = useSelector((state) => state.auth);
