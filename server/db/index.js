@@ -29,12 +29,12 @@ Artist.hasMany(Product);
 Product.belongsTo(Artist);
 
 module.exports = {
-    conn,
-    User,
-    Tag,
-    Order,
-    Product,
-    Track,
-    Artist,
-    LineItem,
+  conn,
+  User,
+  Tag,
+  Order,
+  Product,
+  Track,
+  Artist,
+  LineItem,
 };

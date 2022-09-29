@@ -15,7 +15,6 @@ let genres = [
   { value: 'alternative', label: 'Alternative' },
   { value: 'contemporary', label: 'Contemporary' },
   { value: 'misc', label: 'Misc' },
-  { value: 'afro dancehall', label: 'Afro Dancehall' },
 ];
 
 function AllProducts() {
@@ -23,6 +22,9 @@ function AllProducts() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [productsPerPage] = useState(25);
+  const [priceSort, setPriceSort] = useState(true);
+  const [alphabetSort, setAlphabetSort] = useState(true);
+  const [newSort, setNewSort] = useState(true);
 
   function filterByGenre(options) {
     setFilteredProducts([]);
@@ -70,9 +72,17 @@ function AllProducts() {
       );
       newestProducts.push(productArray[i]);
     }
-    newestProducts.sort((product1, product2) => {
-      return product2.releaseDate - product1.releaseDate;
-    });
+    if (newSort === true) {
+      newestProducts.sort((product1, product2) => {
+        setNewSort(false);
+        return product2.releaseDate - product1.releaseDate;
+      });
+    } else if (newSort === false) {
+      newestProducts.sort((product1, product2) => {
+        setNewSort(true);
+        return product1.releaseDate - product2.releaseDate;
+      });
+    }
     for (let i = 0; i < newestProducts.length; i++) {
       let dateArr = [...newestProducts[i].releaseDate];
       dateArr.splice(4, 0, '-');
@@ -87,10 +97,19 @@ function AllProducts() {
     for (let i = 0; i < productArray.length; i++) {
       sortedArray.push(productArray[i]);
     }
-    sortedArray.sort((product1, product2) =>
-      product1.name.localeCompare(product2.name)
-    );
-    setFilteredProducts(sortedArray);
+    if (alphabetSort === true) {
+      sortedArray.sort((product1, product2) =>
+        product1.name.localeCompare(product2.name)
+      );
+      setFilteredProducts(sortedArray);
+      setAlphabetSort(false);
+    } else if (alphabetSort === false) {
+      sortedArray.sort((product1, product2) =>
+        product2.name.localeCompare(product1.name)
+      );
+      setFilteredProducts(sortedArray);
+      setAlphabetSort(true);
+    }
   }
 
   function sortByPrice(productArray) {
@@ -98,10 +117,19 @@ function AllProducts() {
     for (let i = 0; i < productArray.length; i++) {
       mostExpensiveProducts.push(productArray[i]);
     }
-    mostExpensiveProducts.sort((product1, product2) => {
-      return product2.price - product1.price;
-    });
-    setFilteredProducts(mostExpensiveProducts);
+    if (priceSort === true) {
+      mostExpensiveProducts.sort((product1, product2) => {
+        return product2.price - product1.price;
+      });
+      setFilteredProducts(mostExpensiveProducts);
+      setPriceSort(false);
+    } else if (priceSort === false) {
+      mostExpensiveProducts.sort((product1, product2) => {
+        return product1.price - product2.price;
+      });
+      setFilteredProducts(mostExpensiveProducts);
+      setPriceSort(true);
+    }
   }
 
   //when rendering new components, the component would render from scroll position of previous component, this scrolls back to the top on a rerender
