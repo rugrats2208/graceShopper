@@ -42,9 +42,15 @@ function SingleArtist() {
                 <h5>Price: {displayPrice(product.price)}</h5>
                 <button
                   id="single-artist-cart"
-                  className="single-view-button btn btn-dark"
+                  className={`single-view-button btn btn-dark ${
+                    product.stock ? '' : 'disabled'
+                  }`}
                   type="button"
-                  onClick={() => dispatch(addOrderItem(product.id))}
+                  onClick={
+                    product.stock
+                      ? () => dispatch(addOrderItem(product.id))
+                      : null
+                  }
                 >
                   {product.stock ? 'Add to Cart' : 'Not in stock'}
                 </button>{' '}

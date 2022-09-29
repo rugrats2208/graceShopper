@@ -22,8 +22,12 @@ function Product(props) {
       <br></br>
       <button
         type="button"
-        className="product-button btn btn-light"
-        onClick={() => dispatch(addOrderItem(product.id))}
+        className={`product-button btn btn-light ${
+          product.stock ? '' : 'disabled'
+        }`}
+        onClick={
+          product.stock ? () => dispatch(addOrderItem(product.id)) : null
+        }
       >
         {product.stock ? 'Add to Cart' : 'Not in stock'}
       </button>
