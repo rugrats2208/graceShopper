@@ -36,9 +36,11 @@ function OrderHistory() {
             order.lineItems.map((lineItem) => {
               return (
                 <div key={lineItem.id} id="past-order" className="card w-75">
-                  <h3 className="order-number">
-                    Order #{lineItem.product.id}0-{order.id}0
-                  </h3>
+                  {lineItem.product.id && order.id ? (
+                    <h3 className="order-number">
+                      Order #{lineItem.product.id}0-{order.id}0
+                    </h3>
+                  ) : null}
                   <div id="order-list" className="card-body">
                     <div id="past-order-image-info">
                       <div className="past-order-image">
