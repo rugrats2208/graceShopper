@@ -228,6 +228,9 @@ a.data-item:hover {
   margin-left: 90px;
   margin-bottom: 20px;
 }
+.view-all-link:hover {
+  color: rgb(162, 157, 157);
+}
 
 /************************ single product component ************************/
 

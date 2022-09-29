@@ -71,6 +71,10 @@ function ProductForm() {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    if (form.qty === 0) {
+      inputUnavailable(`Can't change quantity to zero.`);
+      return;
+    }
     inputAvailable();
     switch (formMethod) {
       case "add":
