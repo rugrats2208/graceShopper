@@ -60,19 +60,26 @@ function SingleProduct() {
 
   return (
     <div className="single-product">
-      <div className="single-product-image">
-        <img src={product.img} height="500px" width="500px" />
+      <div className="single-product-image-info">
+        <div className="single-product-image">
+          <img src={product.img} height="250px" width="250px" />
+        </div>
+        <div className="single-product-info">
+          <h4>Title: {product.name}</h4>
+          <Link to={`/singleArtist/${artist.id}`}>
+            <h4>Artist: {artist.name}</h4>
+          </Link>
+          <h4>Label: {product.label}</h4>
+          {artist.genre ? (
+            <h4>Genre: {toTitleCase(artist.genre)}</h4>
+          ) : (
+            <h4>Genre: N/A</h4>
+          )}
+          <h4>Date Released: {product.releaseDate}</h4>
+        </div>
       </div>
-      <div className="single-product-info">
-        <h3>{product.name}</h3>
-        <Link to={`/singleArtist/${artist.id}`}>
-          <h3>{artist.name}</h3>
-        </Link>
-        <h3>Label: {product.label}</h3>
-        {artist.genre ? <p>Genre: {toTitleCase(artist.genre)}</p> : null}
-        <p>Date Released: {product.releaseDate}</p>
-        <p>Price: {displayPrice(product.price)}</p>
-        <p>Tracks: {product.totalTrack}</p>
+      <div className="single-product-tracks">
+        <h5>Tracks: {product.totalTrack}</h5>
         <ol>
           {product.tracks &&
             product.tracks.map((track) => (
@@ -113,12 +120,19 @@ function SingleProduct() {
               </li>
             ))}
         </ol>
+      </div>
+      <h4>Price: {displayPrice(product.price)}</h4>
+      <div className="single-product-buttons">
         <button
-          className="product-button single-view-button btn btn-dark"
+          className={`product-button single-view-button btn btn-dark ${
+            product.stock ? '' : 'disabled'
+          }`}
           type="button"
-          onClick={() => dispatch(addOrderItem(product.id))}
+          onClick={
+            product.stock ? () => dispatch(addOrderItem(product.id)) : null
+          }
         >
-          Add to Cart
+          {product.stock ? 'Add to Cart' : 'Not in stock'}
         </button>
         <Link to={'/'}>
           <button

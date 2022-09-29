@@ -14,7 +14,6 @@ function SearchBar({ placeholder, albums }) {
       return album.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
     if (searchTerm === "") {
-      console.log("empty");
       setFilteredAlbums([]);
     } else {
       setFilteredAlbums(matchingAlbums);
@@ -27,7 +26,7 @@ function SearchBar({ placeholder, albums }) {
   }
 
   return (
-    <div className="search">
+    <div className="search form-search">
       <h5>Search Vinyl</h5>
       <div className="searchInputs">
         <input

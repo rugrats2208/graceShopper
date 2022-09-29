@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../reducers/products/productsReducer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoutes from "./admin/PrivateRoutes";
-
+import GitHubIcon from "@mui/icons-material/GitHub";
 //COMPONENTS
 import {
   AllProducts,
@@ -59,18 +59,28 @@ function App() {
         <Route path={"*"} element={<PageNotFound />} />
       </Routes>
       <footer className="my-5 pt-5 text-muted text-center text-small">
-        <p className="mb-1">&copy; 2017–2022 Grace Shopper Records Ltd.</p>
-        <ul className="list-inline">
-          <li className="list-inline-item">
-            <a href="#">Privacy</a>
-          </li>
-          <li className="list-inline-item">
-            <a href="#">Terms</a>
-          </li>
-          <li className="list-inline-item">
-            <a href="#">Support</a>
-          </li>
-        </ul>
+        <div className="githubIcon">
+          <a href={"https://github.com/rugrats2208/graceShopper"}>
+            <GitHubIcon />
+          </a>
+        </div>
+        <div className="copyright">
+          <p className="mb-1">&copy; 2017–2022 Grace Shopper Records Ltd.</p>
+          <ul className="list-inline">
+            <li className="list-inline-item">
+              <a href="#">Privacy</a>
+            </li>
+            <li className="list-inline-item">
+              <a href="#">Terms</a>
+            </li>
+            <li className="list-inline-item">
+              <a href="#">Support</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <img src="/Spotify_Logo_CMYK_Green.png" />
+        </div>
       </footer>
     </div>
   );

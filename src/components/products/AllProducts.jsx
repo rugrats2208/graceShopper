@@ -15,6 +15,7 @@ let genres = [
   { value: 'alternative', label: 'Alternative' },
   { value: 'contemporary', label: 'Contemporary' },
   { value: 'misc', label: 'Misc' },
+  { value: 'afro dancehall', label: 'Afro Dancehall' },
 ];
 
 function AllProducts() {

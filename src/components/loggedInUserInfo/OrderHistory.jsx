@@ -27,7 +27,6 @@ function OrderHistory() {
     return `$${price}`;
   }
 
-  console.log(pastOrders);
   return (
     <div className="past-orders">
       {pastOrders && pastOrders.length > 0 ? (
@@ -36,7 +35,12 @@ function OrderHistory() {
           {pastOrders.map((order) =>
             order.lineItems.map((lineItem) => {
               return (
-                <div key={lineItem.id} id="past-order" className="card w-50">
+                <div key={lineItem.id} id="past-order" className="card w-75">
+                  {lineItem.product.id && order.id ? (
+                    <h3 className="order-number">
+                      Order #{lineItem.product.id}0-{order.id}0
+                    </h3>
+                  ) : null}
                   <div id="order-list" className="card-body">
                     <div id="past-order-image-info">
                       <div className="past-order-image">
@@ -51,7 +55,7 @@ function OrderHistory() {
                       <div className="past-order-info">
                         <Link to={`/singleProduct/${lineItem.product.id}`}>
                           <h5 className="card-title">
-                            Vinyl: {lineItem.product.name}
+                            Title: {lineItem.product.name}
                           </h5>
                         </Link>
                         <Link

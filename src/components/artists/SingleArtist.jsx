@@ -33,33 +33,38 @@ function SingleArtist() {
           ? artist.products.map((product) => (
               <li className="single-artist-products" key={product.id}>
                 <Link to={`/singleProduct/${product.id}`}>
-                  <h5>{product.name}</h5>
+                  <h4>{product.name}</h4>
                 </Link>
                 <Link to={`/singleProduct/${product.id}`}>
                   <img src={product.img} height="400" width="400"></img>
                 </Link>
                 <br></br>
-                <p>Price: {displayPrice(product.price)}</p>
-                <br></br>
+                <h5>Price: {displayPrice(product.price)}</h5>
                 <button
-                  className="single-view-button btn btn-dark"
+                  id="single-artist-cart"
+                  className={`single-view-button btn btn-dark ${
+                    product.stock ? '' : 'disabled'
+                  }`}
                   type="button"
-                  onClick={() => dispatch(addOrderItem(product.id))}
+                  onClick={
+                    product.stock
+                      ? () => dispatch(addOrderItem(product.id))
+                      : null
+                  }
                 >
-                  Add to Cart
+                  {product.stock ? 'Add to Cart' : 'Not in stock'}
                 </button>{' '}
-                <Link to={'/'}>
-                  <button
-                    className="single-view-button btn btn-dark"
-                    type="button"
-                  >
-                    Back to Home
-                  </button>
-                </Link>
               </li>
             ))
           : null}
       </ul>
+      <div className="single-artist-buttons">
+        <Link to={'/'}>
+          <button className="single-view-button btn btn-dark" type="button">
+            Back to Home
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -17,13 +17,21 @@ function Product(props) {
                 <h5>{product.name}</h5>
             </Link>
             <Link className="link" to={`/singleArtist/${artist.id}`}>
-                <h5>{artist.name}</h5>
+                <h5>
+                    <i>{artist.name}</i>
+                </h5>
             </Link>
             <br></br>
             <button
                 type="button"
-                className="product-button btn btn-light"
-                onClick={() => dispatch(addOrderItem(product.id))}
+                className={`product-button btn btn-light ${
+                    product.stock ? '' : 'disabled'
+                }`}
+                onClick={
+                    product.stock
+                        ? () => dispatch(addOrderItem(product.id))
+                        : null
+                }
             >
                 {product.stock ? 'Add to Cart' : 'Not in stock'}
             </button>
