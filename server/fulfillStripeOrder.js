@@ -1,10 +1,8 @@
 const axios = require('axios');
 //dotenv holds our secret JWT key
 require('dotenv').config();
-GS_base_url = process.env.BASE_URL
-  ? process.env.BASE_URL
-  : 'https://rugrats-grace-shopper.herokuapp.com/';
-axios.defaults.baseURL = GS_base_url;
+
+axios.defaults.baseURL = process.env.BASE_URL;
 
 const fulfillStripeOrder = async (session, lineItems) => {
   // TODO: fill me in
