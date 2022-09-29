@@ -376,9 +376,15 @@ a.data-item:hover {
 .cart-title {
   font-size: 1.2rem;
 }
-
+a.cart-delete-btn {
+  transition: 0.9s;
+  background-color: #dd6666;
+  color: white;
+  font-weight: bold;
+}
 a.cart-delete-btn:hover {
-  background-color: red;
+  background-color: #c70000;
+  color: white;
 }
 
 #checkout-section {
