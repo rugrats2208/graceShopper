@@ -125,14 +125,14 @@ function SingleProduct() {
       <div className="single-product-buttons">
         <button
           className={`product-button single-view-button btn btn-dark ${
-            product.stock ? '' : 'disabled'
+            product.stock > 0 ? '' : 'disabled'
           }`}
           type="button"
           onClick={
-            product.stock ? () => dispatch(addOrderItem(product.id)) : null
+            product.stock > 0 ? () => dispatch(addOrderItem(product.id)) : null
           }
         >
-          {product.stock ? 'Add to Cart' : 'Not in stock'}
+          {product.stock > 0 ? 'Add to Cart' : 'Not in stock'}
         </button>
         <Link to={'/'}>
           <button

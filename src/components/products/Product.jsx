@@ -23,13 +23,13 @@ function Product(props) {
       <button
         type="button"
         className={`product-button btn btn-light ${
-          product.stock ? '' : 'disabled'
+          product.stock > 0 ? '' : 'disabled'
         }`}
         onClick={
-          product.stock ? () => dispatch(addOrderItem(product.id)) : null
+          product.stock > 0 ? () => dispatch(addOrderItem(product.id)) : null
         }
       >
-        {product.stock ? 'Add to Cart' : 'Not in stock'}
+        {product.stock > 0 ? 'Add to Cart' : 'Not in stock'}
       </button>
     </div>
   );
