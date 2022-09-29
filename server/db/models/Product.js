@@ -22,7 +22,7 @@ const Product = conn.define(
         },
         img: {
             type: Sequelize.STRING,
-            defaultValue: '/music-note.jpg',
+            defaultValue: 'https://thumbs.dreamstime.com/b/gold-record-music-disc-award-isolated-white-140630094.jpg',
         },
         spotifyId: {
             type: Sequelize.STRING,
