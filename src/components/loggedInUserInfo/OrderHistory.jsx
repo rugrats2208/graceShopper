@@ -27,8 +27,6 @@ function OrderHistory() {
     return `$${price}`;
   }
 
-  console.log(pastOrders);
-
   return (
     <div className="past-orders">
       {pastOrders && pastOrders.length > 0 ? (

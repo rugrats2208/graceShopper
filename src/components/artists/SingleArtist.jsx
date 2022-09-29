@@ -39,20 +39,20 @@ function SingleArtist() {
                   <img src={product.img} height="400" width="400"></img>
                 </Link>
                 <br></br>
-
                 <h5>Price: {displayPrice(product.price)}</h5>
+                <button
+                  id="single-artist-cart"
+                  className="single-view-button btn btn-dark"
+                  type="button"
+                  onClick={() => dispatch(addOrderItem(product.id))}
+                >
+                  {product.stock ? 'Add to Cart' : 'Not in stock'}
+                </button>{' '}
               </li>
             ))
           : null}
       </ul>
       <div className="single-artist-buttons">
-        <button
-          className="single-view-button btn btn-dark"
-          type="button"
-          onClick={() => dispatch(addOrderItem(product.id))}
-        >
-          Add to Cart
-        </button>{' '}
         <Link to={'/'}>
           <button className="single-view-button btn btn-dark" type="button">
             Back to Home
