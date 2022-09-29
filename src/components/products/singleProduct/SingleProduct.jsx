@@ -124,9 +124,13 @@ function SingleProduct() {
       <h4>Price: {displayPrice(product.price)}</h4>
       <div className="single-product-buttons">
         <button
-          className="product-button single-view-button btn btn-dark"
+          className={`product-button single-view-button btn btn-dark ${
+            product.stock ? '' : 'disabled'
+          }`}
           type="button"
-          onClick={() => dispatch(addOrderItem(product.id))}
+          onClick={
+            product.stock ? () => dispatch(addOrderItem(product.id)) : null
+          }
         >
           {product.stock ? 'Add to Cart' : 'Not in stock'}
         </button>
