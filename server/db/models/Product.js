@@ -22,7 +22,7 @@ const Product = conn.define(
         },
         img: {
             type: Sequelize.STRING,
-            defaultValue: '/https://www.holeandcorner.com/site/wp-content/uploads/2017/12/GoldenRecordImages7.jpg',
+            defaultValue: 'https://www.holeandcorner.com/site/wp-content/uploads/2017/12/GoldenRecordImages7.jpg',
         },
         spotifyId: {
             type: Sequelize.STRING,
