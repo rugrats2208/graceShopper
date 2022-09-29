@@ -3,7 +3,7 @@ const axios = require('axios');
 require('dotenv').config();
 GS_base_url = process.env.BASE_URL
   ? process.env.BASE_URL
-  : 'https://https://rugrats-grace-shopper.herokuapp.com/';
+  : 'https://rugrats-grace-shopper.herokuapp.com/';
 axios.defaults.baseURL = GS_base_url;
 
 const fulfillStripeOrder = async (session, lineItems) => {
