@@ -11,7 +11,12 @@ import {
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import React, { useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import Stack from 'react-bootstrap/Stack';
+import Hamburger from 'hamburger-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../reducers/Auth/authReducer';
@@ -21,7 +26,6 @@ import vinyl from './vinyl.svg';
 import Cart from '../cart/Cart';
 
 export default function Navigation() {
-  const [showBasic, setShowBasic] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //grab the username if logged in
@@ -32,16 +36,18 @@ export default function Navigation() {
   const [showLog, setShowLog] = React.useState(false);
   const handleCloseLog = () => setShowLog(false);
   const handleShowLog = () => setShowLog(true);
+  const [isOpen, setOpen] = useState(false);
 
   //login  handler
-  function handleLogin(e) {
-    e.preventDefault();
-    navigate('/signup');
-  }
+  // function handleLogin(e) {
+  //   e.preventDefault();
+  //   navigate('/signup');
+  // }
   //logout  handler
   function handleLogout(e) {
     e.preventDefault();
     dispatch(logout());
+    setOpen(!isOpen);
     navigate('/');
   }
 
@@ -54,9 +60,24 @@ export default function Navigation() {
 
   return (
     <>
-      {showLog && <Signup show={showLog} onHide={handleCloseLog} />}
-      <MDBNavbar expand="lg" dark bgColor="dark" fixed="top">
-        <MDBContainer fluid>
+      {showLog && (
+        <Signup
+          closeNav={() => setOpen(!isOpen)}
+          show={showLog}
+          onHide={handleCloseLog}
+        />
+      )}
+      <Navbar
+        expanded={isOpen}
+        className="d-flex justify-content-between"
+        collapseOnSelect
+        bg="dark"
+        variant="dark"
+        expand="lg"
+        fixed="top"
+        onToggle={() => setOpen(!isOpen)}
+      >
+        <Container fluid>
           <NavLink to="/">
             <img
               className={styles.logo}
@@ -66,99 +87,90 @@ export default function Navigation() {
               loading="lazy"
             />
           </NavLink>
-          <NavLink to="/">
+          <Nav.Link as={NavLink} to="/" onClick={() => setOpen(!isOpen)}>
             <span className="narvar-brand">
               <span className={styles.nav_title}>Grace Shopper Records</span>
             </span>
-          </NavLink>
-          <MDBNavbarToggler
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            onClick={() => setShowBasic(showBasic ? false : true)}
-          >
-            <MDBIcon icon="bars" fas />
-          </MDBNavbarToggler>
+          </Nav.Link>
+          <Navbar.Toggle aria-controls="basic-navbar-nav">
+            <Hamburger toggled={isOpen} toggle={setOpen} />
+          </Navbar.Toggle>
 
-          <MDBCollapse navbar show={showBasic}>
-            <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
-              <MDBNavbarItem className={styles.nav_header_links}>
-                <NavLink
-                  to="/"
-                  onClick={() => setShowBasic(showBasic ? false : true)}
-                >
-                  Home
-                </NavLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem className={styles.nav_header_links}>
-                <NavLink
-                  to="/allProducts"
-                  onClick={() => setShowBasic(showBasic ? false : true)}
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={NavLink} to="/" onClick={() => setOpen(!isOpen)}>
+                Home
+              </Nav.Link>
+              <Nav.Link
+                as={NavLink}
+                to="/allProducts"
+                onClick={() => setOpen(!isOpen)}
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal',
+                })}
+              >
+                Vinyl
+              </Nav.Link>{' '}
+              {isAdmin ? (
+                <Nav.Link
+                  as={NavLink}
+                  to="/admin"
+                  onClick={() => setOpen(!isOpen)}
                   style={({ isActive }) => ({
                     fontWeight: isActive ? 'bold' : 'normal',
                   })}
                 >
-                  Vinyl
-                </NavLink>{' '}
-              </MDBNavbarItem>
-              <MDBNavbarItem className={styles.nav_header_links}>
-                {isAdmin ? (
-                  <NavLink
-                    to="/admin"
-                    onClick={() => setShowBasic(showBasic ? false : true)}
-                    style={({ isActive }) => ({
-                      fontWeight: isActive ? 'bold' : 'normal',
-                    })}
-                  >
-                    Admin
-                  </NavLink>
-                ) : (
-                  ''
-                )}
-              </MDBNavbarItem>
-            </MDBNavbarNav>
-            {/* Signed in as */}
-            <div className={styles.nav_header_container}>
-              <Navbar.Text>
-                Signed in as:{' '}
-                <NavLink
-                  to={`/userInfoPage`}
-                  onClick={() => setShowBasic(showBasic ? false : true)}
-                >
-                  {username || 'guest'}{' '}
-                </NavLink>
-              </Navbar.Text>
-              {/* Cart Icon */}
-
-              <OverlayTrigger
-                placement="bottom"
-                delay={{ show: 250, hide: 400 }}
-                overlay={renderTooltip}
+                  Admin
+                </Nav.Link>
+              ) : (
+                ''
+              )}
+            </Nav>
+            <Nav className="mx-3">
+              {/* Signed in as */}
+              <Stack
+                direction="horizontal"
+                gap={3}
+                className="d-flex justify-content-end"
               >
-                <div className={styles.cart_icon}>
-                  <Cart />
-                </div>
-              </OverlayTrigger>
-              {/* signin / sign out */}
-              {!window.localStorage.getItem('isLoggedIn') && (
-                <MDBBtn
-                  color="secondary"
-                  variant="primary"
-                  size="sm"
-                  onClick={handleShowLog}
+                <Navbar.Text className="d-flex align-items-center">
+                  Signed in as:{' '}
+                  <Nav.Link
+                    as={NavLink}
+                    to={`/userInfoPage`}
+                    onClick={() => setOpen(!isOpen)}
+                  >
+                    {username || 'guest'}{' '}
+                  </Nav.Link>
+                </Navbar.Text>
+                {/* Cart Icon */}
+
+                <OverlayTrigger
+                  placement="bottom"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltip}
                 >
-                  Sign In
-                </MDBBtn>
-              )}
-              {window.localStorage.getItem('isLoggedIn') && (
-                <MDBBtn color="secondary" size="sm" onClick={handleLogout}>
-                  Log Out
-                </MDBBtn>
-              )}
-            </div>
-          </MDBCollapse>
-        </MDBContainer>
-      </MDBNavbar>
+                  <div className={styles.cart_icon}>
+                    <Cart />
+                  </div>
+                </OverlayTrigger>
+                {/* signin / sign out */}
+                <div className="vr" />
+                {!window.localStorage.getItem('isLoggedIn') && (
+                  <Button variant="primary" size="sm" onClick={handleShowLog}>
+                    Sign In
+                  </Button>
+                )}
+                {window.localStorage.getItem('isLoggedIn') && (
+                  <Button variant="info" size="sm" onClick={handleLogout}>
+                    Log Out
+                  </Button>
+                )}
+              </Stack>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </>
   );
 }
