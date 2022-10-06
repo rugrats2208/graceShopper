@@ -36,7 +36,11 @@ const SignupSchema = Yup.object().shape({
   username: Yup.string()
     .trim()
     .min(5, 'Too Short!')
-    .max(25, 'Too Long!')
+    .max(30, 'Too Long!')
+    .matches(
+      /(?!.*[\.\-\_]{2,})^[a-zA-Z0-9\.\-\_]{3,24}$/gm,
+      'Alphanumeric, dot, underscore, and dash only'
+    )
     .required('Required')
     .test(
       'Unique Username',
@@ -77,14 +81,25 @@ const SignupSchema = Yup.object().shape({
     .min(7, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
+  changepassword: Yup.string().when('password', {
+    is: (val) => (val && val.length > 0 ? true : false),
+    then: Yup.string().oneOf(
+      [Yup.ref('password')],
+      'Both password need to be the same'
+    ),
+  }),
 });
 
 //define the Yup validation schema for LOGIN
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
     .trim()
-    .min(5, 'Too Shorty!')
-    .max(25, 'Too Long!')
+    .min(5, 'Too Short!')
+    .max(30, 'Too Long!')
+    .matches(
+      /(?!.*[\.\-\_]{2,})^[a-zA-Z0-9\.\-\_]{3,24}$/gm,
+      'Alphanumeric and dot, underscore, and dash'
+    )
     .required('Required'),
   password: Yup.string()
     .trim()
@@ -141,6 +156,7 @@ export default function Signup(props) {
                   username: '',
                 }}
                 validationSchema={LoginSchema}
+                validateOnChange={false}
                 onSubmit={(values, { setSubmitting, resetForm }) => {
                   setSubmitting(true);
                   //using Yup to cast the validated inputs so we can send that to the db
@@ -156,6 +172,7 @@ export default function Signup(props) {
                   resetForm();
                   setSubmitting(false);
                   props.onHide();
+                  props.closeNav();
                   navigate('/');
                 }}
               >
@@ -169,30 +186,9 @@ export default function Signup(props) {
                   isSubmitting,
                 }) => (
                   <Form onSubmit={handleSubmit} className="row g-3">
-                    <div className="text-center mb-3">
-                      <p>Sign in with:</p>
-
-                      <MDBBtn floating className="mx-1">
-                        <MDBIcon fab icon="facebook-f" />
-                      </MDBBtn>
-
-                      <MDBBtn floating className="mx-1">
-                        <MDBIcon fab icon="google" />
-                      </MDBBtn>
-
-                      <MDBBtn floating className="mx-1">
-                        <MDBIcon fab icon="twitter" />
-                      </MDBBtn>
-
-                      <MDBBtn floating className="mx-1">
-                        <MDBIcon fab icon="github" />
-                      </MDBBtn>
-                    </div>
-
-                    <p className="text-center">or:</p>
-
                     {/* username */}
-                    <Form.Group controlId="formUsername" className="mb-4">
+                    <Form.Group controlId="formUsername" className="mb-0">
+                      <Form.Label>Username</Form.Label>
                       <Form.Control
                         type="text"
                         name="username"
@@ -202,6 +198,7 @@ export default function Signup(props) {
                         onBlur={handleBlur}
                         value={values.username}
                         autoComplete="username"
+                        autoCapitalize="off"
                         className={
                           touched.username && errors.username ? 'error' : null
                         }
@@ -211,7 +208,8 @@ export default function Signup(props) {
                       ) : null}
                     </Form.Group>
                     {/* password */}
-                    <Form.Group controlId="formPassword" className="mb-4">
+                    <Form.Group controlId="formPassword" className="mb-0">
+                      <Form.Label>Password</Form.Label>
                       <Form.Control
                         type="password"
                         name="password"
@@ -219,7 +217,8 @@ export default function Signup(props) {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.password}
-                        autoComplete="new-password"
+                        autoComplete="current-password"
+                        autoCapitalize="off"
                         className={
                           touched.password && errors.password ? 'error' : null
                         }
@@ -244,21 +243,27 @@ export default function Signup(props) {
               </Formik>
 
               <MDBRow className="mb-4">
-                <MDBCol className="d-flex justify-content-center">
+                {/* <MDBCol className="d-flex justify-content-center">
                   <MDBCheckbox
                     id="form7Example3"
                     label="Remember me"
                     defaultChecked
                   />
-                </MDBCol>
-                <MDBCol>
+                </MDBCol> */}
+                <MDBCol className="d-flex justify-content-center">
                   <a href="#!">Forgot password?</a>
                 </MDBCol>
               </MDBRow>
 
               <div className="text-center">
                 <p>
-                  Not a member? <a href="#!">Register</a>
+                  Not a member?{' '}
+                  <a
+                    href="#!"
+                    onClick={() => handleLoginRegisterClick('register')}
+                  >
+                    Register
+                  </a>
                 </p>
               </div>
             </MDBTabsPane>
@@ -267,6 +272,7 @@ export default function Signup(props) {
               <Formik
                 initialValues={{
                   password: '',
+                  changepassword: '',
                   username: '',
                   email: '',
                   fName: '',
@@ -292,6 +298,7 @@ export default function Signup(props) {
                   resetForm();
                   setSubmitting(false);
                   props.onHide();
+                  props.closeNav();
                   navigate('/');
                 }}
               >
@@ -305,33 +312,14 @@ export default function Signup(props) {
                   isSubmitting,
                 }) => (
                   <Form onSubmit={handleSubmit} className="row g-3">
-                    <div className="text-center mb-3">
-                      <p>Sign up with:</p>
-
-                      <MDBBtn floating className="mx-1">
-                        <MDBIcon fab icon="facebook-f" />
-                      </MDBBtn>
-
-                      <MDBBtn floating className="mx-1">
-                        <MDBIcon fab icon="google" />
-                      </MDBBtn>
-
-                      <MDBBtn floating className="mx-1">
-                        <MDBIcon fab icon="twitter" />
-                      </MDBBtn>
-
-                      <MDBBtn floating className="mx-1">
-                        <MDBIcon fab icon="github" />
-                      </MDBBtn>
-                    </div>
-
-                    <p className="text-center">or:</p>
                     {/* first name */}
-                    <Form.Group controlId="formFirstName" className="mb-4">
+                    <Form.Group controlId="formFirstName" className="mb-0">
+                      <Form.Label>First name</Form.Label>
                       <Form.Control
                         type="text"
                         name="fName"
                         placeholder="first name"
+                        autoComplete="given-name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.fName}
@@ -344,11 +332,13 @@ export default function Signup(props) {
                       ) : null}
                     </Form.Group>
                     {/* last name */}
-                    <Form.Group controlId="formLastName" className="mb-4">
+                    <Form.Group controlId="formLastName" className="mb-0">
+                      <Form.Label>Last name</Form.Label>
                       <Form.Control
                         type="text"
                         name="lName"
                         placeholder="last name"
+                        autoComplete="family-name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.lName}
@@ -361,11 +351,14 @@ export default function Signup(props) {
                       ) : null}
                     </Form.Group>
                     {/* email */}
-                    <Form.Group controlId="formEmail" className="mb-4">
+                    <Form.Group controlId="formEmail" className="mb-0">
+                      <Form.Label>Email</Form.Label>
                       <Form.Control
                         type="email"
                         name="email"
                         placeholder="email"
+                        autoComplete="email"
+                        autoCapitalize="off"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.email}
@@ -380,8 +373,10 @@ export default function Signup(props) {
                     {/* username */}
                     <Form.Group
                       controlId="formUsernameRegister"
-                      className="mb-4"
+                      className="mb-0"
                     >
+                      <Form.Label>Username</Form.Label>
+
                       <Form.Control
                         type="text"
                         name="username"
@@ -390,6 +385,7 @@ export default function Signup(props) {
                         onBlur={handleBlur}
                         value={values.username}
                         autoComplete="username"
+                        autoCapitalize="off"
                         className={
                           touched.username && errors.username ? 'error' : null
                         }
@@ -401,8 +397,10 @@ export default function Signup(props) {
                     {/* password */}
                     <Form.Group
                       controlId="formPasswordRegister"
-                      className="mb-4"
+                      className="mb-0"
                     >
+                      <Form.Label>Password</Form.Label>
+
                       <Form.Control
                         type="password"
                         name="password"
@@ -417,6 +415,33 @@ export default function Signup(props) {
                       />
                       {errors.password && touched.password ? (
                         <div className="error-message">{errors.password}</div>
+                      ) : null}
+                    </Form.Group>
+                    {/* changepassword */}
+                    <Form.Group
+                      controlId="formChangePasswordRegister"
+                      className="mb-0"
+                    >
+                      <Form.Label>Confirm Password</Form.Label>
+
+                      <Form.Control
+                        type="password"
+                        name="changepassword"
+                        placeholder="password"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.changepassword}
+                        autoComplete="off"
+                        className={
+                          touched.changepassword && errors.changepassword
+                            ? 'error'
+                            : null
+                        }
+                      />
+                      {errors.changepassword && touched.changepassword ? (
+                        <div className="error-message">
+                          {errors.changepassword}
+                        </div>
                       ) : null}
                     </Form.Group>
                     {/* buttons */}
