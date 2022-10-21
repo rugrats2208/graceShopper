@@ -4,6 +4,8 @@ Welcome to Grace Shopper Records!
 
 Please enjoy your stay.
 
+Demo: <a href="https://rugrats-grace-shopper.herokuapp.com/">https://rugrats-grace-shopper.herokuapp.com/</a>
+
 <hr>
 <h2>Key Features<h2>
 <hr>
